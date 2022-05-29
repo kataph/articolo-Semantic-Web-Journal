@@ -1035,13 +1035,13 @@ Additionally, we assume that \methodsName{plural} are always contexts for a main
   \item[\myax{pre-method}$_{schema}$] $ \MethodBin{\cst{m}}{n} \myfi \exists!  \cst{main}, \cst{sub_1}, \dots, \cst{sub_n} (\mainFunctionRole{\cst{main}} \land \subFunctionRole{\cst{sub_1}} \land \dots \land \subFunctionRole{{\cst{sub_n}}} \land \founded{\cst{main}}{\cst{m}} \land \founded{\cst{sub_1}}{\cst{m}} \land \dots \land \founded{\cst{sub_n}}{\cst{m}}) $
   \item[] \mytext{for any engineering \methodsName{singular} of functional decomposition, say $\cst{m}$, having a given number of sub-functions, say $n$, there exist a main-function role and $n$ sub-function roles, which are founded on $\cst{m}$ and are uniquely determined}
 \eflist
-Since the main-function and the $n$ sub-functions roles of a given \methodsName{singular} are univoquely determined, we can represent the with functional symbols. In particular, we will write $\cst{main^m}$, $\cst{sub}^m_1$, \dots, $\cst{sub}^m_n$ to indicate the roles corresponding to the \methodsName{singular} $\cst{m}$, as per Axiom \refax{ax:pre-method} (we omit the functional dependence of $n$ on $\cst{m}$, for ease of notation).
+Since the main-function and the $n$ sub-functions roles of a given \methodsName{singular} are univocally determined, we can represent them with functional symbols. In particular, we will write $\cst{main^m}$, $\cst{sub}^m_1$, \dots, $\cst{sub}^m_n$ to indicate the roles corresponding to the \methodsName{singular} $\cst{m}$, as per Axiom \refax{ax:pre-method} (we omit the functional dependence of $n$ on $\cst{m}$, for ease of notation).
 \myComment{Then, we define two binary relation that we will use as shortcuts to simplify the incoming definition schema \refdf{def:method}
 \bflist
   \item[\mydf{main-function-of}] $ \mainFunction{x}{\cst{m}} \myiff \DOLCECLbyBinary{\cst{f}}{\cst{main}^{\cst{m}}} $
-  \item \mytext{$x$ is main-function-of a method $\cst{m}$ if and only if it is constantly classified by the main-function role correspondig to $\cst{m}$} 
+  \item \mytext{$x$ is main-function-of a method $\cst{m}$ if and only if it is constantly classified by the main-function role corresponding to $\cst{m}$} 
   \item[\mydf{sub-function-of}] $ \subFunction{x}{\cst{m}} \myiff \DOLCECLbyBinary{\cst{f}}{\cst{sub}^{\cst{m}}_i} $
-  \item \mytext{$x$ is main-function-of a \methodsName{singular} $\cst{m}$ if and only if it is constantly classified by the any of the sub-function roles correspondig to $\cst{m}$} 
+  \item \mytext{$x$ is main-function-of a \methodsName{singular} $\cst{m}$ if and only if it is constantly classified by the any of the sub-function roles corresponding to $\cst{m}$} 
 \eflist}
 Finally, the link between \methodsName{plural} and decompositions is given in the following definition schema: 
 \bflist
