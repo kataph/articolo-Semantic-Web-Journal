@@ -1,0 +1,1395 @@
+% PLEASE USE THIS FILE AS A TEMPLATE
+% Check file iosart2x.tex for more examples
+
+% add. options: [seceqn,secthm,crcready] FC:original:[sw]
+\documentclass[sw]{iosart2x}
+
+%\usepackage{dcolumn}
+\usepackage{soul}
+\usepackage{comment} %% utility package: allows multiline comments
+\usepackage{xspace}  %% utility package: allows definition of no-argument commands that do not absorb trailing saces
+\usepackage{ifthen}  %% utility package: allows for conditionals
+\usepackage{xcolor}  %% utility package: colors for temporary comments
+\usepackage{enumitem}  %% utility package: change spacing of lists
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%% Put your definitions here
+%%%%% FORMULAS
+% COUNTERS
+% newcommand for list ox formula environment
+\newcommand{\bflist}{\begin{list}{}{\setlength{\topsep}{2mm}\setlength{\partopsep}{0mm}\setlength{\parsep}{0mm}\setlength{\leftmargin}{9mm}\setlength{\labelwidth}{8mm}}}
+\newcommand{\eflist}{\end{list}}
+
+% newcommand for labels of axioms, definitions and formulae
+\newcommand{\AxLabel}{\textrm{a}}
+\newcommand{\DefLabel}{\textrm{d}}
+\newcommand{\ExLabel}{\textrm{ex}}
+\newcommand{\FmLabel}{\textrm{f}}
+\newcommand{\ThrLabel}{\textrm{t}}
+\newcommand{\NtsLabel}{{\color{red}\textrm{TODO}}}
+
+% counter and newcommand for numbering formulas
+\newcounter{cntax}
+\newcommand{\myax}[1]{\refstepcounter{cntax}\begin{small}{\bf \AxLabel\thecntax\label{ax:#1}}\end{small}}
+\newcounter{cntdef}
+\newcommand{\mydf}[1]{\refstepcounter{cntdef}\begin{small}{\bf \DefLabel\thecntdef\label{def:#1}}\end{small}}
+\newcounter{cntfm}
+\newcommand{\myex}[1]{\refstepcounter{cntex}\begin{small}{\bf \ExLabel\thecntex\label{ex:#1}}\end{small}}
+\newcounter{cntex}
+\newcommand{\myfm}[1]{\refstepcounter{cntfm}\begin{small}{\bf \FmLabel\thecntfm\label{for:#1}}\end{small}}
+\newcounter{cntthr}
+\newcommand{\mythr}[1]{\refstepcounter{cntthr}\begin{small}{\bf \ThrLabel\thecntthr\label{th:#1}}\end{small}}
+\newcounter{cntnts}
+\newcommand{\mynts}[1]{\refstepcounter{cntnts}\begin{small}{\bf \NtsLabel\thecntnts\label{nts:#1}}\end{small}}
+
+\newcommand{\mytext}[1]{``#1''}
+
+\newcommand{\refax}[1]{({\AxLabel}\ref{#1})}
+\newcommand{\refdf}[1]{({\DefLabel}\ref{#1})}
+\newcommand{\refex}[1]{({\ExLabel}\ref{#1})}
+\newcommand{\reffm}[1]{({\FmLabel}\ref{#1})}
+\newcommand{\refth}[1]{({\ThrLabel}\ref{#1})}
+
+\newcommand{\refnt}[1]{({\NtsLabel}\ref{#1})}
+
+%%%%% Predicates styling
+%% general style -- purtroppo non funzionano tutti siccome LaTeX fa le storie per le espansioni delle macro, credo
+%                 - pero' almeno texttt, textnormal, textbf e textit funzionano; textsc non funziona
+\newcommand{\generalStyle}[1]{\texttt{#1}}
+%% binary predicate style
+\newcommand{\biRel}[3]{\generalStyle{#1}(#2,#3)}
+%% monadic predicate style
+\newcommand{\uniRel}[2]{\generalStyle{#1}(#2)}
+%% monadic predicate (parameterized) style
+\newcommand{\uniRelPar}[3]{\generalStyle{#1}_{\generalStyle{#3}}(#2)}
+%% binary predicate (parameterized) style
+\newcommand{\biRelPar}[4]{\generalStyle{#1}_{\generalStyle{#4}}(#2,#3)}
+\newcommand{\triRelPar}[5]{\generalStyle{#1}_{\generalStyle{#5}}(#2,#3,#4)}
+%% ternary predicate style
+\newcommand{\triRel}[4]{\generalStyle{#1}(#2,#3,#4)}
+%% 4- predicate style
+\newcommand{\fourRel}[5]{\generalStyle{#1}(#2,#3,#4,#5)}
+%% 5- predicate style
+\newcommand{\fiveRel}[6]{\generalStyle{#1}(#2,#3,#4,#5,#6)}
+%% constant style
+\newcommand{\cst}[1]{\ensuremath{\mathtt{#1}}}
+%% functions 
+%\newcommand{\functionIndividual}[1]{\cst{#1}}
+
+%%%%%%% Logic symbols
+%% biconditional
+\newcommand{\myiff}{\Longleftrightarrow}
+%% necessary condition
+\newcommand{\myif}{\Longleftarrow \hspace{0.9mm}}
+%% sufficient condition
+\newcommand{\myfi}{\hspace{0.9mm} \Longrightarrow}
+
+%%%%%%% DOLCE
+%% DOLCE style -- Small Caps, ie textsc, non funziona per qualche ragione
+\newcommand{\DOLCE}{\textsc{DOLCE}\xspace} %% TODO far si che le macro applichino lo stile :(, perche' textsc non funziona?
+\newcommand{\YAMATO}{\textsc{YAMATO}\xspace}
+\newcommand{\BFO}{\textsc{BFO}\xspace} 
+\newcommand{\GFO}{\textsc{GFO}\xspace} 
+\newcommand{\OWL}{\textnormal{OWL}\xspace} 
+\newcommand{\TLO}{\textnormal{TLO}\xspace} 
+
+
+%% DOLCE various predicates
+\newcommand{\DOLCEQuality}[1]{\uniRel{Q}{#1}}
+\newcommand{\DOLCEEvent}[1]{\uniRel{{E}}{#1}}
+\newcommand{\DOLCEDescription}[1]{\uniRel{{DS}}{#1}}
+\newcommand{\DOLCEAgent}[1]{\uniRel{{ASO}}{#1}}
+\newcommand{\Role}[1]{\uniRel{{Role}}{#1}}
+\newcommand{\DOLCERole}[1]{\uniRel{{RL}}{#1}}
+\newcommand{\DOLCEState}[1]{\uniRel{{ST}}{#1}}
+\newcommand{\DOLCEProcess}[1]{\uniRel{PRO}{#1}}
+\newcommand{\DOLCEPerdurant}[1]{\uniRel{{PD}}{#1}}
+\newcommand{\DOLCEStative}[1]{\uniRel{{STV}}{#1}}
+\newcommand{\DOLCEPhysObj}[1]{\uniRel{{POB}}{#1}}
+\newcommand{\DOLCENASO}[1]{\uniRel{{NASO}}{#1}}
+\newcommand{\DOLCEConcept}[1]{\uniRel{{CN}}{#1}}
+
+\newcommand{\DOLCEDefinedBy}[2]{\biRel{{DF}}{#1}{#2}}
+\newcommand{\DOLCEUsedBy}[2]{\biRel{{US}}{#1}{#2}}
+\newcommand{\DOLCEPC}[3]{\triRel{{PC}}{#1}{#2}{#3}}
+\newcommand{\DOLCEPartBin}[2]{\biRel{{CP}}{#1}{#2}}
+\newcommand{\DOLCEPart}[3]{\triRel{{P}}{#1}{#2}{#3}}
+\newcommand{\DOLCEOver}[2]{\biRel{{O}}{#1}{#2}}
+\newcommand{\DOLCEConstitutes}[2]{\biRel{{constitutes}}{#1}{#2}}
+\newcommand{\DOLCEK}[3]{\triRel{{K}}{#1}{#2}{#3}}
+% \newcommand{\DOLCEParticipates}[3]{\triRel{{Participates}}{#1}{#2}{#3}}
+\newcommand{\DOLCEQualityDirect}[2]{\biRel{qt}{#1}{#2}}
+\newcommand{\DOLCEQualeDirect}[2]{\biRel{{ql}}{#1}{#2}}
+\newcommand{\DOLCECLbyBinary}[2]{\biRel{CL}{#1}{#2}}
+\newcommand{\DOLCECLby}[3]{\triRel{CL}{#1}{#2}{#3}}
+\newcommand{\DOLCEPRE}[2]{\biRel{PRE}{#1}{#2}}
+\newcommand{\DOLCEConceptSubsum}[2]{\biRel{SP}{#1}{#2}}
+
+\newcommand{\DOLCESum}[3]{\triRel{Sum}{#1}{#2}{#3}}
+\newcommand{\DOLCECLbyPar}[3][]{\biRelPar{{CL}}{#2}{#3}{#1}}
+
+%%%% Additional predicates
+\newcommand{\RelationalQualityClass}{\generalStyle{relationalQt}}
+\newcommand{\CapabilityClass}{\generalStyle{Capability}}
+\newcommand{\CapacityClass}{\generalStyle{Capacity}}
+
+\newcommand{\TechArt}[1]{\uniRel{TechArt}{#1}}
+\newcommand{\TechArtNullary}{\generalStyle{TechArt}}
+\newcommand{\Component}[1]{\uniRel{Component}{#1}}
+\newcommand{\Capability}[1]{\uniRel{Capability}{#1}}
+\newcommand{\PumpingCapability}[1]{\uniRel{PumpingCapability}{#1}}
+\newcommand{\PumpingProcess}[1]{\uniRel{PumpingProcess}{#1}}
+\newcommand{\BehaviourAbstract}[1]{\uniRel{AbstBeh}{#1}}
+\newcommand{\BehaviourConcrete}[1]{\uniRel{Behaviour}{#1}}
+\newcommand{\BehaviourConcreteNullary}{\generalStyle{Behaviour}}
+\newcommand{\Capacity}[1]{\uniRel{Capacity}{#1}}
+\newcommand{\RelationalQuality}[1]{\uniRel{relationalQt}{#1}}
+\newcommand{\IntrinsicQuality}[1]{\uniRel{intrinsicQt}{#1}}
+\newcommand{\Goal}[1]{\uniRel{Goal}{#1}}
+\newcommand{\GoalNullary}{\generalStyle{Goal}}
+\newcommand{\StateVariable}[1]{\uniRel{StateVariable}{#1}}
+\newcommand{\System}[1]{\uniRel{System}{#1}}
+\newcommand{\SystemNullary}{\generalStyle{System}}
+\newcommand{\StateVariableCondition}[1]{\uniRel{SystemCond}{#1}}
+\newcommand{\Method}[1]{\uniRelPar{Method}{#1}{Eng}}
+
+\newcommand{\FunctionSys}[1]{\uniRelPar{Function}{#1}{Sys}}
+\newcommand{\FunctionSysOf}[2]{\biRelPar{FunctionOf}{#1}{#2}{Sys}}
+\newcommand{\FunctionAbs}[1]{\uniRelPar{Function}{#1}{Ont}}
+\newcommand{\FunctionSysNullary}{\generalStyle{Function}_{\generalStyle{Sys}}}
+\newcommand{\FunctionEng}[1]{\uniRelPar{Function}{#1}{Eng}}
+
+\newcommand{\inheres}[2]{\biRel{inheres}{#1}{#2}}
+\newcommand{\specificallyDependsOn}[2]{\biRel{dependsOn}{#1}{#2}}
+%SD(x,y) , (∃t(PRE(x,t))∧∀t(PRE(x,t) → PRE(y,t))) (Specific Const. Dep.)
+\newcommand{\founded}[2]{\biRel{\foundedTerm{passive}}{#1}{#2}}
+\newcommand{\foundedNullary}{\generalStyle{\foundedTerm{passive}}}
+
+\newcommand{\contextOf}[2]{\biRel{contextOf}{#1}{#2}}
+\newcommand{\causallyContr}[2]{\biRel{causalContr}{#1}{#2}}
+\newcommand{\causallyContrNullary}{\generalStyle{causalContr}}
+\newcommand{\participatedAsDoer}[3]{\triRel{participatedAsDoer}{#1}{#2}{#3}}
+\newcommand{\participateAsDoer}[3]{\triRel{participatesAsDoer}{#1}{#2}{#3}}
+\newcommand{\participateAsDoerBinary}[2]{\biRel{participatesAsDoer}{#1}{#2}}
+\newcommand{\participateAsFlow}[3]{\triRel{participatesAsFlow}{#1}{#2}{#3}}
+\newcommand{\participateAsFlowBinary}[2]{\biRel{participatesAsFlow}{#1}{#2}}
+\newcommand{\behaviourOf}[2]{\biRel{behaviourOf}{#1}{#2}}
+\newcommand{\goalOf}[2]{\biRel{goalOf}{#1}{#2}}
+\newcommand{\external}[2]{\biRel{externalTo}{#1}{#2}}
+\newcommand{\internal}[2]{\biRel{internalTo}{#1}{#2}}
+\newcommand{\mainFunction}[2]{\biRel{mainFunction}{#1}{#2}}
+\newcommand{\subFunction}[2]{\biRel{subFunction}{#1}{#2}}
+\newcommand{\playAsBinary}[2]{\biRel{playAs}{#1}{#2}}
+\newcommand{\playAs}[3]{\triRel{playAs}{#1}{#2}{#3}}
+\newcommand{\partTABin}[2]{\biRelPar{P}{#1}{#2}{TA}}
+\newcommand{\partTA}[3]{\triRelPar{P}{#1}{#2}{#3}{TA}}
+\newcommand{\partS}[2]{\biRelPar{P}{#1}{#2}{Sys}}
+\newcommand{\describedBy}[2]{\biRelPar{describedBy}{#1}{#2}{Cap}}
+\newcommand{\realizedIn}[2]{\biRelPar{realizedIn}{#1}{#2}{Beh}}
+\newcommand{\foundedCapab}[2]{\biRelPar{founded}{#1}{#2}{Cpb}}
+\newcommand{\foundedROLE}[2]{\biRelPar{\foundedTerm{passive}}{#1}{#2}{Inst}}
+\newcommand{\foundedDef}[2]{\biRelPar{\foundedTerm{passive}}{#1}{#2}{Def}}
+
+%\newcommand{\participateAsDoerTemp}[3]{triRel{participatesAsDoer}{#1}{#2}{#3}}
+\newcommand{\behSum}[3]{\triRel{Sum}{#1}{#2}{#3}}
+\newcommand{\DOLCEQualeTer}[3]{\triRel{ql}{#1}{#2}{#3}}
+
+%% Fnctional Basis Thingies
+\newcommand{\Flow}[1]{\uniRel{Flow}{#1}}
+\newcommand{\flowOf}[2]{\biRel{flowOf}{#1}{#2}}
+\newcommand{\Energy}[1]{\uniRel{Energy}{#1}}
+\newcommand{\Material}[1]{\uniRel{Material}{#1}}
+\newcommand{\Signal}[1]{\uniRel{Signal}{#1}}
+\newcommand{\inp}[2]{\biRel{inp}{#1}{#2}}
+\newcommand{\out}[2]{\biRel{out}{#1}{#2}}
+\newcommand{\ABSum}[3]{\triRel{ASum}{#1}{#2}{#3}}
+
+%% decomposition
+%\newcommand{\decom5}[5]{\fiveRel{comp}{#1}{#2}{#3}{#4}{#5}}
+\newcommand{\decom}{\generalStyle{decomp}}
+
+%%%% First time keyword - usare quando una parola chiave [] menzionata per la prima volta
+\newcommand{\firstTimeKeyWord}[1]{\textit{#1}}
+
+%%%% Terminology - termini introdotti dall'articolo, potenzialmente questionabili, da modificare facilmente
+%%%%%% Terminologia
+
+%% individual quality founds capability
+\newcommand{\foundedTerm}[1]{%
+  \ifthenelse{\equal{#1}{passive}}{founded}{%
+    \ifthenelse{\equal{#1}{verb}}{found}{%
+      \ifthenelse{\equal{#1}{gerund}}{founding}{%
+        ERROR!%
+      }%
+    }%
+  }%
+}  
+
+%% changings of state variables
+\newcommand{\stateVarCond}[1]{%
+  \ifthenelse{\equal{#1}{fullSingular}}{system condition}{%
+    \ifthenelse{\equal{#1}{shortSingular}}{condition}{%
+      \ifthenelse{\equal{#1}{fullPlural}}{system conditions}{%
+        \ifthenelse{\equal{#1}{shortPlural}}{conditions}{%
+          ERROR!%
+        }%
+      }%
+    }%
+  }%
+}  
+
+
+%% single quotes
+\newcommand{\quotes}[1]{`#1'}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% miscellanea
+%%%%%% The following 4 lines are from https://tex.stackexchange.com/questions/287081/how-to-prevent-a-linebreak-before-align-equation-environment-in-itemize/287091#287091
+\newcommand{\myalignspaceskip}{
+ \abovedisplayskip=-\baselineskip
+ \belowdisplayskip=0pt
+ \abovedisplayshortskip=-\baselineskip
+ \belowdisplayshortskip=0pt}
+%%%%%% Commenti
+\newcommand{\TODO}[1]{{\color{red} #1}}
+\newcommand{\TODOinline}[1]{{\color{red} #1}}
+%\newcommand{\TODO}[1]{\nb{#1}}
+%red comment in the margin
+\newcommand{\nb}[1]{\textcolor{red}{$|$}\marginpar{\parbox{22mm}{\scriptsize\raggedright\textcolor{red}{#1}}}}
+% to comment away a small text
+\newcommand{\myComment}[1]{{\unskip \ignorespaces}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% End of definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pubyear{0000}
+\volume{0}
+\firstpage{1}
+\lastpage{1}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%\pretitle{}
+\title{%About functions, behaviours, and capabilities in formal ontology and engineering
+\color{red}{QUESTA E' VERSIONE VECCHIA}
+}
+\runtitle{Running head title}
+%\subtitle{}
+
+% For one author:
+%\author{\inits{N.}\fnms{Name1} \snm{Surname1}\ead[label=e1]{first@somewhere.com}}
+%\address{Department first, \orgname{University or Company name},
+%Abbreviate US states, \cny{Country}\printead[presep={\\}]{e1}}
+
+% Two or more authors:
+\begin{aug}
+\author[A]{\inits{N.}\fnms{Name1} \snm{Surname1}\ead[label=e1]{first@somewhere.com}%
+\thanks{Corresponding author. \printead{e1}.}}
+\author[B]{\inits{N.N.}\fnms{Name2 Name2} \snm{Surname2}\ead[label=e2]{second@somewhere.com}}
+\author[B]{\inits{N.-N.}\fnms{Name3-Name3} \snm{Surname3}\ead[label=e3]{third@somewhere.com}}
+\address[A]{Department first, \orgname{University or Company name},
+Abbreviate US states, \cny{Country}\printead[presep={\\}]{e1}}
+\address[B]{Department first, \orgname{University or Company name},
+Abbreviate US states, \cny{Country}\printead[presep={\\}]{e2,e3}}
+\end{aug}
+
+%\begin{review}{editor}
+%\reviewer{\fnms{First} \snm{Editor}\address{\orgname{University or Company name}, \cny{Country}}}
+%\reviewer{\fnms{Second} \snm{Editor}\address{\orgname{First University or Company name}, \cny{Country}
+%    and \orgname{Second University or Company name}, \cny{Country}}}
+%\end{review}
+%\begin{review}{solicited}
+%\reviewer{\fnms{First} \snm{Solicited reviewer}\address{\orgname{University or Company name}, \cny{Country}}}
+%\reviewer{\snm{anonymous reviewer}}
+%\end{review}
+%\begin{review}{open}
+%\reviewer{\fnms{First} \snm{Open Reviewer}\address{\orgname{University or Company name}, \cny{Country}}}
+%\end{review}
+
+\begin{abstract}
+%% NOTA (estratti dal testo della call):
+%... industrial environments where machines are designed to smoothly interact between themselves and with humans via knowledge models. 
+%At the same time, however, 
+%practitioners and stakeholders lack methodologies and guidelines to reliably develop, use or integrate (existing) ontologies ...
+%% (elenco alcuni temi)
+%-...
+%-Ontologies for knowledge representation and reasoning about topics relevant for industrial engineering (e.g., products, processes, manufacturing resources, requirements and capabilities, etc.).
+%-Ontology-based patterns for industrial engineering knowledge representation.
+%-ethodologies, methods, and techniques targeted to industrial contexts supporting the development, modularisation, extension, and evolution of ontologies.
+%-Literature review of existing ontologies for industrial engineering, including structured comparisons.
+%-Experiences with the use of top-level ontologies (e.g. BFO, DOLCE, ISO 15926, among others) in industrial engineering.
+%-Experiences with research and application initiatives such as OntoCommons, the Industry Ontologies Foundry (IOF), and the UK National Digital Twins.
+%
+%
+%% NOTA (estratti dal file iosart2x.pdf)
+%...
+%� The use of first persons (i.e., �I�, �we�, �their�, possessives, etc.) should be avoided, and can preferably be
+%expressed by the passive voice or other ways. This also applies to the Abstract.
+%� A research paper should be structured in terms of four parts, each of which may comprise of multiple sections:
+%   * Part One is problem description/definition, and a literature review upon the state of the art.
+%   * Part Two is methodological formulation and/or theoretical development (fundamentals, principle and/or ap-
+%     proach, etc.).
+%   * Part Three is prototyping, case study or experiment.
+%   * Part Four is critical evaluation against related works, and the conclusion.
+%In any article it is unnecessary to have an arrangement statement at the beginning (or end) of every (sub-) section.
+%Rather, a single overall arrangement statement about the whole paper can be made at the end of the Introduction
+%section. ...
+%
+
+
+In both applied ontology and engineering, functionality is a well-researched topic, since it is through teleological causal reasoning that domain experts build mental models of engineering systems, giving birth to functions. 
+These mental models are important throughout the whole lifecycle of any product, being used from the design phase up to any \myComment{eventual}  diagnosis activity. 
+Though a vast amount of work to represent functions has already been carried out, the literature has not settled on a shared and well-defined methodology yet. 
+This work develops preliminary steps towards an ontological description of functions and related concepts, such as behaviour, capability, and capacity.
+A conceptual analysis of such notions is carried out using the top-level ontology DOLCE as a framework, and 
+the ensuing logical theory is formally described in first order logic and OWL\myComment{, and some examples are worked through\TODO{check what really is done}}, showing how ontological concepts can model major aspects of engineering products in applications.
+In particular, it is shown how functions can be distinguished from implementation methods, and how functions can differentiate between capabilities and capacities of a product. 
+\end{abstract}
+
+\begin{keyword} 
+    %% NOTA
+    % ... Please include 3-7 keywords below the abstract of your manuscript. ... 
+\kwd{Ontology}
+\kwd{Function}
+\kwd{Behaviour}
+\kwd{Capability}
+\end{keyword}
+
+\end{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ELENCO Di TODOS
+%% TODO we give 3 contribution 1 review 2 some distinction et formaliz 3 la roba capab vs capac
+%% TODO check that "the reference number is not used at the beginning of a sentence" or " integrate the authors’ names into the text,"
+%% TODO dire che metodo = label per composizione di ??comportmaenti??funzioni?? e dire che è meglio che rispetto a FR
+%% TODO observer --> agent
+%% TODO Ruolo in DOLCE
+%% TODO Occurrent vs perdurant
+%% TODO cambiare la definizione di behavior come avverbio per SB
+%% TODO SB si è contraddetto dicendo di fissare capab vs capacity all'inizio, poi ha detto che il contributo del paper era distinguerle in base alla differenza tra funz ont. vs ing.. Come risolvere?
+%% TODO inserire FBS modeler di Umeda (e suo sviluppo: vedi Umeda 2015) e confrontare con Erden 2008
+%% TODO sostituire 'I', 'us', 'we', 'our', etc. con costrutti alternativi, come da linee guida stilistiche
+%% TODO aggiustare l'uso indiscriminato del genitivo sassone
+%% TODO controllare l'uso delle forme ortografiche inglesi o americane, che siano costanti. E.g. 'behaviOUR', 'fomaliSation', 'axiomatiSation', in generale -'Sation' etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FINE TODOS
+
+%%%%%%%%%%% The article body starts:
+
+\section{Introduction}\label{sec:intro}
+%% TODO Rivedere dopo che il resto del materiale è completato.
+
+%% Introdurre lettore a contesto-->Partire da descrizione contesto in cui ci poniamo: Integrare visuone funzionale solida ont. in visione in ingegneria, in generale. Varie teorie da consolidare
+% introduzione 
+Functionality is a concept that has interested engineers as well as philosophers and applied ontologists. 
+% esemplificazione
+It is referenced whenever engineers and scientists discuss the goals of systems, both natural and artificial. 
+For example, engineers commonly use functions in order to design \cite{pahl_engineering_2007} and diagnose devices \cite{larssonDiagnosisBasedExplicit1996}, while philosophers discuss the nature of functions themselves \cite{cumminsFunctionalAnalysis1975}.
+
+%% Dire problemi che ci poniamo: quali problemi in questo ambito
+% problemi
+Despite the high amount of attention given to this topic, some problems have yet to be settled. 
+For instance, the terminology used is quite ambiguous and words such as \firstTimeKeyWord{capability}, \firstTimeKeyWord{capacity}, \firstTimeKeyWord{behavior}, or \firstTimeKeyWord{function} itself have been used with many different meanings \cite{borgoCapabilitiesCapacitiesFunctionalities2021, erdenReviewFunctionModeling2008}, and are characterized differently, if at all.
+Moreover, the study of \firstTimeKeyWord{functional decomposition}, that is, the division of functions into sub-functions, is often addressed in the literature as a means to guide the conceptualisation, design and maintenance of products, but is rarely formalized.
+By and large, functional decomposition consists in associating the product function with a combination of sub-functions whose execution (in a certain order and with suitable coordination) is equivalent to the execution of the main function. This decomposition simplifies both the design process and the implementation of the functional requirements into a concrete physical system.
+Of course, functional decomposition is not limited to the design of engineering systems. 
+In fact, during the teleological analysis of a system, artificial or natural, domain experts speak about functions of both the system and its parts.
+Therefore, one is always confronted with the problem of how simpler functions contribute to coarser granularity functions, so that functional decomposition is ubiquitous. %, which themselves push the system towards the desired state.
+Since in engineering there exist standard ways to execute functions\myComment{meglio->In the engineering domain, functional decomposition has unique characteristics: for example, since in engineering there exist standard ways to solve functions through decomposition}\footnote{For example, the use of gearboxes made in a certain way in order to increase or reduce angular velocity. Another example: a brushless electric motor may be understood as the class subsuming all models of brushless electric motors, but it can also be recognized as a method by which electric energy can be converted to torque.}, %Similarly, `electric resistance welding' is a method, while `to join' is a function.}
+we can speak of \firstTimeKeyWord{engineering methods}\footnote{If the method is not standard, say if it has just been introduced, we still call it an engineering method. In fact, in such a case, the term can refer to the principles and theories, which are shared among engineers, that the implementation follows.}, or solutions \cite{pahl_engineering_2007}, or `ways' of functional achievement \cite{kitamuraOntologicalModelDevice2006}. \myComment{, the last two terms taken from \cite{pahl_engineering_2007} and \cite{kitamuraOntologicalModelDevice2006} respectively}   
+
+%% Si elencano research question (quali problemi aperti a cui rispondere)
+% research questions: 
+% 1 - funzioni ont. vs funzioni ing.
+% 2 - funzioni vs metodi
+% 3 - in un modo formale
+% 4 - ???
+This paper builds on previous research, especially \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{mizoguchiUnifyingDefinitionArtifact2016}, to discuss what functionality and related concepts are, in a formal way. 
+The formal languages used in the paper are first order logic \cite{sep-logic-classical}, adopted for the general discussion of the concepts and their relationships, and \OWL \cite{OWL2-QUICK-REFERENCE} for the use case; additionally, to give a clear ontological grounding for our formalisation, we use the top-level ontology \DOLCE\footnote{The interested reader can find a complete and in-depth presentation of \DOLCE in \cite{masoloWonderWebDeliverableD182003} and its application in use cases in \cite{borgoDOLCEDescriptiveOntology2022}.} as reference. 
+Moreover, we will discuss the relation between functions as entities independent of any implementation, which we call \firstTimeKeyWord{ontological functions}, functions that depend on the teleological analysis of a given system, that is, functions contextualised to a system, that we call \firstTimeKeyWord{systemic functions}, and functions as entities related to an execution method, which we call \firstTimeKeyWord{engineering functions}.
+Finally, ontological functions will be leveraged to propose a general distinction between capabilities and capacities of engineering artifacts.   
+
+% structure statement
+The structure of the paper is as follows. A review of the literature about functionality that is particularly relevant for this work is presented in Section \ref{sec:review}. 
+Section \ref{sec:DOLCE} describes key concepts of \DOLCE. These are exploited in Section \ref{sec:capabilitiesEtc} for the discussion of capabilities, capacities, behaviors, and functions. This section proposes also a formal interpretation of ontological and engineering functions in first order logic, and concludes with a preliminary characterisations of capabilities and capacities. We showcase a preliminary ontology in the \OWL language in Section \ref{sec:appendice}, before drawing our conclusions in Section \ref{sec:conc}. 
+
+%% Review letteratura
+\section{Literature review\label{sec:review}}%
+% review parte 1: introduzione ai lavori principali in letteratura sulle funzioni in generale: cosa è una funzione, che vocabolari sono usati
+Due to strong practical interests, a vast literature about functionality has been developed within engineering. 
+We limit ourselves to a brief review. The reader interested in a more in depth analysis can refer to other works like~\cite{erdenReviewFunctionModeling2008} in engineering and \cite{artigaNewPerspectiveOnFunctions} in applied ontology.
+
+%% TODO frase molto lunga
+Fundamental works about functionality are, for example, De Kleer's \cite{de_kleer_how_1984, kleer_qualitative_1984}, which outline foundational principles such as the locality of functions (functions of a component should refer only to neighboring entities) and the \quotes{no function in structure} principle (structural models should not contain teleological information); and Pahl and Beitz's \cite{pahl_engineering_2007}, which describes functions as black-box transformations applied to input flows, divides functions based on the property of the flow acted upon (e.g., quantity, type, position, etc.), and discusses function decomposition (that is, how to achieve a given function through a structure of adequate sub-functions).
+
+In \cite{pahl_engineering_2007} Pahl and Beitz explain also how designers can start from a generic function and implement it with solutions based on different physical principles. 
+Then, they reference many design catalogues, for example Roth's \cite{rothKonstruierenMitKonstruktionskatalogen2000}, which tabulate solutions and classify them along different criteria.
+In the context of design catalogues, functions and solutions exist along the same abstract-concrete axis, and differ by the \quotes{degree of embodiment}. 
+Thereby, the most abstract functions, called \quotes{generally valid functions}, are the most useful criteria to classify solutions in a product-independent way. 
+
+The definition of functions as (selected) actions on flows is the most common type encountered in the engineering literature, for example Chandrasekaran et al. \cite{chandrasekaranFunctionalRepresentationDesign1993} speak of \quotes{intended input-output relations}, and many vocabularies were proposed in order to standardize the terminology of such actions. 
+The proposed vocabularies range from Keuneke's short four terms list (toMake, toMantain, toPrevent, and toControl) \cite{keuneke_device_1991}, to larger vocabularies built using complex algorithms, as Kitamura et al.'s \cite{kitamuraFunctionalConceptOntology2002a}. 
+A common and often referred to example is Stone and Wood's Functional Basis \cite{hirtz_functional_2002, stone_development_2000}, which gives terms for actions and flows on a three-levels taxonomy described in natural language.
+The literature about the use of such vocabularies has not settled yet and, currently, different lines of research are being pursued, such as behavioural simulation of a system from the functional model \cite{kurtogluGraphBasedFaultIdentification2008} or formal description and automatic construction of the functional model itself \cite{gill_logic_2021,kurtoglu_automating_2010}.
+
+%These vocabularies equate functions to transformations of objects, thus using verbs or verbs-objects[nouns] pair as terms. 
+% review parte 2: funzioni parte oggettiva vs soggettiva --> introduzione a behaviour
+It is generally recognized that functionality depends on the intention of an agent, a typical example being the designer's intent  \cite{kitamuraOntologyBasedFunctionalKnowledgeModeling2004}, also called \quotes{design rationale} \cite{chandrasekaranFunctionalRepresentationDesign1993}. 
+Thus, functions are not objective, at least not completely. 
+Then, it is natural to wonder what in a function is fully objective. Behaviour, intended as what a device does, as determined by physical laws, is usually the answer.    
+
+%Also for the term behaviour we have no universally shared definition, but such a concept is usually countraposed to \quotes{function}. Some authors say that behaviour is what  
+
+Even the term behaviour is used ambiguously and without any universally shared definition. 
+The ambiguity has such consequences so that some authors classified the multiple uses of behavior in engineering literature: 
+Kitamura et al. \cite{kitamuraOntologyBasedFunctionalKnowledgeModeling2004} determine four types of device behaviour\footnote{They explicitly exclude static behaviours such as supporting, though.}, depending on whether the device changes the state of another device, its own state, or the state of one of its operands. Within the second behavior type two additional cases are distinguished: the operand can either stay in the same position or `move' from the input to the output ports (the latter case is called \firstTimeKeyWord{B1 behavior}, for example, \quotes{a motor converts electrical energy to torque} and \quotes{the signal intensity is increased by the amplifier} are examples of B1 behavior, while \quotes{the temperature in the room is increased by the oven} is not a B1 behavior, neither is \quotes{the turbine is rotating}).
+Instead, in \cite{chandrasekaranFunctionDeviceRepresentation2000}, Chandrasekaran and Josephson divide behaviours mainly depending on their time duration (instant, interval, or unspecified).
+
+%\TODO{vedere se inserire qui discorso differenza tra behaviour astratti e concreti--->nope(?): non inserire}
+
+The link between function and behaviour generally reflects the duality between objectivity and intentionality: some authors state that behaviour is what a device does, whilst function is what a device is for \cite{kleer_qualitative_1984}, others focus on describing behaviour as a sequence of state changes and functions as abstractions of behaviours with a goal in mind \cite{umedaFunctionBehaviourStructure1990}.  
+In \cite{sasajimaFBRLFunctionBehavior1995, sasajimaInvestigationDomainOntology1994}, Sasajima et al. state that function is made from behaviour plus additional teleological information called \quotes{functional topping}.
+Specifically, the functional topping allows, among other things, distinguishing the different functions that a device can execute (e.g. an electrical resistor could be devised for either heating the environment or for dropping the input voltage, and the functional topping in these two cases is different\myComment{a heat exchanger could be devised for either heating or cooling depending on the context, and the functional topping in these two cases is different}\footnote{More precisely, when the resistor is used for heating, the functional topping tags as `Focus' the heat flow exiting the output port, when the resistor is used for dropping the voltage, it is the electric energy output of the resistor that is tagged `Focus'.}
+%More precisely, when the exchanger is used as heater, the functional topping tags the heat flow exiting the output port with the label `Need', instead, when the exchanger is used as a cooler, the heat flow entering the input port is tagged with the label `NoNeed'. 
+%\TODOinline{[mi sembra strano, ricontrolla per favore][FC: hai ragione, avevo spiegato sbagliato. Ho anche sostituito con una resistenza elettrica che ha 3 porte invece di 4 ed è più semplice]}}).
+
+In \cite{chandrasekaranFunctionDeviceRepresentation2000} functions are the sum of intentions and sets of behavioural constraints, defined, essentially, as causal relations between devices states.
+
+%\TODO{differenza tra implementation way e resto?}
+
+% Review parte 3: vari sistemi utilizzati
+In any case, to date numerous modelling frameworks have been developed in order to deal with functional and behavioural representation of an engineering systems (e.g., Umeda et al.'s FBS \cite{umedaFunctionBehaviourStructure1990}, Sasajima et al.'s FBRL \cite{sasajimaFBRLFunctionBehavior1995}, Sembugamoorthy and Chandrasekaran's FR \cite{sembugamoorthy1986functional}, Goel et al.'s SBF \cite{goelUseDesignPatterns2004}, Qian and Gero's FBS \cite{qianFunctionBehaviorStructure1996}).
+%\footnote{This acronym stands for Function-Behaviour-Structure, while the one by Umeda et al. stands for Function-Behaviour-State. They are still almost homonymous, since State is used as a synonym for Structure by Umeda et al..} \cite{qianFunctionBehaviorStructure1996}, and several others.
+It would be impossible to explain briefly the characteristics of and the differences between these frameworks. Still, oversimplifying, one can isolate commonalities: all of them tend to see the structure of a device as a set of parts (components) together with their attributes and the relations between them. Then, typically, they say that a behaviour is a sequence of states of the components. The definition of function is more \myComment{murky} complex, but, \textit{de facto}, a function is often used as a label for a subset of behaviours. Finally, they often recognize a dependence of functions on behaviors, and of behaviors on the structure. 
+There are, of course, key differences. 
+For example, behavior in Chandrasekaran’s FR scheme refers to a causal process while behavior in Gero’s FBS representation pertains to the properties of a structural component.
+Or the fact that Gero and Chandrasekaran explicitly allow for decomposition of functions into behaviors, while in Sasajima's approach a decomposition of functions in behaviors is forbidden and functions decompose only into other functions.  
+
+Among the previous frameworks, we find particularly interesting the development of FBRL. 
+This is because, while for engineers functions usually are either already-assigned functional requirements (things that a product must be able to do) or are not distinguished by implementation methods, the authors of FBRL started, in our opinion, to study functions as entities by themselves. %either things that are exists on an application level in order to be solved (functional requirements) or things that an object does to solve its requirements, the authors of FBRL started, in our opinion, to study functions as entities by themselves. 
+%\TODO{[l'uso che fai del verbo 'to solve' mi sembra strano, sopra l'ho cambiato quando potevo. qui l'intero paragrafo mi risulta poco chiaro, puoi rivederlo?] [FC: rivisto paragrafo]}
+For example, at least from \cite{kitamuraMetaFunctionsArtifacts1999}, they studied relations between functions themselves (called \quotes{meta-functions}), and analyzed the properties of functions, building complex taxonomies of functional concepts.
+This is important for our work, since it is one
+%, if not the very first (to our knowledge), 
+clear example of what we call ontological functions, while the engineering functions are the ones that, as in Pahl and Beitz's work, exist only to be implemented \myComment{solved} by some method %in some way 
+in an application context.
+
+Most of the frameworks used for modelling functions come from the engineering community and tend not to be grounded in, nor aligned with, ontological theories. The presence of explicit connections between these framework and ontological theories would be quite beneficial, especially because of the large number of such engineering systems and of the importance of clarifying the use of the terminology. 
+Moreover, engineers often do not make use of formal languages such as first order logic or \OWL\footnote{There is, of course, also the fact that \OWL was first published in 2004, while many works of functional modelling are older.}, instead preferring informal descriptions in natural language or pseudo-code\footnote{There are exceptions, e.g. Kitamura et al. \cite{kitamuraOntologicalModelDevice2006} and Yang et al. \cite{yangFunctionSemanticRepresentation2010} %
+%, and \cite{senProtocolFormaliseFunction2011} 
+showcase an implementation of an  industrially deployed version of FBRL, called SOFAST, %using the ontology editor Hozo,
+and an \OWL and SWRL formalisation of the Functional Basis, %
+% and a pseudocode and logical formalisation of the Functional Basis 
+respectively.}.
+In addition, some topics such as the link between function and malfunction, the difference between function and behaviour, or the methodology with which to carry out the decomposition of a function have been tackled differently by these systems but, overall, it does not seem that a reliable and shared view is emerging.
+
+% review parte 4: tentativi di formalizzazione e intersezione con l'ontologia
+
+Despite the utility of an ontological analysis of these topics, the attempts carried until now are limited. 
+A few research works have formalized part of the FR system \cite{borgoFormalOntologicalPerspective2009}, started a formalisation of the Functional Basis vocabulary (and the conceptualisation it is based on) with the upper ontology \DOLCE \cite{borgoOntologicalRepresentationFunctional2009, borgoFormalizationFunctionsOperations2011}, compared the Functional Basis either with the FR system \cite{garbaczTwoOntologydrivenFormalisations2011} or with both FR and FBRL \cite{kitamuraDeepSemanticMapping2008}, and the function decomposition relation has been analyzed with ontological techniques \cite{vermaasFunctionalDecompositionMereology2009a,vermaasFormalImpossibilityAnalysing2013}. 
+Additionally, applied ontology has influenced engineering literature, as shown by the description of functions as roles played by behaviours \cite{mizoguchiUnifiedDefinitionFunction2012, kitamuraOntologicalModelDevice2006, chandrasekaranFunctionDeviceRepresentation2000}, or the classification of behaviours as occurrents \cite{kitamuraOntologicalModelDevice2006}.
+
+% review parte 4.2: la varie TLO e le funzioni
+Still, no shared reference ontology of functions exists, and top-level ontologies do not explore theories of functions as understood in engineering. 
+For example, \DOLCE makes no mention of function within its specification \cite{masoloWonderWebDeliverableD182003}, and only later work was proposed to see function execution as a particular type of events, namely achievements \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
+The last version of \YAMATO classifies functions as roles and behaviours as processes\footnote{Note that even if processes exist as a category also in \DOLCE, in that \TLO behaviours are still more similar to events and not processes. This is because the process category of \YAMATO and the one of \DOLCE are different: in \YAMATO processes wholly exist at each point in time, while in \DOLCE they are a special kind of events. \YAMATO  and \DOLCE are instead aligned on the notion of events. %are complete realisations of \YAMATO-processes (e.g. \quotes{the motor accelerated} vs \quotes{the motor is accelerating}).
+} 
+caused by an unintentional actor, and delegates the description of a functional ontology to a series of additional papers \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}. 
+\BFO defines functions as dispositions %\footnote{Note that in \BFO functions are dispositions, not roles, while in \YAMATO the opposite holds. See \cite{mizoguchiFunctionalOntologyArtifacts2009} and \cite{spearFunctionsBasicFormal2016} for a comparison.} 
+that exist in virtue of their bearer's physical make-up, and such that the physical make-up came into being through intentional design (in the case of engineering). Other than that, \BFO does not commit to an axiomatisation, at least not within the axiomatisation of BFO currently present in GitHub\footnote{BFO 2020: \url{https://github.com/BFO-ontology/BFO-2020}.}.
+%\TODO{[va verificato][FC: controllati tutti gli assiomi di BFO2020: riguardo le funzioni, dicono che 1-funzioni sono sottoclasse di disposizioni 2-funzioni sono temporalmente rigide. Limito comunque a un riferimento preciso]}
+\GFO too states that functions can be realized by other entities, but makes no mention of dispositions and, instead, calls functions \quotes{intentional entities} \cite{herreGeneralFormalOntology2006}.
+The last development of ISO 15926 \cite{kluwerISO159261420202020} adopts \BFO view of functions as dispositions realized in particular processes.
+
+% review parte 5: motivazione all'articolo
+As we have seen, 
+the meaning of function is ambiguous even within the ontology community. 
+Moreover, it is generally not considered a top-level concept, and thus it is marginally covered by top-level ontologies. 
+Unfortunately, to our knowledge, the ontology community has not produced a shared middle or domain level ontology dealing with functions\footnote{The taxonomy of an ontology of functions, which is still under development, was proposed by Borgo et al. in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}.}. 
+
+% review parte 5.2: ribadimento deglio obbiettivi di ricerca dell'introduzione?
+Given the current situation, an ontological analysis clarifying the domain of functionality would be quite useful.
+This paper aims to provide an initial step in the direction of developing a systemic ontological treatment of functionality, focusing in particular on the engineering domain.
+It might be true that the ambiguity of function terminology is both necessary and rational for engineers \cite{vermaasConceptualElusivenessEngineering2012}. 
+%It may very well be so, and we shall not formalize what \emph{the} meanings of behavior and function are \TODO{mettere citazione chandra.}.
+Still, we maintain that formalisation is useful in order to show differences between the possible approaches. Moreover, it is useful, if not necessary, to develop applications that rely on functional reasoning.
+
+\medskip
+In conclusion of this section, we mention very briefly some facts about capabilities and capacities. 
+These two terms, especially capability, are used in resource modelling \cite{jarvenpaaDevelopmentOntologyDescribing2019a, sarkarOntologyModelProcess2019, jochemISOISO15531312004, solanoKnowledgeRepresentationProduct2014}. In addition, terminological problems are present also for these two concepts, which are rarely formalized \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021}. Usually, capabilities and capacities are often distinguished along a qualitative-quantitative axis, for example ISO 15531-31\cite{jochemISOISO15531312004} states that \quotes{Capacity is strictly a quantitative concept} while \quotes{Capability is essentially a functional and qualitative concept}, and exemplify capacity with product throughput and define capability as \quotes{the quality of being able to perform a given activity}. The same standard advises against reducing capacities as characteristics of capabilities and forbids the opposite (in contradiction to \cite{solanoKnowledgeRepresentationProduct2014}, where a \quotes{Capacity is a Capability
+expressed in terms of amount of production}).
+In any case, in this paper we will try to formalize, in a preliminary way, some intuitions that transpire from the literature on resource modelling, such as the asymmetry between capacities and capabilities, the close link (but not identity) between capabilities and functionality, qualitative vs quantitative aspects, and the idea of capabilities as qualities of being able to do something.
+%\TODO{rivedere e completare la review della letteratura. In particolare, inserire parte su capabilities etc.<--opzionale, seems ok}
+%sarkarOntologyModelProcess2019 per capab=disposizioni 
+%jarvenpaaDevelopmentOntologyDescribing2019a e ES 2015 <- capab in res mod
+
+
+%% metodologia
+%\section{\TODOinline{Section 1-metodologia}}\label{sec:...}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{An (enriched) subset of the \DOLCE ontology\label{sec:DOLCE}} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Here we introduce the fragment of the \DOLCE ontology \cite{masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022} that is needed in this paper. In particular, we cover the following classes which will be needed to model functions and related concepts: \firstTimeKeyWord{qualities}, \firstTimeKeyWord{perdurants}, and \firstTimeKeyWord{roles}. 
+
+\DOLCE qualities are similar to tropes~\cite{Campbell90}. Qualities, for example the weight of a car and the color of a flower, are used for representing properties (e.g., weight) of individual objects (e.g., car) in which they inhere.
+Ontologically, qualities are individuals, that is, the colors of two different flowers are different, even though they could be both the same shade of red.
+Differently than tropes, qualities can change in time, for example the color quality of a flower can change its value as time passes: red in the summer and brown in the fall.
+This is because values of qualities are separated from qualities themselves and are called quales. 
+In this way, the assignment of values to qualities is more flexible and follows the schema object(carrier)-quality(individual property)-quale(value).
+In \DOLCE, qualities form the class $\DOLCEQuality{\cdot}$ and their inherence relation is written $\DOLCEQualityDirect{\cdot}{\cdot}$, \quotes{quality-of}. A temporal quale relation associates a quality with some value which, as said, may be different at different times. (The temporal quale relation will not be used in this paper.)
+
+We add a distinction among qualities, which is not in \DOLCE, to separate \firstTimeKeyWord{intrinsic} qualities, such as mass, length, or shape, and \firstTimeKeyWord{relational}, or extrinsic, qualities, such as weight (which is a comparative property), the personal record for a marathon (which is relative to the definition of marathon), or the distance of an object from another object. %the ability of executing a certain action. 
+Relational qualities are not qualities of an object \textit{per se}, but depend on other things like the context or something in the environment.
+To clarify our intuition we illustrate some of the previous examples: the distance of the Moon from the Earth, seen as a property of the Moon, cannot be thought nor measured without considering the Earth, so we say that it is a relational quality of the Moon. In contrast, the color of a material object, as a property of the material itself, does not depend on other entities (not even light), so that is an example of intrinsic quality. 
+%Of course, this holds true only in a fixed domain of discourse, otherwise one could argue that the color too needs, say, a beam of light to be seen. 
+Another example is the difference between weight and mass of a body: the weight also depends on the position of the body, say if the body is on Earth or on the Moon, so it is relational. 
+%In addition, for someone to have a citizenship, there must be a nation the person owes its allegiance to. 
+A more technical example is the voltage at a point of a component, which, since it is a potential, requires a second point used as  reference (the ground of the electrical circuit) in order to be measured. 
+Informally speaking, capacities can be understood as having a relational nature, which explains our interest in the intrinsic/relational distinction across qualities. For, if we speak about the capacity of a device, say the capacity to process a certain number of items in a given time, then such capacity always refers to another entity, in this case the items.  Analogously, in \cite{qianFunctionBehaviorStructure1996}, Qian and Gero stated that there are different types of \quotes{behavioral variables}: structural, as the area of a room or the diameter of a water tap, and exogenous, as the water flow through a water tap. In the latter example, the water flow is an exogenous variable because \quotes{water is not part of the
+water tap design, it is only related to the design}, so that we could argue water is an additional entity required by the water flow quality of the tap, suggesting that this form of exogeneity can be captured via our notion of relational quality.  
+
+%Behavior can also be characterized by two kinds of behavior
+%variables.
+%• Structural (Direct): A behavior is derived from the structure
+%itself withouc any external effect. For example, %the
+%floor of a room has an area as a behavior %variable, which
+%is directly derived frorn the room's width and %length.
+%• Exogenous (Indirect): A specific kind of %behavior is
+%shown when an external object is applied to a %structure.
+%For example, the waler tap or faucet has an area
+%that water can pass through, but water is not %art of the
+%ater tap design, it is only related to the design. The
+%water flow is an indirect behavior variable %controlled
+%by the diameter of the water tap. --Qian, Gero 1996
+
+In the previous examples, it seems that relational qualities are those qualities that depend, in some way, on an entity different (we say \firstTimeKeyWord{external}, see \refdf{def:external}) from their bearer. Unfortunately, the exact meaning of this dependence relation changes between the different examples. In particular, in the case of capacities the dependence is `potential', for a device can have the capacity to process a product, even when the product is not actually present. In contrast, in the case of relative distance the dependence is `actual', for a physical object is at any time at a certain distance from another.\footnote{Note that relative distance makes sense only at times in which both objects exist.}
+It follows that the characterisation of relational qualities is a complex matter that goes beyond the scope of this paper.\footnote{The interested reader can find a proposal on relational and intrinsic qualities in \cite{fonsecaRelationsOntologyDrivenConceptual2019}.} Therefore, we just introduce relational and intrinsic qualities as complementary primitive subclasses of \DOLCE-qualities: 
+\bflist
+  \item[\myax{relationalQtPartialDef}] $ \RelationalQuality{x} \myfi \DOLCEQuality{x} $ 
+  \item[\mydf{intrinsicQtPartialDef}] $ \IntrinsicQuality{x} \myiff  ( \DOLCEQuality{x} \land \neg  \RelationalQuality{x})$
+  %\item[] \mytext{$x$ is an intrinsic quality if and only if it is a quality and it is not relational}
+\eflist
+
+
+
+Turning now to perdurants ($\DOLCEPerdurant{\cdot}$), which we will also refer to as occurents in this paper, in \DOLCE they are entities that are only partially present at any time they are present.\footnote{Ordinary physical objects such as cars, trees, rocks, etc. are considered fully present at every time in which they exist.} For example, a chemical process, the lifting of a load, and a sitting action are only partially present at each instant at which they happen. Indeed, the initial part of a chemical process is not present when the process reached the midway point, and vice versa.  %only when considered with their full time extension. 
+\DOLCE uses three mereological properties to distinguish perdurants: cumulativity, homeomericity, and atomicity.
+Cumulativity holds if the sum of two instances of a type has the same type, that is, if the type is closed under mereological sum. Consider, for example, \quotes{walking}: if we consider two walking activities, then the activity that comprises both is still an activity of type \quotes{walking}.
+Cumulative perdurants\footnote{More precisely, instances of a cumulative type perdurant.} are called \firstTimeKeyWord{stative} ($\DOLCEStative{\cdot}$), while the ones that are never cumulative are called \firstTimeKeyWord{eventive}.
+Homeomericity holds for a perdurant type if any parts of its instances are instances themselves.
+This is the case of, e.g, \quotes{sitting}, since portions of a sitting action are still sitting actions.
+Stative homeomeric perdurants are called \firstTimeKeyWord{states} ($\DOLCEState{\cdot}$), while the ones that are stative but have parts of different type are called \firstTimeKeyWord{processes}($\DOLCEProcess{\cdot}$). Walking itself is an example of process in \DOLCE: walking requires at least to complete a certain leg movement, below such granularity is not a walking movement.
+Another example is the buzzing of a clapper: the clapper alternates between two states when clapping (opened/closed circuit), and neither state is per se of buzzing type. In \DOLCE the temporal relationship between a perdurant and the object participating in it is called \firstTimeKeyWord{participation}, written $\DOLCEPC{\cdot}{\cdot}{\cdot}$: in the previous example a participant of the clapping is the buzzer.
+
+%%%%% old paragraph
+% Finally, roles are not mentioned in \DOLCE, but they are used in the related literature, at the meta level, as labels for classes \cite{guarinoOverviewOntoClean2009, guarinoFormalOntologyProperties2000}.
+% A class is a role whenever its instances are not necessarily so and, moreover, they depend on some external context (external meaning that is not a part of a substrate). 
+% For example, a certain person could be a student, but not necessarily so, in fact, if it is a student, we expect for it to cease to be a student after some time. 
+% Additionally, a student is such only in the context of a certain school.
+% Oppositely, any person is necessarily so, and it is independent of other external entities.
+% We will not introduce a category for roles, instead, in the following, we will sometimes label a class as a role. 
+% Whenever we do that, we mean it as a meta-logical label, as explained before. 
+%%%%%% new paragraph
+Coming to roles, they were not covered in \DOLCE originally. They have been introduced later as an extension \cite{masoloSocialRolesTheir2004}, and are now part of the expanded taxonomy \cite{borgoDOLCEDescriptiveOntology2022}.
+Roles are antirigid and dependent, or founded, classes \cite{guarinoOverviewOntoClean2009, guarinoFormalOntologyProperties2000,masoloSocialRolesTheir2004}. 
+A class is antirigid whenever its instances are not necessarily so, and is dependent if all of its instances (existentially) depend on some external entity, often called context.
+For example, a certain person can be a student, but no person is necessarily a student. Actually, we expect that a student ceases to be such after some time. 
+In contrast, any person is necessarily a person, and is so independently of other external entities.
+%Additionally, a student is such only in the context of a certain school.
+An ontological class (existentially) depends on, or is founded on, another if, whenever an instance of the first class is present, a corresponding instance of the second is present too.
+For example, for every citizen there is a country, so that someone's citizenship depends on the country. Actually, in this paper, we will be more precise and distinguish between different kinds of dependence and founding, but the basic idea is still captured by the citizen-country example. 
+Additionally, some authors divide roles depending on the type of their context, 
+for example Loebe distinguishes relational, processual, and social roles in \cite{loebeAbstractVsSocial2007}. The classification depends on whether the context is a relation, a process, or a social object. 
+In \DOLCE roles ($\DOLCERole{\cdot}$) are reified and considered as concepts ($\DOLCEConcept{\cdot}$), which themselves form a class subsumed by the class of non-agentive social objects ($\DOLCENASO{\cdot}$):
+\bflist
+  \item[\myax{roleSussum}] $ \DOLCERole{x} \myfi \DOLCEConcept{x}$
+  \item[] \mytext{a role is a concept}
+  \item[\myax{roleSussum2}] $\DOLCEConcept{x} \myfi \DOLCENASO{x}$
+  \item[] \mytext{a concept is a non-agentive social object}
+\eflist
+In this paper, the fact that roles are founded is particularly important, thus, we give the following formalisation, where $\DOLCECLby{\cdot}{\cdot}{\cdot}$ (`classified-by', also called `play-as', if the first argument is a role) is the classification relation between a concept and its instances at a certain time, cf. \cite{masoloSocialRolesTheir2004}. In the formalisation we use some other relations taken from \DOLCE, namely: $\DOLCEConstitutes{\cdot}{\cdot}$ (in \DOLCE it is written $\DOLCEK{\cdot}{\cdot}$) is the  relation holding between some amount of matter and an object when the latter is made of the first;  $\DOLCEOver{\cdot}{\cdot}$ is the standard overlap relation; and $\DOLCEPRE{\cdot}{\cdot}$ is the relation "being present (exist) at time". %, and $\playAs{\cdot}{\cdot}{\cdot}$ is its restriction to roles:
+\bflist
+\item[\mydf{external}] $ \external{x}{y} \myiff \neg (\DOLCEQualityDirect{x}{y} \lor \DOLCEConstitutes{x}{y} \lor %\DOLCEPart{x}{y})
+\DOLCEOver{x}{y})$
+\item[] \mytext{$x$ is external to $y$ if and only if $x$ is neither a quality of $y$, nor one of $y$'s constituents\footnote{Constituent, or substratum, as in \quotes{this fork is constituted by stainless steel.}}, nor $x$ and $y$ have parts in common\footnote{Substrata, parts, and qualities may not cover all possibilities especially if a different top-level ontology were used.}}  
+%\TODO{rendere la relazione simmetrica?}
+%Here, the dependence relationship is specific and constant, that is,
+%$x$ depends on $y$ if and only if whenever $x$ exists, so does $y$: 
+\item[\mydf{specificallyDependsOn}] $ \specificallyDependsOn{x}{y} \myiff (\exists t(\DOLCEPRE{x}{t}) \land \forall t(\DOLCEPRE{x}{t} \myfi \DOLCEPRE{y}{t}))$ 
+\item[] \mytext{$x$ existentially depends on $y$ if and only if $x$ exists at some time and at any time when $x$ exists so does $y$}\footnote{The existential quantifier is a technicality: without it an entity that is never present would depend on all entities. Similarly, existential quantifiers are introduced in axioms having a similar structure to this one.}
+\item[\mydf{foundingBasic}] $ \founded{x}{y} \myiff (\specificallyDependsOn{x}{y} \land \external{x}{y})$
+\item[] \mytext{$x$ is founded on $y$ if and only if $x$ existentially depends on $y$ and $y$ is external to $x$} 
+\eflist
+Further, we specialize the founding relationship to concepts and their instances as follows:
+\bflist
+\item[\mydf{founding}] $ \foundedROLE{x}{y} \myiff (\DOLCEConcept{x} \land \exists z,t (\DOLCECLby{z}{x}{t}) \land \forall z,t (\DOLCECLby{z}{x}{t} \myfi \exists w (\founded{z}{w} \land \DOLCECLby{w}{y}{t})))$
+%\textcolor{blue}{(e' necessario assumere che il concetto classifichi qualcosa (quantificatore esistenziale)?(FC: argomentabile, vedi nota 18)( cmq farei un esempio con $founded_{cn}$)(FC: inserito sotto esempio husband-marriage, è OK?)(SB: meglio tenerlo per evitare casi di foundedness irrilevanti)}
+\item[] \mytext{the concept $x$ is instantiation-founded on the concept $y$ if and only if, given any $z$ that plays $x$, then $z$ is founded on some instance of $y$} 
+%that is, instantiation-founding is the founding relation `lifted' to concepts. Note that the without the existential quantification any empty concept would be founded on every other concept.
+
+\item[\myax{roleFounding}] $ \DOLCERole{x} \myfi \exists y \foundedROLE{x}{y} $ 
+\item[] \mytext{if $x$ is a role, then there is a $y$ on which it is instantiation-founded} 
+%cfr. \refax{ax:relationalQtPartialDef}.
+\eflist 
+For example, the role of `husband' is instantiation-founded on the concept of `marriage', since every time a person is a husband there is an individual marriage between that person and another person.
+
+We also need to capture a different kind of founding relation, that we call \firstTimeKeyWord{definition-founding} ($\foundedDef{\cdot}{\cdot}$). We do not formalize this relation as it requires to discuss how to formally define roles, a topic beyond our concerns in this paper. We will use it with the following informal interpretation: \mytext{$x$ is definition-founded on some entity $y$ if and only if $y$ is used to define $x$}.
+%\TODOinline{[assumo che applichiamo la relazione solo a concetti, confermi?][FC: no, perché la ragione di introdurre questa relazione è la definizione \refdf{def:capability}, per provare a collegare le capability alle funzioni.][SB: ok, ho tolto le restrizioni a "concept" nel testo][FC:roger]} 
+For example, if a doctor is defined as a person who treats patients, then the doctor-role is definition-founded on the patient-role.  %and we will enforce only the following axiom:
+%\bflist
+%\item[\myax{foundingDefRange}] $ \foundedDef{x}{y} \myfi \DOLCEConcept{y}$\footnote{A more in-depth discussion of definition founding, usually called definition dependence, can be found in \cite{masoloSocialRolesTheir2004}.} 
+% \eflist 
+Note that instantiation-founding and definition-founding need not  coincide. A person is a doctor even though, at a certain time, she has no patient, so that the doctor-role is not instantiation-founded on the patient-role.
+\myComment{\textcolor{blue}{(non seguo bene la distinzione qui (ma magari e' un problema mio); guardando a d5, uno potrebbe scrivere $founded_{cn}(doctor-role, patient-role)$. Pero' capisco che qst non andrebbe bene. xke'? Potreste fare un esempio in cui $founded_{cn}$ si applica?)}\TODOinline{[se capisco, la sostanza è che "dottore" è definito usando "paziente" ma un'istanza di dottore on richiede l'esistenze di un'istanza di paziente. Forse si potrebbero chiamare: instantiation-founded e definition-founded per sottolineare meglio questa differenza.][FC: come dice SB. Ho sostituito 'instantiation-founded' con 'instance-founded']*[SB: usare instance e definitional non mi piace, userei due sostantivi opp. due aggettivi. Scegli tu. Inoltre $founded_{CN}$ dovrebbe diventare $founded_{Inst}$][FC: messo "instantiation-"][FC:messo anche definition al posto di definitional]}}
+
+Additionally, we will make use of \firstTimeKeyWord{descriptions} to directly talk about definitions of types of entities. In fact, in this paper, descriptions are \myComment{conceptualised as} reifications of definitions, of relations or of types entities. For example, the content of the Italian constitution can be seen as a particular description (an object) that defines several roles, e.g., the Italian Prime Minister. Another example of descriptions are 
+%documents that describe how to carry out technical activities, say \myComment{SB: ho tolto l'espressione perché la nozione di documento crea confusione tra oggetto materiale e contenuto}
+IKEA assembly instructions. In the latter case, the entities described are perdurants of a certain kind.
+In \DOLCE descriptions, $\DOLCEDescription{\cdot}$, are conceptualized as a subcategory of non-agentive social objects:
+\bflist
+\item[\myax{descriptionSussum}] $ \DOLCEDescription{x} \myfi \DOLCENASO{x} $ 
+\eflist
+
+%\myComment{\TODOinline{[Meglio tagliare il pezzo qui sotto (fino a "... and used-by relations"), non aggiunge nulla e rischia di confondere visto che le relazioni DS e US non sono banali quando si parla di concetti][FC: fatto]}}
+%\myComment{In addition, though it is not necessary to the development of our theory, descriptions can be used to define the definition-founding relation.
+%In fact, if one introduces two relations between entities and descriptions: $\DOLCEDefinedBy{\cdot}{\cdot}$, defined-by, to state that an entity is defined by a description; and $\DOLCEUsedBy{\cdot}{\cdot}$, used-by, to state that a description makes use of an entity\footnote{The interested reader can consult e.g. \cite{masoloSocialRolesTheir2004} for a discussion on descriptions.}, then, these two relations can be used to state 
+%\bflist
+%\item[\mydf{foundingDefinitionally}] $ \foundedDef{x}{y} \myiff \exists z(\DOLCEDescription{z} \land \DOLCEUsedBy{y}{z} \land \DOLCEDefinedBy{x}{z}) ) $ 
+%\item \mytext{$x$ is definition-founded on $y$ if and only if there exists a description, say $z$, that defines $x$ and makes use of $y$} \textcolor{blue}{penso che aiuterebbe i lettori scrivere CN(x) e DS(y)// non ho capito se vale $founded_{def}(x,y) \to founded(x,y)$}
+%\eflist
+%The definition above is just a clarification of the meaning of definition-founding and descriptions, and, for the rest, we will not use the defined-by and used-by relations. }
+
+Finally, since roles, as well as concepts, can be seen as reified classes, there exists a specialisation relation between roles, which we write as $\DOLCEConceptSubsum{\cdot}{\cdot}$:
+\bflist
+\item[\mydf{conceptSussum}] $ \DOLCEConceptSubsum{x}{y} \myiff (\DOLCEConcept{x} \land \DOLCEConcept{y} \land \exists z,t (\DOLCECLby{z}{x}{t}) \land \forall z,t (\DOLCECLby{z}{x}{t} \myfi \DOLCECLby{z}{y}{t}) )$%\footnote{Note that, technically, \refdf{def:conceptSussum} entails that any empty concept specialises any other concept. This is not important, since we do not care about empty concepts.}
+\item \mytext{A concept $x$ specializes a concept $y$ if and only if all instances of $x$ are also instances of $y$} %\textcolor{blue}{(as above, e' necessario il quant. esistenziale?)}\TODOinline{[il quantificatore esistenziale serve]}
+\eflist
+For example, the role of the Italian Prime Minister specializes the role of Prime Minister.
+This notion of specialization is admittedly weak. One would like to add a modal characterization: definition \refdf{def:conceptSussum} should hold in all possible worlds. This problem applies to other definitions we introduce in this paper and in some special cases we will discuss this issue. The problem is not ontological but related to the limitations of first-order logic. Without discussing logical technicalities, in this paper we will make use of these characterizations assuming that, in suitable systems, e.g. first-order modal logic, a suitable modal formula is substituted.
+%%Let’s take, for example, the present Italian Constitution. This can be seen as a description defining the current concepts of Italian President, Italian government, Italian Prime Minister, etc. Berlusconi during 2003 and D'Alema 4 years ago are classified by the latter concept.
+%%explicitly introduce concept definitions, called descriptions, to deal with the social, relational, and contextual nature of social concepts: DS(x) stands for “x is a description”, while DF(x, y) stands for “the concept x is defined by the description y”; --Social Roles...
+%\TODO{alcuni punti generali:\\
+% 1) evitiamo di quantificare su classi;[FC:fatto]\\ 
+% 2) ho introdotto la relazione "play";[FC:ok-->rimossa per via di cambiamenti: solo menzionata]\\ 
+% 3) CL e play hanno bisogno del tempo, sono ternarie;[FC:fatto, allora idem per la partecipazione e per la parte-intero, fatto]\\
+% 4) evita punti, virgola etc. a fine delle formule;[FC:fatto, (anche se tutte le guide stilistiche che ho letto dicono di trattare le formule come parti integranti di un periodo ;), punteggiatura inclusa)]\\ 
+% 5) per ogni formula inserisci tra parentesi come leggerla in ling. naturale (come ho fatto nelle f.le in questa sez.)[FC:should be ok, some easy formula skipped]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modeling behaviors and functions in \DOLCE \label{sec:capabilitiesEtc}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Inizio formalizzazione
+%% formalizzazione parte 1: entita' di base e loro mereologia
+%Our investigation involves engineering systems and devices. 
+In this section we propose a framework to characterize how behaviour and function of engineering artifacts can be understood to make sense of the distinctions used by engineers in, e.g., process, product, or early system design planning. Within the following section, we will expand this view to capability and capacity.
+In this work we use \DOLCE as our top-level ontology.
+
+In the literature, many terms are used to refer to engineering systems and devices such as part, component, device, tool, machine, system, (technical) artifact, functional object etc. 
+We use \firstTimeKeyWord{technical artifact}\footnote{See \cite{borgoTechnicalArtifactsIntegrated2017} for a more in-depth discussion of technical artifacts.} to mean any physical object (see \refax{ax:subsumptionTArt}) that comes into being through some intentional technical process, such as, e.g., cars, planes, tooling machines, and mechanical devices. %Sometimes we will use \quotes{device}, \quotes{artifact}, and,  especially when we want to highlight the mereological structure of an artifact, \quotes{system} as synonyms.
+Also, we will use the terms \quotes{device} and \quotes{technical artifact} as synonyms. 
+Additionally, we will use the term \firstTimeKeyWord{system} in order to highlight the mereological structure of a complex artifact. 
+%In reality, %\myComment{truth}\textcolor{blue}{( `in truth' e' molto italiano ;)},
+The notion of system is complex, cannot be reduced to  that of technical artifact, and its precise characterisation is an open problem (see e.g. \cite{mizoguchiRoleSystemicView2021}). In the paper, we take this notion as given introducing a primitive class, $\System{\cdot}$. In particular, technical artifacts belong to this class. 
+%especially if they are the object of teleological analysis. \textcolor{blue}{( serve parlare di System? artefatti mereologicamente complessi per i quali si specificano le funzionalita'? Lo stesso non puo' gia' valere per TechArt?)}
+%[SB: hai ragione. una bozza di caratterizzazione c'è nell'articolo di Riichiro e me in JOWO 2021. è poco ma è un inizio. purtroppo non riesco a metterci un po' di tempo per sviluppare di più quell'idea (che è sostanzialmente di Riichiro). Cmq la noz. di funzione sistemica presuppone che ci sia una nozione di sistema. quella di artefatto è troppo debole. direi di fare riferimento a quell'articolo a JOWO, dicendo che per ora assumiamo la nozione ma che resta aperto il problema di caratterizzarla in modo adeguato.]
+%%Definition 3 (System and its Components). A system is an entity which consists of two or more identified components and their relationships. The components can be atomic or complex. An atomic component is not decomposed further. A complex component is itself a (sub-)system. Every system is decomposed into atomic components in a finite number of steps -- estratto da Borgo&Mizoguchi 2016, in 2021 è cambiato:
+\begin{comment}
+A generic system as a Structure (See 2.3) is an entity such that:
+(i) is a whole (physical) entity with a boundary separating the world in: the system’s inside and the
+system’s outside (the latter can be possibly empty if the system is the universe itself).
+(ii) has one or more components (the simplest case is, e.g., a pebble as a paper weight)
+(iii)if it has more than one component, each of its components must interact with at least another
+component. More precisely, a multi-component system cannot be divided in two non-interacting
+subsystems.
+(iv) if it has more than one component, it can be decomposed into multiple subsystems.
+(v) if it has more than one component, the systemic goal of a subsystem is specified by its smallest
+super subsystem. Intuitively, it is a (possibly non-intentional) goal necessary for sense-making
+the behavior of a subsystem. As described above, it is automatically specified when the behavior
+of the system is selected because all the components are supposed to realize the behavior.
+(vi) has input object(s) which is processed and then output.3 By being processed, we mean: a
+quality/state of the input object is changed while it goes through the subsystem. The completion
+of the process with the output release4 achieves the systemic goal. The detail of the process is
+defined in the Device ontology discussed in section 3.B).
+(vii) its connected components exchange information or objects as input/output.
+(viii) its subsystems are also systems.
+\end{comment}
+The mereology mentioned above is built as usual from the temporalized parthood relation of \DOLCE,  $\DOLCEPart{\cdot}{\cdot}{\cdot}$. We also introduce a non-temporalized relation, see \refdf{def:partConstant}. Axiom \refax{ax:part-present} and the class $\DOLCEPhysObj{\cdot}$, the category of physical objects, are taken from \DOLCE.
+\bflist
+\item[\myax{subsumptionTArt}] $ \TechArt{x} \myfi \DOLCEPhysObj{x}$
+\item \mytext{a tecnical artifact is a physical object}
+%\footnote{One could argue that technical articfact can also be perdurants [...].} 
+\item[\mydf{partConstant}] $ \DOLCEPartBin{x}{y}  \myiff \exists t (\DOLCEPRE{x}{t}) \land \forall t (\DOLCEPRE{x}{t} \myfi \DOLCEPart{x}{y}{t})$
+\item \mytext{$x$ is constantly part of $y$ if and only if whenever $x$ exists, it is part of $y$} 
+%this is a standard way of removing the temporal argument from parthood
+%Finally, we will use the fact that only actually present objects can be part of other objects:
+\item[\myax{part-present}] $ \DOLCEPart{x}{y}{t} \myfi (\DOLCEPRE{x}{t} \land \DOLCEPRE{y}{t})$
+\item \mytext{if $x$ is part of $y$ at time $t$, then $x$ and $y$ are both present at time $t$}
+\eflist
+%\textcolor{blue}{(per quanto possa dirne io, in genere le formule vengono sempre richiamate nel testo, cosa che nell'articolo non si fa sempre)}
+
+%% formalizzazione parte 2: introduzione di capabilities e capacities
+%%--> posticipato. Controllare tutto!!!
+
+
+
+%%%%%% formalizzazione parte 2: comportamenti
+\subsection{Behaviors}
+%In the previous examples, the relational qualities refer to a specific type of external entity, namely perdurants (like jumping, pumping, the functioning of an electrical circuit) in which the bearing object participates. 
+%Engineers are often focused on realizing specific interactions between an artifact and elements of its environment. 
+Engineers create an artifact to realize a certain interaction between the artifact itself and elements of the environment. The behavior of the artifact is the way in which it participates in the interaction (e.g. \quotes{[the car] rattled when I hit the curve}, \cite{chandrasekaranFunctionDeviceRepresentation2000}), 
+In \DOLCE one models the interaction as a perdurant. How to ontologically understand behavior is more tricky. 
+%Informally, it is the participant's way of being in the perdurant.  in the perdurant \cite{borgoFormalOntologicalPerspective2009} (the participant in the previous example would be the car).
+In the literature, the term behavior is sometimes used with different meanings, e.g., as simplified part or description of processes like in these excerpts: \quotes{The causal rules that describe the values of the variables under various conditions} \cite{chandrasekaranFunctionDeviceRepresentation2000}, \quotes{the behavior represents objective conceptualisation of its input-output relation as a black-box} \cite{kitamuraOntologicalModelDevice2006}, \quotes{situation-independent conceptualisation of the change between input and output of the device} \cite{mizoguchiFunctionalOntologyArtifacts2009}. 
+In \YAMATO \cite{Mizoguchi2017YAMATOYA} behaviours are modelled as processes with an \quotes{agent or an agent-like object as a doer}. 
+Instead, in \cite{borgoFormalOntologicalPerspective2009} Borgo et al.  model them as relational qualities which characterize the specific way of participation of an object to individual events. 
+%The latter choice entails the use of a ternary relation, since it treats behaviours analogously to adverbs, that is, predicates about the participation relation of an object in a process itself. 
+%\TODO{riscrivere questo paragrafo, also per SB adesso sono qualità relazionali}
+%Since we want to minimize the complexity of our formal language, we discard this modelling choice.
+
+% % % % % % % %% % % % %% % % % PARAGRAFI RIMOSSI PERCHE' NON ANDAVANO DA NESSUNA PARTE
+% % Instead, we develop the following construction in order to define what a behaviour is.
+% % First, we say that \firstTimeKeyWord{system} is the role that a technical artifact plays whenever it is studied as the object of teleological analysis by an engineer or a scientist.
+% % A system has, as it is, a countless number of qualities that we can think of.
+% % For example, at each and every point of the artifact we could take the temperature, the density, the color, etc. 
+% % These are already an infinite number but, of course, an engineer or scientist that studies the artifact only selects some of them, that we call \firstTimeKeyWord{state variables}\footnote{State variables are roles of regular qualities.}\footnote{Note that, often, but not always, the state variables of a system coincide with some variables of the underlying artifact. For example, the temperature at a given point is a quality of the artifact and (thus) of the system, while the input current of, say, an amplifier, is not \TODO{is it not?}}.
+
+% % Each observer could select a different set of variables, in that case there would exist different systems and those variables would belong to a system but not another, thus those systems would necessarily be different entities.
+% % Such systems would also be co-located, since they would be made from the very same underlying technical artifact. 
+% % Therefore, we can manage such cases by making use of the technique of \firstTimeKeyWord{entity stacking}, exploiting the multiplicative approach of \DOLCE \cite{vieuArtefactsRolesModelling2008}.
+% % Though, for simplicity, in the following we will assume \TODO{will we?} that there is a fixed point of view, so that to a single artifact corresponds a single system.
+
+% % Finally, we assume that a system can have smaller systems as parts, where the part-whole relation is lifted from the corresponding relation between technical artifacts.
+% % We also assume that, whenever a subsystem has a state variable, that quality is also a state variable of the entire system. 
+
+% % Note that not all subsets of parts are subsystems: they could be, but, in general, it depends on the choices carried out by the observer. 
+% % In fact, they select some subsets of components as subsystems, depending on the their goals, in a way that we will explain in the following \TODO{assicurarsi che sia stato fatto}. 
+% % \bflist
+% %   \item[\myax{systemSubsum}] $ \System{x} \myfi (\DOLCEPhysObj{x} \land \exists y (\TechArt{y} \land \DOLCEConstitutes{y}{x}) $
+% %   \item[\myax{stateVarSubsum}] $ \StateVariable{x} \myfi \DOLCEQuality{x} $
+% %   \item[\myax{subsystemPartDef}] $ \partS{x}{y} \myiff (\partTA{z}{w} \land \DOLCEConstitutes{z}{x} \land \DOLCEConstitutes{w}{y} \land \System{x} \land \System{y}) $
+% %   \item[\myax{stateVarInheritance}] $ (\partS{x}{y} \land \inheres{z}{x} \land \StateVariable{z}) \myfi  \inheres{z}{y} $ %% TODO \TODOinline{\text{forse e' necessario un predicato binario per le variabili di stato?}}
+  
+% % \eflist
+
+% % State variables are the qualities that engineers and scientists take into account when simulating a system. 
+% % For example, one could simulate an electronic system and measure the voltage in a point, say the output voltage of a signal generator. 
+% % Then one can check if the voltage stays constant in time, if it increases or decreases, if it oscillates, or if it does something more complex\footnote{Note that we use examples from the engineering domain, but one could, without any change, think about biology, for example considering the fact of someone's fingers being black, following severe exposure to cold \TODO{check se ha senso}.}.
+% % In any case, such changing of the values of one or more state variables are stative perdurants\footnote{See Paragraph \ref{par:DOLCE}. For example, two increasing are still an increasing, so they are statives; a portion of increasing is still an increasing, so they are states. Oscillating is a process, etc.}, because a composition of changings of some variables is still a changing of some variables.
+% % Of course, in the literature such changings are called \quotes{states}, but we cannot do that, since in \DOLCE they are really stative perdurants.
+% % Therefore, we shall use the term \textit{\stateVarCond{fullPlural}}.
+% % %we need to use \quotes{stative perdurant} insteaad, since that is the correct DOLCE category. 
+
+% % Notice that each \stateVarCond{fullSingular} only carries a part of the system information.
+% % One could say that it is a view of the whole \stateVarCond{shortSingular} of the system imposed by the engineer or scientist that observes the system.
+% % So that the whole condition of the system completely specifies it, while any other \stateVarCond{fullPlural} is less informative. Thus, if we conceptualize the fact of being more or less informative with a part-whole relation between \stateVarCond{shortPlural}, we can define the whole \stateVarCond{fullSingular} as the one that is maximum with respect to the mereological order.
+% % Following common terminology, we call the maximum of \stateVarCond{fullSingular} \firstTimeKeyWord{(complete) behavior of the system}.
+% % \bflist
+% %   \item[\mydf{behDef}] $ \behaviourOf{x}{y} \myiff  (\DOLCEPC{y}{x}{}\land \\ \forall z (\StateVariableCondition{z} \land \DOLCEPC{y}{z}{} \myfi \DOLCEPart{z}{x}) \\ \text{\TODO{vedere se mettere fusione invece}}$
+% % \eflist
+% % %Definition \ref{def:behDef} entails that the behaviour of a system is unique.
+
+% % Now, not all expressible \stateVarCond{fullPlural} are possible: some could be logically inconsistent (e.g., the temperature is plus 20 and minus 2 degrees Celsius), some could be outside the realm of physics (e.g., a temperature in negative Kelvin degrees). The remaining are the possible \stateVarCond{shortPlural}. 
+
+% % Engineers and scientists, that reason about the workings of a system, typically select a possible \stateVarCond{fullSingular}, that is actually happening or only thought of, and wonder what
+% % has caused it to happen\footnote{\TODO{elaborare sulla causazione: la fisica puo' fornire delle leggi matematiche tra le variabili e i lori cambiamenti. Queste pero' non necessariamente recano informazioni causali, e.g., le leggi aritmetiche o certe leggi differenziali non hanno informazione causale. Si puo' argomentare che alcuni cambiamenti accadono prima e altri dopo, ma questo e' vero solo per misure prese in punti diversi  (B1 behaviours), ma, sopratutto, potrebbe accadere così velocemente che l'osservatore non se ne accorge.}}.
+% % This is an essential step, since it introduces a `causal order' between a system \stateVarCond{shortPlural}, that could otherwise not be present.
+% % More precisely, we say that an observer selects some particular \stateVarCond{fullSingular} as \firstTimeKeyWord{goal}, goals being roles for \stateVarCond{shortPlural}, in order to explain what causes the goal to happen.
+
+% % Typically, if an observer selects a goal and just a single other \stateVarCond{fullSingular}, the other \stateVarCond{shortSingular} is not enough to build a causal explanation for the goal: other information are needed. 
+% % The complete behaviour of the system is certainly sufficient to explain the causation, but it is often impossible to known for the observer. 
+% % % % % % % %% % % % %% % % % PARAGRAFI RIMOSSI PERCHE' NON ANDAVANO DA NESSUNA PARTE - FINE 
+
+%%%%% definizione generale di comportamento
+%It is difficult to give a definition of behaviour, due to the many uses found in the literature.
+%We will still give a definition, since it is necessary to carry on our analysis, but, more importantly, 
+Here we discuss a few key ontological properties to distinguish possible definitions of behavior.
+There are, in fact, at least four %\TODO{[four?][FC:yes]} 
+axes along which different meanings of behavior can vary in the literature.
+First, there is what we call the occurrence-property dichotomy:
+\begin{itemize}
+  \item Behavior can be something that happens (occurs) and in which the behaving entity participates, 
+  in this case it is typically referred to as a transition between states or just as (staying in) a state. 
+  Examples are Goel's \cite{goelStructureBehaviorFunction2009}, Chandrasekaran's \cite{chandrasekaranFunctionDeviceRepresentation2000}, Umeda's \cite{umedaFunctionBehaviourStructure1990}, and \YAMATO authors' \cite{mizoguchiFunctionalOntologyArtifacts2009} approaches.
+  \item Behavior can also be a property, that is, something inhering into the behaving entity. 
+  In this case some authors speak of qualities \cite{borgoFormalOntologicalPerspective2009}, others of attributes or dispositions \cite{vermaasConceptualFrameworkJohn2007}, \cite{geroCategorisingTechnologicalKnowledge2002}.
+\end{itemize} 
+
+Then, there is the token-type distinction: behavior can be a class or a concept, as for  Mizoguchi in \cite{mizoguchiFunctionalOntologyArtifacts2009}. Alternatively, it can be an instance of something, or an entity relative to a specific event, as for Chandrasekaran and Josephson in \cite{chandrasekaranFunctionDeviceRepresentation2000}, and for Borgo et al. in \cite{borgoFormalOntologicalPerspective2009}, respectively. 
+
+Additionally, there is the external-internal axis, that is, the behavior \myComment{(or the behavioral description)} of an artifact may refer only to characteristics of the artifact itself, or it may need to refer to some external entities.
+For example, `the electric switch can alternate between open and closed states' is an internal behavioral description, as it refers only to transitions between states of the artifact.
+In contrast, `the current passing through an open switch is zero, if the applied voltage stays within operating conditions' is an external description, since, the current and the voltage are not intrinsic elements of the artifact. %\TODO{intrinsic qualities??? SB: non direi visto che qui behavior non è necessariamente una qualità, certo può esserci un legame}.
+Some authors explicitly use behavior with the internal meaning, e.g. Zhao et al. in \cite{zhaoStateBehaviorFunction2019}, others with the external one, as Kitamura et al. in \cite{kitamuraOntologybasedSystematizationFunctional2004}.%\textcolor{blue}{(usate sia \& sia et, meglio adottare la seconda opzione secondo me)(FC: sostituito Tizio \& al. con Tizio et al. e Tizio \& Caio con Tizio and Caio)}.
+
+Finally, there is the modal axis, since \myComment{for \textcolor{blue}{(since? considering that?)}} behaviours can be \myComment{\textcolor{blue}{(either)}} either expected (i.e. as envisioned by engineers) or actual (i.e. what actually happens), as implied by Gero in \cite{geroSituatedFunctionBehaviour2004} with respect to design activity (though one could use the same duality when talking of, e.g., malfunctioning).
+This axis includes, arguably, talks of causal laws or relations, since those could be conceptualized as changes of a system under some kind of epistemic modality, that is, changes that necessarily happen when some condition is met.
+We do not argue in favor of conceptualizing causal laws in this way, but, in any case, one must also take this use of behaviour into account, since it is encountered often. %often.
+Other differences exist in the literature, such as device-centered vs process-centered \cite{chandrasekaranFunctionDeviceRepresentation2000}, but we do not discuss them. 
+
+%By virtue of how our approach is structured, to define behavior as a property would make it very similar to a capability, or to the realisation of one.
+%\TODO{[FC: completamente ristrutturato questo e i prossimi paragrafi. Tengo "BEhaviour $\subset$ Perdurant" con una caratterizzazione parziale perché è quella più vicina all'uso in ingegneria]}
+
+
+%\TODOinline{[Ho tolto la discussione su (ex1), può generare confusione e non serve per i nostri scopi]}
+%Following common practice in the literature, in this paper we define behaviors as occurrents. 
+% More precisely, one could be tempted to subsume the class of behaviours in the category of \DOLCE processes, since behaviors are usually called \quotes{processes}:
+% \bflist
+% \item[\myex{behaviorSubsum}] $ \BehaviourConcrete{x} \myfi \DOLCEProcess{x} $
+% \eflist
+%However, this should be done only under specific assumptions, e.g., if one were to capture the use of `behaviour' as discrete transitions between states. In fact, in that case, one may assume that the cumulativity property holds, since the composition of two transitions between states is still a transition between states, and homeomericity does not, since there will always be a temporal part of a (discrete) transition between states that is not a transition between states. Therefore, the choice of \refex{ex:behaviorSubsum} is compatible with, e.g., representing transitions as discrete `jumps' between states, and with Kitamura et al.'s B1 behaviors%\TODO{[non sono stati introdotti i behavior B1, dobbiamo dire qualcosa o eliminare la nota...]*[FC:sono stati introdotti sopra]*[SB: ma era solo un cenno, non c'è info sufficiente per il lettore per capire, almeno aggiungi un paio di esempi positivi e un esempio negativo...][FC:hai ragione, aggiunti esempi]}
+%\footnote{For, in the case of B1 behaviors, we argue that there is a minimum time duration for the behavior: the time necessary for the operand to move between input to the output ports}. For those same reasons, choosing \refex{ex:behaviorSubsum} excludes transitions that are not happening along a continuum, thus it cannot be assumed \textit{a priori}.  
+%We will always mention if we speak about a token or a type \TODO{<---check if true and if really needed FC: rimosso}.
+%We understand \TODO{riscrivere frase} that any given device type can participate only in some behavior types and not other, for example, a hammer will never participate in a process 
+%Furthermore, we will not specify a position on the external-internal axis or on the modal one, because it would be outside the scope of this paper and to allow for the biggest number of possible extensions of our theory. \TODO{chechk}
+
+%The previous discussion shows that caution is required when choosing what ontological properties of behaviors hold. 
+
+Following common practice in the literature, in this paper we take behaviors to form a subclass of \DOLCE perdurants. This class is partially characterized by the fact that they give rise to two `processual'\footnote{The term \quotes{processual role} does not refer to \DOLCE processes. It is taken from Loebe which uses it relatively to the GFO approach \cite{loebeAbstractVsSocial2007}.} roles in the sense of \cite{loebeAbstractVsSocial2007}: an active one, called \firstTimeKeyWord{doer}, and a passive one, called \firstTimeKeyWord{operand} or \firstTimeKeyWord{flow} \cite{pahl_engineering_2007}. 
+For instance, a cutting action entails that there is something that is the subject of the action, say a saw (or the system formed by a person or machine using the saw), and the object of the action, say a beam of wood.
+The same holds for pumping, joining, and other behaviors that can be described by transitive verbs. 
+In fact, all device behaviors that can be described as operations on flows are of this kind. 
+Such behaviors, whose class we write as $\BehaviourConcrete{\cdot}$, are external behaviors, since the flow is an entity external to the behaving artifact (the doer).
+We conceptualize the two processual roles through two specialisations of the participation relation: $\participateAsDoer{\cdot}{\cdot}{\cdot}$, to indicate participation in a process with the role of an agent-like doer, and $\participateAsFlow{\cdot}{\cdot}{\cdot}$, for the role of flow: 
+\bflist
+  \item[\myax{participateAsDoerRage}]  $ \participateAsDoer{x}{y}{t} \myfi \TechArt{x} \land \BehaviourConcrete{y} \land \DOLCEPC{x}{y}{t}$
+\item \mytext{if $x$ is a doer in $y$ at time $t$ then $x$ is a technical artifact, $y$ is a perdurant, and $x$ participates in $y$ (in the \DOLCE sense) during that time}
+  \item[\myax{processualRoles}] $ \BehaviourConcrete{x} \myfi \exists y,z,t(\participateAsDoer{y}{x}{t} \land \participateAsFlow{z}{x}{t}) $ 
+\item \mytext{$x$ is a behavior if and only if there are at least a doer and a flow that participate in $x$} \eflist
+%\TODO{[non mi convince, meglio dare le indicazioni precise (visto che sono aspetti ontologici) ed eventualmente anticipare che le altre nozioni possono essere ricostruire nella teoria completa (se è vero)][FC: spostato questo commento dalla sua posizione originaria, vedi versione precedente in mainV2.tex]}
+
+Additionally, we assume that behaviors can be combined to give causal explanations of complex occurences (e.g. the beam was cut, therefore it fell to the floor), and formalize this with a binary relation called \firstTimeKeyWord{causal contribution}\footnote{This relation is inspired by the one introduced in \YAMATO \cite{mizoguchiYAMATOAnotherMore}. The latter, however, is limited to \YAMATO processes.}, which we assume holds more in general between perdurants:
+\bflist
+  \item[\myax{contribRange}] $ \causallyContr{x}{y} \myfi \DOLCEPerdurant{x} \land \DOLCEPerdurant{y} $
+\eflist
+
+We do not axiomatize this relation further, since it is outside the scope of this paper, and some proposal already exists, e.g., 
+%for example 
+the one of Borgo and Mizoguchi in \cite{borgoFirstorderFormalizationEvent2014}\footnote{Note that in that work Borgo and Mizoguchi constrain the relation of causal contribution so that its domain and range are limited to processes. But, in \cite{mizoguchiUnifyingDefinitionArtifact2016}, the same authors argue that the same relation can also hold between a process and a state, with the convention that, whenever that happens, it holds between the first process and the process of achieving the state.
+We do not discuss such conceptualisation, and just take the domain and range to be general perdurants.}.
+
+In any case, whatever the definition of behavior one makes use of, one must take into account the fact that behaviors are perdurants seen from the point of view of the device. This is the main reason behind the approaches that define behaviors as relational qualities of devices \cite{borgoFormalOntologicalPerspective2009}. In this paper we try to model the participating device point of view stating that any behavior must give raise to corresponding processual roles \refax{ax:processualRoles}. A comparison of the advantages and drawbacks of these two modeling choices has not been carried out yet. Nonetheless, we highlight that the two approaches are both compatible with \DOLCE and can coexist in the same formal system.
+
+
+Having conceptualized behaviors as perdurants, we spend a few words about the notion of state of an engineering system.
+In \DOLCE states are, as mentioned in Section \ref{sec:intro}, cumulative and homeomeric perdurants.
+%, so that, if we do not overload the term \quotes{state} with multiple meanings, 
+The same properties should hold for engineering system states.
+Indeed, if we understand states, as many engineers do, as conditions determined by constraints over state variables, then such conditions are homeomeric (if a device satisfies a constraint over a time period, then it also satisfies it during a fragment of that period) and cumulative (if a device satisfies a constraint over some time periods, then it satisfies it during the union of those periods).
+Unfortunately, engineers commonly use the term \quotes{state} also for oscillating phenomena and the like (e.g. the buzzing action of a clapper, which alternates between two different \DOLCE-states while buzzing, namely open-circuit and closed-circuit). 
+Hence, the right \DOLCE category to conceptualize system states is the one of stative perdurants. 
+In the following we will keep using the term \quotes{state} following the engineering terminology, but it is to be understood as \quotes{stative condition} in \DOLCE. %Thus, we will use the stative predicate $\DOLCEStative{\cdot}$.
+
+Finally, engineers typically know what state a system should be in,
+%\footnote{Requirements could, sometimes, interpreted in such a way.\TODO{[non capisco il movito/significato di questa nota][FC:rimossa]}}
+therefore we assume that, given a technical artifact, some `types' of states are selected as desired% state-descriptions
+, called \firstTimeKeyWord{goals}. Note that, typically, one selects the conditions that a state has to satisfy, that is, a concept
+%a state-description 
+and not a state-instance, since the latter would have a specific time extension. %\TODO{[è meglio considerare i goal come degli state descriptions (quindi possibilmente parziali) altrimenti sono troppo vincolanti]*[FC:anche per me i goal devono essere parziali, ma non credevo che ciò fosse esclusso dalla sussunzione in State]*[SB: quando diciamo uno state in Dolce intendiamo una istanza della classe state, quindi un token (Dolce parla di particulars). Quindi lo stato "essere in piedi" non è generico, ha uno spazio e un tempo definiti (il mio essere in piedi ora, il mio essere in piedi due ore fa, etc. puoi prendere la somma di tutti, sarebbe cmq un singolo individuo). Invece qui vogliamo "essere in piedi" come descrizione che caratterizza uno qualsiasi dei perdurant con quella proprietà stativa][FC: ok, ho provato a inserire anche qui le descrizioni]}. 
+%“temperature of the output coolant(Objio) does not exceed five imundred degree centigrade” is an example of time former type of time goal and “the heat energy of time coolammt (Obji)is decreased into one tenth by time other input coolant(Obj4)” is aim example of the latter type. We represemmt suds a desirable state by the predicate G(slate)
+%-- Sasajima et al. An investingation...
+%Given this definition, goals may be interpreted as roles for states, which depend on the agents that select them.
+%For simplicity, we represent the class subsuming all goal-types, as a subclass of stative perdurants: 
+%(recall the possible ways discussed in Section \ref{sec:DOLCE} that we can represent roles with)\TODO{[secondo me non serve dire questo]}:
+Hence, we have that
+\bflist
+  %\item[\myax{goalSubsum}] $ \Goal{x} \myfi \DOLCEStative{x} $
+%   
+\item[\myax{goalSubsum}] $ \Goal{x} \myfi \DOLCEConcept{x} \land \forall y,t (\DOLCECLby{y}{x}{t} \to \DOLCEStative{y})$
+  \item \mytext{a goal is a concept that classifies stative perdurants only}%\TODOinline{[SB: ho esteso l'assioma, controlla][FC: se in DOLCE è ok che la anche le descrizioni, e non solo i concetti, classifichino, allora è ok]*[SB: hai ragione, stavo usando description come sottoclasse di concept ma non è coerente con l'articolo sui ruoli. Se un goal classifica states, seguendo l'articolo sui ruoli un goal è un concetto (a cui sarà associata una descrizione che però a questo punto non ci interessa). Ho cambiato il testo e usato CN, controlla)][FC: dovrebbe esser ok]}
+\eflist
+Thus, goals may correspond to expressions \quotes{the temperature at the port B of the heat exchanger is between 80 and 110 Celsius degrees} and \quotes{the buzzer is clapping with a frequency of at least 10kHz}, which are state classifiers.
+%, if these states-descriptions have been selected as desired\myComment{\textcolor{blue}{(ES: as desired realisation of goals (?))[SB: non abbiamo caratterizzato quando una descrizione è un goal, per me esce dallo scope di questo lavoro]}}.
+
+% % Typically, if an observer selects a goal and just a single other \stateVarCond{fullSingular}, the other \stateVarCond{shortSingular} is not enough to build a causal explanation for the goal: other information are needed. 
+% % The complete behaviour of the system is certainly sufficient to explain the causation, but it is often impossible to known for the observer. 
+
+%note that we have chosen behaviours to be subsumed into processes. 
+%This allows us, among other thing, to return to Chandrasekaran's and Goel's view of behaviors as transitions between states, since states are disjointed from behaviors, because they belong to different ontological categories.
+
+
+\subsection{Ontological and systemic functions}
+% function definition
+In this paragraph we exploit the concepts introduced in the previous sections and propose a preliminary formalisation of ontological functions as roles. 
+Precisely, we start by defining \firstTimeKeyWord{systemic functions}. In doing that, we are mainly inspired by the definition presented in \cite{mizoguchiUnifyingDefinitionArtifact2016} (cfr. also Cummings' definition in \cite{cumminsFunctionalAnalysis1975}).
+Such a definition is based on the so-called \firstTimeKeyWord{systemic view} of devices, that is, on the idea that devices are complex aggregates of components, called systems, whose behaviors combine in order to generate the  behavior of the whole system. 
+In this context, a function is seen as the contribution of the behavior of an individual component to the behavior of the system as a whole, and teleological aspects are introduced through goals imposed to \myComment{selected for} the system.  
+
+% Note that in this approach objects can be seen as systems of components (systemic
+% view). The idea is that the components of a system interact with each other and these interactions realize
+% a behavior of the system as a whole. A behavior is identified by looking at the changes caused on some
+% operand -- a unifying ...
+
+%Given this heuristic, we consider a function as a teleological interpretation of the behavior of a device.
+%We assume that such interpretation necessarily needs a context, since a function  for example, a context-less electric switch, say a switch that is neither part of a circuit nor embedded in some designer's or user's intent, has no function.
+%The definitions of system, behavior, and goal make possible to define the concept of (ontological) function, precisely of \firstTimeKeyWord{systemic} function, that is a function that part of a system carries out w.r.to the whole system. 
+
+%\TODO{[ho aggiunto $\System{z}$][FC: cosa è allora un System? Io avevo provato a introdurlo come il ruolo giocato da un assemblato durante un'analisi teleologica, ma poi ho lasciato stare. Se poi lo introduciamo come primitiva t.c. ha un artefatto come supporto, perché non usare direttamente l'artefatto e basta?]*[SB: hai ragione. una bozza di caratterizzazione c'è nell'articolo di Riichiro e me in JOWO 2021. è poco ma è un inizio. purtroppo non riesco a metterci un po' di tempo per sviluppare di più quell'idea (che è sostanzialmente di Riichiro). Cmq la noz. di funzione sistemica presuppone che ci sia una nozione di sistema. quella di artefatto è troppo debole. direi di fare riferimento a quell'articolo a JOWO, dicendo che per ora assumiamo la nozione ma che resta aperto il problema di caratterizzarla in modo adeguato.][FC: ok, introdotto 'System' vicino a 'Technical Artifact']}
+\bflist
+\myComment{\item[\mydf{functionOf}] $ \FunctionSysOf{x}{y} \myiff (\DOLCERole{x} \land \exists b,t  (\DOLCECLby{b}{x}{t}) \land 
+  \exists z,g ((\System{z} \land \DOLCEPartBin{y}{z}  \\ \land \goalOf{g}{z})  \land 
+    \forall b,t ((\DOLCECLby{b}{x}{t} \myfi (\BehaviourConcrete{b} \land 
+      \participateAsDoer{y}{b}{t} \land \causallyContr{b}{g}))  $
+      \TODOinline{\mbox{[SB: constant part è forse troppo forte?]}}
+  \item \mytext{$x$ is a systemic function of $y$ if and only if $x$ is a role and there exist a system $z$ and a goal $g$ for $z$ such that $y$ is constant part of $z$, and $x$ is satisfied only by behaviors which have $y$ as doer and causally contribute to achieve $g$}}
+  \item[\mydf{functionOf}] $ \FunctionSysOf{x}{y} \myiff (\DOLCERole{x} \land 
+  \exists z,g (\System{z} \land \goalOf{g}{z}  \land  \exists b,t  (\DOLCECLby{b}{x}{t} \land \DOLCEPart{y}{z}{t}) \\
+    \forall b,t ((\DOLCECLby{b}{x}{t} \land \DOLCEPart{y}{z}{t}) \myfi (\BehaviourConcrete{b} \land 
+      \participateAsDoer{y}{b}{t} \\ \hfill{} \land \causallyContr{b}{g}))))  $ 
+  \TODOinline{[SB: constant part è forse troppo forte?][FC: in effetti è un rimasuglio di quando non c'era  l'argomento temporale. Adesso dovrebbe essere ok]}
+  \item \mytext{$x$ is a systemic function of $y$ if and only if $x$ is a role and there exist a system $z$ and a goal $g$ for $z$ such that $x$ is satisfied only by behaviors which have $y$ as doer and causally contribute to achieve $g$, whenever $y$ is  part of $z$}
+  
+%  \item [] {``A systemic function is a role concept that 
+%   \begin{itemize}[topsep=0pt]
+%     \item it classifies only behaviors, relative to some behaving artifact, 
+%     \item is contextualized by \myComment{(therefore existentially depended on)} a system that contains the behaving artifact and for whom a goal state has been selected, 
+%     \item the classified behaviors contribute to the goal of the system.'' %(shouldnt be that it is the function that contributes to the goal?)
+%     %\item the classified behaviors have as doers a system component,
+%   \end{itemize}}
+  \item[\mydf{function}] $ \FunctionSys{x} \myiff \exists y \FunctionSysOf{x}{y}$
+  \item \mytext{$x$ is a systemic function if and only if it is the systemic function of some object $y$}
+\eflist
+
+Of course, there are many different function conceptualisations in the literature and each is relevant from one engineering perspective or another. We propose to start from Definition %\refdf{def:function}-
+\refdf{def:functionOf} because, differently from the others, it is ontologically clear and helps to clarify the assumptions on which other meanings rely.
+%Definition \refdf{def:function} is not the only one possible and different conceptualisations could bring about different definitions.
+%Still, we maintain that it is still useful, at least because it makes explicit a series of assumptions that, otherwise, could have been left implicit.\TODO{[scriverei così: Of course, there are many different function conceptualisations in the literature and each is relevant from one engineering perspective or another. We propose the definition \refdf{def:function} because, differently from the others, it is ontologically funded and it helps to clarify the assumptions on which other meanings rely.]}
+%}
+Note that, by assuming that a function is present whenever is played by a behaviour, 
+%and due to \refax{ax:part-present}, 
+definition \refdf{def:function} entails that systemic functions are specifically existentially dependent on systems. If we also assume that systemic functions are external to systems (indeed, systems are neither qualities, parts, nor constituents of systemic function roles), one obtains the following:
+\bflist
+\item[\mythr{functionSys-founded}] $ \FunctionSys{x} \myfi \exists y (\System{y} \land \founded{x}{y}) $  
+\item \mytext{each systemic function is founded on some system}
+\eflist
+
+\TODOinline{[SB: a partire da qui ho fatto vari cambiamenti importanti]}
+
+% Systemic functions are contextualized by a system, as per Definition \refdf{def:functionOf} and Theorem \refth{th:functionSys-founded}. 
+In engineering practice, one often speaks about functions independently of any system, for instance in an early system design phase. 
+% This especially when talking about the capabilities of an object. 
+For example, if one wants to address the problem of finding the set of devices that have the capability
+% ability\footnote{Here \quotes{capability} could be the right term, as anticipated in Section \ref{sec:review}.}
+of realizing a needed transformation, the devices cannot be \textit{a priori} associated with a certain system, since there is no system yet. Indeed, the system is a variable input of the problem.
+Therefore, to solve this problem, a more general concept of function is needed, as the one introduced in \cite{borgoKnowledgebasedAdaptiveAgents2019}. We call such functions \firstTimeKeyWord{ontological functions}: they address general transformation needs perhaps without even addressing how a transformation occurs or to what entities it should apply. The informal intuition of ontological functions is that they are classified according to the ontological change they realize between the input and the output states. In this sense, they are independent of systemic functions. Yet, every systemic function is associated to one or more ontological functions, depending on the changes it implies. 
+It follows that the following relation between ontological functions and systemic functions holds:
+\bflist
+%\item[\myax{functionAbstr}] $ \FunctionAbs{x} \myfi \exists y (\FunctionSys{y} \land \DOLCEConceptSubsum{y}{x}) \land (\specificallyDependsOn{x}{y} \myfi \neg \System{y}) $
+%\item[] \mytext{An ontological function generalizes some systemic function and is not contextualized by a system}
+%  \item[\myax{functionAbstr}] $ \FunctionAbs{x} \myfi (\DOLCEDescription{x} \land \exists y \DOLCECLbyBinary{y}{x} \land \forall y (\DOLCECLbyBinary{y}{x} \to \FunctionSys{y}) $
+%  \item \mytext{any ontological function is a description that classifies systemic functions only}
+ \item[\myax{functionAbstr}] \myComment{$ \FunctionAbs{x} \myfi (\DOLCEConcept{x} \land \exists y,t (\DOLCECLby{y}{x}{t}) \land \forall y,t (\DOLCECLby{y}{x}{t} \to \FunctionSys{y}) $}
+ $ \FunctionAbs{x} \myfi (\exists y ( \DOLCEConceptSubsum{y}{x}) \land \forall y (\DOLCEConceptSubsum{y}{x} \myfi \FunctionSys{y}) $
+ \item \mytext{any ontological function is a concept that classifies systemic functions only} \TODOinline{[SB: come sopra, ho usato CN invece di DS; poi ho messo la CL ternaria][FC: ok, però ho fatto uso della relazione di specializzazione, già appositamente introdotta. Nota che tu hai scritto CL(funz.sys., funz.ont., t), ma la specializzazione tra concetti non funziona così (e.g. in Social Roles and [...]), è ok?]}
+%\item[\myax{functionAbstr}] $ \FunctionSys{x} \myfi \exists y (\FunctionAbs{y} \land \DOLCECLbyBinary{x}{y} \land \foundedROLE{x}{y})$
+%\item[\myax{functionAbstr}] $ \FunctionAbs{x} \myfi \exists y (\FunctionSys{y} \land \DOLCEConceptSubsum{y}{x}) \land (\specificallyDependsOn{x}{y} \myfi \neg \System{y}) $
+\eflist
+For example, take a given tooling machine, say a lathe, as a system, and assume that the lathe makes use of two electrical motors, %say 
+e.g., one for rotating the spindle and %one 
+the other for moving the spindle horizontally. %Then, 
+Both electrical motors perform the same ontological function of \quotes{converting} (electrical energy into mechanical energy), but they also perform two different systemic functions %that 
+specializing the ontological function in the context of the lathe: \quotes{converting (electrical energy into mechanical energy) to rotate the spindle}, and \quotes{converting (electrical energy into mechanical energy) to translate the spindle}, respectively.
+The intuition is that we can group systemic functions together through common characteristics, abstracting from specific systems or from their occurrences in different parts of the same system.
+
+Such ontologically functions reflect a perdurant taxonomy based on functional grounds, meaning that a given taxonomy of perdurants corresponds to a taxonomy of functions as given in \cite{borgoKnowledgebasedAdaptiveAgents2019}.
+%, by stating that functions of some type must be played only by occurrents of the corresponding type. 
+As said, we obtain the types of ontological functions using the variation of some condition before and after the realization of the function. For example, it is common to speak of `connect' or `change' functions \cite{pahl_engineering_2007}, that is, of functions whose underlying perdurant is such that the number of operands or, respectively, the operand type is modified during the event. Similarly, other ontological  functions-types could be obtained considering variation of other properties, as done in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}, or specializing existing ontological functions to special cases, e.g. specialize `change' to `change electrical energy into torque'.
+In this paper, we do not characterize further the taxonomy ontological functions, nor discuss the organization of their taxonomy. 
+
+Finally, notice that the two types of functions introduced in this paragraph correspond to (at least) two different ideas of functions used by engineers. 
+First, there are \quotes{general} functions that engineer use when need to, say, describe information about or collect information from different systems. For example, Collins \cite{collinsFailureExperienceMatrixUseful1976}, when collecting and analyzing failure experience data, speaks of \quotes{elemental mechanical functions}, which are application-independent characterisations of \quotes{basic} functions. %\quotes{distinctive generic characterization of the basic function of a machine part without reference to the specific application for which it is used} 
+Analogously, Pahl et Beitz \cite{pahl_engineering_2007} speak of \quotes{generally valid functions}, and propose them as  references for cataloguing design knowledge about function implementation. These types of functions could be approximated with ontological functions.
+In contrast, 
+the second meaning used by engineers is system dependent. In fact, in general, when engineers are focused on a single system, they use different concepts when speaking about the system components. The terminology is varied, but typical terms are `serial number', that is the identifier of a component-instance, `component code', i.e. the component or assembly-type identifier, and `functional location' or `tag', which are identifiers that consider also the position of a component within a system. For example, Figure \ref{fig:hydroSystem} schematises a hydraulic system containing four solenoid valves, whose tags are EPF1 to EPF4. These tags cannot refer to the valve-type, since the four valve could have the same type, neither they can refer to the valve-instances, since schema are often used to represent different system-instances. 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{imamoTAXA.PNG}
+  \caption{The scheme of some hydraulic system, taken from \cite{HydroPNG}.  \label{fig:hydroSystem}}
+\end{figure}
+In our terminology, we could say that tags identify  roles that components play in a system. Necessarily, these role are of functional nature, for each component in a engineering system has a role in the system function, thus, tags, or, at least, the teleological content they carry, could be formalized by systemic functions. %Indeed, tags should carry also information about, say, the structural links of the underlying component with the remaining components of the systems. 
+\TODOinline{[SB: manca un risultato conclusivo che giustifichi perché ci fermiamo qui. bisogna dare almeno qualche indicazione di quali concetti di funzione usati in ingegneria cadono sotto questo approccio (nel senso che possono essere considerate specializzazioni di queste definizioni)][ Ho provato a inserire un paragrafo argomentando che le "generally valid functions" di Pahl e Beitz assomigliano alle funz.ont. e che i tag/sigle/functional location assomigliano alle fun.sys.]}
+%\textcolor{blue}{(se capisco, le ontological function sono ruoli giocati dai perdurant. E qst perdurant sono i behavior degli artefatti/sistemi che hanno come scopo la realizzazione di un certo goal.  Per aiutare i lettori, sottolinerei nel testo che la nozione di ontological function e' un ruolo/concetto (forse ho perso qst informazione))(FC: è sotto la definizione di funz. sys., ma per sicurezza ho aggiunto anche all'inizio di sottosezione)}
+
+\subsection{Functional decomposition}
+An important feature of functions in engineering is the possibility to decompose them into sub-functions. This also allows to refine the granularity of the system description. In this paragraph, we show how such decomposition relation can be used in order to formalize the difference between ontological functions and engineering functions that we anticipated earlier.
+
+First, observe that such decomposition cannot be reduced to a partial order relation between functions. %, analogously to a mereological decomposition of a physical object into its parts\TODO{is it really a poset?}. 
+That is, if we represent the functional decomposition of a function, say $\cst{f}$, into sub-functions, say $\cst{f}_1, \cst{f}_2, \dots, \cst{f}_n$, as $\decom(\cst{f};\cst{f}_1,\cst{f}_2,\dots,\cst{f}_n)$, then it does not seem possible to find a parthood relation such that $\decom$ reduces the mereological sum.
+This is caused by, at least, the following reasons:
+\begin{itemize}
+  \item Functions exists at a teleological level, therefore, any decomposition of functions must take into account the decomposition of the underlying objective substrata, that is, of the underlying behaviors and objects.
+  \item The sub-functions of a function must `organize'\footnote{We borrow the term from Vermaas and Garbacz \cite{vermaasFunctionalDecompositionMereology2009a}, in there the interested reader can find a discussion about mereology in functional decomposition, especially with respect to the Functional Basis methodology.} in order to realize the decomposed function. In particular, the composition of a mere set of functions is not unique.
+  \item The same function can be decomposed in more ways, therefore the decomposition relation is of type many-to-many.
+  \item Not all combinations of sub-functions are possible, due to physical and technical constraints. 
+  Moreover, among all possible combinations, engineers recognize typical ones and use them systematically. 
+  %For example, a brushless electric motor may be understood as the class subsuming all models of brushless electric motors, but it can also be recognized as a method by which electric energy can be converted to torque.
+  %As we have mentioned above, in this paper we call such typical combinations engineering methods, which we assume are accompanied by description of how the decomposition is implemented.\TODO{[la frase da "For example,..." fino a qui non mi è chiara. mi sembra che si cambi argomento.][FC:rimosso e spostato esempio motore brushless in nota quando i metodi sono introdotti]}
+\end{itemize}
+Additionally, Vermaas has proven that attempting to model a Functional Basis style of functional decomposition\footnote{That is, a style where functional models can be graphically represented as directed graphs with flows as edges and function as nodes. The composition, then, can be in series, between nodes that share an edge (cancelling that edge), or in parallel, between nodes that do not share edges.} entails contradictions \cite{vermaasFormalImpossibilityAnalysing2013}\footnote{The counterexamples shown are based on some additional assumptions. Precisely that, first, if a function-token is part of another function-token, then the same holds for the corresponding types; and, second, that flow loops are possible. %(note that the presence of loops, entails that some functions compose into a null-token).
+}, so that there are also formal obstacles preventing the application of classical mereology to functional decompositions.
+We do not attempt a solution to these problems here,
+%\footnote{\TODO{will we do it in the future? [SB: lasciamo stare questo per ora]}}, 
+instead we assume that the relation $\decom$ is given, and focus on engineering methods. %, that we take, formally, as a selected subset of the relation $\decom$.     The relation subset is to be interpreted as the set of all methods known and used by a given community of engineers.  
+
+Inspired by the work of Kitamura et al. on `ways of functional achievement' \cite{kitamuraOntologicalModelDevice2006, kitamuraOntologybasedDescriptionFunctional2003}, we conceptualize engineering methods as descriptions of the knowledge that engineers share about ways of implementing functions through functional decomposition:
+\bflist
+  \item[\myax{methodSubs}] $ \Method{x} \myfi \DOLCEDescription{x}$ \TODOinline{[SB: dopo le variazioni questo è l'unico posto dove parliamo di descrizioni e non mi sembra neppure rilevante. visto che qui il metodo è solo informazione per la functional decomposition, potremmo chiamarlo wayOfAchievement e usarlo come relazione: data una main-function f, $wayOfAchievement(f,f_i)$ vale se $f_i$ è una sottofunzione]} 
+%   \land \DOLCEDescription{x}  \myfi \DOLCENASO{x}$
+\eflist
+Formally, such descriptions can be understood as reifications of functional decomposition relations.\TODOinline{[SB: l'uso del termine description non va bene, nell'articolo sui ruoli le description sono entità complesse, quindi non possono essere una reificazione, suggerisco di togliere tutto e usare $wayOfAchievement$]}
+Precisely, we introduce binary relations $\mainFunction{\cdot}{\cdot}$ and $\subFunction{\cdot}{\cdot}$ \TODOinline{[SB: qual è il significato di queste relazioni? come fa un lettore a capire?]}, such that the following definition schema holds:
+\bflist
+  \item[\mydf{method}] $\decom(\cst{f};\cst{f}_1,\cst{f}_2,\dots,\cst{f}_n) \myiff \\ ( \FunctionSys{\cst{f}} \land \FunctionSys{\cst{f}_1} \land \dots \land \FunctionSys{\cst{f}_n} \land \\ \exists \cst{m} (\Method{\cst{m}} \land \mainFunction{\cst{f}}{\cst{m}} \land \subFunction{\cst{f_1}}{\cst{m}} \land \ldots \land \subFunction{\cst{f_n}}{\cst{m}}) 
+ $
+ \item \mytext{$f$ is decomposed in $f_1,\ldots,f_n$ if and only if they are all systemic functions and there is a method to execute all of them}\TODOinline{[SB: non mi è chiaro perché lo stesso $m$ vale per tutte, l'intuizione mia è che $m$ debba essere decomponibile e specifico per ogni funzione. l'esempio del motore elettrico (import electric energy, transform, export torque) a me fa pensare che che ogni sotto funzione ha il suo metodo][FC: non ti seguo tanto qui, a me sembra chiaro che, per esempio, nell'approccio di Riichiro il metodo/way-of-achievement è usato come un "label" di una decomposizione funzionale. Il modo più pacifico di metterlo in simboli è una reificazione individuale della relazione di decomposizione, come ho fatto sopra. Vedi e.g. le slide di RIichiro, le prime che ci ha passato, con le mie annotazioni]
+ \includegraphics[width=\linewidth]{decomposizione.PNG}*[SB: quindi il metodo qui è solo un collante tra funzione e sottofunzione, non fornisce la procedure di come eseguire la funzione. questo va detto. io avevo in mente i metodi in ingegneria che sono delle procedure.}
+\eflist
+In the previous definition, main-functions and sub-functions should be understood as relational roles in the context of a decomposition (for sake of brevity, we implement main- and sub-functions as binary relations instead of role-concepts\TODOinline{[SB: non è un buon argomento. visto che abbiamo usato i ruoli fino ad ora e introdotto tutte le forme di founding che servono, continuiamo a modellare usando i ruoli dove servono]}\footnote{An extended implementation would say that a method-description is the context of a main-function role and of a number, say $n$, of sub-function roles. Then, the decomposed function $\cst{f}$ is in relation $\DOLCECLby{\cdot}{\cdot}{\cdot}$ with the main-function role, and the $n$ decomposing functions $\cst{f_i}$ are in relation $\DOLCECLby{\cdot}{\cdot}{\cdot}$ with the corresponding sub-function roles.}).
+
+The advantage of this approach is manyfold: it makes  possible to organize the method-types within sumbsumption taxonomies, for example, `spot welding' is a specialisation of the method `welding', which itself is an implementation method of the function `to join'; %\footnote{The taxonomy of methods also prevents Vermaas'proof from applying \cite{vermaasFormalImpossibilityAnalysing2013}.\TODOinline{[SB: non mi sembra rilevante, togliamo questa nota]}}; 
+and to describe the properties of the methods, for instance the working principle, say Kirchhoff's law for a `voltage divider' method. %, similarly to what has been done by Kitamura's team in  \cite{kitamuraOntologybasedDescriptionFunctional2003}.
+Additionally, it makes possible to clearly discuss some properties of functional decomposition, for example, if one wishes to express that all functions are decomposable:
+\bflist
+\item[\myex{noAtomsFunctions}] $\FunctionSys{x} \myfi \exists y~ \mainFunction{x}{y}$ \TODO{FC: why should this axiom be enforced? It implies no functional atoms. *[SB: è un commento per me? mi sono perso il contesto...][FC: avevi scritto che mi ero dimenticato questo assioma. L'avevi scritto vicino a \refdf{def:engfunction}.]*[SB: non ricordo bene. credo che l'idea venisse dal lavoro con Riichiro dove un sistema è sempre composto di almeno due parti e quindi decomponibile, ne segue che una funzione systemica è decomponibile (nei casi limite una delle due non "fa nulla", cioè è una funzione di mantenimento)]}
+\eflist
+Instead, if one wishes to state that a function, say $\cst{f}$, is not decomposable:
+\bflist
+\item[\myex{yesAtomsFunctions}] $\neg \exists y~\mainFunction{\cst{f}}{y}$
+\eflist
+Moreover, this approach allows us to give a formal definition of engineering function and, thereby, to discuss the difference between capacities and capabilities that we anticipated in the introduction. 
+In fact, we define engineering function as
+\bflist
+  \item[\mydf{engfunction}]  $ \FunctionEng{x} \myiff \exists y (\Method{y} \land \mainFunction{x}{y}) $
+  \item[] \mytext{engineering functions and main-functions coincide} %\TODOinline{[SB: ho tolto "role defined by a method-description, and, therefore, contextualized by a functional decomposition relation" perché nella lettura in linguaggio naturale delle formule non si deve includere niente altro, neppure spiegazioni od osservazioni][FC:ok]}
+\eflist
+so that engineering functions are roles that systemic functions, which are defined in \refdf{def:function}, can play in the context of a functional decomposition.
+For instance, in the lathe example discussed above, it could be that the systemic functions of the two motors both are implemented through the method of, say, `three-phase electric motor', and, therefore, play the role of engineering functions. In this case, the functional decomposition  entailed by the method includes sub-functions roles for, say, `supply electrical energy' (one per each phase), `drive the motor', and `output mechanical energy'. 
+
+%Now, using the $\founded{\cdot}{\cdot}$ relation introduced in \refdf{def:founding}, we can distinguish between capabilities and capacities using the following axioms:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Capabilities and capacities}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we discuss capabilities and capacities (refer to the end of Section \ref{sec:review} for a very brief intro on these two terms). In particular, we will make use of the ontological-function concept, defined in the previous section, to distinguish capabilities from capacities.
+
+Each technical artifact has relevant characteristics, which are part of its physical make-up, and are such that they endow the artifact with the ability of being able to do certain things. 
+For example, an individual pump could be built in such a way that it is able to, say, pump %hydraulic 
+oil with a certain flow rate.
+Following the quality theory of \DOLCE, both the relevant characteristics of each technical artifact and any of its faculties of being able to do something
+%, that we shall call \firstTimeKeyWord{capabilities}, 
+can be conceptualized as individual qualities. 
+Consequently, both the flow rate (a capacity) and the pumping (a capability) of the pump in the previous example are introduced in the %discourse domain
+domain of discourse as individual qualities.
+
+Whenever a capability is based on some other quality of a technical artifact, that is, when each realisation of the capability depends on the other quality, we say that it is \firstTimeKeyWord{\foundedTerm{passive}} on that quality, and we formalize this through the relation $\founded{\cdot}{\cdot}$ defined in \refdf{def:foundingBasic}.
+For example, in the case of the pump we could say that the capability of the pump to move water is founded on its flow rate capacity.
+%a person could say that he or she is able to jump high due to the strength of their leg muscles and their technical proficiency in jumping, that is, they have a jumping capability that is founded on their leg strength and their technical proficiency in jumping. 
+Coming back to Gero and Qian's example of the water tap mentioned in Section \ref{sec:DOLCE}, which is similar to the one of the pump, we could say that the faucet has the capability of delivering water when requested, which is founded on its flow rate capacity, which is itself founded 
+%of 
+on its diameter quality (Gero and Qian say that the flow rate is \quotes{controlled} by the diameter \cite{qianFunctionBehaviorStructure1996}).
+Now, in this example, there is a difference between the flow rate and the diameter: the latter is intrinsic and the former is extrinsic, as we argued in Section \ref{sec:DOLCE}.
+%Now, in this example, there is a difference between the leg strength and the jumping proficiency quality: the former is intrinsic and the latter is not, since it wouldn't exist without the jumping occurrences. 
+%When \myComment{Whenever<-no: altrimenti sembra definizione} this happens, that is, \myComment{whenever} when a capability is founded on a relational quality, we call that quality \firstTimeKeyWord{capacity}, analogously to the approach in \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
+These examples suggest that we call \firstTimeKeyWord{capacities} those relational qualities that a capability is founded on, analogously to the approach in \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
+%and, analogously to \cite{borgoCapabilitiesCapacitiesFunctionalities2021}, we call the other qualities \firstTimeKeyWord{capacities}. 
+The point being that capacities are relational qualities that provide information about the corresponding capability. 
+So that, in the pumping example, the flow rate capacity partially \myComment{quantifies} parametrizes the pumping capability.  
+
+Another example: types of electronic components, such as resistors, transistors, etc., are accompanied by a datasheet that reports many technical properties of the component instances. 
+Typical properties are, for example, the failure rate and the maximum temperature, current, or voltage that the component can operate with without problems. 
+In our terminology, all the aforementioned properties are capacities, since they require, to be manifested, for the component to be inserted into a working electrical circuit\footnote{As mentioned earlier in the paper, a clear-cut example is the voltage, which, since it is a potential, needs a fixed reference point in order to be measured.}; and, additionally, they \myComment{quantify} parametrize the capability of the component to, say, create a voltage drop in the case of a resistor. 
+
+Capacities themselves are founded on some intrinsic physical qualities of the bearing object. For example, the maximum operating current will depend, say, on the geometric and electrical properties of the conductor metal, such as its diameter and its resistivity, similarly the flow rate of the water tap depends on its diameter. Given these observations, we partially characterise capacities as follows:   
+\bflist
+\item[\myax{capacPartialDef}] $ \Capacity{x} \myfi \RelationalQuality{x} \land \exists y(\founded{x}{y} \land \IntrinsicQuality{y}) $  % 
+\item[] \mytext{A capacity is a relational quality and is founded on some intrinsic quality}
+\eflist
+
+
+In contrast, a characterisation of capabilities should touch also functions, since capabilities are inextricably intertwined to functional aspects. In order to do this, we first try to clarify the nature of capabilities as following:
+%While the choice of modeling characteristics such as flow rate, weight, shape, or color as qualities is safe enough, the same modeling choice for capabilities carries more weight. 
+%One can motivate it as following: 
+to be able to do something is really a modal concept calling for possible worlds in which that something is actually done. 
+But, since we want to keep our formal language as simple as possible, we reduce the modal expression to a simpler construct, analogously to the following heuristic definition:
+\bflist
+\item[\myex{Capab}] $ \exists c(\PumpingCapability{c} \land \DOLCEQualityDirect{c}{x}) \myiff \\
+\mbox{} \hfill
+\lozenge \exists e,t(\participateAsDoer{x}{e}{t} \land  \PumpingProcess{e}) $ 
+\item \mytext{It is possible, for an object, to carry out some pumping process if and only if it carries an individual capability of corresponding type}
+\eflist
+
+Thus, as a simplifying assumption on the formal language, we shall consider that the introduction of capabilities allows us not to use modalities. 
+Then, since the newly introduced capabilities are specifically dependent on their bearers, and each capability of a certain kind is unique to its bearer, we treat them as individual qualities.\footnote{An alternative is to model them as disposition, see for instance \cite{sarkarOntologyModelProcess2019}.} 
+Finally, note that Example \refex{ex:Capab} also seems to suggest that capabilities depend on types of functions (not just processes or behaviors, for the pumping process in \refex{ex:Capab} will always play a function), which are used in their definition. This suggests using the definition-founding  \myComment{\refdf{def:foundingDefinitionally}}, relation introduced in Section \ref{sec:DOLCE} in order to capture this intuition:
+\bflist
+\item[\mydf{capability}] $ \Capability{x} \myiff  \RelationalQuality{x} \land \exists y,z(\Capacity{y} \land \founded{x}{y} \land \FunctionAbs{z} \land \foundedDef{x}{z}) $  
+\item[] \mytext{A relational quality is a capability if and only if is founded on some capacity and is definition-founded on some ontological function}
+\eflist
+\myComment{\TODO{[FC: commento spostato dalla sua posizione originaria] [SB:] Non mi sembra che qui emerga una differenza formale tra capacità e capability.\\ 
+A rileggere l'articolo [4] oggi seguirei una intuizione un po' diversa:\\ 
+1) la capacity è una qualità relazionale associata ad un behavior. Quando un bicchiere ha la capacità di 0.5 lt significa che, date certe condizioni, manifesta un certo behavior con una certa quantità di liquido.\\
+2) La capability qualifica qual è la lettura funzionale di una capacità o combinazione di capacità (il bicchiere combina la capacità di essere contenitore e quella di essere movibile). \\
+3) Ne segue che la capacità è prioritaria rispetto alla capability. Quindi il bicchiere ha la capability di trasportare del materiale solo perché ha le due capacity di cui sopra.
+Ne segue che ad ogni capability corrisponde una capacity, magari complessa. Vale anche il contrario per le capacity semplici e anche per alcune combinazioni di capacity complesse (ma secondo me non tutte).
+
+Quindi avremmo:
+\bflist
+\item[\myax{subsumptionCapacSB}]  $\Capacity{x} \myfi \RelationalQuality{x} \land  \exists y (\founded{x}{y} \land \IntrinsicQuality{y}) $
+\item[\myax{subsumptionCapab}] $ \Capability{x} \myiff  \RelationalQuality{x} \land \exists y,z(\Capacity{y} \land \founded{x}{y} \land \FunctionSys{z} \land \founded{x}{z}) $  
+\eflist
+Ora vorrei capire se l'impostazione che hai è compatibile con questa visione ed eventualmente discutere le differenze. Se c'è compatibilità, possiamo lasciare qui solo le capacity e introdurre le capability solo dopo aver introdotto le funzioni.
+[FC: mi sembra che lo sia, modulo il fatto che i paragrafi sopra devono essere cambiati per adattargli agli assiomi sotto e modulo il fatto che formalmente se la capability è founded on una funzione allora "founded" dovrebbe essere inteso tipo come "usato nella definizione" ma questo senso non è quello usato in precedenza eg in d5. Per il resto ho adottato i due assiomi di sopra, rimuovendo la parte con le funzioni e ti chiederei di controllare che i paragrafi di sopra siano compatibili coi nuovi assiomi.]}}
+Capabilities are also specifically dependent on capacities, which specify how the artifact can function.  
+The intuition is that capabilities are relational qualities that are needed to carry out an ontological function, so that they refer to that function: in our terminology, they are definition-founded\myComment{\TODOinline{[SB: qui c'è "definition-founded", prima c'era "definitional-founded", ricontrollare e unificare][FC: e' accaduto perche' ho applicto la correzione mentre stavi leggendo]}} on an ontological function.  %\footnote{In this context, a heuristic interpretation of definition-dependence at the meta-level could be similar to Definition \myex{ex:Capab}\TODOinline{[SB: nota che questo riferimento è saltato, a cosa ti riferivi?][FC: in realtà, la nota è poco chiara. La rimuovo]}}. 
+Note that they are not \refdf{def:founding}-founded, since an artifact could have a capability to function without actually functioning. Additionally, the function must be ontological and not systemic, because, otherwise, the bearing object would be associated \textit{a priori} with some given system. 
+
+Even though we do not fully characterized capacities, \refax{ax:capacPartialDef} and \refdf{def:capability} have the advantage of explaining
+\begin{itemize}
+    \item the close link between functions and capabilities (capabilities are definition-founded on ontological functions).
+    \item The asymmetry between capacities and capabilities (capabilities are founded on capacities, but not vice-versa).
+\end{itemize}
+The quantitative-qualitative difference between capacities and capabilities anticipated at the end of Section \ref{sec:review} is still unexplained, but, notice that while a flow-rate capability takes as values positive real numbers with, say, m$^3$/s as unit of measure, the value space of the corresponding pumping capability is quite more complex and difficult to describe. This  may be an argument against modelling capabilities as \DOLCE-qualities, but it also reflects the quantitative-qualitative duality that emerges in domain experts' speech. %\TODOinline{[SB: questa sezione sulle capacities/capabilities è migliorata molto ora :)][FC::)]}
+
+\medskip
+Finally, to recap some of the concepts introduced in the last paragraphs, we conclude this section with another example.\myComment{\footnote{Notice again the similarity with the work of Kitamura, Sasajima, Mizoguchi et al.\cite{kitamuraOntologybasedDescriptionFunctional2003}.}} Suppose that a company handling swimming pools must empty some of its pools for maintenance. This imposes a goal, say `the pools are empty', that must be carried out through some device able to realize a `to empty' (ontological) function, specialized to a systemic function in the context of the swimming pool system.
+Such a function can be realized only by some artifact that has a corresponding capability. In this case, the function would probably be implemented through some fluid-emptying-method, that is, through the shared knowledge of the way that a recipient can be emptied, and its fluid content disposed, by pressurizing the fluid, guiding it through a path, and finally storing it.
+Now, the `pressurize' sub-function (which refers to the goal of `having a big enough pressure gradient') could be implemented through a pumping-method, that is, referring to the shared knowledge about pumps.
+Then, a pump (more generally an artifact with pumping capability) could be selected for being the `doer' of the necessary `transform mechanical energy into pressure' sub-sub-function.
+In this context, we could say that the pump has been selected because of its pumping-capability and that the pumping-method describes, at least, a flow rate capacity, which founds the pumping-capability, and its interaction to the other properties and entities involved in the pumping process. 
+
+
+%Chandrasakandar 2000 parla di behavior come istanze (stati o cambiamento tra stati), eccetto che Beh-vi. The causal rules that describe the values of the variables under various conditions. che però non usa.
+
+%%%%%
+
+%not all expressible changings of state variables are possible: some could be logically inconsistent (e.g., the temperature is plus 20 and minus 2 degrees Celsius), some could be outside the realm of physics (e.g., a temperature in negative Kelvin degrees). The remaining are the possible changings of state variables. The remaining are 
+
+%State variables are functions 
+%Now, we assume that some state variables are intrinsic, for example the 
+
+%A system has \firstTimeKeyWord{state variables}, that we take to be a primitive concept sumbsumed in qualities , that 
+%We start from states,  
+
+%, instead opting for representing behaviours as processes that require specific roles played by technical artifacts, such as the agent-like role that the pump plays in any pumping process.
+%Additionally, we make use of the ontological category of DOLCE events, instead of processes, since we take behaviours to be occurred processes, and not 
+%\bflist
+%\item[\mydf{BehaviourConcrete}] $ \BehaviourConcrete{e} \myfi \DOLCEProcess{e} \land  \\ \exists y \participateAsDoer{y}{e}$ 
+%\eflist
+
+%%%%%% formalizzazione parte 3: funzioni
+
+%Now we can finally talk about functions.
+%We will mainly base our discussion on the work \cite{mizoguchiUnifyingDefinitionArtifact2016}, in that we will define functions in a way that intrinsically takes into account functional decomposition.
+
+%We will make use, for our definition, of the concepts of behaviour, goal, context, and context...
+%First we define a goal as a selected stative perdurant of a system  
+%In the literature, the term \quotes{state} is commonly used, but we need to use \quotes{stative perdurant} instead. 
+%his is because in \DOLCE the category of states is a strict subclass of stative perdurants, that, for example, excludes the buzzing action of a clapper, since the clapper, while buzzing, alternates between two different states.
+
+%We say that the 
+
+%We do not formally define the term \quotes{system}, since we assume, informally, that every technical artifact is the system of its own parts, and one can always see a technica
+
+
+%%%%%%%%
+
+%%%%%%%%
+%% TODO ??
+% -mostrare come tale approccio ingloba approcci precedenti?
+
+% -sostituire negli esempi la pompa con un circuito elettrico?}
+
+\section{OWL ontology}\label{sec:appendice}
+%\TODOinline{[SB: assiomi e def in owl dovrebbero essere chiaramente distinti usando, e.g., \textbf{a14$_{owl}$}][FC:fatto]}
+The first order logic theory developed in the previous sections can be converted to \OWL language as is, with the exception of the expressions where ternary relations are used.
+For example, the definition of a systemic function \refdf{def:functionOf}-\refdf{def:function}, the instantiation-founding definition \refdf{def:founding}, and the engineering method schema \refdf{def:method} cannot be expressed in \OWL. 
+In these cases we have to weaken the axioms. For instance, in \OWL we replace the definition of systemic functions with
+\bflist
+\item[\myax{functionOWL}$_{owl}$] 
+\myalignspaceskip
+\setlength{\jot}{0pt}% Inter-equation spacing
+\begin{align*}
+    \FunctionSysNullary\sqsubseteq &
+    (\forall\mathtt{classifies}.\BehaviourConcreteNullary \sqcap \exists\causallyContrNullary.\GoalNullary) 
+        \sqcap \\ & \exists\foundedNullary.\SystemNullary)
+\end{align*}
+\eflist
+where $\mathtt{classifies}$ is the inverse relation of $\DOLCECLby{\cdot}{\cdot}{\cdot}$. In this way the fact that systemic function are founded on systems is preserved and highlighted.
+
+%classifies only 
+%    (Behaviour
+%     and (causally-contributes-to some Goal)
+%     and (partecipated-by-doer some TechnicalArtifact))
+
+Additionally, for all the ternary temporalized relations, such as $\DOLCECLby{\cdot}{\cdot}{\cdot}$ \myComment{, $\playAs{\cdot}{\cdot}{\cdot}$,} 
+and $\hspace{0pt}\texttt{participateAsDoer}(\cdot)(\cdot)(\cdot)$, the temporal argument is removed and a homonymous binary relation is used in their place.
+The link between the temporalized and non-temporalized relations can be interpreted in different ways. For example, one could state that the non-temporalized relation holds if and only if the temporalized relation holds whenever one of the relation arguments exists, what argument precisely depends on the relation. This is our choice for parthood \refdf{def:partConstant}, classification, and participation-like relations as shown by these \textit{meta-rules}: %\TODOinline{[SB: le f.le qui sotto dovrebbero avere la stessa numerazione delle iniziali ma restare chiaramente differenziate, ad es. usando  \textbf{d13$_{meta}$}][FC:fatto]}
+\bflist
+\item[\mydf{CLnontemp}$_{meta}$] $ \DOLCECLbyBinary{x}{y} \myiff ((\exists t \DOLCEPRE{x}{t}) \land \forall t (\DOLCEPRE{x}{t} \myfi  \DOLCECLby{x}{y}{t}))$ 
+\item \mytext{$x$ is constantly classified by $y$ if and only if $x$ is classified by $y$ whenever $x$ exists}
+\item[\mydf{participationDoerNonTemp}$_{meta}$] $ \participateAsDoerBinary{x}{y} \myiff \exists t (\DOLCEPRE{y}{t}) \land \forall t (\DOLCEPRE{y}{t} \myfi \participateAsDoer{x}{y}{t})$
+\item \mytext{$x$ constantly participates-as-doer to $y$ if and only if $x$ participates-as-doer to $y$ for the whole of $y$ duration}
+\eflist
+%and, thus, also for the play-as relation. 
+One could also state that the non-temporalized relation holds if and only if the temporalized relation held true at some time adopting the following \textit{meta-rule}:%. This is our choice for the participation relations, for example, for participation-as-doer: 
+\bflist
+\item[\myex{participationDoerNonTempBIS}$_{meta}$] $ \participateAsDoerBinary{x}{y} \myiff \exists t \participateAsDoer{x}{y}{t}$
+\eflist
+There are also other possibilities. The choice of one over the others must be planned carefully depending on the application concerns, since this kind of changes affects the intended models of the \OWL ontology. For example, \refdf{def:participationDoerNonTemp} excludes partecipation-as-doer in, say, a chemical process only for its first part, while \refex{ex:participationDoerNonTempBIS} allows it, but in \OWL this difference is lost.
+Additionally, the removal of the temporal argument reduces the flexibility of the ensuing ontology. For example, one cannot track (at least not directly) dynamic aspects of roles, e.g. a component that carries out a function at a time and then it changes its function. Nor one can express that, say, there is chemical process which is driven by two different catalysts during its first and second parts.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.45\textwidth]{query_screenshot.PNG}
+  \caption{\label{fig:screen_query}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{entities_screenshot.PNG}
+  \caption{A view of the ontology taxonomy in Protegé.\label{fig:screen_entities}}
+\end{figure}
+
+The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what method could implement a given ontological function \myComment{\TODO{check if true}}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
+what components have a capability that corresponds to a given function:
+\begin{verbatim}
+PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+SELECT  ?component
+	WHERE { 
+	    ?capability :definition-founded-on this:<the given function> .
+		    ?capability :quality-of ?component}
+\end{verbatim}
+\begin{comment}PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX this: <http://www.co-ode.org/ontologies/ont.owl#>
+SELECT  ?component
+	WHERE { ?capability this:definition-founded-on this:convert_chemical_energy_into_electricity_1 .
+		?capability this:quality-of ?component}
+\end{comment}
+or what capacities of what components are  involved in executing the ontological functions present in a given system:
+\begin{verbatim}
+PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+SELECT  ?component ?functionOntological ?capacity
+	WHERE { 
+		    ?functionSystemic :function-of ?component .
+		    ?functionSystemic :founded-on :<the given system> .
+		    ?functionSystemic :specializes ?functionOntological .
+		    ?capability :definition-founded-on ?functionOntological .
+		    ?capability :quality-of ?component .
+		    ?capability :founded-on ?capacity .
+		    ?capacity :quality-of ?component}
+\end{verbatim}
+\begin{comment}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX this: <http://www.co-ode.org/ontologies/ont.owl#>
+SELECT  ?component ?capacity
+	WHERE { 
+		?component this:part-of this:electrical_circuit_1 .
+		?functionSystemic this:founded-on this:electrical_circuit_1 .
+		?functionSystemic this:specializes ?functionOntological .
+		?capability this:definition-founded-on ?functionOntological .
+		?capability this:quality-of ?component .
+		?capability this:founded-on ?capacity .
+		?capacity this:quality-of ?component}
+\end{comment}
+The previous queries showcase the possibility of linking capabilities to functions. This is important for one could develop, based on this link, an application allowing engineers to find whether they already have available components that can satisfy a given functional requirement, e.g. in early system design.
+
+The ontology also supports queries related to engineering methods and their relation with functions.
+For example, the following query takes a given system as inputs and returns all systemic functions involved in a method, with their role (main-function or sub-function) and underlying component:
+\begin{verbatim}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+SELECT  ?component ?functionSystemic ?role ?method 
+WHERE { 
+    ?functionSystemic ?role ?method .
+    ?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
+    ?functionSystemic :function-of ?component  .
+    ?component :constant-part-of :<the given system>}
+\end{verbatim}
+\begin{comment}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+SELECT  ?component ?functionSystemic ?verb ?method
+	WHERE { ?functionSystemic ?verb ?method .
+		?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
+		?functionSystemic :function-of ?component }
+\end{comment}
+Given some ontological function, one can set a query to return a list of methods that can be implemented through systemic-function specialisation of the input ontological function; or explain what method-(sub)types specialize a given method, and what systemic-function-types are required by that method. 
+This is useful, both during design, since it gives information about how to implement a given function, and during reverse engineering, since it explains how the parts of a system cooperate to carry out a function of coarse granularity. 
+
+The ontology was tested using the Hermit reasoner and is consistent. 
+Additionally, for the sake of example, it is populated with a few individuals.
+Moreover, even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exists, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
+Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard\footnote{\url{https://www.iso.org/standard/71954.html}.}, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, together with the ontology described in this section.
+ 
+
+\section{Conclusion}\label{sec:conc}
+This work contributes towards a more precise understanding of fundamental concepts used in engineering, especially functionality.
+In particular, we have shown how one can give ontologically-grounded definitions of capability, capacity, behavior and function using first order logic.
+Moreover, we have shown how one can use functional decomposition to distinguish between ontological, systemic, and engineering functions, and how ontological functions can be used to explain the difference between capabilities and capacities.
+Finally, we partially translated our first order theory in \OWL, showcasing a preliminary serialisation of our theory in a computer-friendly formal language.
+
+%\begin{figure}[t]
+%\includegraphics{}
+%\caption{Figure caption.}\label{f1}
+%\end{figure}
+
+%\begin{table*}
+%\caption{} \label{t1}
+%\begin{tabular}{lll}
+%\hline
+%&&\\
+%&&\\
+%\hline
+%\end{tabular}
+%\end{table*}
+
+\section*{Acknowledgments}
+
+%%%% NOTA:
+%Tutte le pubblicazioni scientifiche eventualmente prodotte dal/dalla 
+%dottorando/a che usufruisce della borsa finanziata dalla presente 
+%Convenzione e derivate dall'attività svolta nell'ambito del ciclo 
+%di dottorato, oltre a indicare l'afferenza al Dottorato dell'Università,
+%dovrà citare il sostegno all'attività di ricerca da parte del Finanziatore.
+
+Francesco Compagno is funded
+by the company Adige Spa.
+This work is partially funded by the European project OntoCommons (GA 958371, \url{www.ontocommons.eu}).
+
+%%%%%%%%%%% The bibliography starts:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  The Bibliography                       %%
+%%                                                         %%
+%%  ios1.bst will be used to                               %%
+%%  create a .BBL file for submission.                     %%
+%%                                                         %%
+%%                                                         %%
+%%  Note that the displayed Bibliography will not          %%
+%%  necessarily be rendered by Latex exactly as specified  %%
+%%  in the online Instructions for Authors.                %%
+%%                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\nocite{*}
+% if your bibliography is in bibtex format, use those commands:
+\bibliographystyle{ios1}           % Style BST file.
+\bibliography{bibliography}        % Bibliography file (usually '*.bib')
+
+% or include bibliography directly:
+%\begin{thebibliography}{0}
+%\bibitem{r1} F. Author, Information about cited object.
+%
+%\bibitem{r2} S. Author and T. Author, Information about cited object.
+%\end{thebibliography}
+
+\end{document}
