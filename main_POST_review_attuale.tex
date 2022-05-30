@@ -1271,7 +1271,7 @@ what components have a capability that corresponds to a given function:
 PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
 SELECT  ?component
 	WHERE { 
-	    ?capability :definition-founded-on this:<the given function> .
+	    ?capability :definition-founded-on :<the given function> .
 		    ?capability :quality-of ?component}
 \end{verbatim}
 \begin{comment}PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
