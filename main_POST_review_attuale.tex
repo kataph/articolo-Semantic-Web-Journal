@@ -299,7 +299,7 @@
 \title{%About functions, behaviours, and capabilities in formal ontology and engineering
 Towards a formal ontology of engineering functions, behaviours, and capabilities
 }
-\runtitle{Running head title}
+\runtitle{Towards a formal ontology of engineering functions, behaviours, and capabilities}
 %\subtitle{}
 
 % For one author:
@@ -859,7 +859,7 @@ We conceptualize the two processual roles through two specialisations of the par
   \item[\myax{participateAsDoerRage}]  $ \participateAsDoer{x}{y}{t} \myfi \TechArt{x} \land \BehaviourConcrete{y} \land \DOLCEPC{x}{y}{t}$
 \item \mytext{if $x$ is a doer in $y$ at time $t$ then $x$ is a technical artifact, $y$ is a perdurant, and $x$ participates in $y$ (in the \DOLCE sense) during that time}
   \item[\myax{processualRoles}] $ \BehaviourConcrete{x} \myfi \exists y,z,t(\participateAsDoer{y}{x}{t} \land \participateAsFlow{z}{x}{t} \land y \neq z) $ 
-\item \mytext{$x$ is a behavior if and only if there are at least a doer and a flow that participate in $x$}\TODOinline{[SB: se assumiamo che i ruoli sono giocati da entità distinte, come mi sembra implicitamente facciamo, dovremmo aggiungere $y \neq z$[FC: aggiunto]} \eflist
+\item \mytext{$x$ is a behavior only if there are at least a doer and a flow that participate in $x$}\TODOinline{[SB: se assumiamo che i ruoli sono giocati da entità distinte, come mi sembra implicitamente facciamo, dovremmo aggiungere $y \neq z$[FC: aggiunto]} \eflist
 %\TODO{[non mi convince, meglio dare le indicazioni precise (visto che sono aspetti ontologici) ed eventualmente anticipare che le altre nozioni possono essere ricostruire nella teoria completa (se è vero)][FC: spostato questo commento dalla sua posizione originaria, vedi versione precedente in mainV2.tex]}
 
 Additionally, we assume that behaviors can be combined to give causal explanations of complex occurences (e.g. the beam was cut, therefore it fell to the floor), and formalize this with a binary relation called \firstTimeKeyWord{causal contribution}\footnote{This relation is inspired by the one introduced in \YAMATO \cite{mizoguchiYAMATOAnotherMore}. The latter, however, is limited to \YAMATO processes.}, which we assume holds more in general between perdurants:
@@ -1039,13 +1039,13 @@ Additionally, we assume that \methodsName{plural} are always contexts for a main
   \item[\myax{pre-method}$_{schema}$] $ \MethodBin{\cst{m}}{n} \myfi \exists!  \cst{main}, \cst{sub_1}, \dots, \cst{sub_n} (\mainFunctionRole{\cst{main}} \land \subFunctionRole{\cst{sub_1}} \land \dots \land \subFunctionRole{{\cst{sub_n}}} \land \founded{\cst{main}}{\cst{m}} \land \founded{\cst{sub_1}}{\cst{m}} \land \dots \land \founded{\cst{sub_n}}{\cst{m}}) $
   \item[] \mytext{for any engineering \methodsName{singular} of functional decomposition, say $\cst{m}$, having a given number of sub-functions, say $n$, there exist a main-function role and $n$ sub-function roles, which are founded on $\cst{m}$ and are uniquely determined}
 \eflist
-Since the main-function and the $n$ sub-functions roles of a given \methodsName{singular} are univoquely determined, we can represent them with functional symbols. In particular, we will write $\cst{main^m}$, $\cst{sub}^m_1$, \dots, $\cst{sub}^m_n$ to indicate the roles corresponding to the \methodsName{singular} $\cst{m}$, as per Axiom \refax{ax:pre-method} (we omit the functional dependence of $n$ on $\cst{m}$, for ease of notation).
+Since the main-function and the $n$ sub-functions roles of a given \methodsName{singular} are univocally determined, we can represent them with functional symbols. In particular, we will write $\cst{main^m}$, $\cst{sub}^m_1$, \dots, $\cst{sub}^m_n$ to indicate the roles corresponding to the \methodsName{singular} $\cst{m}$, as per Axiom \refax{ax:pre-method} (we omit the functional dependence of $n$ on $\cst{m}$, for ease of notation).
 \myComment{Then, we define two binary relation that we will use as shortcuts to simplify the incoming definition schema \refdf{def:method}
 \bflist
   \item[\mydf{main-function-of}] $ \mainFunction{x}{\cst{m}} \myiff \DOLCECLbyBinary{\cst{f}}{\cst{main}^{\cst{m}}} $
-  \item \mytext{$x$ is main-function-of a method $\cst{m}$ if and only if it is constantly classified by the main-function role correspondig to $\cst{m}$} 
+  \item \mytext{$x$ is main-function-of a method $\cst{m}$ if and only if it is constantly classified by the main-function role corresponding to $\cst{m}$} 
   \item[\mydf{sub-function-of}] $ \subFunction{x}{\cst{m}} \myiff \DOLCECLbyBinary{\cst{f}}{\cst{sub}^{\cst{m}}_i} $
-  \item \mytext{$x$ is main-function-of a \methodsName{singular} $\cst{m}$ if and only if it is constantly classified by the any of the sub-function roles correspondig to $\cst{m}$} 
+  \item \mytext{$x$ is main-function-of a \methodsName{singular} $\cst{m}$ if and only if it is constantly classified by the any of the sub-function roles corresponding to $\cst{m}$} 
 \eflist}
 Finally, the link between \methodsName{plural} and decompositions is given in the following definition schema: 
 \bflist
