@@ -515,15 +515,44 @@ Additionally, applied ontology has influenced engineering literature, as shown b
 
 % review parte 4.2: la varie TLO e le funzioni
 Still, no shared reference ontology of functions exists, and top-level ontologies do not explore theories of functions as understood in engineering. 
-For example, \DOLCE makes no mention of function within its specification \cite{masoloWonderWebDeliverableD182003}, and only later work was proposed to see function execution as a particular type of events, namely achievements \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
+For example, \DOLCE makes no mention of function within its specification \cite{masoloWonderWebDeliverableD182003}.%, and only later work was proposed to see function execution as a particular type of events, namely achievements \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
 The last version of \YAMATO classifies functions as roles and behaviours as processes\footnote{Note that even if processes exist as a category also in \DOLCE, in that \TLO behaviours are still more similar to events and not processes. This is because the process category of \YAMATO and the one of \DOLCE are different: in \YAMATO processes wholly exist at each point in time, while in \DOLCE they are a special kind of events. \YAMATO  and \DOLCE are instead aligned on the notion of events. %are complete realisations of \YAMATO-processes (e.g. \quotes{the motor accelerated} vs \quotes{the motor is accelerating}).
 } 
-caused by an unintentional actor, and delegates the description of a functional ontology to a series of additional papers \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}. 
+caused by an unintentional actor. %, and delegates the description of a functional ontology to a series of additional papers \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}. 
 \BFO defines functions as dispositions %\footnote{Note that in \BFO functions are dispositions, not roles, while in \YAMATO the opposite holds. See \cite{mizoguchiFunctionalOntologyArtifacts2009} and \cite{spearFunctionsBasicFormal2016} for a comparison.} 
 that exist in virtue of their bearer's physical make-up, and such that the physical make-up came into being through intentional design (in the case of engineering). Other than that, \BFO does not commit to an axiomatisation, at least not within the axiomatisation of BFO currently present in GitHub\footnote{BFO 2020: \url{https://github.com/BFO-ontology/BFO-2020}.}.
 %\TODO{[va verificato][FC: controllati tutti gli assiomi di BFO2020: riguardo le funzioni, dicono che 1-funzioni sono sottoclasse di disposizioni 2-funzioni sono temporalmente rigide. Limito comunque a un riferimento preciso]}
 \GFO too states that functions can be realized by other entities, but makes no mention of dispositions and, instead, calls functions \quotes{intentional entities} \cite{herreGeneralFormalOntology2006}.
 The last development of ISO 15926 \cite{kluwerISO159261420202020} adopts \BFO view of functions as dispositions realized in particular processes.
+
+In truth, despite the relatively small space that functions occupy in these upper-level ontologies, their authors have been discussing functionality more in length in various series of research papers. 
+For example, \DOLCE's authors suggest seeing functions as particular types of events, while behaviours are `qualifications of the participation relation' in that they explain the specific way a device participates in a specific event \cite{borgoCapabilitiesCapacitiesFunctionalities2021,borgoFormalizationFunctionsOperations2011, garbaczTwoOntologydrivenFormalisations2011}. %Some authors describe classes of functions as particular classes of occurrents. For example, the Functional Basis function `to convert' is interpreted as the class of all events in which a flow is converted (e.g., whenever a combustion engine consumes some fuel to move a vehicle, that conversion of chemical energy to kinetic energy is a function of `to convert' type).%% As anticipated before, the engineering functions listed in fb are here interpreted as types whose instances are perdurants of certain kinds. EngFun(p) −→ PD(p). (26) -- quote from two formalisations...
+%% to distribute is a class of perdurants in which a certain flow is broken up. EngFuncðxÞ!PDðxÞ -- quote from borgoFormalizationFunctionsOperations2011 
+On the other hand, \YAMATO's authors, deepen their idea of functional ontology in a series of additional papers, among them \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}, in which their confirm and expand their claim that functions are roles played by behaviors, which are themselves a certain class of process (notice that \YAMATO's authors are same research group behind FBRL development).
+
+The view of \GFO's authors has some similarities with the one of FBRL, in that functions are not roles, but are linked to `functional items', which are roles played by the entities realizing the function. Functions themselves are complex entities, composed of a functional item, a label to identify them, and descriptions of the initial and final states corresponding to the function execution, called `requirements' and `goals', respectively \cite{burekToplevelOntologyFunctions2006,burekOverviewGFOFunctions2021}. The typical example is the function `to transport oxygen', which is linked to the functional item `oxygen transporter' which can be played by a red blood cell. Then, a requirement for the realisation of the function is the presence of oxygen in the red blood cell environment and the goal is the presence of oxygen in the body cells that need it for cellular respiration. Another similarity with the FBRL is the development of teleological relations between functions similar to meta-functions. For example, \cite{burekToplevelOntologyFunctions2006} mentions the relations `support', `enable', and `prevent', depending on the fact that the goal of the first function fulfills partially, completely, or is incompatible with the requirement of the second function (cfr. with \cite{kitamuraMetaFunctionsArtifacts1999}, which also uses the term `enable' and `prevent', among others). 
+%Support – one function supports the other if its goal fulfills partially the second function’s requirements (the goal of the first function is a proper part of the requirements of the second function).  Enable – one function enables the other if its goal fulfills all of the second function’s requirements (the requirements of the second function are a part of the goal of the first function).  Prevent – one function prevents the other if its goal excludes the requirements of the second. 
+%The functional item is a role played by this entity in any realization of the function. In the case of ‘‘to transport oxygen’’, it would be an oxygen transporter. -- burek
+
+Coming to \BFO, the view of functions as special dispositions was expanded and defended by its authors \cite{arpFunctionRoleDisposition2008,spearFunctionsBasicFormal2016}, as well as criticized by some philosophers, such as Jansen and Röhl \cite{rohlWhyFunctionsAre2014,jansenFunctionsMalfunctioningNegative2018}. 
+A full description of this debate is beyond the scope of this paper, we just mention that while \BFO maintains functions as a subclass of dispositions, while Jansen argues that functions and dispositions are disjoint, though related, categories. Moreover, a major point of disagreement concerns malfunctions, in that Jansen argues that malfunctioning entities are entities that have a function, but lack the means to realize it, for example because they have lost the required dispositions; while Barry et al. maintain that when an entity malfunctions it loses its function, partially or completely, and is recognized as an entity of its kind only because of its history, if at all (e.g., a cancerous lung is not a lung).
+Notice that in both of these positions functions and roles are disjoint subclasses of realizable entities, on the ground that roles are coincidental for their players, while functions are essential for their players.
+
+\TODO{[...]?}.
+
+%We have drawn a table which summarizes these different ontological positions
+% \begin{table}[]
+%   \begin{tabular}{|l|l|l|l|l|}
+%   \hline
+%   Upper Ontology & Functions in the upper ontology                                                  & Functions in additional research articles &  &  \\ \hline
+%   BFO            & Dispositions that are selected by virtue of their evulotionary or design history & ...                                       &  &  \\ \hline
+%   DOLCE          & n./a.                                                                            & Functions as special subclasses of events &  &  \\ \hline
+%   GFO            & ...                                                                              &                                           &  &  \\ \hline
+%   ISO 15926      & ...                                                                              &                                           &  &  \\ \hline
+%   YAMATO         & ...                                                                              &                                           &  &  \\ \hline
+%   \end{tabular}
+%   \end{table}
+
 
 % review parte 5: motivazione all'articolo
 As we have seen, 
@@ -555,6 +584,7 @@ In any case, in this paper we will try to formalize, in a preliminary way, some 
 \section{An (enriched) subset of the \DOLCE ontology\label{sec:DOLCE}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Here we introduce the fragment of the \DOLCE ontology \cite{masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022} that is needed in this paper. In particular, we cover the following classes which will be needed to model functions and related concepts: \firstTimeKeyWord{qualities}, \firstTimeKeyWord{perdurants}, and \firstTimeKeyWord{roles}. 
+In particular, we anticipate to the reader that we will argue in favor of subsuming capabilities and capacities into qualities, behaviors into perdurants, and functions into roles. 
 
 \DOLCE qualities are similar to tropes~\cite{Campbell90}. Qualities, for example the weight of a car and the color of a flower, are used for representing properties (e.g., weight) of individual objects (e.g., car) in which they inhere.
 Ontologically, qualities are individuals, that is, the colors of two different flowers are different, even though they could be both the same shade of red.
