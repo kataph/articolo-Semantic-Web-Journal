@@ -11,6 +11,7 @@
 \usepackage{ifthen}  %% utility package: allows for conditionals
 \usepackage{xcolor}  %% utility package: colors for temporary comments
 \usepackage{enumitem}  %% utility package: change spacing of lists
+\usepackage{graphicx}  %% utility package: define reverse iota operator
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 %%%%%%%%%%% Put your definitions here
@@ -83,6 +84,9 @@
 \newcommand{\myif}{\Longleftarrow \hspace{0.9mm}}
 %% sufficient condition
 \newcommand{\myfi}{\hspace{0.9mm} \Longrightarrow}
+%% reverse iota operator
+\newcommand{\suchthat}{\rotatebox[origin=c]{180}{$\iota$}}
+
 
 %%%%%%% DOLCE
 %% DOLCE style -- Small Caps, ie textsc, non funziona per qualche ragione
@@ -129,6 +133,7 @@
 \newcommand{\DOLCESum}[3]{\triRel{Sum}{#1}{#2}{#3}}
 \newcommand{\DOLCECLbyPar}[3][]{\biRelPar{{CL}}{#2}{#3}{#1}}
 
+\newcommand{\bearer}[1]{\uniRel{bearer}{#1}}
 %%%% Additional predicates
 \newcommand{\RelationalQualityClass}{\generalStyle{relationalQt}}
 \newcommand{\CapabilityClass}{\generalStyle{Capability}}
@@ -1262,6 +1267,21 @@ For instance, in the lathe example discussed above, it could be that the systemi
 In this section, we discuss capabilities and capacities, two notions that we briefly introduced at the end of Section~\ref{sec:review}. In particular, we will make use of the concept of  \ontoFunc{fullSingular} to distinguish capabilities from capacities (recall that, following the approach taken in ISO 15531-31\cite{jochemISOISO15531312004}, the quantitative viewpoint on what a device do is characterized by capacities, while the qualitative viewpoint by capabilities).
 %\TODOinline{which, following the approach taken in ISO 15531-31\cite{jochemISOISO15531312004}, characterize the qualitative (capabilities) and the quantitative (capacities) viewpoints on what a device can do}.
 
+Given that the difference between capabilities and capacities is expressed using the qualitative vs quantitative duality, a first idea is to just say that capacities are sublcasses of capabilities: for example, \cite{kochCAPABILITIESBASEDACCOUNTPATIENT2016} (despite not mentioning capacities) speaks of \qquotes{general and specific capabilities}, a general one being, for example, the \qquotes{capability of obtaining food}, and a corresponding specific capability being \qquotes{capability of obtaining through hunting whales on the sea for extended periods of time}. 
+Therefore, one could be tempted to say that there are no capacities at all, as an ontological category, but only more or less specific capabilities.
+This is a possible approach, but we argue against it, for (at least) two reasons: first, in engineering speech the capabilities and capacities are different concepts. Sometimes this difference is only implicit, but sometimes it is stated explicitly, as in ISO 15531.
+Secondly, some aspects of capabilities are not reducible to other, more specific, capabilities.
+Take, for example, Figure \ref{fig:capability-parameters}. 
+It contains two capabilities, \textit{moving} and \textit{finger grasping}, that a robot can have, together with some characterising parameters, such as \textit{paylod, workspace dimensions}, and so on. 
+It is possible that the workspace dimensions parameter is linked to (or just is) a capacity quantifying the moving capability. In that case, it would be unnatural to call \quotes{workspace dimension} a capability, and, thus, the same should hold for capacities\TODO{FC: se quest'ultimo paragrafo non è convincente, rimuoverlo senza remore}. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{capability-parameters.JPG}
+  \caption{\label{fig:capability-paramenters} Two possible capabilities of a robot and they respective parameters, copied from \cite{jarvenpaaDevelopmentOntologyDescribing2019a}.}%Capability parameters describe the characteristics of a capability.
+\end{figure}
+
+In order to differentiate between capacities and capabilities, we carry out the following reasoning. 
 Each technical artifact has relevant characteristics, which are part of its physical make-up and determine how the artifact interacts with certain things. 
 For example, an individual pump could be built in such a way that it is able to pump %hydraulic 
 oil with a certain flow rate.
@@ -1273,9 +1293,7 @@ Consequently, we model both the flow rate (that is, a capacity), and the pumping
 Whenever a capability is based on some other quality of a technical artifact, that is, when each realisation of the capability depends on some other quality, we say that it is \firstTimeKeyWord{\foundedTerm{passive}} on that quality (or qualities), and we formalize this through the relation $\founded{\cdot}{\cdot}$ defined in \refdf{def:foundingBasic}.
 For example, in the case of the pump we could say that the capability of the pump to move water is founded on its flow rate capacity.
 %a person could say that he or she is able to jump high due to the strength of their leg muscles and their technical proficiency in jumping, that is, they have a jumping capability that is founded on their leg strength and their technical proficiency in jumping. 
-Coming back to Gero and Qian's example of the water tap mentioned in Section \ref{sec:DOLCE}, which is similar to the one of the pump, we could say that the faucet has the capability of delivering water when requested, which is founded on its flow rate capacity, which is itself founded 
-%of 
-on its diameter quality (Gero and Qian say that the flow rate is \quotes{controlled} by the diameter \cite{qianFunctionBehaviorStructure1996}).
+Coming back to Gero and Qian's example of the water tap mentioned in Section \ref{sec:DOLCE}, which is similar to the one of the pump, we could say that the faucet has the capability of delivering water when requested, which is founded on its flow rate capacity, which is itself founded on its diameter quality (Gero and Qian say that the flow rate is \quotes{controlled} by the diameter \cite{qianFunctionBehaviorStructure1996}).
 Now, in this example, there is a difference between the flow rate and the diameter: the latter is intrinsic and the former is extrinsic, as we argued in Section \ref{sec:DOLCE}.
 %Now, in this example, there is a difference between the leg strength and the jumping proficiency quality: the former is intrinsic and the latter is not, since it wouldn't exist without the jumping occurrences. 
 %When \myComment{Whenever<-no: altrimenti sembra definizione} this happens, that is, \myComment{whenever} when a capability is founded on a relational quality, we call that quality \firstTimeKeyWord{capacity}, analogously to the approach in \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
@@ -1290,12 +1308,27 @@ In our terminology, all the aforementioned properties are capacities, since they
 
 Capacities themselves are founded on some intrinsic physical qualities of the bearing object. For example, the maximum operating current will depend, say, on the geometric and electrical properties of the conductor metal, such as its diameter and its resistivity, similarly the flow rate of the water tap depends on its diameter. Given these observations, we partially characterise capacities as follows:   
 \bflist
-\item[\myax{capacPartialDef}] $ \Capacity{x} \myfi \RelationalQuality{x} \land \exists y(\founded{x}{y} \land \IntrinsicQuality{y}) $  % 
-\item[] \mytext{A capacity is a relational quality and is founded on some intrinsic quality}\TODOinline{[SB: se non è complicato farlo ora aggiungerei che x e y dovrebbero anche avere lo stesso bearer, altrimenti lasciamo per l'eventuale revisione][FC. hai sicuramente ragione, ma anche io lascerei a eventuale revisione]}
+\item[\myax{capacPartialDef}] $ \Capacity{x} \myfi \RelationalQuality{x} \land \exists y(\founded{x}{y} \land \IntrinsicQuality{y} \land \bearer{x} = \bearer{y}) $%(\DOLCEQualityDirect{y}{z} \land \DOLCEQualityDirect{x}{w} \myfi z = w)) $  % 
+\item[] \mytext{A capacity is a relational quality and is founded on some intrinsic quality, which is carried by the same bearer.}\TODOinline{[SB: se non è complicato farlo ora aggiungerei che x e y dovrebbero anche avere lo stesso bearer, altrimenti lasciamo per l'eventuale revisione][FC. hai sicuramente ragione, ma anche io lascerei a eventuale revisione][FC: aggiunto questo dettaglio]}
+\\ Where $\bearer{\cdot}$ is the (unique) bearer of a quality, i.e.:
+\item[\mydf{beareDef}] $ \bearer{x} = y\suchthat (\DOLCEQualityDirect{x}{y}) $ 
+\item[\myax{capacPartialDef2}] $ \Capacity{x} \myfi \exists y( \Capability{y} \land \founded{y}{x}) $  % 
+\item[] \mytext{For each capacity there exists a capability founded by said capacity.\TODO{FC: ha senso questo assioma o è eccessivo (e in caso dire che hanno lo stesso bearer?)?}}
 \eflist
+Axioms \refax{ax:capacPartialDef} and \refax{ax:capacPartialDef2} do not fully define what a capacity is, but only give some contraints.
+Since the classical case of deciding what relations there is between the color of an object and its hue is difficult (is the hue a quality of the color? Or maybe the hue is part of the color, or something else?)\TODO{FC:esiste citazione per questo?}, finding out the relation between capacities and capabilities is difficult too. In fact, one could even argue that color itself is a capability: the capability of reflecting certain lightwaves.
+A full definition of capacity is, therefore, a complex issue.
+We still suggest one in the following, though we highlight that is only one possibility among others, and we cannot say for certain what precise consequences its adoption has.
+We opt for defining capacity as \quotes{parameter} of the capabilities it founds, that is, as a quality such that its values are always subset of values of the corresponding capability:
+\bflist
+\item[\mydf{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
+\item[] \mytext{Capacities are precisely those relational quality which are founded on some intrinsic quality (of the same bearer), and which found some capability (of the same bearer), such that every time that the capability takes a value ($u$), the capacity takes a corresponding value ($v$), which is part of $u$.}
+\eflist
+The previous definition amounts, essentially, to an attempt of defining what a parameter of a quality is (then capacities are, basically, the parameters of capabilities). 
+Our approach is to define a parameter as another quality whose values are mereological parts of the values of the original quality. 
 
 
-In contrast, a characterisation of capabilities should touch upon functions as capabilities are inextricably intertwined to functional aspects. In order to do this, we first try to clarify the nature of capabilities as follows:
+In contrast to Definition \refdf{def:capacFullDef}, a characterisation of capabilities should touch upon functions as capabilities are inextricably intertwined to functional aspects. In order to do this, we first try to clarify the nature of capabilities as follows:
 %While the choice of modeling characteristics such as flow rate, weight, shape, or color as qualities is safe enough, the same modeling choice for capabilities carries more weight. 
 %One can motivate it as following: 
 to be able to do something is really a modal concept calling for possible worlds in which that something is actually done. 
