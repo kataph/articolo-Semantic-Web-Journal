@@ -344,7 +344,7 @@ Towards a formal ontology of engineering functions, behaviours, and capabilities
 \thanks{Corresponding author. \printead{e1}.}}
 \author[A]{\inits{S.}\fnms{Stefano} \snm{Borgo}\ead[label=e2]{stefano.borgo@cnr.it}}
 %\author[A]{\inits{N.-N.}\fnms{Name3-Name3} \snm{Surname3}\ead[label=e3]{third@somewhere.com}}
-\address[A]{Labotory for Applied Ontology (LOA), \orgname{Institute for Cognition Science and Technology (ISTC)},
+\address[A]{Laboratory for Applied Ontology (LOA), \orgname{Institute for Cognition Science and Technology (ISTC)},
 Trento, \cny{Italy}\printead[presep={\\}]{e1}\printead[presep={\\}]{e2}}
 %\address[B]{Department first, \orgname{University or Company name},
 %Abbreviate US states, \cny{Country}\printead[presep={\\}]{e2,e3}}
@@ -1315,14 +1315,14 @@ Capacities themselves are founded on some intrinsic physical qualities of the be
 \item[\myax{capacPartialDef2}] $ \Capacity{x} \myfi \exists y( \Capability{y} \land \founded{y}{x}) $  % 
 \item[] \mytext{For each capacity there exists a capability founded by said capacity.\TODO{FC: ha senso questo assioma o è eccessivo (e in caso dire che hanno lo stesso bearer?)?}}
 \eflist
-Axioms \refax{ax:capacPartialDef} and \refax{ax:capacPartialDef2} do not fully define what a capacity is, but only give some contraints.
-Since the classical case of deciding what relations there is between the color of an object and its hue is difficult (is the hue a quality of the color? Or maybe the hue is part of the color, or something else?)\TODO{FC:esiste citazione per questo?}, finding out the relation between capacities and capabilities is difficult too. In fact, one could even argue that color itself is a capability: the capability of reflecting certain lightwaves.
+Axioms \refax{ax:capacPartialDef} and \refax{ax:capacPartialDef2} do not fully define what a capacity is, but only give some constraints.
+Since the classical case of deciding what relations there are between the color of an object and its hue is difficult (is the hue a quality of the color? Or maybe the hue is part of the color, or something else?)\TODO{FC:esiste citazione per questo?}, finding out the relation between capacities and capabilities is difficult too. In fact, one could even argue that color itself is a capability: the capability of reflecting certain lightwaves.
 A full definition of capacity is, therefore, a complex issue.
 We still suggest one in the following, though we highlight that is only one possibility among others, and we cannot say for certain what precise consequences its adoption has.
 We opt for defining capacity as \quotes{parameter} of the capabilities it founds, that is, as a quality such that its values are always subset of values of the corresponding capability:
 \bflist
 \item[\mydf{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
-\item[] \mytext{Capacities are precisely those relational quality which are founded on some intrinsic quality (of the same bearer), and which found some capability (of the same bearer), such that every time that the capability takes a value ($u$), the capacity takes a corresponding value ($v$), which is part of $u$.}
+\item[] \mytext{Capacities are precisely those relational qualities that are founded on some intrinsic quality (of the same bearer), and which found some capability (of the same bearer), such that every time that the capability takes a value ($u$), the capacity takes a corresponding value ($v$), which is part of $u$.}
 \eflist
 The previous definition amounts, essentially, to an attempt of defining what a parameter of a quality is (then capacities are, basically, the parameters of capabilities). 
 Our approach is to define a parameter as another quality whose values are mereological parts of the values of the original quality. 
