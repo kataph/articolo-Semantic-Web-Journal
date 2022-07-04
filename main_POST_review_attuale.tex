@@ -614,7 +614,7 @@ In any case, in this paper we will try to formalize, in a preliminary way, some 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{An (enriched) subset of the \DOLCE ontology\label{sec:DOLCE}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Here we introduce the fragment of the \DOLCE ontology \cite{masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022} that is needed in this paper. In particular, we cover the following classes which will be needed to model functions and related concepts: \firstTimeKeyWord{qualities}, \firstTimeKeyWord{perdurants}, and \firstTimeKeyWord{roles}. 
+Here we introduce the fragment of the \DOLCE ontology \cite{masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022} that is needed in this paper\footnote{See Figure \ref{fig:DOLCE-taxa} for a complete taxonomy}. In particular, we cover the following classes which will be needed to model functions and related concepts: \firstTimeKeyWord{qualities}, \firstTimeKeyWord{perdurants}, and \firstTimeKeyWord{roles}. 
 We anticipate to the reader that we will argue in favor of subsuming capabilities and capacities into qualities, behaviors into perdurants, and (a certain kind of) functions into roles. The links among these concepts will be, roughly, as follows: role-functions classifies behaviors, capabilities requires functions in order to be defined, while capacities and capabilities are tightly coupled concepts.  
 
 \DOLCE qualities are similar to tropes~\cite{Campbell90}. Qualities, for example the weight of a car and the color of a flower, are used for representing properties (e.g., weight) of individual objects (e.g., car) in which they inhere.
@@ -990,7 +990,7 @@ In this context, a function is seen as the contribution of the behavior of an in
   \exists z,g (\System{z} \land \goalOf{g}{z}  \land  \exists b,t  (\DOLCECLby{b}{x}{t} \land \DOLCEPart{y}{z}{t}) \\
     \forall b,t ((\DOLCECLby{b}{x}{t} \land \DOLCEPart{y}{z}{t}) \myfi (\BehaviourConcrete{b} \land 
       \participateAsDoer{y}{b}{t} \\ \hfill{} \land \causallyContr{b}{g}))))  $ 
-  \item \mytext{$x$ is a systemic function of $y$ if and only if $x$ is a role and there exist a system $z$ and a goal $g$ for $z$ such that $x$ is satisfied only by behaviors which have $y$ as doer and causally contribute to achieve $g$, whenever $y$ is  part of $z$}
+  \item \mytext{$x$ is a systemic function of $y$ if and only if $x$ is a role and there exist a system $z$ and a goal $g$ for $z$ such that $x$ is satisfied only by behaviors which have $y$ as doer and causally contribute to achieve $g$, whenever $y$ is  part of $z$}\footnote{This means that the term \quotes{systemic} in \quotes{systemic function} refers to the dependence of such role-concept to a system, and does not imply that the player artifact is a system itself. For example, if a wood table is held together by screws, those screws do have systemic functions in the table-system: they connect the table-legs to the table-top, even though single screws may not be systems themselves.}
   
 %  \item [] {``A systemic function is a role concept that 
 %   \begin{itemize}[topsep=0pt]
