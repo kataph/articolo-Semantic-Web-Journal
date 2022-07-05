@@ -785,7 +785,6 @@ The mereology mentioned above is built as usual from the temporalized parthood r
 %\footnote{One could argue that technical articfact can also be perdurants [...].} 
 \item[\mydf{partConstant}] $ \DOLCEPartBin{x}{y}  \myiff \exists t (\DOLCEPRE{y}{t}) \land \forall t (\DOLCEPRE{y}{t} \myfi \DOLCEPart{x}{y}{t})$
 \item \mytext{$x$ is constantly part of $y$ if and only if whenever $x$ exists, it is part of $y$}
-\TODOinline{[SB: la def. di "constant part" $CP$ (Dd25) in \DOLCE usa PRE(y,t) e non PRE(x,t) nell'esistenziale e nella precondizione. sicuro che qui ci serve quest'altra? se è così dobbiamo usare un nome diverso da $CP$, altrimenti bisogna riprendere la def. di Dolce e dire che viene presa da là][FC: hai ragione, mi ero sbagliato. Ho anche riportato, poco sopra, che è presa da DOLCE]}
 %this is a standard way of removing the temporal argument from parthood
 %Finally, we will use the fact that only actually present objects can be part of other objects:
 \item[\myax{part-present}] $ \DOLCEPart{x}{y}{t} \myfi (\DOLCEPRE{x}{t} \land \DOLCEPRE{y}{t})$
@@ -1311,7 +1310,7 @@ Capacities themselves are founded on some intrinsic physical qualities of the be
 \item[\myax{capacPartialDef}] $ \Capacity{x} \myfi \RelationalQuality{x} \land \exists y(\founded{x}{y} \land \IntrinsicQuality{y} \land \bearer{x} = \bearer{y}) $%(\DOLCEQualityDirect{y}{z} \land \DOLCEQualityDirect{x}{w} \myfi z = w)) $  % 
 \item[] \mytext{A capacity is a relational quality and is founded on some intrinsic quality, which is carried by the same bearer.}\TODOinline{[SB: se non è complicato farlo ora aggiungerei che x e y dovrebbero anche avere lo stesso bearer, altrimenti lasciamo per l'eventuale revisione][FC. hai sicuramente ragione, ma anche io lascerei a eventuale revisione][FC: aggiunto questo dettaglio]}
 \\ Where $\bearer{\cdot}$ is the (unique) bearer of a quality, i.e.:
-\item[\mydf{beareDef}] $ \bearer{x} = y\suchthat (\DOLCEQualityDirect{x}{y}) $ 
+\item[\mydf{beareDef}] $ \bearer{x} = \suchthat y (\DOLCEQualityDirect{x}{y}) $ 
 \item[\myax{capacPartialDef2}] $ \Capacity{x} \myfi \exists y( \Capability{y} \land \founded{y}{x}) $  % 
 \item[] \mytext{For each capacity there exists a capability founded by said capacity.\TODO{FC: ha senso questo assioma o è eccessivo (e in caso dire che hanno lo stesso bearer?)?}}
 \eflist
@@ -1346,7 +1345,7 @@ Finally, note that Example \refex{ex:Capab} also seems to suggest that capabilit
 \item[\mydf{capability}] $ \Capability{x} \myiff  \RelationalQuality{x} \land \exists y,z(\Capacity{y} \land \founded{x}{y} \land \FunctionAbs{z} \land \foundedDef{x}{z}) $  
 \item[] \mytext{$x$ is a capability if and only if it is a relational quality founded on some capacity and is definition-founded on some \ontoFunc{fullSingular}}
 \eflist
-{\TODO{[FC: commento spostato dalla sua posizione originaria] [SB:] Non mi sembra che qui emerga una differenza formale tra capacità e capability.\\ 
+\myComment{\TODO{[FC: commento spostato dalla sua posizione originaria] [SB:] Non mi sembra che qui emerga una differenza formale tra capacità e capability.\\ 
 A rileggere l'articolo [4] oggi seguirei una intuizione un po' diversa:\\ 
 1) la capacity è una qualità relazionale associata ad un behavior. Quando un bicchiere ha la capacità di 0.5 lt significa che, date certe condizioni, manifesta un certo behavior con una certa quantità di liquido.\\
 2) La capability qualifica qual è la lettura funzionale di una capacità o combinazione di capacità (il bicchiere combina la capacità di essere contenitore e quella di essere movibile). \\
@@ -1423,7 +1422,13 @@ In this context, we could say that the pump has been selected because of its pum
 
 \section{OWL ontology}\label{sec:appendice}
 %\TODOinline{[SB: assiomi e def in owl dovrebbero essere chiaramente distinti usando, e.g., \textbf{a14$_{owl}$}][FC:fatto]}
-The first order logic theory developed in the previous sections can be converted to \OWL language as is, except for the expressions where ternary relations are used.
+In order to facilitate the deployment of our theory in applications, we reduce it from first order logic to the \OWL language. 
+This is standard practice, for at least the following reasons: first, \OWL is decidable, while first order logic is not, so that reasoning task will terminate in finite time\footnote{though they have exponential complexity, in the general case\TODO{citazione}}. Second, \OWL is a standard endorsed by the World Wide Web Consortium (W3C) and is part of the Semantic Web technology stack \cite{OWL2-QUICK-REFERENCE}, and is the language of choice for many ontologies in various domains \cite{OWL-ontology-repositories}.
+
+Unfortunately, the increased computational properties of \OWL come with a tradeoff with respect to its expressibility, therefore, one has to simplify the first order theory. 
+The original theory is still useful as it constrains with more detail the \OWL concepts, and provides a more expressive language for conceptual modeling. 
+
+The first order theory developed in the previous sections can be converted to \OWL language as is, except for the expressions where ternary relations are used.
 For example, the definition of a systemic function \refdf{def:functionOf}-\refdf{def:function}, the instantiation-founding definition \refdf{def:founding}, and the engineering \methodsName{singular} schema \refdf{def:method} cannot be expressed in \OWL. 
 In these cases we have to weaken the axioms. For instance, in \OWL we replace the definition of systemic functions with
 \bflist
