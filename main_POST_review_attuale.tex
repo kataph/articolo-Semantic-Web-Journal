@@ -27,6 +27,7 @@
 \newcommand{\ExLabel}{\textrm{ex}}
 \newcommand{\FmLabel}{\textrm{f}}
 \newcommand{\ThrLabel}{\textrm{t}}
+\newcommand{\CQLabel}{\textrm{CQ}}
 \newcommand{\NtsLabel}{{\color{red}\textrm{TODO}}}
 
 % counter and newcommand for numbering formulas
@@ -40,6 +41,8 @@
 \newcommand{\myfm}[1]{\refstepcounter{cntfm}\begin{small}{\bf \FmLabel\thecntfm\label{for:#1}}\end{small}}
 \newcounter{cntthr}
 \newcommand{\mythr}[1]{\refstepcounter{cntthr}\begin{small}{\bf \ThrLabel\thecntthr\label{th:#1}}\end{small}}
+\newcounter{cntCQ}
+\newcommand{\myCQ}[1]{\refstepcounter{cntCQ}\begin{small}{\bf \CQLabel\thecntCQ\label{CQ:#1}}\end{small}}
 \newcounter{cntnts}
 \newcommand{\mynts}[1]{\refstepcounter{cntnts}\begin{small}{\bf \NtsLabel\thecntnts\label{nts:#1}}\end{small}}
 
@@ -50,6 +53,7 @@
 \newcommand{\refex}[1]{({\ExLabel}\ref{#1})}
 \newcommand{\reffm}[1]{({\FmLabel}\ref{#1})}
 \newcommand{\refth}[1]{({\ThrLabel}\ref{#1})}
+\newcommand{\refCQ}[1]{({\CQLabel}\ref{#1})}
 
 \newcommand{\refnt}[1]{({\NtsLabel}\ref{#1})}
 
@@ -1320,7 +1324,7 @@ A full definition of capacity is, therefore, a complex issue.
 We still suggest one in the following, though we highlight that is only one possibility among others, and we cannot say for certain what precise consequences its adoption has.
 We opt for defining capacity as \quotes{parameter} of the capabilities it founds, that is, as a quality such that its values are always subset of values of the corresponding capability:
 \bflist
-\item[\mydf{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
+\item[\mydf{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land \founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
 \item[] \mytext{Capacities are precisely those relational qualities that are founded on some intrinsic quality (of the same bearer), and which found some capability (of the same bearer), such that every time that the capability takes a value ($u$), the capacity takes a corresponding value ($v$), which is part of $u$.}
 \eflist
 The previous definition amounts, essentially, to an attempt of defining what a parameter of a quality is (then capacities are, basically, the parameters of capabilities). 
@@ -1482,7 +1486,7 @@ Finally, as a further simplifying assumption, we define two binary relations tha
 \begin{figure}
   \centering
   \includegraphics[width=0.45\textwidth]{entities_screenshot.PNG}
-  \caption{A view of the ontology taxonomy in Protegé.\label{fig:screen_entities}}
+  \caption{A view of the ontology taxonomy in Protegé\TODO{UPDATARE IMMAGINE CHE E' VECCHIA}.\label{fig:screen_entities}}
 \end{figure}
 
 The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular} \myComment{\TODO{check if true}}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
@@ -1562,7 +1566,80 @@ This is useful, both during design, since it gives information about how to impl
 Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
 Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
 (For the sake of example, the ontology is populated with a few individuals).
- 
+
+\subsection{Evaluation and possible applications}
+\TODO{
+
+1-Ontoclean
+2-OOPS
+3-CQs
+4-Casi d'uso immaginari
+5-requirements
+
+1-ok
+2-ok, solo cambiare iri
+3-Competency questions ("Can the authors identify any use cases, motivating scenarios, or competency questions that their ontology could address in real engineering design practices):
+\bflist
+  %\item[\myCQ{cq1}] What is the function of a given component? <--trivial
+  \item[\myCQ{cq2}] Given an (ontological) function, which artifacts have the capability of satisfying it?
+  \item[\myCQ{cq3}] Given an (ontological or systemic) function, which methods can be employed to implement it?
+  \item[\myCQ{cq4}] How to fruitfully carry out the funcitonal decomposition of a system?
+  \item[\myCQ{cq5.1}] How to write requirements (in a uniform, expressive, and machine readable way)? <--immaginifica
+  \item[\myCQ{cq5.2}] How to write requirements on the capabilities and capacities of an object)? <--immaginifica
+  \item[\myCQ{cq6}] How to automatically check a list of requirements against a system? <--immaginifica
+  \item[\myCQ{cq7}] How to automatically check a list of requirements against a system? <--immaginifica
+  \item[\myCQ{cq8}] How to explain the capability of an artifact (or justify that the capability is within certain parameters)?
+  \item[\myCQ{cq8.2}] How to explain the capability of an artifact (or justify that the capability is within certain parameters)?
+  \item[\myCQ{cq8.3}] How to distinguish between capabilities and capacities?
+  \item[\myCQ{cq9}] How to fruitfully record malfunctions?
+\eflist
+Motivating scenarios:
+\paragraph{Formal Requirements.}
+Requirements are an essential part of engineering design, which engineers have to write, share, maintain, and implement. 
+The ensuing work and documentation can be daunting, especially in large progects. Therefore, attempts have been made to standardize \cite{alrumaihDomainOntologyRequirements2020}, trace \cite{holterScopeDetectionTextual2021}, digitalize, and automatize requirement pipelines using ontologies. 
+Some of these approaches discuss properties of requirements themselves, for example, they build a taxonomy of requirement types \TODO{[cit]} or they develop vocabularies for the activities carried out during requirement managememnt \TODO{[cit]}. 
+Other approaches discuss also how requirements should be written, so that their quality, shareability, and even automatic verification agains a design model can be assured \TODO{[cit]}.
+In the latter case, requirements are usually interpreted as assertion (constraints) about an engineering artifact that can be expressed (at least some of them) in a formal language. 
+For example, a requirement translated directly from an client's request, could be that the product, say a table, \qquotes{must weight as little as possible}, then engineers could precise this by stating 
+\bflist
+  \item[\myex{req1}] $ weight(table\_top) \leq 5kg \land weight(i_{th}\_table\_leg) \leq 2kg$, for $i = 1,2,3,4$. 
+\eflist
+Therefore, if one also design products using the same formal language, the products can be checked against the set of constraints, to verify that those are satified by the products \TODO{[cit]}.
+One difficulty of this approach is that some requirements are more difficult to express than other.
+Requirements such as \refex{ex:req1} are easy to express, as they refer to physical properties of the products (they are sometime called \qquotes{physical requirements} \cite{jinxinlinRequirementOntologyEngineering1996}).
+On the other hand, requirements linked to products performance or functions are more difficult to express.
+For example, in \cite{jinxinlinRequirementOntologyEngineering1996}, the requirements \qquotes{The artifact (desk spot lamp) should be able to illuminate more than half a square meter of room}, \qquotes{The base (of the desk spot lamp) should provide support to the artifact}, and \qquotes{the short arm must have a hole [...]} are formalized as follows: 
+\bflist
+  \item[\myex{req2}] $ arm(p) \myfi \exists f(hole\_feature(f) \land
+ feature\_of(f, p) \land
+  $ [...]. 
+  \item[\myex{req3}] $ desk\_spot\_lamp(p) \myfi \exists f( illuminating\_feature(f) \land feature\_of(f, p) \land illumination\_area(f) \geq 0.5 $
+  \item[\myex{req4}] $ base(p) \myfi \exists f (provide\_support\_feature(f) \land feature\_of(f, p) $ 
+\eflist
+Therefore, predicates \qquotes{$illuminating\_feature$}, \qquotes{$provide\_support\_feature$}, and \qquotes{$hole\_feature$} are introduced to classify the capability to illuminate, the function to support, and the hole of the short arm as \qquotes{$feature\_of$} the corresponding artefacts. 
+So that capabilities and functions are features in the same sense that a hole is, and we consider this an ontological error\footnote{For example, in \DOLCE features form a category of endurants that are (generically contantly) dependent on physical objects that cannot be detached from their corresponding physical object without losing their identities. In this sense, a hole is a feature, while the wheel of a car is not. The fact that, in our approach, features are not capabilities or functions, entailed by our categorisation of those as qualities and non-physical endurants, respectively.}.
+
+The point is that being able to express requirements which mention capabilities or functions is difficult, and an ontology which describes such concepts would make things easier.
+For example, using our theory we would write Requirements \refex{ex:req3} and \refex{ex:req4} as, respectively (in the following we have introduced a subclass of capabilities, $illuminating\_capability$, a subclass of capacities $illumination\_area$, and a subclass of (ontological) functions, $provede\_support$):
+\bflist
+  \item[\myex{req5}] $ desk\_spot\_lamp(p) \myfi \exists f,c,v( illuminating\_capability(f) \land \DOLCEQualityDirect{f}{p} \land illumination\_area(c) \land \\ \founded{f}{c} \land \DOLCEQualeDirect{c}{v} \land \DOLCEPartBin{v}{(-\infty,0.5]}$
+  \item[\myex{req6}] $ base(p) \myfi \exists fo,fs (provide\_support(fo) \land \DOLCECLbyBinary{fs}{fo} \land \FunctionSysOf{fs}{p})$
+\eflist
+Notice that \refex{ex:req5} and \refex{ex:req6} can be readily formalized in \OWL, so that they be part of an \OWL knowledge base containing all the requirement that can be expressed in a similar way. 
+Then, if engineers build during design a model of the product, using the same language, they just need to import the model in the knowledge base with the requirements: the product model satisfies the requirements if and only if the ensuing ontology is consistent.  
+
+To summarize, using 
+\paragraph{Knowledge Transfer.}
+\paragraph{Innovative Design.}
+\paragraph{Malfunction Record.}
+%-READI
+%-FUNCTIONAL REP
+%-KNOWLEDGE TRANSFER
+%-PREEXISTING THINGYES
+
+
+
+}
 
 \section{Conclusion}\label{sec:conc}
 %%non riassuntive, bensi' esplicative
