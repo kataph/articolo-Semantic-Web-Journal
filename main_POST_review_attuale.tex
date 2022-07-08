@@ -129,7 +129,7 @@
 % \newcommand{\DOLCEParticipates}[3]{\triRel{{Participates}}{#1}{#2}{#3}}
 \newcommand{\DOLCEQualityDirect}[2]{\biRel{qt}{#1}{#2}}
 % \newcommand{\DOLCEQualeDirect}[2]{\biRel{{ql}}{#1}{#2}} FC:<--uso questa relazione solo una volta, e sarebbe la versione detemporalizzata che non è quella di DOLCE, inoltre nell'atricolo c'è scritto che non usiamo la relazione di qualia.
-\newcommand{\DOLCEQualeDirectTer}[2]{\triRel{{ql}}{#1}{#2}{#3}}
+\newcommand{\DOLCEQualeDirectTer}[3]{\triRel{{ql}}{#1}{#2}{#3}}
 \newcommand{\DOLCEQualeDirect}[2]{\biRel{{cql}}{#1}{#2}}
 \newcommand{\DOLCECLbyBinary}[2]{\biRel{CL}{#1}{#2}}
 \newcommand{\DOLCECLby}[3]{\triRel{CL}{#1}{#2}{#3}}
@@ -284,7 +284,7 @@
   }%
 }  
 
-%% ontological funcitons - atomic ontological transformations?
+%% ontological functions - atomic ontological transformations?
 \DeclareRobustCommand{\ontoFunc}[1]{%
   \ifthenelse{\equal{#1}{fullSingular}}{ontological function}{%
     \ifthenelse{\equal{#1}{fullPlural}}{ontological functions}{%
@@ -595,7 +595,7 @@ Notice that in both of these positions functions and roles are disjoint subclass
 As we have seen, 
 the meaning of function is ambiguous even within the ontology community. 
 Moreover, it is generally not considered a top-level concept, and thus it is marginally covered by top-level ontologies. 
-Unfortunately, to our knowledge, the ontology community has not produced a shared middle or domain level ontology dealing with functions\footnote{The taxonomy of an ontology of functions, which is still under development, was proposed by Borgo et al. in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}.}. 
+Unfortunately, to our knowledge, the ontology community has not produced a shared middle or domain-level ontology dealing with functions\footnote{The taxonomy of an ontology of functions, which is still under development, was proposed by Borgo et al. in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}.}. 
 
 % review parte 5.2: ribadimento deglio obbiettivi di ricerca dell'introduzione?
 Given the current situation, an ontological analysis clarifying the domain of functionality would be quite useful.
@@ -1028,18 +1028,18 @@ In engineering practice, one often speaks about functions independently of any s
 For example, if one wants to address the problem of finding the set of devices that have the capability
 % ability\footnote{Here \quotes{capability} could be the right term, as anticipated in Section \ref{sec:review}.}
 of realizing a needed transformation, the devices cannot be \textit{a priori} associated with a certain system, since there is no system yet. Indeed, the system is a variable input of the problem.
-Therefore, to solve this problem, a more general concept of function is needed, as the one introduced in \cite{borgoKnowledgebasedAdaptiveAgents2019}. We call such functions \firstTimeKeyWord{\ontoFunc{fullPlural}}: they address general transformation needs perhaps without even addressing how a transformation occurs or to what entities it should apply. The informal intuition of \ontoFunc{fullPlural} is that they are classified according to the ontological change they realize between the input and the output states. In this sense, they are independent of systemic functions. Yet, every systemic function is associated to one or more \ontoFunc{fullPlural}, depending on the changes it classifies. 
+Therefore, to solve this problem, a more general concept of function is needed, as the one introduced in \cite{borgoKnowledgebasedAdaptiveAgents2019}. We call such functions \firstTimeKeyWord{\ontoFunc{fullPlural}}: they address general transformation needs perhaps without even addressing how a transformation occurs or to what entities it should apply. The informal intuition of \ontoFunc{fullPlural} is that they are classified according to the ontological change they realize between the input and the output states. In this sense, they are independent of systemic functions. Yet, every systemic function is associated with one or more \ontoFunc{fullPlural}, depending on the changes it classifies. 
 
 %%%
-More precisely, our reasoning is that a complete description of occurences is extremely complicated to obtain. 
-For instance, walking may be considered a simple action, but, in order to describe such a process, one needs to \qquotes{project} the waking onto some limited viewpoints, such as the variation of the distance of the feets from the floor, the plane trajectory of the center of mass the body, the changing contact forces between the feet and the floor, as well as those developing into the leg joints, and so on. 
-In addition, one can, for sake of simplicity, disregard dynamic behaviour and only consider these \qquotes{projections} at some finite set of time instants, and think of them about trnsitions between states.
+More precisely, our reasoning is that a complete description of occurrences is extremely complicated to obtain. 
+For instance, walking may be considered a simple action, but, in order to describe such a process, one needs to \qquotes{project} the waking onto some limited viewpoints, such as the variation of the distance of the feet from the floor, the plane trajectory of the center of mass the body, the changing contact forces between the feet and the floor, as well as those developing into the leg joints, and so on. 
+In addition, one can, for sake of simplicity, disregard dynamic behaviour and only consider these \qquotes{projections} at some finite set of time instants, and think of them as transitions between states.
 Then, each of these \qquotes{projections} is itself a (simplification of) part of the original process.
 To make order among those parts, we need some criteria.
-In our approach, we assume that we can refer to an upper ontology (we use \DOLCE, but naother top-level ontology could be used). 
-Then, one can group the state transitions depending on the entity in the ontology that is relevant in the state transition.
-For example, in the case of the distance of a foot from the floor, if it is conceptualized as a relational quality of the foot with respect to the floor, we can observe the change of the value of such a quality throughout a succession of states. Then, this will be an \ontoFunc{fullSingular} of type \textit{change in quality}, and, possibly, on a finer taxonomy level, \textit{change in distance quality} or even \textit{change in foot-floor distance quality} (of course, the latter two types will not refer to some entity in an upper-level ontology, but may refer, instead, to some domain level ontology).
-In practice, given an upper ontology, one can use its classes and relations to enstablish corresponding types of \ontoFunc{fullPlural}.
+In our approach, we assume that we can refer to an upper ontology (we use \DOLCE, but another top-level ontology could be used). 
+Then, one can group the state transitions depending on the entity in the ontology that is relevant to the state transition.
+For example, in the case of the distance of a foot from the floor, if it is conceptualized as a relational quality of the foot with respect to the floor, we can observe the change of the value of such a quality throughout a succession of states. Then, this will be an \ontoFunc{fullSingular} of type \textit{change in quality}, and, possibly, on a finer taxonomy level, \textit{change in distance quality} or even \textit{change in foot-floor distance quality} (of course, the latter two types will not refer to some entity in an upper-level ontology, but may refer, instead, to some domain-level ontology).
+In practice, given an upper ontology, one can use its classes and relations to establish corresponding types of \ontoFunc{fullPlural}.
 In general, the resulting taxonomy of \ontoFunc{fullPlural} types will depend on the upper ontology used: this is the reason we use the term \qquotes{ontological} \TODO{FC:controllare che sia coerente con la terminologia effettivamente impiegata.}in \qquotes{\ontoFunc{fullPlural}}.
 
 For example, taking \DOLCE as upper ontology, we can consider the categories \textit{region}, \textit{quality}, \textit{physical object}, \textit{amount of matter}, etc. (see Figure \ref{fig:DOLCE-taxa}), and enstablish corresponding \ontoFunc{fullSingular}-types \textit{change in quality-value} (for example, \textit{the temperature of the oven increased}), \textit{change of physical object} (e.g., \textit{four wooden leg were assemblied together with a table-top to form a table}), \textit{change of amount of matter} (e.g., \textit{the water was vaporized}), and so on, see Figure \ref{fig:onto-func-taxa}.
@@ -1049,7 +1049,7 @@ For example, an instance of said category could be eliminated, meaning that the 
 Another possibility is that there is a change of a relation of the ontology, e.g., in the initial state there were two individuals that were, say, one part of the other, while in the final state they are not.
 More complex changes can be described, depending on the difference between the initial and final structure of the ontology. %, thought of as a knowledge base\footnote{The changes are, therefore, relative only to the Abox of the knowledge base.}.
 We have reported some of these cases in Figure \ref{fig:onto-func-logic}, which is not exhaustive.
-Notice that the classification discussed in this pararaph is only at a logical level, and must be joined with an ontological classification to find terms that are typical of the natural language.
+Notice that the classification discussed in this paragraph is only at a logical level, and must be joined with an ontological classification to find terms that are typical of the natural language.
 For instance, the \firstTimeKeyWord{reclassification} (i.e., a change such that an instance changes type) of energy or matter is usually called \quotes{convert} \cite{hirtz_functional_2002, sasajimaFBRLFunctionBehavior1995} or \quotes{change} \cite{pahl_engineering_2007} or \quotes{transform} \cite{kitamuraOntologybasedSystematizationFunctional2004}, while the change of value of a spatial location quality is called \quotes{channel} \cite{pahl_engineering_2007,hirtz_functional_2002}, and so on.
 
 Notice that some function terms are linked to domain-level terms (e.g., \quotes{vaporize}, \quotes{moisten}, \quotes{heat}).
@@ -1057,73 +1057,73 @@ These will require a domain or middle-level ontology containing corresponding co
 Unfortunately, there are terms that are commonly used in engineering and physics, but are difficult to describe ontologically. 
 %For example, \quotes{energy} and \quotes{signal}. 
 Take \quotes{energy}\footnote{Another notbale example is \quotes{information}.}, its ontological nature is unclear \cite{mcginnOntologyEnergy2012}, despite being a fundamental concept in engineering and physics. 
-In this paper, we are not intrested in discussing what energy is, only in showing that, given an ontology containing a conceptualisation of energy, it is possible to deduce corresponding functions, which will be different if the conceptualisation of energy is different.
+In this paper, we are not interested in discussing what energy is, only in showing that, given an ontology containing a conceptualisation of energy, it is possible to deduce corresponding functions, which will be different if the conceptualisation of energy is different.
 For instance, one could conceptualize energy as a quality. 
 This is the case, arguably, when one speaks about the energy \textit{of something}, e.g, of a battery.
 In this case, in our ontology there should be a, say, \textit{energy content} quality-type, which would give rise to a corresponding \textit{convert energy} function.
 Another possibility is to conceptualize energy as an endurant, which can reside into entities, change its location, and change type (e.g., heat energy, kinetic energy, etc.).
-In that case, the \textit{convert energy} function could be interpreted as a reclassification-type trasformation.
+In that case, the \textit{convert energy} function could be interpreted as a reclassification-type transformation.
 The point is that natural language is ambiguous, and making terms refer to a formal ontology necessarily disambiguates them, so that the same natural language term could be used to label many predicates defined using said ontology. 
 
 Formalizing this intuition that we have described about \ontoFunc{fullPlural} is difficult.
 A possibility is defining \ontoFunc{fullPlural}-types by making them classify those events such that there is a given relation between the situation at the initial instant and at the final instant of the event.
 For instance, to define a \textit{connect} function:
 \bflist
-  \item[\myex{connect}] $ \Connect{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,b (\DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEPC{b}{s_i}{t_i} \land \DOLCEPC{b}{s_f}{t_f} \land \exists c (\DOLCEPC{c}{s_f}{t_f} \land \DOLCEPart{a}{c}{t_f} \land \DOLCEPart{b}{c}{t_f}) \land \neg \exists c (\DOLCEPC{c}{s_i}{t_i} \land \DOLCEPart{a}{c}{t_i} \land \DOLCEPart{b}{c}{t_i})) $ 
+  \item[\mydf{connect}] $ \Connect{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,b (\DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEPC{b}{s_i}{t_i} \land \DOLCEPC{b}{s_f}{t_f} \land \exists c (\DOLCEPC{c}{s_f}{t_f} \land \DOLCEPart{a}{c}{t_f} \land \DOLCEPart{b}{c}{t_f}) \land \neg \exists c (\DOLCEPC{c}{s_i}{t_i} \land \DOLCEPart{a}{c}{t_i} \land \DOLCEPart{b}{c}{t_i})) $ 
   \item[] \mytext{A concept is of \textit{connect} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there are two entities ($a$ and $b$) that partecipate in such states and, during the final state but not in the initial one, are part of a common third entity ($c$).\TODO{TODO: questa formula e altre sono etichettate con "ex". Aggiustarle in "ax" o "df", in abase a cosa si decide alla fine.}}
 \eflist 
 In the previous formula we used the predicate $\sState{y}{s_i}{t_i}$ to mean that $s_i$ is a state with time extension $t_i$, which is part of the perdurant $y$ and such that there are no parts of the time extension of $y$ which precede $t_i$. Analogous meaning for $\sState{\cdot}{\cdot}{\cdot}$.
-Notice that, if one reverses the initial and final situations of Formula \refex{ex:connect}, then a definition of a \textit{divide} function could be obtained.
+Notice that, if one reverses the initial and final situations of Formula \refdf{def:connect}, then a definition of a \textit{divide} function could be obtained.
 
-%%Moreover, notice that \refex{ex:connect} is not teleological by itself
+%%Moreover, notice that \refdf{def:connect} is not teleological by itself
 
 Another example, to define a \textit{convert} function: 
 \bflist
-  \item[\myex{convert}] $ \Convert{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists \Phi,\Psi,a (\Phi\in\mathcal{NR} \land \Psi\in\mathcal{NR} \land \Psi\cap\Phi = \emptyset \land  \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \Phi(a,t_i) \land \Psi(a,t_f))) $ 
+  \item[\mydf{convert}] $ \Convert{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists \Phi,\Psi,a (\Phi\in\mathcal{NR} \land \Psi\in\mathcal{NR} \land \Psi\cap\Phi = \emptyset \land  \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \Phi(a,t_i) \land \Psi(a,t_f))) $ 
   \item[] \mytext{A concept is of \textit{convert} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) that at time $t_i$ is instance of a type ($\Phi$), while at time $t_f$ is instance of a different, disjoint, type ($\Psi$). Necessarily, $\Phi$ and $\Psi$ are types belonging to the set of all non-rigid types of the underlying ontology ($\mathcal{NR}$).}
 \eflist 
 Notice that in the previous definition we have quantified over the set of all non-rigid classes of an ontology ($\mathcal{NR}$). 
-If said set is finite, then quantification can be substituted with a finite number of logical disjunctions, therefore Formula \refex{ex:convert} is still a first-order formula.
+If such a set is finite, then quantification can be substituted with a finite number of logical disjunctions, therefore Formula \refdf{def:convert} is still a first-order formula.
 Moreover, upper-level ontologies typically contain only rigid categories (i.e., if an individual is an event, it is always an event), therefore, such a convert function makes sense only when using middle or domain-level ontologies, so that the set $\mathcal{NR}$ is not void.     
 
 %%%
 The type of all \ontoFunc{fullPlural} that involve change in quality values could be defined as following:
 \bflist
-  \item[\myex{changeQualityValue}] $ \ChangeQualityValue{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,q,v_i,v_f (\DOLCEQualityDirect{q}{a}{t_i} \land \DOLCEQualityDirect{q}{a}{t_f} \land v_i \neq v_f \land \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEQualeTer{q}{v_i}{t_i} \land \DOLCEQualeTer{q}{v_f}{t_f})) $ 
+  \item[\mydf{changeQualityValue}] $ \ChangeQualityValue{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,q,v_i,v_f (\DOLCEQualityDirect{q}{a}{t_i} \land \DOLCEQualityDirect{q}{a}{t_f} \land v_i \neq v_f \land \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEQualeTer{q}{v_i}{t_i} \land \DOLCEQualeTer{q}{v_f}{t_f})) $ 
   \item[] \mytext{A concept is of \textit{change of quality-value} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) which has a quality ($q$) that at time $t_f$ has a different value than the one ($v_i$) at time $t_i$.}
 \eflist
-If the case that the quality appearing in the formula \refex{ex:changeQualityValue} is of type spatial location, the ensuing \ontoFunc{fullSingular} will be of type \textit{channel}. 
-Instead, if the quality in \refex{ex:changeQualityValue} is such that it takes values into an ordered space (e.g., \textit{temperature}, \textit{humidity}, etc.) then the ensuing \ontoFunc{fullSingular} will be of type \textit{vary}, which can clearly be specialized into \textit{increase} and \textit{decrease} types. (we are borrowing those terms from \cite{hirtz_functional_2002} and \cite{pahl_engineering_2007}, mostly).  
+If the case that the quality appearing in the formula \refdf{def:changeQualityValue} is of type spatial location, the ensuing \ontoFunc{fullSingular} will be of type \textit{channel}. 
+Instead, if the quality in \refdf{def:changeQualityValue} is such that it takes values into an ordered space (e.g., \textit{temperature}, \textit{humidity}, etc.) then the ensuing \ontoFunc{fullSingular} will be of type \textit{vary}, which can clearly be specialized into \textit{increase} and \textit{decrease} types. (we are borrowing those terms from \cite{hirtz_functional_2002} and \cite{pahl_engineering_2007}, mostly).  
 %%%
-Some functions, such as \textit{store} or \textit{support}, hint to the absence of change, as, for instance, a battery stores energy very well if it does not lose its charge over time, while a load-bearing wall supports the roof only if the roof does not fall. 
-Therefore, concepts like store, support, or similar terms could be defined by modifying formula \refex{ex:changeQualityValue} imposing that the initial and final values of the quality are equal instead of different.
+Some functions, such as \textit{store} or \textit{support}, hint at the absence of change, as, for instance, a battery stores energy very well if it does not lose its charge over time, while a load-bearing wall supports the roof only if the roof does not fall. 
+Therefore, concepts like store, support, or similar terms could be defined by modifying formula \refdf{def:changeQualityValue} imposing that the initial and final values of the quality are equal instead of different.
 %%%
 
 At this point we make three observations: 
 \begin{itemize}
-  \item first, some processes are impossible to categorize only observing the differences between a single couple of states.
-  Take, for example, a temperature controlled oven. 
-  The controller unit of the oven makes so that the temperature in the oven stays, up to some tolerance, at a target value.
-  The controller could achieve this by turnig off the heat when a sensor realizes that the target value is surpassed, and turnig on the heat when the current temperature is less than the target. 
+  \item first, some processes are impossible to categorize only by observing the differences between a single couple of states.
+  Take, for example, a temperature-controlled oven. 
+  The controller unit of the oven makes it so that the temperature in the oven stays, up to some tolerance, at a target value.
+  The controller could achieve this by turning off the heat when a sensor realizes that the target value is surpassed, and turning on the heat when the current temperature is less than the target. 
   This makes so that the temperature value over time oscillates around the target value (because the temperature keeps overshooting or undershooting), and such a process cannot be deduced by only observing the differences between two states.
   Therefore, processes like this cannot be reduced to \ontoFunc{fullSingular}.
   In this particular case, one could also argue that the function that of the controller is to maintain the temperature in the oven around the set temperature\footnote{This could be expressed in the style of the previous definitions by comparing an initial state, in which the set value and the actual value are different, to a final state, in which said values are equal.}, while the oscillations of the temperature are merely a side effect of the chosen implementation method, and would be different, or even absent, if the implementation method was different. 
-  In general, though, if one actually wishes to classify a transformation which cannot be described by comparison of two states, then the method employed in the previous formulas is not sufficient.
+  In general, though, if one actually wishes to classify a transformation that cannot be described by comparison of two states, then the method employed in the previous formulas is not sufficient.
   \item Second, actual events can be extremely complex and participated by many relevant entities (think, e.g., the complexity of waking from a biomechanical point of view). 
-  This, together with the fact that we admit also \ontoFunc{fullPlural} defined by absence of some type of change (e.g., \textit{support}), makes so that many events would be classified by several (possibly even all) \ontoFunc{fullPlural} at once.
+  This, together with the fact that we admit also \ontoFunc{fullPlural} defined by the absence of some type of change (e.g., \textit{support}), makes so that many events would be classified by several (possibly even all) \ontoFunc{fullPlural} at once.
   This is not unexpected, and, in fact, reflects the flexibility of teleological thinking.
   Take, for example, a load-bearing wall.
-  One could say that its function is to \textit{support} the weight of the roof, but it may also \textit{transmit} the load to the floor, or even \textit{stop} the wind from entering the house, or \textit{divide} the space inside the hause into smaller rooms, and so on. 
-  To recognize what aspect is the most relevant in a given context is a task for the engineer or technician, which, using their intelligence and creativity, determine what aspects to focus on.
+  One could say that its function is to \textit{support} the weight of the roof, but it may also \textit{transmit} the load to the floor, or even \textit{stop} the wind from entering the house, or \textit{divide} the space inside the house into smaller rooms, and so on. 
+  To recognize what aspect is the most relevant in a given context is a task for the engineer or technician, which, using their contextual intelligence and creativity, determine what aspects to focus on.
   Events, by themselves, are open to different interpretations. 
   \item Lastly, we argue in favour of the flexibility of \ontoFunc{fullPlural}.
   In the previous paragraphs, we have mainly used functional terms taken from the Functional Basis \cite{hirtz_functional_2002} or from the generally valid functions of \cite{pahl_engineering_2007}.
-  Such vocabularies are indeed capable of expressing a vast quantity , if not the totality, of functions used within engineering domains, but they may not do so in the most natural way.
+  Such vocabularies are indeed capable of expressing a vast quantity, if not the totality, of functions used within engineering domains, but they may not do so in the most natural way.
   For example, suppose that one is working with tooling machines that cut holes, slots, grooves, etc. in the workpieces. 
   Then, using the Functional Basis one is reduced to using just the term \textit{remove} to talk about the functions realizing such features in the workpiece.
-  Instead, if one uses a domain ontology which contains concepts such as hole, slot, groove, etc., then one can build corresponding functional terms, say \textit{make hole}, \textit{make slot}, \textit{to groove}, etc., defined analogously to the previous formulas.
+  Instead, if one uses a domain ontology that contains concepts such as hole, slot, groove, etc., then one can build corresponding functional terms, say \textit{make hole}, \textit{make slot}, \textit{to groove}, etc., defined analogously to the previous formulas.
   Such terms may be more natural than just using \quotes{removing}, and may even differ significantly  from \quotes{removing}, depending on their precise formalisation.
-  Another example: in the Functional Basis vocabulary, the term \quotes{stop} means \quotes{to cease the transfer of a flow}, for instance \quotes{A reflective coating on a window stops the transmission of UV radiation through a window} \cite{hirtz_functional_2002}. But what if occurrents are important in our domain and we want to say that something \textit{stops a process} (e.g., \qquotes{The addition of a respiratory inhibitor stops the absorption of amino acids}, not that \qquotes{stops the amino acid-material-flow from moving}, but that it \qquotes{stops the absorption}, where absorption is an important element of the domain? We could derive useful functional term, from an appropriate domain ontology managing domain-process-concepts.
+  Another example: in the Functional Basis vocabulary, the term \quotes{stop} means \quotes{to cease the transfer of a flow}, for instance \quotes{A reflective coating on a window stops the transmission of UV radiation through a window} \cite{hirtz_functional_2002}. But what if occurrents are important in our domain and we want to say that something \textit{stops a process} (e.g., \qquotes{The addition of a respiratory inhibitor stops the absorption of amino acids}, not that \qquotes{stops the amino acid-material-flow from moving}, but that it \qquotes{stops the absorption}, where absorption is an important element of the domain? We could derive useful functional terms, from an appropriate domain ontology managing concepts of domain processes.
 \end{itemize}
 %%%
 
@@ -1131,14 +1131,15 @@ At this point we make three observations:
 Up to this point we have defined some types of \ontoFunc{fullPlural}, but not the concept of \ontoFunc{fullSingular} itself. 
 A possibility is to find an exhaustive list of types of \ontoFunc{fullPlural} and then define \ontoFunc{fullSingular} as the disjunction of all those types, for instance:
 \bflist
-  \item[\myex{ontoDef1}] $ \FunctionAbs{x} \myiff (\Connect{x} \lor \Divide{x} \lor \Convert{x} \lor \dots) $
+  \item[\mydf{ontoDef1}] $ \FunctionAbs{x} \myiff (\Connect{x} \lor \Divide{x} \lor \Convert{x} \lor \dots) $
 \eflist
 This is, in principle, correct, but, in practice, requires an exhaustive enumeration of top-function types, which we do not want to commit to, in this paper. 
-Instead, an instrinc definition of \ontoFunc{fullPlural} would be, informally:
+Instead, an intrinsic definition of \ontoFunc{fullPlural} would be, informally:
 \bflist
-  \item[\myex{ontoDef2}] \mytext{A concept is a \ontoFunc{fullSingular} if and only if it classifies exactly those events consisting in a transition from an initial state to a desired final state, such that the difference (if any) between the two states is characterized in terms of a small number of predicates of interest, taken from a reference ontology.}
+  \item[\mydf{ontoDef2}] \mytext{A concept is a \ontoFunc{fullSingular} if and only if it classifies exactly those events consisting in a transition from an initial state to a desired final state, such that the difference (if any) between the two states is characterized in terms of a formula expressed in the language of a reference ontology.}
 \eflist
-Since a \qquotes{small number of predicates of interest} is not a logical concept, we cannot give an (intrinsic) logical definition of \ontoFunc{fullPlural}. 
+(Of course, the formulas that engineers actually use to express ontological functions are not arbitrary, as in \refdf{def:ontoDef2}, but, typically, belong to a small set of cases).
+Since a \qquotes{a formula expressed in the language of a reference ontology} is not writeable using first-order logic in a natural way, we cannot give an (intrinsic) first-logical definition of \ontoFunc{fullPlural}. 
 
 %%%
 \begin{figure}
@@ -1159,7 +1160,7 @@ Since a \qquotes{small number of predicates of interest} is not a logical concep
 %%%
 
 \paragraph[meta]{Link between systemic functions and \ontoFunc{fullPlural}.}
-Returning to the relation between systemic functions and \ontoFunc{fullPlural}, we observe that the former correspond to system-dependent functional descriptions, while the latter correspond to system-independent functional descriptions. 
+Returning to the relation between systemic functions and \ontoFunc{fullPlural}, we observe that the former correspond to system-dependent functional descriptions, while the latter corresponds to system-independent functional descriptions. 
 Since \ontoFunc{fullPlural} are more general than systemic functions, they can be used to classify them:
 %% DA SOPRA-->The informal intuition of \ontoFunc{fullPlural} is that they are classified according to the ontological change they realize between the input and the output states. In this sense, they are independent of systemic functions. Yet, every systemic function is associated to one or more \ontoFunc{fullPlural}, depending on the changes it classifies. 
 %of the  the following relation between \ontoFunc{fullPlural} and systemic functions holds:
@@ -1173,7 +1174,7 @@ e.g., one for rotating the spindle and %one
 the other for moving the spindle horizontally. %Then, 
 Both electrical motors perform the same \ontoFunc{fullSingular} of \quotes{converting} (electrical energy into mechanical energy), but they also perform two different systemic functions %that 
 specializing the \ontoFunc{fullSingular} in the context of the lathe: \quotes{converting (electrical energy into mechanical energy) to rotate the spindle}, and \quotes{converting (electrical energy into mechanical energy) to translate the spindle}, respectively.
-The intuition is that we can group systemic functions together through common characteristics, as we have attempted in the definitions \refex{ex:connect} to \refex{ex:changeQualityValue}, abstracting from specific systems or from their occurrences in different parts of the same system.
+The intuition is that we can group systemic functions together through common characteristics, as we have attempted in the definitions \refdf{def:connect} to \refdf{def:changeQualityValue}, abstracting from specific systems or from their occurrences in different parts of the same system.
 
 %Such ontologically functions reflect a perdurant taxonomy based on functional grounds, meaning that a given taxonomy of perdurants corresponds to a taxonomy of functions as given in \cite{borgoKnowledgebasedAdaptiveAgents2019}. TODO:<--reinserire-->
 %
@@ -1182,7 +1183,7 @@ The intuition is that we can group systemic functions together through common ch
 %In this paper, we do not characterize further the taxonomy of \ontoFunc{fullPlural}, nor discuss the organisation of their taxonomy beyond what presented in \cite{borgoKnowledgebasedAdaptiveAgents2019}. 
 
 Finally, notice that the two types of functions introduced in this paragraph correspond to (at least) two different ideas of functions used by engineers. 
-First, there are \quotes{general} functions that engineer use when need to, say, describe information about or collect information from different systems. For example, Collins \cite{collinsFailureExperienceMatrixUseful1976}, when collecting and analyzing failure experience data, speaks of \quotes{elemental mechanical functions}, which are application-independent characterisations of \quotes{basic} functions. %\quotes{distinctive generic characterisation of the basic function of a machine part without reference to the specific application for which it is used} 
+First, there are \quotes{general} functions that engineers use when need to, say, describe information about or collect information from different systems. For example, Collins \cite{collinsFailureExperienceMatrixUseful1976}, when collecting and analyzing failure experience data, speaks of \quotes{elemental mechanical functions}, which are application-independent characterisations of \quotes{basic} functions. %\quotes{distinctive generic characterisation of the basic function of a machine part without reference to the specific application for which it is used} 
 Analogously, Pahl et Beitz \cite{pahl_engineering_2007} speak of \quotes{generally valid functions}, and propose them as  references for cataloguing design knowledge about function implementation. 
 These types of functions could be approximated with \ontoFunc{fullPlural}.
 In contrast, the second meaning used by engineers is system dependent. In fact, in general, when engineers are focused on a single system, they use different concepts when speaking about the system components. The terminology is varied, but typical terms are `serial number', that is the identifier of a component-instance, `component code', i.e. the component or assembly-type identifier, and `functional location' or `tag', which are identifiers that consider also the position of a component within a system. For example, Figure \ref{fig:hydroSystem} schematises a hydraulic system containing four solenoid valves, whose tags are EPF1 to EPF4. These tags cannot refer to the valve-type, since the four valve could have the same type, neither they can refer to the valve-instances, since schema are often used to represent different system-instances. 
@@ -1191,7 +1192,7 @@ In contrast, the second meaning used by engineers is system dependent. In fact, 
   \includegraphics[width=0.45\textwidth]{imamoTAXA.PNG}
   \caption{The scheme of some hydraulic system, taken from \cite{HydroPNG}.  \label{fig:hydroSystem}}
 \end{figure}
-In our terminology, we could say that tags identify  roles that components play in a system. Necessarily, these roles are of functional nature, for each component in an engineering system has a role in the system function, thus, tags, or, at least, the teleological content they carry, could be formalized by systemic functions. %Indeed, tags should carry also information about, say, the structural links of the underlying component with the remaining components of the systems. 
+In our terminology, we could say that tags identify roles that components play in a system. Necessarily, these roles are of functional nature, for each component in an engineering system has a role in the system function, thus, tags, or, at least, the teleological content they carry, could be formalized by systemic functions. %Indeed, tags should carry also information about, say, the structural links of the underlying component with the remaining components of the systems. 
 \TODOinline{[SB: manca un risultato conclusivo che giustifichi perché ci fermiamo qui. bisogna dare almeno qualche indicazione di quali concetti di funzione usati in ingegneria cadono sotto questo approccio (nel senso che possono essere considerate specializzazioni di queste definizioni)][ Ho provato a inserire un paragrafo argomentando che le "generally valid functions" di Pahl e Beitz assomigliano alle funz.ont. e che i tag/sigle/functional location assomigliano alle fun.sys.]*[SB: ok, per ora va bene. magari in fase di revisione vediamo se riusciamo ad approfondire questo punto][FC:ok]}
 %\textcolor{blue}{(se capisco, le \ontoFunc{fullSingular} sono ruoli giocati dai perdurant. E qst perdurant sono i behavior degli artefatti/sistemi che hanno come scopo la realizzazione di un certo goal.  Per aiutare i lettori, sottolinerei nel testo che la nozione di \ontoFunc{fullSingular} e' un ruolo/concetto (forse ho perso qst informazione))(FC: è sotto la definizione di funz. sys., ma per sicurezza ho aggiunto anche all'inizio di sottosezione)}
 
@@ -1283,7 +1284,7 @@ It is possible that the workspace dimensions parameter is linked to (or just is)
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{capability-parameters.JPG}
-  \caption{\label{fig:capability-paramenters} Two possible capabilities of a robot and they respective parameters, copied from \cite{jarvenpaaDevelopmentOntologyDescribing2019a}.}%Capability parameters describe the characteristics of a capability.
+  \caption{\label{fig:capability-parameters} Two possible capabilities of a robot and they respective parameters, copied from \cite{jarvenpaaDevelopmentOntologyDescribing2019a}.}%Capability parameters describe the characteristics of a capability.
 \end{figure}
 
 In order to differentiate between capacities and capabilities, we carry out the following reasoning. 
@@ -1643,7 +1644,7 @@ This means that they are assertions of the form
   \item[\myex{SCD}] $ \text{S} \sqcap \text{C} \sqsubseteq \text{D}  $
 \eflist
 where S, C, and D are \OWL classes, for example (example, taken from \cite{overliAssetInformationModelling2021}), \qquotes{Equipment with a transport dry weight above 1000 kg shall be weighed by the manufacturer and a weight certificate shall be issued} is written in such a form, if S, C, and D are interpreted as the classes \quotes{Equipment}, \quotes{things with transport dry weight above 1000 kg}, \quotes{things that have a weight certificate}, respectively.   
-Again, it is difficult to express functions- and performance-related requirements in form \refex{SCD} if one lacks an appropriate reference ontology. 
+Again, it is difficult to express functions- and performance-related requirements in form \refex{ex:SCD} if one lacks an appropriate reference ontology. 
 
 To summarize, using our ontology, one could enhance current work aimed at the digitalisation of written requirements, by facilitating the assertion of requirements related to product performance and functions.
 \paragraph{Knowledge Transfer.}
