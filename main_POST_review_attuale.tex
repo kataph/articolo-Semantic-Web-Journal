@@ -567,12 +567,20 @@ For example, \DOLCE's authors suggest seeing functions as particular types of ev
 %% to distribute is a class of perdurants in which a certain flow is broken up. EngFuncðxÞ!PDðxÞ -- quote from borgoFormalizationFunctionsOperations2011 
 On the other hand, \YAMATO's authors, deepen their idea of functional ontology in a series of additional papers, among them \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}, in which they confirm and expand their claim that functions are roles played by behaviors, which are themselves a certain class of process (notice that \YAMATO's authors are same research group behind FBRL development).
 
-The view of \GFO's authors has some similarities with the one of FBRL, in that functions are not roles, but are linked to `functional items', which are roles played by the entities realizing the function. Functions themselves are complex entities, composed of a functional item, a label to identify them, and descriptions of the initial and final states corresponding to the function execution, called `requirements' and `goals', respectively \cite{burekToplevelOntologyFunctions2006,burekOverviewGFOFunctions2021}. The typical example is the function `to transport oxygen', which is linked to the functional item `oxygen transporter' which can be played by a red blood cell. Then, a requirement for the realisation of the function is the presence of oxygen in the red blood cell environment and the goal is the presence of oxygen in the body cells that need it for cellular respiration. Another similarity with the FBRL is the development of teleological relations between functions similar to meta-functions. For example, \cite{burekToplevelOntologyFunctions2006} mentions the relations `support', `enable', and `prevent', depending on the fact that the goal of the first function fulfills partially, completely, or is incompatible with the requirement of the second function (cfr. with \cite{kitamuraMetaFunctionsArtifacts1999}, which also uses the term `enable' and `prevent', among others). 
+The view of \GFO's authors has some similarities with the one of FBRL, in that functions despite not being roles themselves, are linked to `functional items', which are roles played by the entities realizing the function. Functions themselves are complex entities, composed of a functional item, a label to identify them, and descriptions of the initial and final states corresponding to the function execution, called `requirements' and `goals', respectively \cite{burekToplevelOntologyFunctions2006,burekOverviewGFOFunctions2021}. The typical example is the function `to transport oxygen', which is linked to the functional item `oxygen transporter' which can be played by a red blood cell. Then, a requirement for the realisation of the function is the presence of oxygen in the red blood cell environment and the goal is the presence of oxygen in the body cells that need it for cellular respiration. Another similarity with the FBRL is the development of teleological relations between functions similar to meta-functions. For example, \cite{burekToplevelOntologyFunctions2006} mentions the relations `support', `enable', and `prevent', depending on the fact that the goal of the first function fulfills partially, completely, or is incompatible with the requirement of the second function (cfr. with \cite{kitamuraMetaFunctionsArtifacts1999}, which also uses the term `enable' and `prevent', among others). 
 %Support – one function supports the other if its goal fulfills partially the second function’s requirements (the goal of the first function is a proper part of the requirements of the second function).  Enable – one function enables the other if its goal fulfills all of the second function’s requirements (the requirements of the second function are a part of the goal of the first function).  Prevent – one function prevents the other if its goal excludes the requirements of the second. 
 %The functional item is a role played by this entity in any realization of the function. In the case of ‘‘to transport oxygen’’, it would be an oxygen transporter. -- burek
 
 Coming to \BFO, the view of functions as special dispositions was expanded and defended by its authors \cite{arpFunctionRoleDisposition2008,spearFunctionsBasicFormal2016}, as well as criticized by some philosophers, such as Jansen and Röhl \cite{rohlWhyFunctionsAre2014,jansenFunctionsMalfunctioningNegative2018}. 
-A full description of this debate is beyond the scope of this paper, we just mention that while \BFO maintains functions as a subclass of dispositions, while Jansen argues that functions and dispositions are disjoint, though related, categories. Moreover, a major point of disagreement concerns malfunctions, in that Jansen argues that malfunctioning entities are entities that have a function, but lack the means to realize it, for example because they have lost the required dispositions; while Barry et al. maintain that when an entity malfunctions it loses its function, partially or completely, and is recognized as an entity of its kind only because of its history, if at all (e.g., a cancerous lung is not a lung).
+A full description of this debate is beyond the scope of this paper, we just mention that while \BFO maintains functions as a subclass of dispositions, while Jansen argues that functions and dispositions are disjoint, though related, categories. 
+More specifically, in \BFO functions are defined as follows \cite{spearFunctionsBasicFormal2016}:
+\begin{quote}
+  \qquotes{f is a disposition & f exists in virtue of its bearer’s physical make-up & this physical make-up is something that this bearer possesses because it came into being, either through evolution (in the case of natural biological entities) or through intentional design (in the case of artifacts), in order to realize processes of a certain sort.}
+\end{quote} 
+This entails, among other things, that, if a function ceases to exist, then the physical make-up of its bearer changes as well (this is true for all dispositions in \BFO).
+On the other hand, Jansen argues that functions are \qquotes{externally grounded}
+
+Moreover, a major point of disagreement concerns malfunctions, in that Jansen argues that malfunctioning entities are entities that have a function, but lack the means to realize it, for example because they have lost the required dispositions; while Barry et al. maintain that when an entity malfunctions it loses its function, partially or completely, and is recognized as an entity of its kind only because of its history, if at all (e.g., a cancerous lung is not a lung).
 Notice that in both of these positions functions and roles are disjoint subclasses of realizable entities, on the ground that roles are coincidental for their players, while functions are essential for their players.
 
 \TODO{[...]?}.
@@ -1136,10 +1144,10 @@ A possibility is to find an exhaustive list of types of \ontoFunc{fullPlural} an
 This is, in principle, correct, but, in practice, requires an exhaustive enumeration of top-function types, which we do not want to commit to, in this paper. 
 Instead, an intrinsic definition of \ontoFunc{fullPlural} would be, informally:
 \bflist
-  \item[\mydf{ontoDef2}] \mytext{A concept is a \ontoFunc{fullSingular} if and only if it classifies exactly those events consisting in a transition from an initial state to a desired final state, such that the difference (if any) between the two states is characterized in terms of a formula expressed in the language of a reference ontology.}
+  \item[\mydf{ontoDef2}] \mytext{A concept is a \ontoFunc{fullSingular} if and only if it classifies exactly those events consisting in a transition from an initial state to a desired final state, such that the difference (or the absence thereof) between the two states is characterized in terms of a formula expressed in the language of a reference ontology.}
 \eflist
 (Of course, the formulas that engineers actually use to express ontological functions are not arbitrary, as in \refdf{def:ontoDef2}, but, typically, belong to a small set of cases).
-Since a \qquotes{a formula expressed in the language of a reference ontology} is not writeable using first-order logic in a natural way, we cannot give an (intrinsic) first-logical definition of \ontoFunc{fullPlural}. 
+Since \qquotes{a formula expressed in the language of a reference ontology} is not something that can be written in a natural way using first-order logic, we cannot give an intrinsic first-logical definition of \ontoFunc{fullPlural}. 
 
 %%%
 \begin{figure}
@@ -1422,10 +1430,6 @@ In this context, we could say that the pump has been selected because of its pum
 %%%%%%%%
 
 %%%%%%%%
-%% TODO ??
-% -mostrare come tale approccio ingloba approcci precedenti?
-
-% -sostituire negli esempi la pompa con un circuito elettrico?}
 
 \section{OWL ontology}\label{sec:appendice}
 %\TODOinline{[SB: assiomi e def in owl dovrebbero essere chiaramente distinti usando, e.g., \textbf{a14$_{owl}$}][FC:fatto]}
@@ -1494,10 +1498,10 @@ Finally, as a further simplifying assumption, we define two binary relations tha
   \caption{A view of the ontology taxonomy in Protegé\TODO{UPDATARE IMMAGINE CHE E' VECCHIA}.\label{fig:screen_entities}}
 \end{figure}
 
-The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular} \myComment{\TODO{check if true}}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
+The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
 what components have a capability that corresponds to a given function:
 \begin{verbatim}
-PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
 SELECT  ?component
 	WHERE { 
 	    ?capability :definition-founded-on :<the given function> .
@@ -1507,14 +1511,14 @@ SELECT  ?component
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX this: <http://www.co-ode.org/ontologies/ont.owl#>
+PREFIX this: <https://github.com/kataph/function-method-ontology#>
 SELECT  ?component
 	WHERE { ?capability this:definition-founded-on this:convert_chemical_energy_into_electricity_1 .
 		?capability this:quality-of ?component}
 \end{comment}
-or what capacities of what components are  involved in executing the \ontoFunc{fullPlural} present in a given system:
+or what capacities of what components are involved in executing the \ontoFunc{fullPlural} present in a given system:
 \begin{verbatim}
-PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
 SELECT  ?component ?functionOntological ?capacity
 	WHERE { 
 		    ?functionSystemic :function-of ?component .
@@ -1530,7 +1534,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX this: <http://www.co-ode.org/ontologies/ont.owl#>
+PREFIX this: <https://github.com/kataph/function-method-ontology#>
 SELECT  ?component ?capacity
 	WHERE { 
 		?component this:part-of this:electrical_circuit_1 .
@@ -1548,7 +1552,7 @@ For example, the following query takes a given system as inputs and returns all 
 \begin{verbatim}
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
 SELECT  ?component ?functionSystemic ?role ?method 
 WHERE { 
     ?functionSystemic ?role ?method .
@@ -1559,7 +1563,7 @@ WHERE {
 \begin{comment}
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX : <http://www.co-ode.org/ontologies/ont.owl#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
 SELECT  ?component ?functionSystemic ?verb ?method
 	WHERE { ?functionSystemic ?verb ?method .
 		?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
@@ -1581,14 +1585,22 @@ Any of these could be used to align the ontology developed in this paper with \D
 4-Casi d'uso immaginari
 5-requirements
 
-1-ok
-2-ok, solo cambiare iri
-3-Competency questions ("Can the authors identify any use cases, motivating scenarios, or competency questions that their ontology could address in real engineering design practices):
+1-OntoClean methodology \cite{guarinoOverviewOntoClean2009} does not identify any issue in our taxonomy.
+In fact, since we are extending \DOLCE categories, the only possible source of issues would be if the extensions of the role-concepts (that is, the set of all entities that, at a given time, are classified by the role-concept) were not anti-rigid: the other rules that must be checked in OntoClean methodologies are trivially true. 
+This does not happen, since functions, as we defined them, are contextual (e.g., a heat exchanger, with its behavior, may be used either to heat a substance or to cool it, depending on the context). 
+
+2-The \OWL ontology was evaluated against the Ontology Pitfall Scanner (OOPS) \cite{poveda2014oops}, which did not find relevant issues in the ontology\footnote{Except for the fact that the ontology URI, \url{https://github.com/kataph/function-method-ontology/blob/main/function-method-ont.owl}, contains the \qquotes{.owl} file extension.}.
+
+%12-Our ontology passed OntoClean and OOPS checks, but these were almost trivial due to the use of an upper ontology as reference, and to the small size of the ontology, respectively.
+%Therefore, we turn to the competency questions methodology
+
+3-Competency questions ("Can the authors identify any use cases, motivating scenarios, or competency questions that their ontology could address in real engineering design practices"):
+We argue that 
 \bflist
   %\item[\myCQ{cq1}] What is the function of a given component? <--trivial
   \item[\myCQ{cq2}] Given an (ontological) function, which artifacts have the capability of satisfying it?
   \item[\myCQ{cq3}] Given an (ontological or systemic) function, which methods can be employed to implement it?
-  \item[\myCQ{cq4}] How to fruitfully carry out the funcitonal decomposition of a system?
+  \item[\myCQ{cq4}] How to fruitfully carry out the functional decomposition of a system?
   \item[\myCQ{cq5.1}] How to write requirements (in a uniform, expressive, and machine-readable way)? <--immaginifica
   \item[\myCQ{cq5.2}] How to write requirements on the capabilities and capacities of an object? <--immaginifica
   \item[\myCQ{cq6}] How to automatically check a list of requirements against a system? <--immaginifica
@@ -1598,6 +1610,7 @@ Any of these could be used to align the ontology developed in this paper with \D
   \item[\myCQ{cq8.3}] How to distinguish between capabilities and capacities?
   \item[\myCQ{cq9}] How to fruitfully record malfunctions?
 \eflist
+
 Motivating scenarios:
 \paragraph{Formal Requirements.}
 Requirements are an essential part of engineering design, which engineers have to write, share, maintain, and implement. 
@@ -1647,9 +1660,24 @@ where S, C, and D are \OWL classes, for example (example, taken from \cite{overl
 Again, it is difficult to express functions- and performance-related requirements in form \refex{ex:SCD} if one lacks an appropriate reference ontology. 
 
 To summarize, using our ontology, one could enhance current work aimed at the digitalisation of written requirements, by facilitating the assertion of requirements related to product performance and functions.
+
 \paragraph{Knowledge Transfer.}
-\paragraph{Innovative Design.}
-\paragraph{Malfunction Record.}
+
+\paragraph{Innovative Design vs Representation of Pre-existing Solutions.}
+A good portion of the literature on functional modelling argues that functional modelling can be used to improve engineering design.
+The basic argument is as follows: designers should start from the custumer's requirements, translate them in high-level functions, then decompose those functions into less abstract ones, until arriving to a point where finding a solution that realizes the functions is easy \TODO{\cite{..}}.
+This methodology, is argued, facilitates engineers to come up fast with high-quality designs and enhances their creativity by decoupling the goals of the design from the ways they are achieved.
+
+This argument is not wrong, but, during actual practice, one rarely start from a blank slate. 
+Instead, designers are typically constrained by the need to reuse pre-existing solutions, for a company may have a developed a legacy that is difficult to depart from, possibly because the company would not be able to (profitably) rerout its know-how and resources towards innovative lines of products.
+Therefore, designers usually have to devise marginal improvements or corrections for pre-existing solutions, and these activities seem at odds with the aforementioned methodology. % or ways to readapt them for marginally more genereral situations. 
+Additionally, such methodology does not seem applicable to other activities, such as diagnostic or reverse engineering, despite functional reasoning being clearly relevant for those. \cite{}
+
+[...]
+
+%\paragraph{Malfunction Record.}
+%todo <- no
+ 
 %-READI
 %-FUNCTIONAL REP
 %-KNOWLEDGE TRANSFER
