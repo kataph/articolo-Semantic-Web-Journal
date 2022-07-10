@@ -575,11 +575,10 @@ Coming to \BFO, the view of functions as special dispositions was expanded and d
 A full description of this debate is beyond the scope of this paper, we just mention that while \BFO maintains functions as a subclass of dispositions, while Jansen argues that functions and dispositions are disjoint, though related, categories. 
 More specifically, in \BFO functions are defined as follows \cite{spearFunctionsBasicFormal2016}:
 \begin{quote}
-  \qquotes{f is a disposition & f exists in virtue of its bearer’s physical make-up & this physical make-up is something that this bearer possesses because it came into being, either through evolution (in the case of natural biological entities) or through intentional design (in the case of artifacts), in order to realize processes of a certain sort.}
+  \qquotes{f is a disposition \& f exists in virtue of its bearer’s physical make-up \& this physical make-up is something that this bearer possesses because it came into being, either through evolution (in the case of natural biological entities) or through intentional design (in the case of artifacts), in order to realize processes of a certain sort.}
 \end{quote} 
 This entails, among other things, that, if a function ceases to exist, then the physical make-up of its bearer changes as well (this is true for all dispositions in \BFO).
-On the other hand, Jansen argues that functions are \qquotes{externally grounded}
-
+On the other hand, Jansen and Röhl argue that functions are \qquotes{externally grounded}.
 Moreover, a major point of disagreement concerns malfunctions, in that Jansen argues that malfunctioning entities are entities that have a function, but lack the means to realize it, for example because they have lost the required dispositions; while Barry et al. maintain that when an entity malfunctions it loses its function, partially or completely, and is recognized as an entity of its kind only because of its history, if at all (e.g., a cancerous lung is not a lung).
 Notice that in both of these positions functions and roles are disjoint subclasses of realizable entities, on the ground that roles are coincidental for their players, while functions are essential for their players.
 
@@ -628,7 +627,19 @@ In any case, in this paper we will try to formalize, in a preliminary way, some 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{An (enriched) subset of the \DOLCE ontology\label{sec:DOLCE}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Here we introduce the fragment of the \DOLCE ontology \cite{masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022} that is needed in this paper\footnote{See Figure \ref{fig:DOLCE-taxa} for a complete taxonomy}. In particular, we cover the following classes which will be needed to model functions and related concepts: \firstTimeKeyWord{qualities}, \firstTimeKeyWord{perdurants}, and \firstTimeKeyWord{roles}. 
+As stated in the introduction, we will use \DOLCE as reference ontology. 
+The reasons we chose \DOLCE are, at least, the following:
+\begin{itemize}
+  \item \DOLCE is a well-known upper ontology that has been tested in many applications.
+  \item \DOLCE has been stable since its foundation, differently than many other upper-ontology, which have been reworked exstensively.
+  \item \DOLCE is a descriptive ontology that \qquotes{aims at capturing the ontological categories underlying natural language and human commonsense} \cite{masoloWonderWebDeliverableD182003}. 
+  For this reason, theories formulated using \DOLCE tend to be easy(er) to use and understand.
+  \item Finally, we agree with Jansen and Röhl \cite{rohlWhyFunctionsAre2014,jansenFunctionsMalfunctioningNegative2018} about the external grounding of functions and the relation of functions with malfunctions, as will become clear from the following sections. 
+  Therefore, we could not use ontologies, such as \BFO, which make incompatible ontological commitments. 
+  In particular, malfunctions are common and important events to be modeled in industrial use cases, and, using Jansen's words \cite{jansenFunctionsMalfunctioningNegative2018} \qquotes{malfunction ascriptions imply, in fact, ascriptions of functions plus the denial of the matching dispositions}. This is an argument in favour of rejecting the subsumption of functions within dispositions in engineering settings, at least from a descriptivist point of view.  
+\end{itemize}
+
+In this section we introduce the fragment of the \DOLCE ontology \cite{masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022} that is needed in this paper\footnote{See Figure \ref{fig:DOLCE-taxa} for a complete taxonomy}. In particular, we cover the following classes which will be needed to model functions and related concepts: \firstTimeKeyWord{qualities}, \firstTimeKeyWord{perdurants}, and \firstTimeKeyWord{roles}. 
 We anticipate to the reader that we will argue in favor of subsuming capabilities and capacities into qualities, behaviors into perdurants, and (a certain kind of) functions into roles. The links among these concepts will be, roughly, as follows: role-functions classifies behaviors, capabilities requires functions in order to be defined, while capacities and capabilities are tightly coupled concepts.  
 
 \DOLCE qualities are similar to tropes~\cite{Campbell90}. Qualities, for example the weight of a car and the color of a flower, are used for representing properties (e.g., weight) of individual objects (e.g., car) in which they inhere.
