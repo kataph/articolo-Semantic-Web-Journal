@@ -1315,7 +1315,7 @@ oil with a certain flow rate.
 Following the quality theory of \DOLCE, both the relevant characteristics of each technical artifact and any of its faculties of being able to do something
 %, that we shall call \firstTimeKeyWord{capabilities}, 
 can be conceptualized as individual qualities. 
-Consequently, we model both the flow rate (that is, a capacity), and the pumping (a capability) of the pump as individual qualities.
+Consequently, we model both the flow rate (that is, a capacity), and the pumping-ability (a capability) of the pump as individual qualities.
 
 Whenever a capability is based on some other quality of a technical artifact, that is, when each realisation of the capability depends on some other quality, we say that it is \firstTimeKeyWord{\foundedTerm{passive}} on that quality (or qualities), and we formalize this through the relation $\founded{\cdot}{\cdot}$ defined in \refdf{def:foundingBasic}.
 For example, in the case of the pump we could say that the capability of the pump to move water is founded on its flow rate capacity.
@@ -1402,10 +1402,31 @@ The characterization of capacities via \refax{ax:capacPartialDef} and \refdf{def
     \item the close link between functions and capabilities (capabilities are definition-founded on \ontoFunc{fullPlural}).
     \item The asymmetry between capacities and capabilities (capabilities are founded on capacities, but not vice-versa).
 \end{itemize}
-The quantitative-qualitative difference between capacities and capabilities anticipated at the end of Section \ref{sec:review} is not yet really explained, but, notice that while a flow-rate capability takes as values positive real numbers with, say, m$^3$/s as unit of measure, the value space of the corresponding pumping capability is quite more complex and difficult to describe. This  may be an argument against modelling capabilities as \DOLCE-qualities, but it also reflects the quantitative-qualitative duality that emerges in domain experts' speech.
+The quantitative-qualitative difference between capacities and capabilities anticipated at the end of Section \ref{sec:review} is not yet really explained, but, notice that while a flow-rate capability takes as values positive real numbers with, say, m$^3$/s as unit of measure, the value space of the corresponding pumping capability is quite more complex and difficult to describe. This may be an argument against modelling capabilities as \DOLCE-qualities, but it also reflects the quantitative-qualitative duality that emerges in domain experts' speech.
 
 
 \medskip
+
+Note that this section highlights the difficulties in defining concepts such as capacities and capabilities. 
+One reason for this difficulty is the relational and potential nature (in our interpretation) of these concepts: they are relational, in the sense that we have attempted to capture with relational qualities, since they need the relation between their bearer and its environment to make sense; and they are potential, in the sense that they are strictly related to events that may occur, but need not to actually happen necessarily.
+Functions are, arguably, similar to capabilities in this aspect (indeed, in \BFO they are classified as realizable entities), and this may partially explain the terminological and conceptual complexity that these concepts carry with themselves. 
+Of course, these concepts are not the only ones to be both puzzling and commonly used in engineering: \textit{affordances} being a prime example.
+Affordances were originally introduced by \cite{gibsonTheoryAffordances1979}, and popularized in engineering design by Maier and Fadel in a series of works (\cite{maier2001affordance,maierAffordanceBasedDesign2009}, among others).
+Briefly, affordances are \qquotes{what it [the environment] offers the animal, what it provides or furnishes, either for good or ill} \cite{gibsonTheoryAffordances1979}. \qquotes{interaction between artifact and user in which properties of the artifact offer a potential use to the user} \cite{maierAffordanceBasedDesign2009}, That is, they are potential behaviours that the environment, or a part thereof, allow an agent to do. 
+In engineering, they are often defined as the set of all the behaviours that an artifact enables a user to do \cite{brownRelationshipFunctionAffordance2005}, but this is far from being a universally shared definition.
+For instance, one original example of Gibson was that a flat surface affords footing, while other examples are a pool full of water, which affords a person to swim, or a briefcase, which, affords a person to be grabbed; so that one could say that \quotes{swimmability} and \quotes{grabbability} are affordances of the pool and the briefcase, respectively.
+Unsurprisingly, an unsettled debate exists in the disciplines that make use of the concept of affordances, about their meaning \cite{brownRelationshipFunctionAffordance2005}, up to the point that some authors called for their abandonment \cite{motaDispensingTheoryPhilosophy2021}.
+
+We do not attempt to carry out an ontological analysis of affordances, but we do make two brief observations:
+\begin{itemize}
+  \item first, the reasons for the confusion around the concept of affordance may be, at least partially, the same for the concepts analyzed in this paper. They strongly depend on relations between entities, and they are potential.
+  \item Second, one could attempt to reduce affordances to capability using, for example, the following informal equivalence:
+  \bflist
+    \item[\myex{affordances}] \mytext{An engineering artifact affords a user (or another artifact) to do something if and only if the system made by the artifact, the user (or the second artifact), and their relation has the capability to do that something}
+  \eflist 
+\end{itemize}
+From this point of view, our analysis of capabilities would carry at least some insight into affordances.
+
 Finally, to recap the concepts introduced in the last two sections, we conclude this section with another example.\myComment{\footnote{Notice again the similarity with the work of Kitamura, Sasajima, Mizoguchi et al. \cite{kitamuraOntologybasedDescriptionFunctional2003}.}} Suppose that a company handling swimming pools must empty some of its pools for maintenance. This imposes a goal, say `the pools are empty', that must be carried out through some device able to realize a `to remove' (ontological) function, specialized to a systemic function in the context of the swimming pool system.
 Such a function can be realized by artifacts that have a corresponding capability. In this case, the function would probably be implemented through some fluid-emptying-method, that is, through the knowledge of the way that a recipient can be emptied, and its fluid content disposed, by pressurizing the fluid and guiding it through a path.
 %, and finally release it in a storage.
