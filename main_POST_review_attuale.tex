@@ -1472,8 +1472,9 @@ In this context, we could say that the pump has been selected because of its pum
 
 %%%%%%%%
 
-\section{OWL ontology}\label{sec:appendice}
+\section{Evaluation and possible applications}\label{sec:appendice}
 %\TODOinline{[SB: assiomi e def in owl dovrebbero essere chiaramente distinti usando, e.g., \textbf{a14$_{owl}$}][FC:fatto]}
+\subsection[meta]{Reduction to \OWL ontology}
 In order to facilitate the deployment of our theory in applications, we reduce it from first order logic to the \OWL language. 
 This is standard practice, for at least the following reasons: first, \OWL is decidable, while first order logic is not, so that reasoning task will terminate in finite time\footnote{though they have exponential complexity, in the general case\TODO{citazione}}. Second, \OWL is a standard endorsed by the World Wide Web Consortium (W3C) and is part of the Semantic Web technology stack \cite{OWL2-QUICK-REFERENCE}, and is the language of choice for many ontologies in various domains \cite{OWL-ontology-repositories}.
 
@@ -1539,6 +1540,7 @@ Finally, as a further simplifying assumption, we define two binary relations tha
   \caption{A view of the ontology taxonomy in Protegé\TODO{UPDATARE IMMAGINE CHE E' VECCHIA}.\label{fig:screen_entities}}
 \end{figure}
 
+\subsection{evaluation}
 The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
 what components have a capability that corresponds to a given function:
 \begin{verbatim}
@@ -1638,18 +1640,19 @@ This does not happen, since functions, as we defined them, are contextual (e.g.,
 3-Competency questions ("Can the authors identify any use cases, motivating scenarios, or competency questions that their ontology could address in real engineering design practices"):
 We argue that 
 \bflist
+  \item[\myCQ{RQ1}] Clarify the concepts of function, etc.?
+  \item[\myCQ{RQ2}] How to fruitfully carry out the functional decomposition of a system?
+  \item[\myCQ{RQ3}] How to write requirements (in a uniform, expressive, and machine-readable way)?
+  \item[\myCQ{RQ4}] How to write requirements on the capabilities and capacities of an object? 
+  \item[\myCQ{RQ5}] How to automatically check a list of requirements against a system?
+  \item[\myCQ{RQ6}] How to distinguish between capabilities and capacities?
+  \item[\myCQ{RQ7}] How to fruitfully record malfunctions?
+\eflist
+\bflist
   %\item[\myCQ{cq1}] What is the function of a given component? <--trivial
   \item[\myCQ{cq2}] Given an (ontological) function, which artifacts have the capability of satisfying it?
   \item[\myCQ{cq3}] Given an (ontological or systemic) function, which methods can be employed to implement it?
-  \item[\myCQ{cq4}] How to fruitfully carry out the functional decomposition of a system?
-  \item[\myCQ{cq5.1}] How to write requirements (in a uniform, expressive, and machine-readable way)? <--immaginifica
-  \item[\myCQ{cq5.2}] How to write requirements on the capabilities and capacities of an object? <--immaginifica
-  \item[\myCQ{cq6}] How to automatically check a list of requirements against a system? <--immaginifica
-  \item[\myCQ{cq7}] How to automatically check a list of requirements against a system? <--immaginifica
-  \item[\myCQ{cq8}] How to explain the capability of an artifact (or justify that the capability is within certain parameters)?
-  \item[\myCQ{cq8.2}] How to explain the capability of an artifact (or justify that the capability is within certain parameters)?
-  \item[\myCQ{cq8.3}] How to distinguish between capabilities and capacities?
-  \item[\myCQ{cq9}] How to fruitfully record malfunctions?
+  \item[\myCQ{cq8}] Which parameters explain the performance of a capability or of a function?
 \eflist
 
 Motivating scenarios:
