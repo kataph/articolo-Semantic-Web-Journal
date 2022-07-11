@@ -1142,7 +1142,9 @@ At this point we make three observations:
   Then, using the Functional Basis one is reduced to using just the term \textit{remove} to talk about the functions realizing such features in the workpiece.
   Instead, if one uses a domain ontology that contains concepts such as hole, slot, groove, etc., then one can build corresponding functional terms, say \textit{make hole}, \textit{make slot}, \textit{to groove}, etc., defined analogously to the previous formulas.
   Such terms may be more natural than just using \quotes{removing}, and may even differ significantly  from \quotes{removing}, depending on their precise formalisation.
-  Another example: in the Functional Basis vocabulary, the term \quotes{stop} means \quotes{to cease the transfer of a flow}, for instance \quotes{A reflective coating on a window stops the transmission of UV radiation through a window} \cite{hirtz_functional_2002}. But what if occurrents are important in our domain and we want to say that something \textit{stops a process} (e.g., \qquotes{The addition of a respiratory inhibitor stops the absorption of amino acids}, not that \qquotes{stops the amino acid-material-flow from moving}, but that it \qquotes{stops the absorption}, where absorption is an important element of the domain? We could derive useful functional terms, from an appropriate domain ontology managing concepts of domain processes.
+  Another example: in the Functional Basis vocabulary, the term \quotes{stop} means \quotes{to cease the transfer of a flow}, for instance \quotes{A reflective coating on a window stops the transmission of UV radiation through a window} \cite{hirtz_functional_2002}. But what if occurrents are important in our domain and we want to say that something \textit{stops a process} (e.g., \qquotes{The addition of a respiratory inhibitor stops the absorption of amino acids}, not that \qquotes{stops the amino acid-material-flow from moving}, but that it \qquotes{stops the absorption}, where absorption is an important element of the domain?
+  %Altro esempio: camiamento di stato come camiamento di *stato* o cambiamento di *stato di aggregazione*
+  We could derive useful functional terms, from an appropriate domain ontology managing concepts of domain processes.
 \end{itemize}
 %%%
 
@@ -1343,7 +1345,7 @@ Capacities themselves are founded on some intrinsic physical qualities of the be
 Axioms \refax{ax:capacPartialDef} and \refax{ax:capacPartialDef2} do not fully define what a capacity is, but only give some constraints.
 Since the classical case of deciding what relations there are between the color of an object and its hue is difficult (is the hue a quality of the color? Or maybe the hue is part of the color, or something else?)\TODO{FC:esiste citazione per questo?}, finding out the relation between capacities and capabilities is difficult too. In fact, one could even argue that color itself is a capability: the capability of reflecting certain lightwaves.
 A full definition of capacity is, therefore, a complex issue.
-We still suggest one in the following, though we highlight that is only one possibility among others, and we cannot say for certain what precise consequences its adoption has.
+We still suggest one in the following, though we highlight that is only one possibility among others, and the precise consequences of its adoption, with respect to other approaches, warrant further study.
 We opt for defining capacity as \quotes{parameter} of the capabilities it founds, that is, as a quality such that its values are always subset of values of the corresponding capability:
 \bflist
 \item[\mydf{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land \founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
@@ -1356,7 +1358,7 @@ Our approach is to define a parameter as another quality whose values are mereol
 In contrast to Definition \refdf{def:capacFullDef}, a characterisation of capabilities should touch upon functions as capabilities are inextricably intertwined to functional aspects. In order to do this, we first try to clarify the nature of capabilities as follows:
 %While the choice of modeling characteristics such as flow rate, weight, shape, or color as qualities is safe enough, the same modeling choice for capabilities carries more weight. 
 %One can motivate it as following: 
-to be able to do something is really a modal concept calling for possible worlds in which that something is actually done. 
+to be able to do something is, arguably, a modal concept calling for possible worlds in which that something is actually done. 
 But, since we want to keep our formal language as simple as possible, we reduce the modal expression to a simpler construct, analogously to the following heuristic definition:
 \bflist
 \item[\myex{Capab}] $ \exists c(\PumpingCapability{c} \land \DOLCEQualityDirect{c}{x}) \myiff \\
@@ -1368,8 +1370,9 @@ But, since we want to keep our formal language as simple as possible, we reduce 
 Thus, we shall introduce capabilities as qualities with a modal flavour. Since the introduced capabilities are specifically dependent on their bearers, and each capability of a certain kind is unique to its bearer, we treat them as individual qualities.\footnote{An alternative is to model them as disposition, see for instance \cite{sarkarOntologyModelProcess2019}, and \cite{MALZKORN2001335} for a broader introduction to dispositions.} 
 Finally, note that Example \refex{ex:Capab} also seems to suggest that capabilities depend on types of functions (not just processes or behaviors, for the pumping process in \refex{ex:Capab} will always play a function), which are used in their definition. This suggests using the definition-founding  \myComment{\refdf{def:foundingDefinitionally}} relation introduced in Section \ref{sec:DOLCE} in order to capture this intuition:
 \bflist
-\item[\mydf{capability}] $ \Capability{x} \myiff  \RelationalQuality{x} \land \exists y,z(\Capacity{y} \land \founded{x}{y} \land \FunctionAbs{z} \land \foundedDef{x}{z}) $  
-\item[] \mytext{$x$ is a capability if and only if it is a relational quality founded on some capacity and is definition-founded on some \ontoFunc{fullSingular}}
+%\item[\mydf{capability}] $ \Capability{x} \myiff \RelationalQuality{x} \land \exists y,z(\Capacity{y} \land \founded{x}{y} \land \FunctionAbs{z} \land \foundedDef{x}{z}) $ 
+\item[\mydf{capability}] $ \Capability{x} \myiff \RelationalQuality{x} \land \exists y(\FunctionAbs{y} \land \foundedDef{x}{y}) $ 
+\item[] \mytext{$x$ is a capability if and only if it is a relational quality definition-founded on some \ontoFunc{fullSingular}}
 \eflist
 \myComment{\TODO{[FC: commento spostato dalla sua posizione originaria] [SB:] Non mi sembra che qui emerga una differenza formale tra capacità e capability.\\ 
 A rileggere l'articolo [4] oggi seguirei una intuizione un po' diversa:\\ 
@@ -1385,7 +1388,12 @@ Quindi avremmo:
 \eflist
 Ora vorrei capire se l'impostazione che hai è compatibile con questa visione ed eventualmente discutere le differenze. Se c'è compatibilità, possiamo lasciare qui solo le capacity e introdurre le capability solo dopo aver introdotto le funzioni.
 [FC: mi sembra che lo sia, modulo il fatto che i paragrafi sopra devono essere cambiati per adattargli agli assiomi sotto e modulo il fatto che formalmente se la capability è founded on una funzione allora "founded" dovrebbe essere inteso tipo come "usato nella definizione" ma questo senso non è quello usato in precedenza e.g. in d5. Per il resto ho adottato i due assiomi di sopra, rimuovendo la parte con le funzioni e ti chiederei di controllare che i paragrafi di sopra siano compatibili coi nuovi assiomi.]}}
-From the definition, we have that capabilities are specifically dependent on capacities, which specify how the artifact (the bearer) can function.  
+Additionally, we assume that each capability is parameterized by at least a capacity:
+\bflist
+  \item[\myax{capacityNuovo}] $ \Capability{x} \myfi \exists y(\Capacity{y} \land \founded{x}{y}) $
+  \item[] \mytext{A capability is founded on some capacity}
+\eflist
+From this \myComment{definition} axiom, we have that capabilities are specifically dependent on capacities, which specify how the artifact (the bearer) can function.\TODO{Nota che ho dovuto cambiare la def. di Capability e separarla in una definizione + un assioma, o era circolare con quella di Capacity}  
 The intuition is that capabilities are relational qualities that associate the artifact to \ontoFunc{fullPlural}, so that they must refer to those functions: in our terminology, they are definition-founded on \ontoFunc{fullPlural}.  
 Note that they are not instantiation-founded, see \refdf{def:founding}, since an artifact could have a capability to function without actually functioning. Additionally, the function must be ontological and not systemic, because, otherwise, the bearing object would be associated \textit{a priori} with some given system. 
 
@@ -1396,8 +1404,9 @@ The characterization of capacities via \refax{ax:capacPartialDef} and \refdf{def
 \end{itemize}
 The quantitative-qualitative difference between capacities and capabilities anticipated at the end of Section \ref{sec:review} is not yet really explained, but, notice that while a flow-rate capability takes as values positive real numbers with, say, m$^3$/s as unit of measure, the value space of the corresponding pumping capability is quite more complex and difficult to describe. This  may be an argument against modelling capabilities as \DOLCE-qualities, but it also reflects the quantitative-qualitative duality that emerges in domain experts' speech.
 
+
 \medskip
-Finally, to recap the concepts introduced in the last paragraphs, we conclude this section with another example.\myComment{\footnote{Notice again the similarity with the work of Kitamura, Sasajima, Mizoguchi et al. \cite{kitamuraOntologybasedDescriptionFunctional2003}.}} Suppose that a company handling swimming pools must empty some of its pools for maintenance. This imposes a goal, say `the pools are empty', that must be carried out through some device able to realize a `to remove' (ontological) function, specialized to a systemic function in the context of the swimming pool system.
+Finally, to recap the concepts introduced in the last two sections, we conclude this section with another example.\myComment{\footnote{Notice again the similarity with the work of Kitamura, Sasajima, Mizoguchi et al. \cite{kitamuraOntologybasedDescriptionFunctional2003}.}} Suppose that a company handling swimming pools must empty some of its pools for maintenance. This imposes a goal, say `the pools are empty', that must be carried out through some device able to realize a `to remove' (ontological) function, specialized to a systemic function in the context of the swimming pool system.
 Such a function can be realized by artifacts that have a corresponding capability. In this case, the function would probably be implemented through some fluid-emptying-method, that is, through the knowledge of the way that a recipient can be emptied, and its fluid content disposed, by pressurizing the fluid and guiding it through a path.
 %, and finally release it in a storage.
 Now, the `pressurize' sub-function (which refers to the goal of `having a big enough pressure gradient') could be implemented through a pumping-method, that is, referring to engineering knowledge about pumps.
