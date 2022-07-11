@@ -472,7 +472,7 @@ Finally, \ontoFunc{fullPlural} will be leveraged to propose a general distinctio
 
 % structure statement
 The structure of the paper is as follows. A review of the literature about functionality that is particularly relevant for this work is presented in Section \ref{sec:review}. 
-Section \ref{sec:DOLCE} describes key concepts of \DOLCE. These are exploited in Section \ref{sec:capabilitiesEtc} for the discussion of capabilities, capacities, behaviors, and functions. This section proposes also a formal interpretation of ontological and engineering functions in first order logic, and concludes with a preliminary characterisation of capabilities and capacities. We showcase a preliminary ontology in the \OWL language in Section \ref{sec:appendice}, before drawing our conclusions in Section \ref{sec:conc}. 
+Section \ref{sec:DOLCE} describes key concepts of \DOLCE. These are exploited in Sections \ref{sec:capabilitiesEtc} and \ref{sec:CapabilAndCapac} for the discussion of capabilities, capacities, behaviors, functions, and, very briefly, \firstTimeKeyWord{affordances}. This section proposes also a formal interpretation of ontological and engineering functions in first order logic, and concludes with a preliminary characterisation of capabilities and capacities. We showcase and evaluate a preliminary ontology in the \OWL language in Section \ref{sec:appendice}, before drawing our conclusions in Section \ref{sec:conc}. 
 
 %% Review letteratura
 \section{Literature review\label{sec:review}} %
@@ -612,10 +612,20 @@ It might be true that the ambiguity of function terminology is both necessary an
 Still, we maintain that formalisation is useful in order to show differences between the possible approaches. Moreover, it is useful, if not necessary, to develop applications that rely on functional reasoning.
 
 \medskip
-In conclusion of this section, we mention very briefly some facts about capabilities and capacities. 
-These two terms, especially capability, are used in resource modelling \cite{jarvenpaaDevelopmentOntologyDescribing2019a, sarkarOntologyModelProcess2019, jochemISOISO15531312004, solanoKnowledgeRepresentationProduct2014}. In addition, terminological problems are present also for these two concepts, which are rarely formalized \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021}. When distinguished, capabilities and capacities are separated along a qualitative-quantitative axis, for example ISO 15531-31\cite{jochemISOISO15531312004} states that \quotes{Capacity is strictly a quantitative concept} while \quotes{Capability is essentially a functional and qualitative concept}, and exemplify capacity with product throughput and define capability as \quotes{the quality of being able to perform a given activity}. The same standard advises against reducing capacities as characteristics of capabilities and forbids the opposite (in contradiction to \cite{solanoKnowledgeRepresentationProduct2014}, where a \quotes{Capacity is a Capability
+In conclusion of this section, we mention very briefly some facts about some other engineerign concepts of complex ontological status: capabilities and capacities, and affordances. 
+Capacities and, especially, capabilities are used in resource modelling \cite{jarvenpaaDevelopmentOntologyDescribing2019a, sarkarOntologyModelProcess2019, jochemISOISO15531312004, solanoKnowledgeRepresentationProduct2014}. In addition, terminological problems are present also for these two concepts, which are rarely formalized \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021}. When distinguished, capabilities and capacities are separated along a qualitative-quantitative axis, for example ISO 15531-31\cite{jochemISOISO15531312004} states that \quotes{Capacity is strictly a quantitative concept} while \quotes{Capability is essentially a functional and qualitative concept}, and exemplify capacity with product throughput and define capability as \quotes{the quality of being able to perform a given activity}. The same standard advises against reducing capacities as characteristics of capabilities and forbids the opposite (in contradiction to \cite{solanoKnowledgeRepresentationProduct2014}, where a \quotes{Capacity is a Capability
 expressed in terms of amount of production}).
 In any case, in this paper we will try to formalize, in a preliminary way, some intuitions that transpire from the literature on resource modelling, such as the asymmetry between capacities and capabilities, the close link (but not identity) between capabilities and functionality, qualitative vs quantitative aspects, and the idea of capabilities as qualities of being able to do something.
+
+Affordances too are a source of conceptual confusion:
+they were originally introduced by \cite{gibsonTheoryAffordances1979}, and popularized in engineering design by Maier and Fadel in a series of works (\cite{maier2001affordance,maierAffordanceBasedDesign2009}, among others) as a paradigm-shift from a function-based design, towards an interaction-based design, characterized by the focus on all the possible ways a user can interact with a product, included those unintended by the designer and not strictly relevant for the product function.
+Briefly, affordances are \qquotes{what it [the environment] offers the animal, what it provides or furnishes, either for good or ill} \cite{gibsonTheoryAffordances1979}. That is, they are potential behaviours that the environment, or a part thereof, allows an agent to do. 
+In engineering, they are often defined as the set of all the behaviours that an artifact enables a user to do \cite{brownRelationshipFunctionAffordance2005}, but this is far from being a universally shared definition.\myComment{\qquotes{interaction between artifact and user in which properties of the artifact offer a potential use to the user} \cite{maierAffordanceBasedDesign2009}}
+The original example of Gibson was that a flat surface affords footing to an animal, while other examples could be a pool full of water, which affords a person to swim, or a briefcase, which, affords a person to be grabbed; so that one could say that \quotes{swimmability} and \quotes{grabbability} are affordances of the pool and the briefcase, respectively.
+Unsurprisingly, an unsettled debate exists in the disciplines that make use of the concept of affordances, about their meaning \cite{brownRelationshipFunctionAffordance2005}, up to the point that some authors called for their abandonment \cite{motaDispensingTheoryPhilosophy2021}.
+In this paper, we do not carry out an ontological analysis of affordances. 
+Instead, we mention them as an important engineering concept that is related to functions \cite{brownRelationshipFunctionAffordance2005} and, at the end of Section \ref{sec:capabilitiesEtc}, we point out a few similarities affordances share with capabilities.
+
 %\TODO{rivedere e completare la review della letteratura. In particolare, inserire parte su capabilities etc.<--opzionale, seems ok}
 %sarkarOntologyModelProcess2019 per capab=disposizioni 
 %jarvenpaaDevelopmentOntologyDescribing2019a e ES 2015 <- capab in res mod
@@ -1089,7 +1099,7 @@ A possibility is defining \ontoFunc{fullPlural}-types by making them classify th
 For instance, to define a \textit{connect} function:
 \bflist
   \item[\mydf{connect}] $ \Connect{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,b (\DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEPC{b}{s_i}{t_i} \land \DOLCEPC{b}{s_f}{t_f} \land \exists c (\DOLCEPC{c}{s_f}{t_f} \land \DOLCEPart{a}{c}{t_f} \land \DOLCEPart{b}{c}{t_f}) \land \neg \exists c (\DOLCEPC{c}{s_i}{t_i} \land \DOLCEPart{a}{c}{t_i} \land \DOLCEPart{b}{c}{t_i})) $ 
-  \item[] \mytext{A concept is of \textit{connect} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there are two entities ($a$ and $b$) that partecipate in such states and, during the final state but not in the initial one, are part of a common third entity ($c$).\TODO{TODO: questa formula e altre sono etichettate con "ex". Aggiustarle in "ax" o "df", in abase a cosa si decide alla fine.}}
+  \item[] \mytext{A concept is of \textit{connect} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there are two entities ($a$ and $b$) that partecipate in such states and, during the final state but not in the initial one, are part of a common third entity ($c$)}
 \eflist 
 In the previous formula we used the predicate $\sState{y}{s_i}{t_i}$ to mean that $s_i$ is a state with time extension $t_i$, which is part of the perdurant $y$ and such that there are no parts of the time extension of $y$ which precede $t_i$. Analogous meaning for $\sState{\cdot}{\cdot}{\cdot}$.
 Notice that, if one reverses the initial and final situations of Formula \refdf{def:connect}, then a definition of a \textit{divide} function could be obtained.
@@ -1099,7 +1109,7 @@ Notice that, if one reverses the initial and final situations of Formula \refdf{
 Another example, to define a \textit{convert} function: 
 \bflist
   \item[\mydf{convert}] $ \Convert{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists \Phi,\Psi,a (\Phi\in\mathcal{NR} \land \Psi\in\mathcal{NR} \land \Psi\cap\Phi = \emptyset \land  \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \Phi(a,t_i) \land \Psi(a,t_f))) $ 
-  \item[] \mytext{A concept is of \textit{convert} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) that at time $t_i$ is instance of a type ($\Phi$), while at time $t_f$ is instance of a different, disjoint, type ($\Psi$). Necessarily, $\Phi$ and $\Psi$ are types belonging to the set of all non-rigid types of the underlying ontology ($\mathcal{NR}$).}
+  \item[] \mytext{A concept is of \textit{convert} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) that at time $t_i$ is instance of a type ($\Phi$), while at time $t_f$ is instance of a different, disjoint, type ($\Psi$). Necessarily, $\Phi$ and $\Psi$ are types belonging to the set of all non-rigid types of the underlying ontology ($\mathcal{NR}$)}
 \eflist 
 Notice that in the previous definition we have quantified over the set of all non-rigid classes of an ontology ($\mathcal{NR}$). 
 If such a set is finite, then quantification can be substituted with a finite number of logical disjunctions, therefore Formula \refdf{def:convert} is still a first-order formula.
@@ -1109,7 +1119,7 @@ Moreover, upper-level ontologies typically contain only rigid categories (i.e., 
 The type of all \ontoFunc{fullPlural} that involve change in quality values could be defined as following:
 \bflist
   \item[\mydf{changeQualityValue}] $ \ChangeQualityValue{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,q,v_i,v_f (\DOLCEQualityDirect{q}{a}{t_i} \land \DOLCEQualityDirect{q}{a}{t_f} \land v_i \neq v_f \land \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEQualeTer{q}{v_i}{t_i} \land \DOLCEQualeTer{q}{v_f}{t_f})) $ 
-  \item[] \mytext{A concept is of \textit{change of quality-value} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) which has a quality ($q$) that at time $t_f$ has a different value than the one ($v_i$) at time $t_i$.}
+  \item[] \mytext{A concept is of \textit{change of quality-value} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) which has a quality ($q$) that at time $t_f$ has a different value than the one ($v_i$) at time $t_i$}
 \eflist
 If the case that the quality appearing in the formula \refdf{def:changeQualityValue} is of type spatial location, the ensuing \ontoFunc{fullSingular} will be of type \textit{channel}. 
 Instead, if the quality in \refdf{def:changeQualityValue} is such that it takes values into an ordered space (e.g., \textit{temperature}, \textit{humidity}, etc.) then the ensuing \ontoFunc{fullSingular} will be of type \textit{vary}, which can clearly be specialized into \textit{increase} and \textit{decrease} types. (we are borrowing those terms from \cite{hirtz_functional_2002} and \cite{pahl_engineering_2007}, mostly).  
@@ -1165,8 +1175,8 @@ Since \qquotes{a formula expressed in the language of a reference ontology} is n
 %%%
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{DOLCE-taxa.JPG}
-  \caption{\label{fig:DOLCE-taxa} \DOLCE taxonomy, taken from \cite{borgoDOLCEDescriptiveOntology2022}. Most division in subcategories are not exhaustive. Division Most The dotted classes are added to help some descriptions detailed in the paper, and are not part of \DOLCE taxonomy.}
+  \includegraphics[width=\textwidth]{DOLCE-taxav2.JPG}
+  \caption{\label{fig:DOLCE-taxa} \DOLCE taxonomy, taken from \cite{borgoDOLCEDescriptiveOntology2022}. Most divisions in subcategories are not exhaustive. Division Most The dotted classes are added to help some descriptions detailed in the paper, and are not part of \DOLCE taxonomy.}
 \end{figure}
 \begin{figure}
   \centering
@@ -1288,7 +1298,7 @@ For instance, in the lathe example discussed above, it could be that the systemi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Capabilities and capacities}
+\section{Capabilities and capacities}\label{sec:CapabilAndCapac}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In this section, we discuss capabilities and capacities, two notions that we briefly introduced at the end of Section~\ref{sec:review}. In particular, we will make use of the concept of  \ontoFunc{fullSingular} to distinguish capabilities from capacities (recall that, following the approach taken in ISO 15531-31\cite{jochemISOISO15531312004}, the quantitative viewpoint on what a device do is characterized by capacities, while the qualitative viewpoint by capabilities).
@@ -1410,16 +1420,16 @@ The quantitative-qualitative difference between capacities and capabilities anti
 Note that this section highlights the difficulties in defining concepts such as capacities and capabilities. 
 One reason for this difficulty is the relational and potential nature (in our interpretation) of these concepts: they are relational, in the sense that we have attempted to capture with relational qualities, since they need the relation between their bearer and its environment to make sense; and they are potential, in the sense that they are strictly related to events that may occur, but need not to actually happen necessarily.
 Functions are, arguably, similar to capabilities in this aspect (indeed, in \BFO they are classified as realizable entities), and this may partially explain the terminological and conceptual complexity that these concepts carry with themselves. 
-Of course, these concepts are not the only ones to be both puzzling and commonly used in engineering: \textit{affordances} being a prime example.
-Affordances were originally introduced by \cite{gibsonTheoryAffordances1979}, and popularized in engineering design by Maier and Fadel in a series of works (\cite{maier2001affordance,maierAffordanceBasedDesign2009}, among others).
-Briefly, affordances are \qquotes{what it [the environment] offers the animal, what it provides or furnishes, either for good or ill} \cite{gibsonTheoryAffordances1979}. \qquotes{interaction between artifact and user in which properties of the artifact offer a potential use to the user} \cite{maierAffordanceBasedDesign2009}, That is, they are potential behaviours that the environment, or a part thereof, allow an agent to do. 
-In engineering, they are often defined as the set of all the behaviours that an artifact enables a user to do \cite{brownRelationshipFunctionAffordance2005}, but this is far from being a universally shared definition.
-For instance, one original example of Gibson was that a flat surface affords footing, while other examples are a pool full of water, which affords a person to swim, or a briefcase, which, affords a person to be grabbed; so that one could say that \quotes{swimmability} and \quotes{grabbability} are affordances of the pool and the briefcase, respectively.
-Unsurprisingly, an unsettled debate exists in the disciplines that make use of the concept of affordances, about their meaning \cite{brownRelationshipFunctionAffordance2005}, up to the point that some authors called for their abandonment \cite{motaDispensingTheoryPhilosophy2021}.
-
+Of course, these concepts are not the only ones to be both puzzling and commonly used in engineering: \textit{affordances} being a prime example. 
+As mentioned at the end of the literature review, engineering affordances are often defined as \qquotes{interaction between artifact and user in which properties of the artifact offer a potential use to the user} \cite{maierAffordanceBasedDesign2009}, but this is not an universally shared definition, and conceptual confusion persists in the disciplines (not only engineering) that make use of this concept.
+%Affordances were originally introduced by \cite{gibsonTheoryAffordances1979}, and popularized in engineering design by Maier and Fadel in a series of works (\cite{maier2001affordance,maierAffordanceBasedDesign2009}, among others) as a paradigm-shift from a function-based design, towards an interaction-based design, characterized by the focus on all the possible ways an user can interact with a product, included those unintended by the designer and not strictly relevant for the product function.
+%Briefly, affordances are \qquotes{what it [the environment] offers the animal, what it provides or furnishes, either for good or ill} \cite{gibsonTheoryAffordances1979}. That is, they are potential behaviours that the environment, or a part thereof, allows an agent to do. 
+%In engineering, they are often defined as the set of all the behaviours that an artifact enables a user to do \cite{brownRelationshipFunctionAffordance2005}, but this is far from being a universally shared definition.\myComment{\qquotes{interaction between artifact and user in which properties of the artifact offer a potential use to the user} \cite{maierAffordanceBasedDesign2009}}
+%The original example of Gibson was that a flat surface affords footing to an animal, while other examples could be a pool full of water, which affords a person to swim, or a briefcase, which, affords a person to be grabbed; so that one could say that \quotes{swimmability} and \quotes{grabbability} are affordances of the pool and the briefcase, respectively.
+%Unsurprisingly, an unsettled debate exists in the disciplines that make use of the concept of affordances, about their meaning \cite{brownRelationshipFunctionAffordance2005}, up to the point that some authors called for their abandonment \cite{motaDispensingTheoryPhilosophy2021}.
 We do not attempt to carry out an ontological analysis of affordances, but we do make two brief observations:
 \begin{itemize}
-  \item first, the reasons for the confusion around the concept of affordance may be, at least partially, the same for the concepts analyzed in this paper. They strongly depend on relations between entities, and they are potential.
+  \item first, the reasons for the confusion around the concept of affordance may be, at least partially, the same for the concepts analyzed in this paper. They strongly depend on relations between entities, and they are potential concepts, as opposite to actual.
   \item Second, one could attempt to reduce affordances to capability using, for example, the following informal equivalence:
   \bflist
     \item[\myex{affordances}] \mytext{An engineering artifact affords a user (or another artifact) to do something if and only if the system made by the artifact, the user (or the second artifact), and their relation has the capability to do that something}
@@ -1540,88 +1550,11 @@ Finally, as a further simplifying assumption, we define two binary relations tha
   \caption{A view of the ontology taxonomy in Protegé\TODO{UPDATARE IMMAGINE CHE E' VECCHIA}.\label{fig:screen_entities}}
 \end{figure}
 
-\subsection{evaluation}
-The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
-what components have a capability that corresponds to a given function:
-\begin{verbatim}
-PREFIX : <https://github.com/kataph/function-method-ontology#>
-SELECT  ?component
-	WHERE { 
-	    ?capability :definition-founded-on :<the given function> .
-		    ?capability :quality-of ?component}
-\end{verbatim}
-\begin{comment}PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX this: <https://github.com/kataph/function-method-ontology#>
-SELECT  ?component
-	WHERE { ?capability this:definition-founded-on this:convert_chemical_energy_into_electricity_1 .
-		?capability this:quality-of ?component}
-\end{comment}
-or what capacities of what components are involved in executing the \ontoFunc{fullPlural} present in a given system:
-\begin{verbatim}
-PREFIX : <https://github.com/kataph/function-method-ontology#>
-SELECT  ?component ?functionOntological ?capacity
-	WHERE { 
-		    ?functionSystemic :function-of ?component .
-		    ?functionSystemic :founded-on :<the given system> .
-		    ?functionSystemic :specializes ?functionOntological .
-		    ?capability :definition-founded-on ?functionOntological .
-		    ?capability :quality-of ?component .
-		    ?capability :founded-on ?capacity .
-		    ?capacity :quality-of ?component}
-\end{verbatim}
-\begin{comment}
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX this: <https://github.com/kataph/function-method-ontology#>
-SELECT  ?component ?capacity
-	WHERE { 
-		?component this:part-of this:electrical_circuit_1 .
-		?functionSystemic this:founded-on this:electrical_circuit_1 .
-		?functionSystemic this:specializes ?functionOntological .
-		?capability this:definition-founded-on ?functionOntological .
-		?capability this:quality-of ?component .
-		?capability this:founded-on ?capacity .
-		?capacity this:quality-of ?component}
-\end{comment}
-The previous queries showcase the possibility of linking capabilities to functions. This is important for one could develop, based on this link, an application allowing engineers to find whether they already have available components that can satisfy a given functional requirement, e.g. in early system design.
-
-The ontology also supports queries related to engineering \methodsName{plural} and their relation with functions.
-For example, the following query takes a given system as inputs and returns all systemic functions involved in a \methodsName{singular}, with their role (main-function or sub-function) and underlying component:
-\begin{verbatim}
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX : <https://github.com/kataph/function-method-ontology#>
-SELECT  ?component ?functionSystemic ?role ?method 
-WHERE { 
-    ?functionSystemic ?role ?method .
-    ?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
-    ?functionSystemic :function-of ?component  .
-    ?component :constant-part-of :<the given system>}
-\end{verbatim}
-\begin{comment}
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX : <https://github.com/kataph/function-method-ontology#>
-SELECT  ?component ?functionSystemic ?verb ?method
-	WHERE { ?functionSystemic ?verb ?method .
-		?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
-		?functionSystemic :function-of ?component }
-\end{comment}
-Given some \ontoFunc{fullSingular}, one can set a query to return the list of \methodsName{plural}, present in the database, that can be implemented through systemic-function specialisation of the input \ontoFunc{fullSingular}; or explain what \methodsName{singular}-(sub)types specialize a given \methodsName{singular}, and what systemic-function-types are required by that \methodsName{singular}. 
-This is useful, both during design, since it gives information about how to implement a given function, and during reverse engineering, since it explains how the parts of a system cooperate to carry out a function of coarse granularity. 
-
-Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
-Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
-(For the sake of example, the ontology is populated with a few individuals).
-
+\subsection{Evaluation}
 \subsection{Evaluation and possible applications}
-\TODO{
+Evaluation of 
 
+\TODO{
 1-Ontoclean
 2-OOPS
 3-CQs
@@ -1730,6 +1663,99 @@ Additionally, such methodology does not seem applicable to other activities, suc
 
 
 }
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
+what components have a capability that corresponds to a given function:
+\begin{verbatim}
+  PREFIX : <https://github.com/kataph/function-method-ontology#>
+  SELECT  ?component
+	WHERE { 
+    ?capability :definition-founded-on :<the given function> .
+    ?capability :quality-of ?component}
+  \end{verbatim}
+\begin{comment}PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX this: <https://github.com/kataph/function-method-ontology#>
+SELECT  ?component
+	WHERE { ?capability this:definition-founded-on this:convert_chemical_energy_into_electricity_1 .
+		?capability this:quality-of ?component}
+\end{comment}
+or what capacities of what components are involved in executing the \ontoFunc{fullPlural} present in a given system:
+\begin{verbatim}
+PREFIX : <https://github.com/kataph/function-method-ontology#>
+SELECT  ?component ?functionOntological ?capacity
+WHERE { 
+		    ?functionSystemic :function-of ?component .
+		    ?functionSystemic :founded-on :<the given system> .
+		    ?functionSystemic :specializes ?functionOntological .
+		    ?capability :definition-founded-on ?functionOntological .
+		    ?capability :quality-of ?component .
+		    ?capability :founded-on ?capacity .
+		    ?capacity :quality-of ?component}
+\end{verbatim}
+\begin{comment}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX this: <https://github.com/kataph/function-method-ontology#>
+SELECT  ?component ?capacity
+	WHERE { 
+		?component this:part-of this:electrical_circuit_1 .
+		?functionSystemic this:founded-on this:electrical_circuit_1 .
+		?functionSystemic this:specializes ?functionOntological .
+		?capability this:definition-founded-on ?functionOntological .
+		?capability this:quality-of ?component .
+		?capability this:founded-on ?capacity .
+		?capacity this:quality-of ?component}
+  \end{comment}
+The previous queries showcase the possibility of linking capabilities to functions. This is important for one could develop, based on this link, an application allowing engineers to find whether they already have available components that can satisfy a given functional requirement, e.g. in early system design.
+
+The ontology also supports queries related to engineering \methodsName{plural} and their relation with functions.
+For example, the following query takes a given system as inputs and returns all systemic functions involved in a \methodsName{singular}, with their role (main-function or sub-function) and underlying component:
+\begin{verbatim}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
+SELECT  ?component ?functionSystemic ?role ?method 
+WHERE { 
+    ?functionSystemic ?role ?method .
+    ?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
+    ?functionSystemic :function-of ?component  .
+    ?component :constant-part-of :<the given system>}
+\end{verbatim}
+\begin{comment}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
+SELECT  ?component ?functionSystemic ?verb ?method
+	WHERE { ?functionSystemic ?verb ?method .
+		?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
+		?functionSystemic :function-of ?component }
+\end{comment}
+Given some \ontoFunc{fullSingular}, one can set a query to return the list of \methodsName{plural}, present in the database, that can be implemented through systemic-function specialisation of the input \ontoFunc{fullSingular}; or explain what \methodsName{singular}-(sub)types specialize a given \methodsName{singular}, and what systemic-function-types are required by that \methodsName{singular}. 
+This is useful, both during design, since it gives information about how to implement a given function, and during reverse engineering, since it explains how the parts of a system cooperate to carry out a function of coarse granularity. 
+
+Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
+Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
+(For the sake of example, the ontology is populated with a few individuals).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Conclusion}\label{sec:conc}
 %%non riassuntive, bensi' esplicative
