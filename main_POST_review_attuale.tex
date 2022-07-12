@@ -476,7 +476,7 @@ The objective of our work is to answer the following research questions which ar
 %We list them here before going on with modeling, and we will use them in Section \ref{sec:appendice} when evaluating the ontology. 
 They all specialize the goal of clarifying the main concepts of this paper, i.e., functions, behaviours, capabilities, and capacities:
 \bflist
-  \item[\myRQ{RQ1}] How can the wide range of meanings carried by the term \quotes{function} be ontologically differentiated. In particular, how can the why-how and the abstraction-implementation axes present in functional concepts be explained?
+  \item[\myRQ{RQ1}] How can the wide range of meanings carried by the term \quotes{function} be ontologically differentiated and explained. %In particular, how can the why-how and the abstraction-implementation axes present in functional concepts be explained?
   %\item[\myRQ{RQ1}] How can the concepts of function, behaviour, capability, and capacity be clarified?
   \item[\myRQ{RQ1.1}] How can the functional decomposition of a system be explained and formalized?
   \item[\myRQ{RQ1.2}] What are capabilities and capacities and what is the difference between them (if any)?
@@ -1248,7 +1248,7 @@ In our terminology, we could say that tags identify roles that components play i
 \TODOinline{[SB: manca un risultato conclusivo che giustifichi perché ci fermiamo qui. bisogna dare almeno qualche indicazione di quali concetti di funzione usati in ingegneria cadono sotto questo approccio (nel senso che possono essere considerate specializzazioni di queste definizioni)][ Ho provato a inserire un paragrafo argomentando che le "generally valid functions" di Pahl e Beitz assomigliano alle funz.ont. e che i tag/sigle/functional location assomigliano alle fun.sys.]*[SB: ok, per ora va bene. magari in fase di revisione vediamo se riusciamo ad approfondire questo punto][FC:ok]}
 %\textcolor{blue}{(se capisco, le \ontoFunc{fullSingular} sono ruoli giocati dai perdurant. E qst perdurant sono i behaviour degli artefatti/sistemi che hanno come scopo la realizzazione di un certo goal.  Per aiutare i lettori, sottolinerei nel testo che la nozione di \ontoFunc{fullSingular} e' un ruolo/concetto (forse ho perso qst informazione))(FC: è sotto la definizione di funz. sys., ma per sicurezza ho aggiunto anche all'inizio di sottosezione)}
 
-\subsection{Functional decomposition}
+\subsection{Functional decomposition}\label{subsec:fun-dec}
 An important feature of functions in engineering is the possibility to decompose them into sub-functions. This also allows to refine the granularity of the system description. In this paragraph, we show how such decomposition relation can be used in order to formalize the difference between \ontoFunc{fullPlural} and engineering functions that we anticipated earlier.
 
 First, observe that such decomposition cannot be reduced to a partial order relation between functions.  
@@ -1568,23 +1568,19 @@ Finally, as a further simplifying assumption, we define two binary relations tha
 \begin{figure}
   \centering
   \includegraphics[width=0.45\textwidth]{entities_screenshot.PNG}
-  \caption{A view of the ontology taxonomy in Protegé\TODO{UPDATARE IMMAGINE CHE E' VECCHIA}.\label{fig:screen_entities}}
+  \caption{A view of the ontology taxonomy in Protegé.\label{fig:screen_entities}}
 \end{figure}
 
-\subsection{Evaluation}
-\subsection{Evaluation and possible applications}
-The ontology developed in this paper is a hand-crafted prototype that discusses middle and high-level concepts. 
-Therefore, some common approaches to evaluation cannot be employed, as, for example, there is no \qquotes{gold standard} \cite{}, or set of formal ontologies that one could use to compare common ontology metrics (such as those extracted by \cite{}) with.
-Instead, we will evaluate our ontology using the OntoClean methodology  \cite{guarinoOverviewOntoClean2009} and the Ontology Pitfall Scanner \cite{poveda2014oops}. 
-Moreover, we will discuss how our ontology answers the research questions \TODO{\ref{}-\ref{}}, as well as some competency questions that will serve to demponstrate the expressibility potential of the ontology.
-Finally, we will also discuss some\TODO{quanti?} possible application scenarios, though we higlight that the ontology main goals are the research questions \ref{}-\ref{}, while we delegate the developement of application-level ontologies in relevant domains to further work.
+Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
+Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
+(For the sake of example, the ontology is populated with a few individuals).
 
-\TODO{
-1-Ontoclean
-2-OOPS
-3-CQs
-4-Casi d'uso immaginari
-5-requirements}
+\subsection{Evaluation}
+The ontology developed in this paper is a hand-crafted prototype that discusses middle and high-level concepts. 
+Therefore, some common approaches to evaluation cannot be employed, as, for example, there is no \qquotes{gold standard} \cite{sfarGoldStandardBased2016}, or set of formal ontologies that one could use to compare common ontology metrics (such as those extracted by OntoMetrics\footnote{\url{https://ontometrics.informatik.uni-rostock.de/ontologymetrics/index.jsp}.}) with, neither there is a precise application against which carry out the evaluation. 
+Instead, we will evaluate our ontology using the OntoClean methodology  \cite{guarinoOverviewOntoClean2009} and the Ontology Pitfall Scanner \cite{poveda2014oops}. 
+Moreover, we will discuss how our ontology answers the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, as well as some competency questions that will serve to demonstrate the expressibility potential of the ontology.
+Finally, we will also discuss some possible application scenarios, though we highlight that the ontology main goals are the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, while we delegate the development of application-level ontologies in relevant domains to further work.
 
 \paragraph{OntoClean.} OntoClean does not identify any issue in our taxonomy, that is, none of the meta-level rules that OntoClean methodology enforces are violated.
 In fact, this is almost trivial to check: since we are extending \DOLCE categories, the only possible source of issues would be if the extensions of the role-concepts (that is, the set of all entities that, at a given time, are classified by the role-concept) were not anti-rigid: the other rules that must be checked in OntoClean methodologies are trivially true. 
@@ -1609,22 +1605,130 @@ The scanner did not find relevant issues in the ontology: the only issue is the 
 
 % ("Can the authors identify any use cases, motivating scenarios, or competency questions that their ontology could address in real engineering design practices"):
 \paragraph{Research questions and competency questions}
-We argue that 
+Our ontology answers the research questions listed in the introduction. 
+In particular:
+\begin{itemize}
+  \item \textbf{Answer to \refRQ{RQ:RQ1}.} We modeled functions as \DOLCE-concepts that classify certain classes of perdurants. 
+  This modeling choice explains how functions can exist even when they are not executed.
+  Moreover, we separated functions into the distinct categories of engineering methods and (proper) functions, and, further, we separated functions into systemic or ontological depending on their abstraction level, thus explaining the ambiguity on the why-how or abstraction-implementation axes.
+  \item \textbf{Answer to \refRQ{RQ:RQ1.1}.} Systemic functions can be decomposed in the way discussed in Subsection \ref{subsec:fun-dec}, in such a way that an engineering method describes how a decomposition must happen. 
+  \item \textbf{Answer to \refRQ{RQ:RQ1.2}.} We have attempted full definitions of capabilities and capacities in Section \ref{sec:CapabilAndCapac}. In the first case we leveraged ontological functions, in the second case we committed to consider capacities as parameters of capabilities. Moreover, capabilities and capacities are clearly separated by the use of the founding relation: capabilities are founded on capacities, while the opposite does not hold.     
+\end{itemize} 
+Moreover, since the formal ontology answers these research questions, it is also able to answer related competency questions, which can be of interest in applications.
 
 \bflist
-  %\item[\myCQ{cq1}] What is the function of a given component? <--trivial
-  \item[\myCQ{cq2}] Given an (ontological) function, which artifacts have the capability of satisfying it?
-  \item[\myCQ{cq3}] Given an (ontological or systemic) function, which methods can be employed to implement it?
-  \item[\myCQ{cq8}] Which parameters explain the performance of a capability or of a function?
+\item[\myCQ{first-function-capability}] Given an (ontological) function, which artifacts have the capability of satisfying it? %%IM
+\item[\myCQ{function-implementation}] How can the given ontological function be implemented? %Given an (ontological or systemic) function, which methods can be employed to implement it? %%NIM
+\item[\myCQ{capability-founded}] What are the capacities that a given capability is founded on?%Which parameters explain the performance of a capability or of a function? %%IMMAGINE
+%\item[\myCQ{function-parameter}] Which characteristics of which components are involved in executing the \ontoFunc{fullPlural} present in a given system? %% RODONDANTE CON LA PROSSIMA
+\item[\myCQ{function-parameter2}] Which parameters explain the performance of the functions in a given system?
+\item[\myCQ{function-decomposition}] Which is the functional decomposition of a given system? %%IM
+%\item[\myCQ{function-implementation}] How can the given ontological function be implemented? RIDONDANTE
+%\item[\myCQ{method-specialisation}] What does this engineering method need? RIMOSSA
+\item[\myCQ{last-tag-function}] Which is the function of the given tag and what is its purpose?
 \eflist
 
-Motivating scenarios:
+% 1 IM what components have a capability that corresponds to a given function:
+% 2 what \methodsName{singular} could implement a given \ontoFunc{fullSingular}, 
+% 3 what are the capacities that a given capability is founded on, 
+% 3 IM in IMMAGINE what is their value for a given object (Figure \ref{fig:screen_query}). 
+% 4 IM what capacities of what components are involved in executing the \ontoFunc{fullPlural} present in a given system:
+% 5 IM For example, the following query takes a given system as inputs and returns all systemic functions involved in a \methodsName{singular}, with their role (main-function or sub-function) and underlying component:
+% 6 Given some \ontoFunc{fullSingular}, one can set a query to return the list of \methodsName{plural}, present in the database, that can be implemented through systemic-function specialisation of the input \ontoFunc{fullSingular}; %% DUPLICATO
+% 7 or explain what \methodsName{singular}-(sub)types specialize a given \methodsName{singular}, and what systemic-function-types are required by that \methodsName{singular}. RIMOSSO
+% 8 Which is the function of this tag. 
+
+Of course, the RDF schema of our ontology supports many more competency questions, we chose some of the most interesting. 
+Additionally, many do not need our ontological analysis of functions and related concepts at all (e.g., \qquotes{what is the value of a certain property of the given component}).
+% \bflist
+% \item[\myCQ{cq1}] What is the function of a given component?
+% \item[\myCQ{cq1bis}] What is the value of a given property of a given component?
+% \item[\myCQ{cq1tris}] What is the value of a given property of a given component?
+% \eflist
+
+
+The \OWL ontology, after being populated, can be used to answer the competency questions \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function} by means of SPARQL queries. 
+For example, these are implementations of \refCQ{CQ:first-function-capability}:
+\begin{verbatim}
+  PREFIX : <https://github.com/kataph/function-method-ontology#>
+  SELECT  ?component
+  WHERE { 
+    ?capability :definition-founded-on :<the given function> .
+    ?capability :quality-of ?component}
+\end{verbatim}
+of \refCQ{CQ:function-parameter2}:
+\begin{verbatim}
+  PREFIX : <https://github.com/kataph/function-method-ontology#>
+  SELECT  ?component ?functionOntological ?capacity
+  WHERE { 
+          ?functionSystemic :function-of ?component .
+          ?functionSystemic :founded-on :<the given system> .
+          ?functionSystemic :specializes ?functionOntological .
+          ?capability :definition-founded-on ?functionOntological .
+          ?capability :quality-of ?component .
+          ?capability :founded-on ?capacity .
+          ?capacity :quality-of ?component}
+\end{verbatim}
+and of \refCQ{CQ:function-decomposition}, provided that the functional decomposition of a system is interpreted as the list of all systemic functions of the given system involved in a \methodsName{singular}, with their role (main-function or sub-function) and underlying component:
+\begin{verbatim}
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX : <https://github.com/kataph/function-method-ontology#>
+  SELECT  ?component ?functionSystemic ?role ?method 
+  WHERE { 
+      ?functionSystemic ?role ?method .
+      ?method rdf:type/rdfs:subClassOf* :EngineeringMethod .
+      ?functionSystemic :function-of ?component  .
+      ?component :constant-part-of :<the given system>}
+\end{verbatim}
+The remaining competency questions can be implemented in a similar way (see also \ref{fig:screen_query} for \refCQ{CQ:capability-founded}).
+
+\medskip
+The fact that our ontology can answer all these questions proves its expressive capability.
+In the following paragraphs we explain how such capability could be used in application scenarios.
+
+% Motivating scenarios:
+
+\subsection{Motivating scenarios}
+%The previous [1-2] queries showcase the possibility of linking capabilities to functions. This is important for one could develop, based on this link, an application allowing engineers to find whether they already have available components that can satisfy a given functional requirement, e.g. in early system design.
+\paragraph{Innovative Design.}
+A good portion of the literature on functional modelling argues that functional modelling can be used to improve engineering design.
+For instance, the basic argument of the German school is as follows: designers should start from the customer's requirements, translate them into high-level functions, then decompose those functions into less abstract ones, until arriving at a point where finding a solution that realizes the functions is easy \cite{pahl_engineering_2007}.
+This methodology, is argued, facilitates engineers to come up fast with high-quality designs and enhances their creativity by decoupling the goals of the design from the ways they are achieved.
+
+This argument is not wrong, but, during actual practice, one rarely starts from a blank slate. 
+Instead, designers are typically constrained by the need to reuse pre-existing solutions, for a company may have developed a legacy that is difficult to depart from, possibly because the company would not be able to (profitably) reroute its know-how and resources towards innovative lines of products, or other reasons.
+Therefore, designers usually have to devise marginal improvements or corrections for pre-existing solutions, and these activities seem at odds with the aforementioned methodology. % or ways to readapt them for marginally more general situations. 
+Additionally, such methodology is design-oriented and does not seem relevant to other activities, such as troubleshooting or reverse engineering, despite functional reasoning being clearly relevant for those.
+
+One important reason for carrying out ontological analysis is to bridge all such activities and cases, by producing an explicit representation (the ontology) of the shared conceptualisation of the relevant stakeholders, which can be used by all of them.
+We argue that our ontology is useful for the blank-slate innovation scenario (for, e.g., competency questions \refCQ{CQ:first-function-capability} and \refCQ{CQ:capability-founded} showcase the possibility of linking capabilities to functions, which is important since it allows engineers to find whether they already have available components that can satisfy a given functional requirement), as well as many other scenarios, some of which we describe briefly in the following. 
+
+\paragraph{Incremental innovation} In a company, innovation may happen mainly through incremental changes in pre-existing products. 
+Therefore, product types will have a version history, in which each new version improves on the former. 
+Using our ontology, one could describe some\footnote{For example, our ontology by itself is not able to express the case, which is typical, that a new version of a product has been released to repair a known widespread issue.} of such improvements, allowing their digitalisation in a semantically meaningful way. 
+For instance, a new version may introduce new capabilities than the former, or it may have the same capabilities, but it could realize them better due to different capacities. 
+Storing such information could be more helpful to engineers than just storing the bill of material corresponding to the different versions in the enterprise management system.
+
+\paragraph{Knowledge transfer} An engineer or technician could have been recently employed by a manufacturing company. 
+In that case, he is (hopefully) trained to learn about the company's products and their functioning. 
+Still, a good part of the knowledge the company possesses, especially functional knowledge, is implicit. 
+Therefore, the trainee will learn about it only through experience or through its background knowledge of the domain. 
+This works, but it may be a slow process, and some knowledge could be lost. 
+Building a knowledge base modelling functional knowledge (necessarily together with other types of information, e.g. geometrical from CAD models, etc.) could facilitate training since it would relieve the trainee from having to deduce the functionality of components from their structure, as well as the (functional) role of components within their systems. 
+%Additionally, maintaining a knowledge base of engineering methods could be an effective way to record the company's know-how, which may very well be unique to that company, and, therefore,  
+
+\paragraph{Troubleshooting} When a technician troubleshoots a product he often makes use of functional reasoning (e.g., \qquotes{the volume of the speakers is constantly louder than it should be. It may be that there is something wrong with the amplifier circuit, since it is that component that has the function of controlling the volume}). 
+Sometimes, a technician may lack sufficient knowledge about the functional structure of a product to carry out such reasoning fruitfully (say, it is an external contractor with limited knowledge of the company which manufactures the product). 
+In those cases, a clear rapresentation of the product functional structure, if accessible to the technician, may solve the issue. 
+
 \paragraph{Formal Requirements.}
 Requirements are an essential part of engineering design, which engineers have to write, share, maintain, and implement. 
 The ensuing work and documentation can be daunting, especially in large progects. Therefore, attempts have been made to standardize \cite{alrumaihDomainOntologyRequirements2020}, trace \cite{murtazinaOntologybasedApproachSupport2019}, and automatize \cite{holterScopeDetectionTextual2021} requirement pipelines using ontologies. 
 %Some of these approaches discuss properties of requirements themselves, for example, they build a taxonomy of requirement types %\TODO{[cit]} or they develop vocabularies for the activities carried out during requirement managememnt %\TODO{[cit]}. 
 Some approaches discuss how requirements should be written, so that their quality, shareability, and even automatic verification against a design model can be assured (e.g., \cite{jinxinlinRequirementOntologyEngineering1996, chenOntologybasedRequirementVerification2020}).
 In the latter case, requirements are usually interpreted as assertions (constraints) about an engineering artifact that can be expressed (at least some of them can) in a formal language. 
+The fact that the requirement refers to something that \textit{should be}, and not to something that \textit{is}, means that requirements are modal concepts, though this can be left implicit in formal representations.  
 For example, a requirement translated directly from a client's request, could be that the product, say a table, \qquotes{must weight as little as possible}, then engineers could precise this by stating 
 \bflist
   \item[\myex{req1}] $ weight(table\_top) \leq 5kg \land weight(i_{th}\_table\_leg) \leq 2kg$, for $i = 1,2,3,4$. 
@@ -1663,39 +1767,16 @@ This means that they are assertions of the form
 \bflist
   \item[\myex{SCD}] $ \text{S} \sqcap \text{C} \sqsubseteq \text{D}  $
 \eflist
-where S, C, and D are \OWL classes, for example (example, taken from \cite{overliAssetInformationModelling2021}), \qquotes{Equipment with a transport dry weight above 1000 kg shall be weighed by the manufacturer and a weight certificate shall be issued} is written in such a form, if S, C, and D are interpreted as the classes \quotes{Equipment}, \quotes{things with transport dry weight above 1000 kg}, \quotes{things that have a weight certificate}, respectively.   
+where S, C, and D are \OWL classes, for example (the example is taken from \cite{overliAssetInformationModelling2021}), \qquotes{Equipment with a transport dry weight above 1000 kg shall be weighed by the manufacturer and a weight certificate shall be issued} is written in such a form, if S, C, and D are interpreted as the classes \quotes{Equipment}, \quotes{things with transport dry weight above 1000 kg}, \quotes{things that have a weight certificate}, respectively.   
 Again, it is difficult to express functions- and performance-related requirements in form \refex{ex:SCD} if one lacks an appropriate reference ontology. 
 
 To summarize, using our ontology, one could enhance current work aimed at the digitalisation of written requirements, by facilitating the assertion of requirements related to product performance and functions.
 
-\paragraph{Knowledge Transfer.}
-
-\paragraph{Innovative Design vs Representation of Pre-existing Solutions.}
-A good portion of the literature on functional modelling argues that functional modelling can be used to improve engineering design.
-The basic argument is as follows: designers should start from the custumer's requirements, translate them in high-level functions, then decompose those functions into less abstract ones, until arriving to a point where finding a solution that realizes the functions is easy \TODO{\cite{..}}.
-This methodology, is argued, facilitates engineers to come up fast with high-quality designs and enhances their creativity by decoupling the goals of the design from the ways they are achieved.
-
-This argument is not wrong, but, during actual practice, one rarely start from a blank slate. 
-Instead, designers are typically constrained by the need to reuse pre-existing solutions, for a company may have a developed a legacy that is difficult to depart from, possibly because the company would not be able to (profitably) rerout its know-how and resources towards innovative lines of products.
-Therefore, designers usually have to devise marginal improvements or corrections for pre-existing solutions, and these activities seem at odds with the aforementioned methodology. % or ways to readapt them for marginally more genereral situations. 
-Additionally, such methodology does not seem applicable to other activities, such as diagnostic or reverse engineering, despite functional reasoning being clearly relevant for those. \cite{}
-
-[...]
-
-%\paragraph{Malfunction Record.}
-%todo <- no
- 
-%-READI
-%-FUNCTIONAL REP
-%-KNOWLEDGE TRANSFER
-%-PREEXISTING THINGYES
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\myComment{
 The \OWL ontology, after being populated, can be used to query information about the functionality of objects. For example, one could query what \methodsName{singular} could implement a given \ontoFunc{fullSingular}, or what are the capacities that a given capability is founded on, and what is their value for a given object (Figure \ref{fig:screen_query}). Moreover, one could query  
 what components have a capability that corresponds to a given function:
 \begin{verbatim}
@@ -1772,7 +1853,7 @@ This is useful, both during design, since it gives information about how to impl
 
 Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
 Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
-(For the sake of example, the ontology is populated with a few individuals).
+(For the sake of example, the ontology is populated with a few individuals).}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1788,6 +1869,10 @@ Finally, we partially translated our first-order theory in \OWL, showcasing a pr
 
 Our approach builds on a series of previous works, especially on the study of functionality carried out by engineers and researchers, in particular \cite{pahl_engineering_2007, sasajimaFBRLFunctionBehavior1995, mizoguchiUnifiedDefinitionFunction2012}; the study of resources in manufacturing, in the applied ontology literature as well as some standards  \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021, jochemISOISO15531312004}; and the top-level ontology \DOLCE and its developments \cite{masoloSocialRolesTheir2004, masoloWonderWebDeliverableD182003}.
 The novelty of our work is the in-depth ontological analysis, which,  exploiting a common ontological framework, clarifies the conceptualisation of functions and related concepts in a systematic way.
+
+We evaluated the quality of our implementation using by assessing the clarity, expressive capability, and flexibility of our ontology with respect to some research questions, some competency questions, and some application scenarios. 
+The relevance of our work is precisely the ability to answer questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2} and \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function}, among others, so that it could be able to support applications in most applied scenarios where functional reasoning is required. 
+We highlight, though, that we delegate to further work the specialisation of our work to an application-level.\TODO{<--FC:check if ok.}
 %\begin{figure}[t]
 %\includegraphics{}
 %\caption{Figure caption.}\label{f1}
