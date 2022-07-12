@@ -406,11 +406,11 @@ Trento, \cny{Italy}\printead[presep={\\}]{e1}\printead[presep={\\}]{e2}}
 
 In both applied ontology and engineering, functionality is a well-researched topic, since it is through teleological causal reasoning that domain experts build mental models of engineering systems, giving birth to functions. 
 These mental models are important throughout the whole lifecycle of any product, being used from the design phase up to any \myComment{eventual}  diagnosis activity. 
-Though a vast amount of work to represent functions has already been carried out, the literature has not settled on a shared and well-defined methodology yet. 
-This work develops preliminary steps towards an ontological description of functions and related concepts, such as behaviour, capability, and capacity.
+Though a vast amount of work to represent functions has already been carried out, the literature has not settled on a shared and well-defined \myComment{methodology} approach yet. 
+This work develops \myComment{preliminary} some crucial steps towards an ontological description of functions and related concepts, such as behaviour, capability, and capacity.
 A conceptual analysis of such notions is carried out using the top-level ontology DOLCE as a framework, and 
 the ensuing logical theory is formally described in first-order logic and OWL, showing how ontological concepts can model major aspects of engineering products in applications.
-In particular, it is shown how functions can be distinguished from implementation methods, and how functions can differentiate between capabilities and capacities of a product. 
+In particular, it is shown how functions can be distinguished from the implementation methods to realize them, \myComment{and} how \myComment{functions} one can differentiate between capabilities and capacities of a product, and how these are related to engineering functions. 
 \end{abstract}
 
 \begin{keyword} 
@@ -420,6 +420,7 @@ In particular, it is shown how functions can be distinguished from implementatio
 \kwd{Function}
 \kwd{Behaviour}
 \kwd{Capability}
+\kwd{DOLCE}
 \end{keyword}
 
 \end{frontmatter}
@@ -459,9 +460,9 @@ Moreover, the study of \firstTimeKeyWord{functional decomposition}, that is, the
 By and large, functional decomposition consists in associating the product function with a combination of sub-functions whose execution (in a certain order and with suitable coordination) is equivalent to the execution of the main function. This decomposition simplifies both the design process and the implementation of the functional requirements into a concrete physical system.
 Of course, functional decomposition is not limited to the design of engineering systems. 
 In fact, during the teleological analysis of a system, artificial or natural, domain experts speak about functions of both the system and its parts.
-Therefore, one is always confronted with the problem of how simpler functions contribute to coarser granularity functions, so that functional decomposition is ubiquitous. %, which themselves push the system towards the desired state.
-Since in engineering there exist standard ways to execute functions\footnote{For example, the use of gearboxes made in a certain way in order to increase or reduce angular velocity. Another example: a brushless electric motor may be understood as the class subsuming all models of brushless electric motors, but it can also be recognized as a method by which electric energy can be converted to torque.}, 
-we can speak of \firstTimeKeyWord{engineering \methodsName{plural}}\footnote{If the \methodsName{singular} is not standard, say if it has just been introduced, we still call it an engineering \methodsName{singular}. In fact, in such a case, the term can refer to the principles and theories, which are shared among engineers, that the implementation follows.}, or solutions \cite{pahl_engineering_2007}, or `ways' of functional achievement \cite{kitamuraOntologicalModelDevice2006}. \myComment{, the last two terms taken from \cite{pahl_engineering_2007} and \cite{kitamuraOntologicalModelDevice2006} respectively}   
+Therefore, one is always confronted with the problem of how simpler functions contribute to functions with coarser granularity, so that functional decomposition is ubiquitous. %, which themselves push the system towards the desired state.
+Since in engineering there exist standard ways to execute functions\footnote{For example, the use of gearboxes made in a certain way in order to increase or reduce angular velocity, and \myComment{. Another example:} a brushless electric motor \myComment{may be understood as the class subsuming all models of brushless electric motors, but it can also be recognized as a method by which electric energy can be converted to torque.} as a way to convert electric energy to torque.}, 
+we can speak of \firstTimeKeyWord{engineering \methodsName{plural}}\footnote{If the \methodsName{singular} is not standard, say if it has just been introduced, we still call it an engineering \methodsName{singular}. In fact, in such a case, the term can refer to the principles and theories, which are shared among engineers, on which the implementation \myComment{follows} relies.}, or solutions \cite{pahl_engineering_2007}, or `ways' of functional achievement \cite{kitamuraOntologicalModelDevice2006}. \myComment{, the last two terms taken from \cite{pahl_engineering_2007} and \cite{kitamuraOntologicalModelDevice2006} respectively}   
 
 %% Si elencano research question (quali problemi aperti a cui rispondere)
 % research questions: 
@@ -525,16 +526,15 @@ Then, it is natural to wonder what in a function is fully objective. Behaviour, 
 Even the term behaviour is used ambiguously and without any universally shared definition. 
 The ambiguity has such consequences so that some authors classified the multiple uses of behaviour in engineering literature: 
 Kitamura et al. \cite{kitamuraOntologyBasedFunctionalKnowledgeModeling2004} determine four types of device behaviour\footnote{They explicitly exclude static behaviours such as supporting, though.}, depending on whether the device changes the state of another device, its own state, or the state of one of its operands. Within the second behaviour type two additional cases are distinguished: the operand can either stay in the same position or `move' from the input to the output ports (the latter case is called \firstTimeKeyWord{B1 behaviour}, for example, \quotes{a motor converts electrical energy to torque} and \quotes{the signal intensity is increased by the amplifier} are examples of B1 behaviour, while \quotes{the temperature in the room is increased by the oven} is not a B1 behaviour, neither is \quotes{the turbine is rotating}).
-Instead, in \cite{chandrasekaranFunctionDeviceRepresentation2000}, Chandrasekaran and Josephson divide behaviours mainly depending on their time duration (instant, interval, or unspecified).
+\myComment{Instead} For another view, in \cite{chandrasekaranFunctionDeviceRepresentation2000}, Chandrasekaran and Josephson divide six types of behaviours mainly depending on their time duration (instant, interval, or unspecified) and the values of the state variables during that time.
 
 %\TODO{vedere se inserire qui discorso differenza tra behaviour astratti e concreti--->nope(?): non inserire}
 
-The link between function and behaviour generally reflects the duality between objectivity and intentionality: some authors state that behaviour is what a device does, whilst function is what a device is for \cite{kleer_qualitative_1984}, others focus on describing behaviour as a sequence of state changes and functions as abstractions of behaviours with a goal in mind \cite{umedaFunctionBehaviourStructure1990}.  
+The link between behaviour and function generally reflects the duality between objectivity and intentionality: some authors state that behaviour is what a device does, whilst function is what a device is for \cite{kleer_qualitative_1984}, others focus on describing behaviour as a sequence of state changes and functions as abstractions of behaviours with a goal in mind \cite{umedaFunctionBehaviourStructure1990}.  
 In \cite{sasajimaFBRLFunctionBehavior1995, sasajimaInvestigationDomainOntology1994}, Sasajima et al. state that function is made from behaviour plus additional teleological information called \quotes{functional topping}.
 Specifically, the functional topping allows, among other things, distinguishing the different functions that a device can execute (e.g. an electrical resistor could be devised for either heating the environment or for dropping the input voltage, and the functional topping in these two cases is different\myComment{a heat exchanger could be devised for either heating or cooling depending on the context, and the functional topping in these two cases is different}\footnote{More precisely, when the resistor is used for heating, the functional topping tags as `Focus' the heat flow exiting the output port, when the resistor is used for dropping the voltage, it is the electric energy output of the resistor that is tagged `Focus'.}).
 %More precisely, when the exchanger is used as heater, the functional topping tags the heat flow exiting the output port with the label `Need', instead, when the exchanger is used as a cooler, the heat flow entering the input port is tagged with the label `NoNeed'. 
 %\TODOinline{[mi sembra strano, ricontrolla per favore][FC: hai ragione, avevo spiegato sbagliato. Ho anche sostituito con una resistenza elettrica che ha 3 porte invece di 4 ed è più semplice]}}).
-
 In \cite{chandrasekaranFunctionDeviceRepresentation2000}, functions are the sum of intentions and sets of behavioural constraints, defined, essentially, as causal relations between devices states.
 
 %\TODO{differenza tra implementation way e resto?}
@@ -542,9 +542,9 @@ In \cite{chandrasekaranFunctionDeviceRepresentation2000}, functions are the sum 
 % Review parte 3: vari sistemi utilizzati
 In any case, to date numerous modelling frameworks have been developed in order to deal with functional and behavioural representation of engineering systems (e.g., Umeda et al.'s FBS \cite{umedaFunctionBehaviourStructure1990}, Sasajima et al.'s FBRL \cite{sasajimaFBRLFunctionBehavior1995}, Sembugamoorthy and Chandrasekaran's FR \cite{sembugamoorthy1986functional}, Goel et al.'s SBF \cite{goelUseDesignPatterns2004}, Qian and Gero's FBS \cite{qianFunctionBehaviorStructure1996}).
 %\footnote{This acronym stands for Function-Behaviour-Structure, while the one by Umeda et al. stands for Function-Behaviour-State. They are still almost homonymous, since State is used as a synonym for Structure by Umeda et al..} \cite{qianFunctionBehaviorStructure1996}, and several others.
-It would be impossible to explain briefly the characteristics of and the differences between these frameworks. Still, oversimplifying, one can isolate commonalities: all of them tend to see the structure of a device as a set of parts (components) together with their attributes and the relations between them. Then, typically, they say that a behaviour is a sequence of states of the components. The definition of function is more \myComment{murky} complex, but, \textit{de facto}, a function is often used as a label for a subset of behaviours. Finally, they often recognize a dependence of functions on behaviours, and of behaviours on the structure. 
+It would be impossible to explain briefly the characteristics of and the differences between these frameworks. Still, oversimplifying, one can isolate commonalities: all of them tend to see the structure of a device as a set of parts (components) together with their attributes and the relations between them. Then, typically, they say that a behaviour is a sequence of states of the components. The definition of function is more \myComment{murky} complex but, \myComment{\textit{de facto}} again roughly speaking, a function is used as a label for a subset of behaviours. Finally, they \myComment{often} mostly recognize a dependence of functions on behaviours, and of behaviours on the structure. 
 There are, of course, key differences. 
-For example, behaviour in Chandrasekaran’s FR scheme refers to a causal process while behaviour in Gero’s FBS representation pertains to the properties of a structural component.
+For example, (functional) behaviour in Chandrasekaran’s FR scheme refers to a causal process while behaviour in Gero’s FBS representation pertains to the properties of a structural component.
 Or the fact that Gero and Chandrasekaran explicitly allow for decomposition of functions into behaviours, while in Sasajima's approach a decomposition of functions in behaviours is forbidden and functions decompose only into other functions.  
 
 Among the previous frameworks, we find particularly interesting the development of FBRL. 
@@ -567,13 +567,13 @@ In addition, some topics such as the link between function and malfunction, the 
 
 % review parte 4: tentativi di formalizzazione e intersezione con l'ontologia
 
-Despite the utility of an ontological analysis of these topics, the attempts carried until now are limited. 
+Despite the utility of an ontological analysis of these topics, the attempts carried out until now are limited. 
 A few research works have formalized part of the FR system \cite{borgoFormalOntologicalPerspective2009}, started a formalisation of the Functional Basis vocabulary (and the conceptualisation it is based on) with the upper ontology \DOLCE \cite{borgoOntologicalRepresentationFunctional2009, borgoFormalizationFunctionsOperations2011}, compared the Functional Basis either with the FR system \cite{garbaczTwoOntologydrivenFormalisations2011} or with both FR and FBRL \cite{kitamuraDeepSemanticMapping2008}, and the function decomposition relation has been analyzed with ontological techniques \cite{vermaasFunctionalDecompositionMereology2009a,vermaasFormalImpossibilityAnalysing2013}. 
 Additionally, applied ontology has influenced engineering literature, as shown by the description of functions as roles played by behaviours \cite{mizoguchiUnifiedDefinitionFunction2012, kitamuraOntologicalModelDevice2006, chandrasekaranFunctionDeviceRepresentation2000}, or the classification of behaviours as occurrents \cite{kitamuraOntologicalModelDevice2006}.
 
 % review parte 4.2: la varie TLO e le funzioni
 Still, no shared reference ontology of functions exists, and top-level ontologies do not explore theories of functions as understood in engineering. 
-For example, \DOLCE makes no mention of function within its specification \cite{masoloWonderWebDeliverableD182003}.%, and only later work was proposed to see function execution as a particular type of events, namely achievements \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
+For example, \DOLCE makes no mention of function within its specification  ~\cite{masoloWonderWebDeliverableD182003}. %, and only later work was proposed to see function execution as a particular type of events, namely achievements \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
 The last version of \YAMATO classifies functions as roles and behaviours as processes\footnote{Note that even if processes exist as a category also in \DOLCE, in that \TLO behaviours are still more similar to events and not processes. This is because the process category of \YAMATO and the one of \DOLCE are different: in \YAMATO processes wholly exist at each point in time, while in \DOLCE they are a special kind of events. \YAMATO  and \DOLCE are instead aligned on the notion of events. %are complete realisations of \YAMATO-processes (e.g. \quotes{the motor accelerated} vs \quotes{the motor is accelerating}).
 } 
 caused by an unintentional actor. %, and delegates the description of a functional ontology to a series of additional papers \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}. 
@@ -586,24 +586,24 @@ The last development of ISO 15926 \cite{kluwerISO159261420202020} adopts \BFO vi
 In truth, despite the relatively small space that functions occupy in these upper-level ontologies, their authors have been discussing functionality more in length in various series of research papers. 
 For example, \DOLCE's authors suggest seeing functions as particular types of events, while behaviours are `qualifications of the participation relation' in that they explain the specific way a device participates in a specific event \cite{borgoCapabilitiesCapacitiesFunctionalities2021,borgoFormalizationFunctionsOperations2011, garbaczTwoOntologydrivenFormalisations2011}. %Some authors describe classes of functions as particular classes of occurrents. For example, the Functional Basis function `to convert' is interpreted as the class of all events in which a flow is converted (e.g., whenever a combustion engine consumes some fuel to move a vehicle, that conversion of chemical energy to kinetic energy is a function of `to convert' type).%% As anticipated before, the engineering functions listed in fb are here interpreted as types whose instances are perdurants of certain kinds. EngFun(p) −→ PD(p). (26) -- quote from two formalisations...
 %% to distribute is a class of perdurants in which a certain flow is broken up. EngFuncðxÞ!PDðxÞ -- quote from borgoFormalizationFunctionsOperations2011 
-On the other hand, \YAMATO's authors, deepen their idea of functional ontology in a series of additional papers, among them \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}, in which they confirm and expand their claim that functions are roles played by behaviours, which are themselves a certain class of process (notice that \YAMATO's authors are same research group behind FBRL development).
+On the other hand, \YAMATO's authors deepen their idea of functional ontology in a series of additional papers, among them \cite{kitamuraOntologicalModelDevice2006, kitamuraCharacterizingFunctionsBased2013, mizoguchiFunctionalOntologyArtifacts2009}, in which they confirm and expand their claim that functions are roles played by behaviours, which are themselves a certain class of process (notice that \YAMATO \myComment{'s authors are same research group behind FBRL development} and FBRL were developed by the same research group).
 
 The view of \GFO's authors has some similarities with the one of FBRL, in that functions despite not being roles themselves, are linked to `functional items', which are roles played by the entities realizing the function. Functions themselves are complex entities, composed of a functional item, a label to identify them, and descriptions of the initial and final states corresponding to the function execution, called `requirements' and `goals', respectively \cite{burekToplevelOntologyFunctions2006,burekOverviewGFOFunctions2021}. The typical example is the function `to transport oxygen', which is linked to the functional item `oxygen transporter' which can be played by a red blood cell. Then, a requirement for the realisation of the function is the presence of oxygen in the red blood cell environment and the goal is the presence of oxygen in the body cells that need it for cellular respiration. Another similarity with the FBRL is the development of teleological relations between functions similar to meta-functions. For example, \cite{burekToplevelOntologyFunctions2006} mentions the relations `support', `enable', and `prevent', depending on the fact that the goal of the first function fulfills partially, completely, or is incompatible with the requirement of the second function (cfr. with \cite{kitamuraMetaFunctionsArtifacts1999}, which also uses the term `enable' and `prevent', among others). 
 %Support – one function supports the other if its goal fulfills partially the second function’s requirements (the goal of the first function is a proper part of the requirements of the second function).  Enable – one function enables the other if its goal fulfills all of the second function’s requirements (the requirements of the second function are a part of the goal of the first function).  Prevent – one function prevents the other if its goal excludes the requirements of the second. 
 %The functional item is a role played by this entity in any realization of the function. In the case of ‘‘to transport oxygen’’, it would be an oxygen transporter. -- burek
 
 Coming to \BFO, the view of functions as special dispositions was expanded and defended by its authors \cite{arpFunctionRoleDisposition2008,spearFunctionsBasicFormal2016}, as well as criticized by some philosophers, such as Jansen and Röhl \cite{rohlWhyFunctionsAre2014,jansenFunctionsMalfunctioningNegative2018}. 
-A full description of this debate is beyond the scope of this paper, we just mention that while \BFO maintains functions as a subclass of dispositions, while Jansen argues that functions and dispositions are disjoint, though related, categories. 
+A full description of this debate is beyond the scope of this paper, we just mention that while \BFO maintains functions as a subclass of dispositions, Jansen and Röhl argue that functions and dispositions are disjoint, though related, categories. 
 More specifically, in \BFO functions are defined as follows \cite{spearFunctionsBasicFormal2016}:
 \begin{quote}
   \qquotes{f is a disposition \& f exists in virtue of its bearer’s physical make-up \& this physical make-up is something that this bearer possesses because it came into being, either through evolution (in the case of natural biological entities) or through intentional design (in the case of artifacts), in order to realize processes of a certain sort.}
 \end{quote} 
 This entails, among other things, that, if a function ceases to exist, then the physical make-up of its bearer changes as well (this is true for all dispositions in \BFO).
 On the other hand, Jansen and Röhl argue that functions are \qquotes{externally grounded}.
-Moreover, a major point of disagreement concerns malfunctions, in that Jansen argues that malfunctioning entities are entities that have a function, but lack the means to realize it, for example because they have lost the required dispositions; while Barry et al. maintain that when an entity malfunctions it loses its function, partially or completely, and is recognized as an entity of its kind only because of its history, if at all (e.g., a cancerous lung is not a lung).
-Notice that in both of these positions functions and roles are disjoint subclasses of realizable entities, on the ground that roles are coincidental for their players, while functions are essential for their players.
+Moreover, a major point of disagreement concerns malfunctions, in that Jansen argues that malfunctioning entities are entities that have a function, but lack the means to realize it, for example because they have lost the required dispositions; while Smith and colleagues maintain that when an entity malfunctions it loses its function, partially or completely, and is recognized as an entity of its kind only because of its history, if at all (e.g., a cancerous lung is not a lung).
+Notice that in both of these positions functions and roles are assumed to be disjoint subclasses of realizable entities, on the ground that roles are \myComment{coincidental} accidental for their players, while functions are essential for their players.
 
-\TODO{[...]?}.
+%\TODO{[...]?}.
 
 %We have drawn a table which summarizes these different ontological positions
 % \begin{table}[]
@@ -623,17 +623,17 @@ Notice that in both of these positions functions and roles are disjoint subclass
 As we have seen, 
 the meaning of function is ambiguous even within the ontology community. 
 Moreover, it is generally not considered a top-level concept, and thus it is marginally covered by top-level ontologies. 
-Unfortunately, to our knowledge, the ontology community has not produced a shared middle or domain-level ontology dealing with functions\footnote{The taxonomy of an ontology of functions, which is still under development, was proposed by Borgo et al. in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}.}. 
+Unfortunately, to our knowledge, the ontology community has not produced a shared middle or domain-level ontology dealing with functions\footnote{An initial taxonomy of an ontology of functions in this sense, which is resumed and extended in this paper, was proposed by Borgo et al. in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}.}. 
 
 % review parte 5.2: ribadimento deglio obbiettivi di ricerca dell'introduzione?
 Given the current situation, an ontological analysis clarifying the domain of functionality would be quite useful.
 This paper aims to provide an initial step in the direction of developing a systemic ontological treatment of functionality, focusing in particular on the engineering domain.
 It might be true that the ambiguity of function terminology is both necessary and rational for engineers \cite{vermaasConceptualElusivenessEngineering2012}. 
 %It may very well be so, and we shall not formalize what \emph{the} meanings of behaviour and function are %\TODO{mettere citazione chandra.}.
-Still, we maintain that formalisation is useful in order to show differences between the possible approaches. Moreover, it is useful, if not necessary, to develop applications that rely on functional reasoning.
+Still, we maintain that formalisation is needed for interoperability and to show differences between the possible approaches. Moreover, it is useful, if not necessary, to develop applications that rely on functional reasoning.
 
 \medskip
-In conclusion of this section, we mention very briefly some facts about some other engineerign concepts of complex ontological status: capabilities and capacities, and affordances. 
+In conclusion of this section, we briefly mention \myComment{very briefly some facts about some} other engineering concepts \myComment{of complex} whose ontological status is quite complex: capabilities, capacities, and affordances. 
 Capacities and, especially, capabilities are used in resource modelling \cite{jarvenpaaDevelopmentOntologyDescribing2019a, sarkarOntologyModelProcess2019, jochemISOISO15531312004, solanoKnowledgeRepresentationProduct2014}. In addition, terminological problems are present also for these two concepts, which are rarely formalized \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021}. When distinguished, capabilities and capacities are separated along a qualitative-quantitative axis, for example ISO 15531-31\cite{jochemISOISO15531312004} states that \quotes{Capacity is strictly a quantitative concept} while \quotes{Capability is essentially a functional and qualitative concept}, and exemplify capacity with product throughput and define capability as \quotes{the quality of being able to perform a given activity}. The same standard advises against reducing capacities as characteristics of capabilities and forbids the opposite (in contradiction to \cite{solanoKnowledgeRepresentationProduct2014}, where a \quotes{Capacity is a Capability
 expressed in terms of amount of production}).
 In any case, in this paper we will try to formalize, in a preliminary way, some intuitions that transpire from the literature on resource modelling, such as the asymmetry between capacities and capabilities, the close link (but not identity) between capabilities and functionality, qualitative vs quantitative aspects, and the idea of capabilities as qualities of being able to do something.
@@ -1507,7 +1507,7 @@ In this context, we could say that the pump has been selected because of its pum
 %\TODOinline{[SB: assiomi e def in owl dovrebbero essere chiaramente distinti usando, e.g., \textbf{a14$_{owl}$}][FC:fatto]}
 \subsection[meta]{Reduction to \OWL ontology}
 In order to facilitate the deployment of our theory in applications, we reduce it from first-order logic to the \OWL language. 
-This is standard practice, for at least the following reasons: first, \OWL is decidable, while first-order logic is not, so that reasoning task will terminate in finite time\footnote{though they have exponential complexity, in the general case\TODO{citazione}}. Second, \OWL is a standard endorsed by the World Wide Web Consortium (W3C) and is part of the Semantic Web technology stack \cite{OWL2-QUICK-REFERENCE}, and is the language of choice for many ontologies in various domains \cite{OWL-ontology-repositories}.
+This is standard practice, for at least the following reasons: first, \OWL is decidable, while first-order logic is not, so that reasoning task will terminate in finite time\footnote{though they have exponential complexity, in the general case.\myComment{\TODO{citazione}}}. Second, \OWL is a standard endorsed by the World Wide Web Consortium (W3C) and is part of the Semantic Web technology stack \cite{OWL2-QUICK-REFERENCE}, and is the language of choice for many ontologies in various domains \cite{OWL-ontology-repositories}.
 
 Unfortunately, the increased computational properties of \OWL come with a tradeoff with respect to its expressibility, therefore, one has to simplify the first-order theory. 
 The original theory is still useful as it constrains with more detail the \OWL concepts, and provides a more expressive language for conceptual modeling. 
@@ -1579,16 +1579,16 @@ Any of these could be used to align the ontology developed in this paper with \D
 The ontology developed in this paper is a hand-crafted prototype that discusses middle and high-level concepts. 
 Therefore, some common approaches to evaluation cannot be employed, as, for example, there is no \qquotes{gold standard} \cite{sfarGoldStandardBased2016}, or set of formal ontologies that one could use to compare common ontology metrics (such as those extracted by OntoMetrics\footnote{\url{https://ontometrics.informatik.uni-rostock.de/ontologymetrics/index.jsp}.}) with, neither there is a precise application against which carry out the evaluation. 
 Instead, we will evaluate our ontology using the OntoClean methodology  \cite{guarinoOverviewOntoClean2009} and the Ontology Pitfall Scanner \cite{poveda2014oops}. 
-Moreover, we will discuss how our ontology answers the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, as well as some competency questions that will serve to demonstrate the expressibility potential of the ontology.
-Finally, we will also discuss some possible application scenarios, though we highlight that the ontology main goals are the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, while we delegate the development of application-level ontologies in relevant domains to further work.
+Moreover, we will discuss how our ontology answers the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, as well as some competency questions that will serve to demonstrate the expressive potential of the ontology.
+Finally, we will also discuss some possible application scenarios, though we highlight that the ontology main goals are the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, while we delegate the development of derived application-level ontologies to further work.
 
 \paragraph{OntoClean.} OntoClean does not identify any issue in our taxonomy, that is, none of the meta-level rules that OntoClean methodology enforces are violated.
 In fact, this is almost trivial to check: since we are extending \DOLCE categories, the only possible source of issues would be if the extensions of the role-concepts (that is, the set of all entities that, at a given time, are classified by the role-concept) were not anti-rigid: the other rules that must be checked in OntoClean methodologies are trivially true. 
-This does not happen, since functions, as we defined them, are contextual (e.g., a heat exchanger, with its behaviour, may be used either to heat a substance or to cool it, depending on the context). 
-The ease of using OntoClean is mainly due to our use of a (clean) upper-level ontology as reference. 
+This condition is not violated, since (systemic) functions, as we defined them, are contextual (e.g., a heat exchanger, with its behaviour, may be used either to heat a substance or to cool it, depending on the context). 
+The ease of applying OntoClean is mainly due to our use of a (clean) upper-level ontology as reference. 
 
 \paragraph{Ontology Pitfall Scanner} The \OWL ontology was evaluated with the Ontology Pitfall Scanner (OOPS!) \cite{poveda2014oops}, which searches common design errors from a list of 41 items.  
-The scanner did not find relevant issues in the ontology: the only issue is the fact that the ontology URI, \url{https://github.com/kataph/function-method-ontology/blob/main/function-method-ont.owl}, contains the \qquotes{.owl} file extension.\TODO{check if true alla fine}.
+The scanner did not find relevant issues in the ontology: the only issue is the fact that the ontology URI on GitHub, \url{https://github.com/kataph/function-method-ontology/blob/main/function-method-ont.owl}, contains the \qquotes{.owl} file extension.\TODO{memo: check if true alla fine di tutto}.
 
 % % The Ontology Pitfall scanner (OOPS!) evaluates an
 % % ontology by searching for design pitfalls considered
@@ -1611,10 +1611,10 @@ In particular:
   \item \textbf{Answer to \refRQ{RQ:RQ1}.} We modeled functions as \DOLCE-concepts that classify certain classes of perdurants. 
   This modeling choice explains how functions can exist even when they are not executed.
   Moreover, we separated functions into the distinct categories of engineering methods and (proper) functions, and, further, we separated functions into systemic or ontological depending on their abstraction level, thus explaining the ambiguity on the why-how or abstraction-implementation axes.
-  \item \textbf{Answer to \refRQ{RQ:RQ1.1}.} Systemic functions can be decomposed in the way discussed in Subsection \ref{subsec:fun-dec}, in such a way that an engineering method describes how a decomposition must happen. 
+  \item \textbf{Answer to \refRQ{RQ:RQ1.1}.} Systemic functions can be decomposed in the way discussed in Subsection \ref{subsec:fun-dec}, where each decomposition is described an engineering \methodsName{singular}. %in such a way that an engineering method describes how a decomposition must happen. 
   \item \textbf{Answer to \refRQ{RQ:RQ1.2}.} We have attempted full definitions of capabilities and capacities in Section \ref{sec:CapabilAndCapac}. In the first case we leveraged ontological functions, in the second case we committed to consider capacities as parameters of capabilities. Moreover, capabilities and capacities are clearly separated by the use of the founding relation: capabilities are founded on capacities, while the opposite does not hold.     
 \end{itemize} 
-Moreover, since the formal ontology answers these research questions, it is also able to answer related competency questions, which can be of interest in applications.
+Additionally, since the formal ontology answers these research questions, it is also able to answer related competency questions, which can be of interest in applications, such as the following:
 
 \bflist
 \item[\myCQ{first-function-capability}] Given an (ontological) function, which artifacts have the capability of satisfying it? %%IM
@@ -1639,13 +1639,12 @@ Moreover, since the formal ontology answers these research questions, it is also
 % 8 Which is the function of this tag. 
 
 Of course, the RDF schema of our ontology supports many more competency questions, we chose some of the most interesting. 
-Additionally, many do not need our ontological analysis of functions and related concepts at all (e.g., \qquotes{what is the value of a certain property of the given component}).
+Additionally, many possible questions would not need our ontological analysis of functions and related concepts at all to be formulated (e.g., \qquotes{what is the value of a certain property of the given component}).
 % \bflist
 % \item[\myCQ{cq1}] What is the function of a given component?
 % \item[\myCQ{cq1bis}] What is the value of a given property of a given component?
 % \item[\myCQ{cq1tris}] What is the value of a given property of a given component?
 % \eflist
-
 
 The \OWL ontology, after being populated, can be used to answer the competency questions \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function} by means of SPARQL queries. 
 For example, these are implementations of \refCQ{CQ:first-function-capability}:
@@ -1691,7 +1690,7 @@ In the following paragraphs we explain how such capability could be used in appl
 
 \subsection{Motivating scenarios}
 %The previous [1-2] queries showcase the possibility of linking capabilities to functions. This is important for one could develop, based on this link, an application allowing engineers to find whether they already have available components that can satisfy a given functional requirement, e.g. in early system design.
-\paragraph{Innovative Design.}
+\paragraph{Innovative Design (and other things).}
 A good portion of the literature on functional modelling argues that functional modelling can be used to improve engineering design.
 For instance, the basic argument of the German school is as follows: designers should start from the customer's requirements, translate them into high-level functions, then decompose those functions into less abstract ones, until arriving at a point where finding a solution that realizes the functions is easy \cite{pahl_engineering_2007}.
 This methodology, is argued, facilitates engineers to come up fast with high-quality designs and enhances their creativity by decoupling the goals of the design from the ways they are achieved.
@@ -1707,11 +1706,11 @@ We argue that our ontology is useful for the blank-slate innovation scenario (fo
 \paragraph{Incremental innovation} In a company, innovation may happen mainly through incremental changes in pre-existing products. 
 Therefore, product types will have a version history, in which each new version improves on the former. 
 Using our ontology, one could describe some\footnote{For example, our ontology by itself is not able to express the case, which is typical, that a new version of a product has been released to repair a known widespread issue.} of such improvements, allowing their digitalisation in a semantically meaningful way. 
-For instance, a new version may introduce new capabilities than the former, or it may have the same capabilities, but it could realize them better due to different capacities. 
+For instance, a new version may introduce new capabilities, or it may have the same capabilities as the former version, but it could realize them better due to different capacities. 
 Storing such information could be more helpful to engineers than just storing the bill of material corresponding to the different versions in the enterprise management system.
 
 \paragraph{Knowledge transfer} An engineer or technician could have been recently employed by a manufacturing company. 
-In that case, he is (hopefully) trained to learn about the company's products and their functioning. 
+In that case, they are (hopefully) trained to learn about the company's products and their functioning. 
 Still, a good part of the knowledge the company possesses, especially functional knowledge, is implicit. 
 Therefore, the trainee will learn about it only through experience or through its background knowledge of the domain. 
 This works, but it may be a slow process, and some knowledge could be lost. 
@@ -1720,7 +1719,8 @@ Building a knowledge base modelling functional knowledge (necessarily together w
 
 \paragraph{Troubleshooting} When a technician troubleshoots a product he often makes use of functional reasoning (e.g., \qquotes{the volume of the speakers is constantly louder than it should be. It may be that there is something wrong with the amplifier circuit, since it is that component that has the function of controlling the volume}). 
 Sometimes, a technician may lack sufficient knowledge about the functional structure of a product to carry out such reasoning fruitfully (say, it is an external contractor with limited knowledge of the company which manufactures the product). 
-In those cases, a clear rapresentation of the product functional structure, if accessible to the technician, may solve the issue. 
+In those cases, a clear rapresentation of the product functional structure, if accessible to the technician, may solve the issue.
+For example, a query answering \refCQ{CQ:function-parameter2} may be useful in this  case.
 
 \paragraph{Formal Requirements.}
 Requirements are an essential part of engineering design, which engineers have to write, share, maintain, and implement. 
@@ -1870,9 +1870,9 @@ Finally, we partially translated our first-order theory in \OWL, showcasing a pr
 Our approach builds on a series of previous works, especially on the study of functionality carried out by engineers and researchers, in particular \cite{pahl_engineering_2007, sasajimaFBRLFunctionBehavior1995, mizoguchiUnifiedDefinitionFunction2012}; the study of resources in manufacturing, in the applied ontology literature as well as some standards  \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021, jochemISOISO15531312004}; and the top-level ontology \DOLCE and its developments \cite{masoloSocialRolesTheir2004, masoloWonderWebDeliverableD182003}.
 The novelty of our work is the in-depth ontological analysis, which,  exploiting a common ontological framework, clarifies the conceptualisation of functions and related concepts in a systematic way.
 
-We evaluated the quality of our implementation using by assessing the clarity, expressive capability, and flexibility of our ontology with respect to some research questions, some competency questions, and some application scenarios. 
-The relevance of our work is precisely the ability to answer questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2} and \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function}, among others, so that it could be able to support applications in most applied scenarios where functional reasoning is required. 
-We highlight, though, that we delegate to further work the specialisation of our work to an application-level.\TODO{<--FC:check if ok.}
+We evaluated the quality of our implementation by assessing the clarity, expressive capability, and flexibility of our ontology with respect to some research questions, some competency questions, and some application scenarios. 
+The relevance of our work is precisely the ability to answer questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2} and \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function}, and similar others, so that the ontology could be able to support applications in most applied scenarios where functional reasoning is required. 
+We highlight, though, that we delegate to further work the specialisation of our ontology to an application-level.\TODO{<--FC:check if ok.}
 %\begin{figure}[t]
 %\includegraphics{}
 %\caption{Figure caption.}\label{f1}
