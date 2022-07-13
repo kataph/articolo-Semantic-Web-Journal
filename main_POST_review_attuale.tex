@@ -569,7 +569,7 @@ In addition, some topics such as the link between function and malfunction, the 
 
 Despite the utility of an ontological analysis of these topics, the attempts carried out until now are limited. 
 A few research works have formalized part of the FR system \cite{borgoFormalOntologicalPerspective2009}, started a formalisation of the Functional Basis vocabulary (and the conceptualisation it is based on) with the upper ontology \DOLCE \cite{borgoOntologicalRepresentationFunctional2009, borgoFormalizationFunctionsOperations2011}, compared the Functional Basis either with the FR system \cite{garbaczTwoOntologydrivenFormalisations2011} or with both FR and FBRL \cite{kitamuraDeepSemanticMapping2008}, and the function decomposition relation has been analyzed with ontological techniques \cite{vermaasFunctionalDecompositionMereology2009a,vermaasFormalImpossibilityAnalysing2013}. 
-Additionally, applied ontology has influenced engineering literature, as shown by the description of functions as roles played by behaviours \cite{mizoguchiUnifiedDefinitionFunction2012, kitamuraOntologicalModelDevice2006, chandrasekaranFunctionDeviceRepresentation2000}, or the classification of behaviours as occurrents \cite{kitamuraOntologicalModelDevice2006}.
+Additionally, applied ontology has influenced engineering literature, as shown by the description of functions as roles played by behaviours \cite{mizoguchiUnifiedDefinitionFunction2012, kitamuraOntologicalModelDevice2006, chandrasekaranFunctionDeviceRepresentation2000}, or the classification of behaviours as occurrents\footnote{An ontological category similar to \DOLCE's perdurants, see Section \ref{sec:DOLCE}.}  \cite{kitamuraOntologicalModelDevice2006}.
 
 % review parte 4.2: la varie TLO e le funzioni
 Still, no shared reference ontology of functions exists, and top-level ontologies do not explore theories of functions as understood in engineering. 
@@ -721,7 +721,7 @@ It follows that the characterisation of relational qualities is a complex matter
 
 
 
-Turning now to perdurants ($\DOLCEPerdurant{\cdot}$), which we will also refer to as occurents in this paper\TODO{S: perché creiamo questa potenziale confusione terminologica? possiamo evitarla?[FC: sì, l'unica cosa è che ogni tanto il verbo 'to occur' no ha alternative. Però i sostantivi 'occurrent(s)' si potrebbero sostituire coi sostantivi 'perdurant(s)']}, in \DOLCE they are entities that are only partially present at any time they are present.\footnote{Ordinary physical objects such as cars, trees, rocks, etc. are considered fully present at every time in which they exist.} For example, a chemical process, the lifting of a load, and a sitting action are only partially present at each instant at which they happen. Indeed, the initial part of a chemical process is not present when the process reached the midway point, and vice versa.  %only when considered with their full time extension. 
+Turning now to perdurants ($\DOLCEPerdurant{\cdot}$)\myComment{, which we will also refer to as occurrents in this paper\TODO{S: perché creiamo questa potenziale confusione terminologica? possiamo evitarla?[FC: sì, l'unica cosa è che ogni tanto il verbo 'to occur' no ha alternative. Però i sostantivi 'occurrent(s)' si potrebbero sostituire coi sostantivi 'perdurant(s)']}}, in \DOLCE they are entities that are only partially present at any time they are present.\footnote{Ordinary physical objects such as cars, trees, rocks, etc. are considered fully present at every time in which they exist.} For example, a chemical process, the lifting of a load, and a sitting action are only partially present at each instant at which they happen. Indeed, the initial part of a chemical process is not present when the process reached the midway point, and vice versa.  %only when considered with their full time extension. 
 \DOLCE uses three mereological properties to distinguish perdurants: cumulativity, homeomericity, and atomicity.
 Cumulativity holds if the sum of two instances of a type has the same type, that is, if the type is closed under mereological sum. Consider, for example, \quotes{walking}: if we consider two walking activities, then the activity that comprises both is still an activity of type \quotes{walking}.
 Cumulative perdurants\footnote{More precisely, instances of a cumulative type perdurant.} are called \firstTimeKeyWord{stative} ($\DOLCEStative{\cdot}$), while the ones that are never cumulative are called \firstTimeKeyWord{eventive}.
@@ -955,7 +955,7 @@ Other differences exist in the literature, such as device-centric vs. environmen
 
 
 %\TODOinline{[Ho tolto la discussione su (ex1), può generare confusione e non serve per i nostri scopi]}
-%Following common practice in the literature, in this paper we define behaviours as occurrents. 
+%Following common practice in the literature, in this paper we define behaviours as perdurants. 
 % More precisely, one could be tempted to subsume the class of behaviours in the category of \DOLCE processes, since behaviours are usually called \quotes{processes}:
 % \bflist
 % \item[\myex{behaviorSubsum}] $ \BehaviourConcrete{x} \myfi \DOLCEProcess{x} $
@@ -1047,8 +1047,8 @@ In this context, a function is seen as the contribution of the behaviour of an i
   \item \mytext{$x$ is a systemic function of $y$ if and only if $x$ is a role and there exist a system $z$ and a goal $g$ for $z$ such that $y$ is constant part of $z$, and $x$ is satisfied only by behaviours which have $y$ as doer and causally contribute to achieve $g$}}
   \item[\mydf{functionOf}] $ \FunctionSysOf{x}{y} \myiff (\DOLCERole{x} \land 
   \exists z,g,b,t (\System{z} \land \goalOf{g}{z}  \land  \DOLCECLby{b}{x}{t} \land \DOLCEPart{y}{z}{t} \\ \land
-    \forall b',t' ((\DOLCECLby{b'}{x}{t'} \land \DOLCEPart{y}{z}{t'}) \myfi (\BehaviourConcrete{b'} \land 
-      \participateAsDoer{y}{b'}{t'} \\ \hfill{} \land \causallyContr{b'}{g}))))  $ \TODO{S: mettendo $\DOLCEPart{y}{z}{t}$ nell'antecedente dell'implicazione allora $b$ non è più un evento necessariamente relativo a $y$ e potrebbe essere in altri momenti un evento che non è neppure un behaviour. non è quello che vogliamo, quindi dovremmo avere solo $\DOLCECLby{b'}{x}{t'}$ nell'antecedente. [FC: potrebbe essere che nella formula, come stava scritta prima, mancasse un "$\land$" tra la prima e la seconda riga, ma tranne quello mi sembra che la nuova formula sia equivalente alla vecchia]}
+    \forall b',t' (\myComment{(}\DOLCECLby{b'}{x}{t'} \myComment{\land \DOLCEPart{y}{z}{t'})} \myfi (\BehaviourConcrete{b'} \land 
+      \participateAsDoer{y}{b'}{t'} \\ \hfill{} \land \causallyContr{b'}{g}))))  $ \TODO{S: mettendo $\DOLCEPart{y}{z}{t}$ nell'antecedente dell'implicazione allora $b$ non è più un evento necessariamente relativo a $y$ e potrebbe essere in altri momenti un evento che non è neppure un behaviour. non è quello che vogliamo, quindi dovremmo avere solo $\DOLCECLby{b'}{x}{t'}$ nell'antecedente. [FC: potrebbe essere che nella formula, come stava scritta prima, mancasse un "$\land$" tra la prima e la seconda riga, ma tranne quello mi sembra che la nuova formula sia equivalente alla vecchia][FC:ahhhhh, adesso ho capito cosa volevi dire! Sì, direi che bisogna rimuovere la seconda congiunzione. Ho rimosso.]}
   \item \mytext{$x$ is a systemic function of $y$ if and only if $x$ is a role and there exist a system $z$ and a goal $g$ for $z$ such that $x$ is satisfied only by behaviours which have $y$ as doer and causally contribute to achieve $g$, whenever $y$ is  part of $z$}\footnote{This means that the term \quotes{systemic} in \quotes{systemic function} refers to the dependence of such role-concept to a system, and does not imply that the player artifact is a system itself. For example, if a wood table is held together by screws, those screws do have systemic functions in the table-system: they connect the table-legs to the table-top, even though single screws may not be systems themselves.}
   
 %  \item [] {``A systemic function is a role concept that 
@@ -1072,12 +1072,20 @@ Note that, by assuming that a function is present whenever is played by a behavi
 definition \refdf{def:function} entails that systemic functions are specifically existentially dependent on systems. If we also assume that systemic functions are external to systems\TODO{S: non funziona, intanto dovremmo imporre che behaviour è external e dipendente su altro (non lo abbiamo detto in formule), se non vogliamo mettere assiomi allora questa condizione va messa nella formula altrimenti non è un teorema. 
 se invece vogliamo usare l'assioma a4 allora founded va limitato a $founded_{Inst}$ (ma forse non basta, bisogna fare la prova...) [FC: non ho capito. Nella mia testa c'è questa successione di passi:
 \bflist
-\item $\FunctionSys{x}\land\DOLCEPRE{x}{t} \myfi $
-\item $\exists b\  \DOLCECLby{b}{x}{t} \myfi $ usando al definizione d8,d9
-\item $\exists y,g,z\  \participateAsDoer{y}{b}{t} \land \causallyContr{b}{g} \land \goalOf{g}{z} \myfi$ (chiaramente se il comportamento di y contribuisce al goal g di un sistema z, il systema z è presente al tempo t)
-\item $\DOLCEPRE{z}{t}$ 
+\item Voglio dimostrare che x systemic function implica che c'è un system z su cui x è founded.
+\medskip
+\item founded vuol dire external-to + dipendenza esistenziale costruita con il predicato \DOLCEPRE{.}{.}.
+\item se dimostro che $ \FunctionSys{x} \myfi \exists y (\System{y} \land \specificallyDependsOn{x}{y}) $, allora siamo a posto, perché la rimanente parte sull'essere esterno è assunta per ipotesi ("assume that systemic functions are external to systems"-effettivamente mi viene in mente che si potrebbe argomentare che i ruoli funzionali fanno parte di un sistema, però lo stiamo escludendoo per ipotesi).
+\medskip
+\item la dipendenza specifica è definita come $\specificallyDependsOn{x}{y} \myiff (\exists t(\DOLCEPRE{x}{t}) \land \forall t(\DOLCEPRE{x}{t} \myfi \DOLCEPRE{y}{t}))$, quindi dobbiamo dimostrare che 
+\medskip
+\item 1.una funzione systemica è presente a un qualche tempo. Ma questo è garantito per le categorie di DOLCE da (Td15) : $(\text{ED}(x)\lor \text{PD}(x)\lor \text{Q}(x))\myfi \exists t (\DOLCEPRE{x}{t})$
+\medskip
+\item 2.quando la funzione sistemica $x$ è presente, allora è presente anche un certo system $z$  ($\DOLCEPRE{x}{t} \myfi \DOLCEPRE{z}{t})$. Cosa vuol dire che un ruolo è presente? In testa avevo 
+"$$\DOLCEPRE{r}{t} \land \DOLCERole{r} \myfi \exists t',p ~ (\DOLCECLby{p}{r}{t} \land \DOLCEPart{t'}{t})  \  (*)$$ ", che però effettivamente non sta da nessuna parte. Aggiungendolo, e usando d8-d9, si trova che ogni volta che la funzione sistemica è presente, c'è un'entità classificata (almeno in un sotto-tempo $t'$, parte di $t$), che è il behaviour di una componente del sistema. Adesso rimane solo da accettare una cosa del tipo "$(\System{z}\land\BehaviourConcrete{b}\land\goalOf{g}{z}\land\causallyContr{b}{g}\land\exists t~(\DOLCEPart{y}{z}{t})) \myfi \DOLCEPart{y}{z}{t}$"
+(che mi sembra pacifica, anche se effettivamente non ci sono assiomi per dedurla), per determinare che $\DOLCEPRE{z}{t'}$, dove $t'$ è parte di $t$ come in (*). Adesso, rinunciando a catene mereologiche infinite trai tempi, che comunque non è quello il punto e si potrebbero escludere aggiungedo assiomi simili a (*), data l'arbitrarietà di $t$, necessariamente $t'$ si può prendere come uguale a tutto $t$.
+Questo prova la dipendenza specifica dalle funzioni sistemica ai sistemi, e quindi la prova, per le ossefvazioni di sopra.
 \eflist
-quindi x depends on z, inoltre z è esterno a x per l'ipotesi espressa prima della formula "assume that systemic functions are external to systems", quindi, per definizione x founded-on z
 ]} (indeed, systems are neither qualities, parts, nor constituents of systemic function roles), one obtains the following:
 \bflist
 \item[\mythr{functionSys-founded}] $ \FunctionSys{x} \myfi \exists y (\System{y} \land \founded{x}{y}) $  
@@ -1094,7 +1102,7 @@ of realizing a needed transformation, the devices cannot be \textit{a priori} as
 Therefore, to solve this problem, a more general concept of function is needed, as the one introduced in \cite{borgoKnowledgebasedAdaptiveAgents2019}. We call such functions \firstTimeKeyWord{\ontoFunc{fullPlural}} as they are relative only to the ontological system one is using. These functions address general transformation needs perhaps without even addressing how a transformation occurs or to what entities it should apply. The informal intuition of \ontoFunc{fullPlural} is that they are classified according to the ontological change they realize between the input and the output states. In this sense, they are independent of systemic functions. Yet, every systemic function is associated with one or more \ontoFunc{fullPlural}, depending on the changes it classifies. 
 
 %%%
-More precisely, our reasoning is that a complete description of occurrences is extremely complicated to obtain. 
+More precisely, our reasoning is that a complete description of predurants (occurrences) is extremely complicated to obtain. 
 For instance, walking may be considered a simple action, but, in order to describe such a process, one needs to \qquotes{project} the walking onto some limited viewpoints, such as the variation of the distance of the feet from the floor, the plane trajectory of the body's center of mass, the changing contact forces between the feet and the floor, as well as those developing into the leg joints, and so on. 
 In addition, one can, for sake of simplicity, disregard dynamic behaviour and only consider these \qquotes{projections} at some finite set of time instants, and think of them as transitions between states.
 Then, each of these \qquotes{projections} is itself a (simplification of) part of the original process.
@@ -1203,7 +1211,7 @@ At this point we make three observations:
   Then, using the Functional Basis one is reduced to using just the term \textit{remove} to talk about the functions realizing such features in the workpiece.
   Instead, if one uses a domain ontology that contains concepts such as hole, slot, groove, etc., then one can build corresponding functional terms, say \textit{make hole}, \textit{make slot}, \textit{to groove}, etc., defined analogously to the previous formulas.
   Such terms may be more natural than just using \quotes{removing}, and may even differ significantly  from \quotes{removing}, depending on their precise formalisation.
-  Another example: in the Functional Basis vocabulary, the term \quotes{stop} means \quotes{to cease the transfer of a flow}, for instance \quotes{A reflective coating on a window stops the transmission of UV radiation through a window} \cite{hirtz_functional_2002}. But what if occurrents are important in our domain and we want to say that something \textit{stops a process} (e.g., \qquotes{The addition of a respiratory inhibitor stops the absorption of amino acids}, not that \qquotes{stops the amino acid-material-flow from moving}, but that it \qquotes{stops the absorption}, where absorption is an important element of the domain?
+  Another example: in the Functional Basis vocabulary, the term \quotes{stop} means \quotes{to cease the transfer of a flow}, for instance \quotes{A reflective coating on a window stops the transmission of UV radiation through a window} \cite{hirtz_functional_2002}. But what if perdurants are important in our domain and we want to say that something \textit{stops a process} (e.g., \qquotes{The addition of a respiratory inhibitor stops the absorption of amino acids}, not that \qquotes{stops the amino acid-material-flow from moving}, but that it \qquotes{stops the absorption}, where absorption is an important element of the domain?
   %Altro esempio: camiamento di stato come camiamento di *stato* o cambiamento di *stato di aggregazione*
   We could derive useful functional terms, from an appropriate domain ontology managing concepts of domain processes.
 \end{itemize}
@@ -1231,12 +1239,12 @@ Since \qquotes{a formula expressed in the language of an upper or reference onto
 \end{figure}
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{onto-func-logic.JPG}
-  \caption{\label{fig:onto-func-logic} A non exhaustive taxonomy of the changes between states, classified depending on what predicates differ between the initial and final states.}
+  \includegraphics[width=\textwidth]{onto-func-logicv2.JPG}
+  \caption{\label{fig:onto-func-logic} A non exhaustive taxonomy of the logical formulas describing changes between states, classified depending on what predicates differ between the initial and final states.}
 \end{figure}
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{onto-func-taxa.JPG}
+  \includegraphics[width=\textwidth]{onto-func-taxav2.JPG}
   \caption{\label{fig:onto-func-taxa} A possible taxonomy of \ontoFunc{fullPlural}. The light blue rectangles contain the \ontoFunc{fullPlural}-categories. The gray circles contain the corresponding type of change at a logical level, and refer to Figure \ref{fig:onto-func-logic}. Finally, the yellow rectangles contain terms used by other authors that could, arguably, used to label the \ontoFunc{fullSingular} category: H, P\&B, and O refers to \cite{hirtz_functional_2002}, \cite{pahl_engineering_2007}, and \cite{sasajimaFBRLFunctionBehavior1995} respectively. Notice that some of these terms are used by their authors with different meaning than in this figure, additionally, we do not have added terms related with information content.}
 \end{figure}
 %%%
@@ -1260,7 +1268,7 @@ The intuition is that we can group systemic functions together through common ch
 
 %Such ontologically functions reflect a perdurant taxonomy based on functional grounds, meaning that a given taxonomy of perdurants corresponds to a taxonomy of functions as given in \cite{borgoKnowledgebasedAdaptiveAgents2019}. TODO:<--reinserire-->
 %
-%, by stating that functions of some type must be played only by occurrents of the corresponding type. 
+%, by stating that functions of some type must be played only by perdurants of the corresponding type. 
 %As said, we obtain the types of \ontoFunc{fullPlural} using the variation of some condition before and after the realisation of the function. For example, it is common to speak of `connect' or `change' functions \cite{pahl_engineering_2007}, that is, of functions whose underlying perdurant is such that the number of operands or, respectively, the operand type is modified during the event. Similarly, other ontological  functions-types could be obtained considering variation of other properties, as done in \cite{borgoCapabilitiesCapacitiesFunctionalities2021} and \cite{borgoKnowledgebasedAdaptiveAgents2019}, or specializing existing \ontoFunc{fullPlural} to special cases, e.g. specialize `change' to `change electrical energy into torque'.
 %In this paper, we do not characterize further the taxonomy of \ontoFunc{fullPlural}, nor discuss the organisation of their taxonomy beyond what presented in \cite{borgoKnowledgebasedAdaptiveAgents2019}. 
 
@@ -1279,10 +1287,9 @@ In our terminology, we could say that tags identify roles that components play i
 %\textcolor{blue}{(se capisco, le \ontoFunc{fullSingular} sono ruoli giocati dai perdurant. E qst perdurant sono i behaviour degli artefatti/sistemi che hanno come scopo la realizzazione di un certo goal.  Per aiutare i lettori, sottolinerei nel testo che la nozione di \ontoFunc{fullSingular} e' un ruolo/concetto (forse ho perso qst informazione))(FC: è sotto la definizione di funz. sys., ma per sicurezza ho aggiunto anche all'inizio di sottosezione)}
 
 
-\myComment{S: sono arrivato qui XXX}
 
 \subsection{Functional decomposition}\label{subsec:fun-dec}
-An important feature of functions in engineering is the possibility to decompose them into sub-functions. This also allows to refine the granularity of the system description. In this paragraph, we show how such decomposition relation can be used in order to formalize the difference between \ontoFunc{fullPlural} and engineering functions that we anticipated earlier.
+An important feature of functions in engineering is the possibility to decompose them into sub-functions. This also allows to refine the granularity of the system description. In this paragraph, we show how such decomposition relation can be used in order to formalize the difference between \ontoFunc{fullPlural} and engineering functions that we described earlier.
 
 First, observe that such decomposition cannot be reduced to a partial order relation between functions.  
 That is, if we represent the functional decomposition of a function, say $\cst{f}$, into sub-functions, say $\cst{f}_1, \cst{f}_2, \dots, \cst{f}_n$, as $\decom(\cst{f};\cst{f}_1,\cst{f}_2,\dots,\cst{f}_n)$, then it does not seem possible to find a parthood relation such that $\decom$ reduces the mereological sum.
@@ -1310,9 +1317,9 @@ Precisely, we introduce roles $\mainFunctionRole{\cdot}$ and $\subFunctionRole{\
   \item[\myax{main-sub-functions-sussum}] $ (\mainFunctionRole{x} \lor \subFunctionRole{x}) \myfi (\DOLCERole{x} \land \exists \cst{m} ~(\Method{x}  \land \founded{x}{\cst{m}}))$
   \item[] \mytext{main-functions and sub-functions are roles founded on some engineering \methodsName{singular}}
 \eflist 
-Additionally, we assume that \methodsName{plural} are always contexts for a main-function and for a certain number of  sub-functions:
+Additionally, we assume that \methodsName{plural} are always contexts for a main-function and for a certain number of  sub-functions (axiom \refax{ax:pre-pre-method}$^*$ is actually a meta-axiom, for this reason we mark it with a $*$-symbol, note that, given a finite set of methods, the axiom can be substituted with a finite set of axioms in FOL; the next axiom \refax{ax:pre-method} is an axiom schema):\TODO{S: vedi se ti torna la prima osservazione, infatti l'assioma messo così assume che usiamo il modello standard degli interi che non è assiomatizzabile}
 \bflist
-  \item[\myax{pre-pre-method}] $ \Method{\cst{m}} \myiff \exists! n ~\MethodBin{\cst{m}}{n},$ and $n$ is integer
+  \item[\myax{pre-pre-method}$^*$] $ \Method{\cst{m}} \myiff \exists! n ~\MethodBin{\cst{m}}{n},$ and $n$ is integer
   \item \mytext{Each method, say $\cst{m}$, has a (unique) number, say $n$, of  sub-functions that are contextualized by the method}
   \item[\myax{pre-method}$_{schema}$] $ \MethodBin{\cst{m}}{n} \myfi \exists!  \cst{main}, \cst{sub_1}, \dots, \cst{sub_n} (\mainFunctionRole{\cst{main}} \land \subFunctionRole{\cst{sub_1}} \land \dots \land \subFunctionRole{{\cst{sub_n}}} \land \founded{\cst{main}}{\cst{m}} \land \founded{\cst{sub_1}}{\cst{m}} \land \dots \land \founded{\cst{sub_n}}{\cst{m}}) $
   \item[] \mytext{for any engineering \methodsName{singular} of functional decomposition, say $\cst{m}$, having a given number of sub-functions, say $n$, there exist a main-function role and $n$ sub-function roles, which are founded on $\cst{m}$ and are uniquely determined}
@@ -1333,7 +1340,7 @@ Finally, the link between \methodsName{plural} and decompositions is given in th
 
 The advantage of this approach is manyfold: it makes  possible to organize the \methodsName{singular}-types within sumbsumption taxonomies, for example, `spot welding' is a specialisation of the \methodsName{singular} `welding', which itself is an implementation \methodsName{singular} of the function `to join';  
 and to describe the properties of the \methodsName{plural}, for instance the working principle, say Kirchhoff's law for a `voltage divider' \methodsName{singular}. %, similarly to what has been done by Kitamura's team in  \cite{kitamuraOntologybasedDescriptionFunctional2003}.
-Additionally, it makes possible to clearly discuss some properties of functional decomposition, for example, if one wishes to express that all functions are decomposable:
+Additionally, it makes possible to introduce properties of functional decomposition. For example, if one wishes to express that all functions are decomposable, she can state:
 \bflist
 \item[\myex{noAtomsFunctions}] $\FunctionSys{x} \myfi \exists y~ \mainFunctionRole{y} \land \DOLCEConceptSubsum{x}{y} \land x\neq y$ %\TODO{FC: why should this axiom be enforced? It implies no functional atoms. *[SB: è un commento per me? mi sono perso il contesto...][FC: avevi scritto che mi ero dimenticato questo assioma. L'avevi scritto vicino a \refdf{def:engfunction}.]*[SB: non ricordo bene. credo che l'idea venisse dal lavoro con Riichiro dove un sistema è sempre composto di almeno due parti e quindi decomponibile, ne segue che una funzione systemica è decomponibile (nei casi limite una delle due non "fa nulla", cioè è una funzie di mantenimento)][FC: ok, allora io o lascerei così]*[SB: ok]}
 \eflist
