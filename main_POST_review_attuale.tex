@@ -1317,7 +1317,7 @@ Precisely, we introduce roles $\mainFunctionRole{\cdot}$ and $\subFunctionRole{\
   \item[\myax{main-sub-functions-sussum}] $ (\mainFunctionRole{x} \lor \subFunctionRole{x}) \myfi (\DOLCERole{x} \land \exists \cst{m} ~(\Method{x}  \land \founded{x}{\cst{m}}))$
   \item[] \mytext{main-functions and sub-functions are roles founded on some engineering \methodsName{singular}}
 \eflist 
-Additionally, we assume that \methodsName{plural} are always contexts for a main-function and for a certain number of  sub-functions (axiom \refax{ax:pre-pre-method}$^*$ is actually a meta-axiom, for this reason we mark it with a $*$-symbol, note that, given a finite set of methods, the axiom can be substituted with a finite set of axioms in FOL; the next axiom \refax{ax:pre-method} is an axiom schema):\TODO{S: vedi se ti torna la prima osservazione, infatti l'assioma messo così assume che usiamo il modello standard degli interi che non è assiomatizzabile}
+Additionally, we assume that \methodsName{plural} are always contexts for a main-function and for a certain number of  sub-functions (axiom \refax{ax:pre-pre-method}$^*$ is actually a meta-axiom, for this reason we mark it with a $*$-symbol, note that, given a finite set of methods, the axiom can be substituted with a finite set of axioms in FOL; the next axiom \refax{ax:pre-method} is an axiom schema):\TODO{S: vedi se ti torna la prima osservazione, infatti l'assioma messo così assume che usiamo il modello standard degli interi che non è assiomatizzabile [FC: sì. Infatti a14+a15 di fatto servono per scrivere uno schema di assiomi in modo carino, e "and $n$ is an integer" sta fuori dalla teoria propria]}
 \bflist
   \item[\myax{pre-pre-method}$^*$] $ \Method{\cst{m}} \myiff \exists! n ~\MethodBin{\cst{m}}{n},$ and $n$ is integer
   \item \mytext{Each method, say $\cst{m}$, has a (unique) number, say $n$, of  sub-functions that are contextualized by the method}
@@ -1362,75 +1362,82 @@ For instance, in the lathe example discussed above, it could be that the systemi
 \section{Capabilities and capacities}\label{sec:CapabilAndCapac}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section, we discuss capabilities and capacities, two notions that we briefly introduced at the end of Section~\ref{sec:review}. In particular, we will make use of the concept of  \ontoFunc{fullSingular} to distinguish capabilities from capacities (recall that, following the approach taken in ISO 15531-31\cite{jochemISOISO15531312004}, the quantitative viewpoint on what a device do is characterized by capacities, while the qualitative viewpoint by capabilities).
+In this section, we discuss capabilities and capacities, two notions that we briefly introduced at the end of Section~\ref{sec:review}. In particular, we will make use of the concept of  \ontoFunc{fullSingular} to distinguish capabilities from capacities. That is, we ground the distinction on an ontological argument moving beyond the practical view given in ISO 15531-31\cite{jochemISOISO15531312004}, which associates capacities to a quantitative viewpoint and capabilities to a qualitative viewpoint.
 %\TODOinline{which, following the approach taken in ISO 15531-31\cite{jochemISOISO15531312004}, characterize the qualitative (capabilities) and the quantitative (capacities) viewpoints on what a device can do}.
 
-Given that the difference between capabilities and capacities is expressed using the qualitative vs quantitative duality, a first idea is to just say that capacities are sublcasses of capabilities: for example, \cite{kochCAPABILITIESBASEDACCOUNTPATIENT2016} (despite not mentioning capacities) speaks of \qquotes{general and specific capabilities}, a general one being, for example, the \qquotes{capability of obtaining food}, and a corresponding specific capability being \qquotes{capability of obtaining through hunting whales on the sea for extended periods of time}. 
+\myComment{Given that the difference between capabilities and capacities is expressed using the qualitative vs quantitative duality, a first idea is to model capacities as sublcasses of capabilities: for example, \cite{kochCAPABILITIESBASEDACCOUNTPATIENT2016} (despite not mentioning capacities) speaks of \qquotes{general and specific capabilities}, a general one being, for example, the \qquotes{capability of obtaining food}, and a corresponding specific capability being \qquotes{capability of obtaining through hunting whales on the sea for extended periods of time}. 
 Therefore, one could be tempted to say that there are no capacities at all, as an ontological category, but only more or less specific capabilities.
-This is a possible approach, but we argue against it, for (at least) two reasons: first, in engineering speech the capabilities and capacities are different concepts. Sometimes this difference is only implicit, but sometimes it is stated explicitly, as in ISO 15531.
-Secondly, some aspects of capabilities are not reducible to other, more specific, capabilities.
+This is a possible approach, but we argue against it, for (at least) two reasons: first, in engineering capabilities and capacities are often used as different concepts. Sometimes this difference is only implicit, sometimes it is explicit as in the ISO 15531.
+Secondly, some aspects of capabilities do not seem reducible to other, perhaps more specific, capabilities.
 Take, for example, Figure \ref{fig:capability-parameters}. 
-It contains two capabilities, \textit{moving} and \textit{finger grasping}, that a robot can have, together with some characterising parameters, such as \textit{paylod, workspace dimensions}, and so on. 
-It is possible that the workspace dimensions parameter is linked to (or just is) a capacity quantifying the moving capability. In that case, it would be unnatural to call \quotes{workspace dimension} a capability, and, thus, the same should hold for capacities.%\TODO{FC: se quest'ultimo paragrafo non è convincente, rimuoverlo senza remore}. 
+It shows two capabilities, \textit{moving} and \textit{finger grasping}, that a robot may have, together with some characterising parameters, such as \textit{paylod, workspace dimensions}, and so on. 
+It is possible that the parameter for workspace dimensions is linked to (or just is) a capacity quantifying the moving capability. In that case, it would be unnatural to call \quotes{workspace dimension} a capability, and, thus, the same should hold for capacities.%\TODO{FC: se quest'ultimo paragrafo non è convincente, rimuoverlo senza remore}.
+
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{capability-parameters.JPG}
-  \caption{\label{fig:capability-parameters} Two possible capabilities of a robot and they respective parameters, copied from \cite{jarvenpaaDevelopmentOntologyDescribing2019a}.}%Capability parameters describe the characteristics of a capability.
+  \caption{\label{fig:capability-parameters} Two possible capabilities of a robot and they respective parameters (taken from \cite{jarvenpaaDevelopmentOntologyDescribing2019a}).}%Capability parameters describe the characteristics of a capability.
 \end{figure}
+}
 
-In order to differentiate between capacities and capabilities, we carry out the following reasoning. 
-Each technical artifact has relevant characteristics, which are part of its physical make-up and determine how the artifact interacts with certain things. 
-For example, an individual pump could be built in such a way that it is able to pump %hydraulic 
+In order to differentiate between capacities and capabilities, recall that the characteristics of a technical artifact are part of its physical make-up and determine how the artifact interacts with its environment. 
+For example, an individual pump is built in such a way that it is able to pump %hydraulic 
 oil with a certain flow rate.
-Following the quality theory of \DOLCE, both the relevant characteristics of each technical artifact and any of its faculties of being able to do something
+Following the quality theory of \DOLCE, both the physical characteristics of the technical artifact and its `being able' to do something
 %, that we shall call \firstTimeKeyWord{capabilities}, 
-can be conceptualized as individual qualities. 
-Consequently, we model both the flow rate (that is, a capacity), and the pumping-ability (a capability) of the pump as individual qualities.
+can be conceptualized as individual qualities.\footnote{As seen in Section \ref{sec:DOLCE}, individual qualities in \DOLCE have associated quality speces, which are essentially types of conceptual spaces as introduced in \cite{Gardenfors2004}. In the case of capabilities, the associated quality spaces should characterize the kinds of entity through which the capability can be realized.} 
+Consequently, we can model the capacity `flow rate' (something that can be quantified) as a relational quality of the artifact relative to a certain kind of fluid, and the capability to pump (something that realizes a type of interaction or an ability) of the same artifact as another (yet related) relational quality.
+But what are these capabilities? We assume that an entity has a capability if it can participate as doer in an \ontoFunc{fullSingular}. More precisely, an entity has a capability of a certain type (it has the capability of cutting) if and only if it can participate in the role of doer in an \ontoFunc{fullSingular} of the corresponding type (it participates as doer in a, perhaps not actual, event classified as cutting). Thus, we assume that \ontoFunc{fullPlural} define types of capabilities, and that an entity has a capability only if it can manifest the corresponding \ontoFunc{fullSingular}.\TODO{S: ho aggiunto questa parte per collegare capabilities e funz. ontologiche, secondo me va anticipata qui.}
 
 Whenever a capability is based on some other quality of a technical artifact, that is, when each realisation of the capability depends on some other quality, we say that it is \firstTimeKeyWord{\foundedTerm{passive}} on that quality (or qualities), and we formalize this through the relation $\founded{\cdot}{\cdot}$ defined in \refdf{def:foundingBasic}.
 For example, in the case of the pump we could say that the capability of the pump to move water is founded on its flow rate capacity.
 %a person could say that he or she is able to jump high due to the strength of their leg muscles and their technical proficiency in jumping, that is, they have a jumping capability that is founded on their leg strength and their technical proficiency in jumping. 
 Coming back to Gero and Qian's example of the water tap mentioned in Section \ref{sec:DOLCE}, which is similar to the one of the pump, we could say that the faucet has the capability of delivering water when requested, which is founded on its flow rate capacity, which is itself founded on its diameter quality (Gero and Qian say that the flow rate is \quotes{controlled} by the diameter \cite{qianFunctionBehaviorStructure1996}).
-Now, in this example, there is a difference between the flow rate and the diameter: the latter is intrinsic and the former is extrinsic, as we argued in Section \ref{sec:DOLCE}.
+Now, in this example, there is a difference between the flow rate and the diameter: the latter is an intrinsic quality and the former is an extrinsic quality, as we argued in Section \ref{sec:DOLCE}.
 %Now, in this example, there is a difference between the leg strength and the jumping proficiency quality: the former is intrinsic and the latter is not, since it wouldn't exist without the jumping occurrences. 
 %When \myComment{Whenever<-no: altrimenti sembra definizione} this happens, that is, \myComment{whenever} when a capability is founded on a relational quality, we call that quality \firstTimeKeyWord{capacity}, analogously to the approach in \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
-These examples suggest that we call \firstTimeKeyWord{capacities} those relational qualities that a capability is founded on, analogously to the approach in \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
+These examples suggest that  \firstTimeKeyWord{capacities} are those relational qualities that a capability is founded on, analogously to the approach in \cite{borgoCapabilitiesCapacitiesFunctionalities2021}. 
 %and, analogously to \cite{borgoCapabilitiesCapacitiesFunctionalities2021}, we call the other qualities \firstTimeKeyWord{capacities}. 
-The point being that capacities are relational qualities that provide information about the corresponding capability. 
+The point being that capacities are relational qualities that provide information about how the corresponding capability can be realized in practice. 
 Going back to the pumping example, we conclude that the flow rate capacity \myComment{quantifies} parametrizes, perhaps only partially, the pumping capability.  
 
 Another example: types of electronic components, such as resistors, transistors, etc., are accompanied by a datasheet that reports many technical properties of the component instances. 
-Typical properties are, for example, the failure rate and the maximum temperature, current, or voltage that the component can operate with without problems. 
-In our terminology, all the aforementioned properties are capacities, since they require, to be manifested, for the component to be inserted into a working electrical circuit\footnote{As mentioned earlier in the paper, a clear-cut example is the voltage, which, since it is a potential, needs a fixed reference point in order to be measured.}; and, additionally, they \myComment{quantify} parametrize the capability of the component to, say, create a voltage drop in the case of a resistor. 
+Typical properties are, for example, the failure rate and the maximum temperature, current, or voltage that the component can operate with in standard conditions. 
+In our terminology, all the aforementioned properties are capacities: these properties are manifested only when the component is inserted into a working electrical circuit\footnote{As mentioned earlier in the paper, a clear-cut example is the voltage, which, since it is a potential, needs a fixed reference point in order to be measured.}; and they \myComment{quantify} parametrize some capability of the component like, say in the case of a resistor, to create a voltage drop. 
 
-Capacities themselves are founded on some intrinsic physical qualities of the bearing object. For example, the maximum operating current will depend, say, on the geometric and electrical properties of the conductor metal, such as its diameter and its resistivity, similarly the flow rate of the water tap depends on its diameter. Given these observations, we partially characterize capacities as follows:   
+Capacities themselves are founded on some intrinsic physical qualities of the bearing object. For example, the maximum operating current will depend on the geometric and electrical properties of the conductor metal, such as its diameter and its resistivity. Similarly, the flow rate of the water tap depends on its diameter. Given these observations, we partially characterize capacities as follows:   
 \bflist
 \item[\myax{capacPartialDef}] $ \Capacity{x} \myfi \RelationalQuality{x} \land \exists y(\founded{x}{y} \land \IntrinsicQuality{y} \land \bearer{x} = \bearer{y}) $%(\DOLCEQualityDirect{y}{z} \land \DOLCEQualityDirect{x}{w} \myfi z = w)) $  % 
-\item[] \mytext{A capacity is a relational quality and is founded on some intrinsic quality, which is carried by the same bearer.}\TODOinline{[SB: se non è complicato farlo ora aggiungerei che x e y dovrebbero anche avere lo stesso bearer, altrimenti lasciamo per l'eventuale revisione][FC. hai sicuramente ragione, ma anche io lascerei a eventuale revisione][FC: aggiunto questo dettaglio]}
+\item[] \mytext{A capacity is a relational quality and is founded on some intrinsic quality, which is carried by the same bearer.}%\TODOinline{[SB: se non è complicato farlo ora aggiungerei che x e y dovrebbero anche avere lo stesso bearer, altrimenti lasciamo per l'eventuale revisione][FC. hai sicuramente ragione, ma anche io lascerei a eventuale revisione][FC: aggiunto questo dettaglio]}
 \\ Where $\bearer{\cdot}$ is the (unique) bearer of a quality, i.e.:
-\item[\mydf{beareDef}] $ \bearer{x} = \suchthat y (\DOLCEQualityDirect{x}{y}) $ 
+\item[\mydf{beareDef}] $ \bearer{x} =\iota %\suchthat 
+y (\DOLCEQualityDirect{x}{y}) $ 
 \item[\myax{capacPartialDef2}] $ \Capacity{x} \myfi \exists y( \Capability{y} \land \founded{y}{x}) $  % 
-\item[] \mytext{For each capacity there exists a capability founded by said capacity.\TODO{FC: ha senso questo assioma o è eccessivo (e in caso dire che hanno lo stesso bearer?)?}}
+\item[] \mytext{Each capacity founds a capability.}%\TODO{FC: ha senso questo assioma o è eccessivo (e in caso dire che hanno lo stesso bearer?)?}\TODO{S: per me va bene così}
 \eflist
-Axioms \refax{ax:capacPartialDef} and \refax{ax:capacPartialDef2} do not fully define what a capacity is, but only give some constraints.
-Since the classical case of deciding what relations there are between the color of an object and its hue is difficult (is the hue a quality of the color? Or maybe the hue is part of the color, or something else?)\TODO{FC:esiste citazione per questo?}, finding out the relation between capacities and capabilities is difficult too. In fact, one could even argue that color itself is a capability: the capability of reflecting certain lightwaves.
-A full definition of capacity is, therefore, a complex issue.
-We still suggest one in the following, though we highlight that is only one possibility among others, and the precise consequences of its adoption, with respect to other approaches, warrant further study.
-We opt for defining capacity as \quotes{parameter} of the capabilities it founds, that is, as a quality such that its values are always subset of values of the corresponding capability:
+Axioms \refax{ax:capacPartialDef} and \refax{ax:capacPartialDef2} do not fully define what a capacity is. They only give some constraints.
+\myComment{Since the classical case of deciding what relations there are between the color of an object and its hue is difficult (is the hue a quality of the color? Or maybe the hue is part of the color, or something else?)\TODO{FC:esiste citazione per questo?}\todo{S: non ne conosco, meglio tagliare questa osservazione, non è centrale}, }
+Modeling the relation between capacities and capabilities, if possible, is difficult and requires further investigation on the topic. 
+\myComment{In fact, one could even argue that color itself is a capability: the capability of reflecting certain lightwaves.}
+A full definition of capacity is, therefore, left as an open issue.
+Yet, we mention one interesting way to tackle the problem:
+\myComment{among others, and the precise consequences of its adoption, with respect to other approaches, warrant further study.}
+ to define a capacity as \quotes{parameter} of the capabilities it founds, that is, as a quality such that its values are always related to the conceptual space of the corresponding capability:
+ %(since this is only a suggestion, we mark this definition with a $\dag$-symbol):
 \bflist
-\item[\mydf{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land \founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
-\item[] \mytext{Capacities are precisely those relational qualities that are founded on some intrinsic quality (of the same bearer), and which found some capability (of the same bearer), such that every time that the capability takes a value ($u$), the capacity takes a corresponding value ($v$), which is part of $u$.}
+\item[\myex{capacFullDef}] $ \Capacity{x} \myiff \RelationalQuality{x} \land \exists y,z(\founded{x}{y} \land \IntrinsicQuality{y} \land \founded{z}{x} \land \Capability{z} \land \bearer{x} = \bearer{y} = \bearer{z} \land \forall u,t (\DOLCEQualeTer{u}{z}{t} \myfi \exists v (\DOLCEQualeTer{v}{y}{t} \land \DOLCEPart{v}{u}{t}))) $ 
+\item[] \mytext{Capacities are precisely those relational qualities that are founded on some intrinsic quality (of the same bearer), and which found some capability (of the same bearer), such that every time that the capability takes a value ($u$), the capacity takes a corresponding value ($v$), which is part of $u$.}\TODO{S: visto che è solo un suggerimento, ho classificato questa def. come esempio.}
 \eflist
-The previous definition amounts, essentially, to an attempt of defining what a parameter of a quality is (then capacities are, basically, the parameters of capabilities). 
-Our approach is to define a parameter as another quality whose values are mereological parts of the values of the original quality. 
+Briefly put, the formula above views capacities as the parameters of capabilities. 
+\myComment{Our approach is to define a parameter as another quality whose values are mereological parts of the values of the original quality. }
 
 
-In contrast to Definition \refdf{def:capacFullDef}, a characterisation of capabilities should touch upon functions as capabilities are inextricably intertwined to functional aspects. In order to do this, we first try to clarify the nature of capabilities as follows:
+In contrast to \refex{ex:capacFullDef}, a characterisation of capabilities should touch upon the fact that capabilities are inextricably intertwined to functional aspects. In order to do this, we first try to clarify the nature of capabilities.
 %While the choice of modeling characteristics such as flow rate, weight, shape, or color as qualities is safe enough, the same modeling choice for capabilities carries more weight. 
 %One can motivate it as following: 
-to be able to do something is, arguably, a modal concept calling for possible worlds in which that something is actually done. 
-But, since we want to keep our formal language as simple as possible, we reduce the modal expression to a simpler construct, analogously to the following heuristic definition:
+To be able to do something is, arguably, a modal concept calling for possible worlds in which that something is actually done: 
+\myComment{In order to keep our formal language as simple as possible, we use a simpler construct, analogously to the following heuristic definition:}
 \bflist
 \item[\myex{Capab}] $ \exists c(\PumpingCapability{c} \land \DOLCEQualityDirect{c}{x}) \myiff \\
 \mbox{} \hfill
@@ -1439,7 +1446,7 @@ But, since we want to keep our formal language as simple as possible, we reduce 
 \eflist
 
 Thus, we shall introduce capabilities as qualities with a modal flavour. Since the introduced capabilities are specifically dependent on their bearers, and each capability of a certain kind is unique to its bearer, we treat them as individual qualities.\footnote{An alternative is to model them as disposition, see for instance \cite{sarkarOntologyModelProcess2019}, and \cite{MALZKORN2001335} for a broader introduction to dispositions.} 
-Finally, note that Example \refex{ex:Capab} also seems to suggest that capabilities depend on types of functions (not just processes or behaviours, for the pumping process in \refex{ex:Capab} will always play a function), which are used in their definition. This suggests using the definition-founding  \myComment{\refdf{def:foundingDefinitionally}} relation introduced in Section \ref{sec:DOLCE} in order to capture this intuition:
+Finally, note that Example \refex{ex:Capab} also seems to suggest that capabilities depend on types of functions (not just processes or behaviours, for the pumping process in \refex{ex:Capab} will always play a function), which are used in their definition. This suggests to adopt the definition-founding  \myComment{\refdf{def:foundingDefinitionally}} relation already introduced in Section \ref{sec:DOLCE}: 
 \bflist
 %\item[\mydf{capability}] $ \Capability{x} \myiff \RelationalQuality{x} \land \exists y,z(\Capacity{y} \land \founded{x}{y} \land \FunctionAbs{z} \land \foundedDef{x}{z}) $ 
 \item[\mydf{capability}] $ \Capability{x} \myiff \RelationalQuality{x} \land \exists y(\FunctionAbs{y} \land \foundedDef{x}{y}) $ 
@@ -1459,29 +1466,31 @@ Quindi avremmo:
 \eflist
 Ora vorrei capire se l'impostazione che hai è compatibile con questa visione ed eventualmente discutere le differenze. Se c'è compatibilità, possiamo lasciare qui solo le capacity e introdurre le capability solo dopo aver introdotto le funzioni.
 [FC: mi sembra che lo sia, modulo il fatto che i paragrafi sopra devono essere cambiati per adattargli agli assiomi sotto e modulo il fatto che formalmente se la capability è founded on una funzione allora "founded" dovrebbe essere inteso tipo come "usato nella definizione" ma questo senso non è quello usato in precedenza e.g. in d5. Per il resto ho adottato i due assiomi di sopra, rimuovendo la parte con le funzioni e ti chiederei di controllare che i paragrafi di sopra siano compatibili coi nuovi assiomi.]}}
-Additionally, we assume that each capability is parameterized by at least a capacity:
+Additionally, we assume that each capability is parameterized by at least a capacity (cf. \refax{ax:capacPartialDef2}):
 \bflist
   \item[\myax{capacityNuovo}] $ \Capability{x} \myfi \exists y(\Capacity{y} \land \founded{x}{y}) $
   \item[] \mytext{A capability is founded on some capacity}
 \eflist
-From this \myComment{definition} axiom, we have that capabilities are specifically dependent on capacities, which specify how the artifact (the bearer) can function.\TODO{Nota che ho dovuto cambiare la def. di Capability e separarla in una definizione + un assioma, o era circolare con quella di Capacity}  
-The intuition is that capabilities are relational qualities that associate the artifact to \ontoFunc{fullPlural}, so that they must refer to those functions: in our terminology, they are definition-founded on \ontoFunc{fullPlural}.  
+From this \myComment{definition} axiom, we have that capabilities are specifically dependent on capacities, which specify how the artifact (the bearer) can function.%\TODO{Nota che ho dovuto cambiare la def. di Capability e separarla in una definizione + un assioma, o era circolare con quella di Capacity}  
+The intuition, as anticipated at the beginning of this section, is that capabilities are relational qualities that associate their bearers with \ontoFunc{fullPlural}, so that they must refer to those functions: in our terminology, they are definition-founded on \ontoFunc{fullPlural}.  
 Note that they are not instantiation-founded, see \refdf{def:founding}, since an artifact could have a capability to function without actually functioning. Additionally, the function must be ontological and not systemic, because, otherwise, the bearing object would be associated \textit{a priori} with some given system. 
 
-The characterization of capacities via \refax{ax:capacPartialDef} and \refdf{def:capability} has the advantage of explaining
+The characterization of capacities via \refax{ax:capacPartialDef} and \refdf{def:capability} has the advantage of explaining:
 \begin{itemize}
-    \item the close link between functions and capabilities (capabilities are definition-founded on \ontoFunc{fullPlural}).
-    \item The asymmetry between capacities and capabilities (capabilities are founded on capacities, but not vice-versa).
+    \item the close link between functions and capabilities (capabilities are definition-founded on \ontoFunc{fullPlural});
+    \item the asymmetry between capacities and capabilities (capabilities are founded on capacities, but not vice-versa).
 \end{itemize}
-The quantitative-qualitative difference between capacities and capabilities anticipated at the end of Section \ref{sec:review} is not yet really explained, but, notice that while a flow-rate capability takes as values positive real numbers with, say, m$^3$/s as unit of measure, the value space of the corresponding pumping capability is quite more complex and difficult to describe. This may be an argument against modelling capabilities as \DOLCE-qualities, but it also reflects the quantitative-qualitative duality that emerges in domain experts' speech.
+The quantitative-qualitative difference between capacities and capabilities anticipated at the end of Section \ref{sec:review} is not fully explained by this approach. Yet, notice that while a flow-rate capability takes as values positive real numbers with, say, m$^3$/s as unit of measure, the value space of the corresponding pumping capability is quite more complex and difficult to describe. This may be an argument against modelling capabilities as \DOLCE-qualities, but it also reflects the quantitative-qualitative duality that emerges in domain experts' speech.
 
 
 \medskip
 
-Note that this section highlights the difficulties in defining concepts such as capacities and capabilities. 
-One reason for this difficulty is the relational and potential nature (in our interpretation) of these concepts: they are relational, in the sense that we have attempted to capture with relational qualities, since they need the relation between their bearer and its environment to make sense; and they are potential, in the sense that they are strictly related to events that may occur, but need not to actually happen necessarily.
-Functions are, arguably, similar to capabilities in this aspect (indeed, in \BFO they are classified as realizable entities), and this may partially explain the terminological and conceptual complexity that these concepts carry with themselves. 
-Of course, these concepts are not the only ones to be both puzzling and commonly used in engineering: \textit{affordances} being a prime example. 
+%Note that this section highlights the difficulties in defining concepts such as capacities and capabilities. 
+One reason for the difficulty to defining capacities and capabilities is the relational and potential nature (in our interpretation) of these concepts: they are relational, in the sense that we have attempted to capture with relational qualities, since they need the relation between their bearer and its environment to make sense; and they are potential, in the sense that they are strictly related to events that may occur, but need not to actually happen necessarily.
+Functions are, arguably, similar to capabilities in this aspect, 
+%(indeed, in \BFO they are classified as realizable entities), 
+and this may partially explain the terminological and conceptual complexity that these concepts bring. 
+Of course, these concepts are not the only ones to be both puzzling and commonly used in engineering: \textit{affordances} being another well-known example. 
 As mentioned at the end of the literature review, engineering affordances are often defined as \qquotes{interaction between artifact and user in which properties of the artifact offer a potential use to the user} \cite{maierAffordanceBasedDesign2009}, but this is not an universally shared definition, and conceptual confusion persists in the disciplines (not only engineering) that make use of this concept.
 %Affordances were originally introduced by \cite{gibsonTheoryAffordances1979}, and popularized in engineering design by Maier and Fadel in a series of works (\cite{maier2001affordance,maierAffordanceBasedDesign2009}, among others) as a paradigm-shift from a function-based design, towards an interaction-based design, characterized by the focus on all the possible ways an user can interact with a product, included those unintended by the designer and not strictly relevant for the product function.
 %Briefly, affordances are \qquotes{what it [the environment] offers the animal, what it provides or furnishes, either for good or ill} \cite{gibsonTheoryAffordances1979}. That is, they are potential behaviours that the environment, or a part thereof, allows an agent to do. 
@@ -1546,8 +1555,8 @@ In this context, we could say that the pump has been selected because of its pum
 \section{Evaluation and possible applications}\label{sec:appendice}
 %\TODOinline{[SB: assiomi e def in owl dovrebbero essere chiaramente distinti usando, e.g., \textbf{a14$_{owl}$}][FC:fatto]}
 \subsection[meta]{Reduction to \OWL ontology}
-In order to facilitate the deployment of our theory in applications, we reduce it from first-order logic to the \OWL language. 
-This is standard practice, for at least the following reasons: first, \OWL is decidable, while first-order logic is not, so that reasoning task will terminate in finite time\footnote{though they have exponential complexity, in the general case.\myComment{\TODO{citazione}}}. Second, \OWL is a standard endorsed by the World Wide Web Consortium (W3C) and is part of the Semantic Web technology stack \cite{OWL2-QUICK-REFERENCE}, and is the language of choice for many ontologies in various domains \cite{OWL-ontology-repositories}.
+To facilitate the deployment of our theory in applications, we present an \OWL version of the first-order logic formalization. 
+This is standard practice, for at least the following reasons: first, \OWL is decidable, while first-order logic is not, so that reasoning task will terminate in finite time\footnote{Though the complexity is  exponential in the general.\myComment{\TODO{citazione}}}. Second, \OWL is a standard endorsed by the World Wide Web Consortium (W3C) and is part of the Semantic Web technology stack \cite{OWL2-QUICK-REFERENCE}, and is the language of choice for many ontologies in various domains \cite{OWL-ontology-repositories}.
 
 Unfortunately, the increased computational properties of \OWL come with a tradeoff with respect to its expressibility, therefore, one has to simplify the first-order theory. 
 The original theory is still useful as it constrains with more detail the \OWL concepts, and provides a more expressive language for conceptual modeling. 
@@ -1572,9 +1581,9 @@ where $\mathtt{classifies}$ is the inverse relation of $\DOLCECLby{\cdot}{\cdot}
 %     and (causally-contributes-to some Goal)
 %     and (partecipated-by-doer some TechnicalArtifact))
 
-Additionally, for all the ternary temporalized relations, such as $\DOLCECLby{\cdot}{\cdot}{\cdot}$ \myComment{, $\playAs{\cdot}{\cdot}{\cdot}$,} 
-and $\hspace{0pt}\texttt{participateAsDoer}(\cdot,\cdot,\cdot)$, the temporal argument is removed and a homonymous binary relation is used in their place.
-The link between the temporalized and non-temporalized relations can be interpreted in different ways. For example, one could state that the non-temporalized relation holds if and only if the temporalized relation holds whenever one of the relation arguments exists, what argument precisely depends on the relation. This is our choice for parthood \refdf{def:partConstant}, classification, temporal quale, and participation-like relations as shown by these \textit{meta-rules}: %\TODOinline{[SB: le f.le qui sotto dovrebbero avere la stessa numerazione delle iniziali ma restare chiaramente differenziate, ad es. usando  \textbf{d13$_{meta}$}][FC:fatto]}
+Additionally, all the ternary temporalized relations used in the first-order version, such as $\DOLCECLby{\cdot}{\cdot}{\cdot}$ \myComment{, $\playAs{\cdot}{\cdot}{\cdot}$,} 
+and $\hspace{0pt}\texttt{participateAsDoer}(\cdot,\cdot,\cdot)$, occur in the \OWL version with the temporal argument removed, i.e., as binary relations.
+The link between the temporalized and non-temporalized relations can be interpreted in different ways. For example, one could state that the non-temporalized relation holds if and only if the temporalized relation holds whenever one of the relation arguments exists, what argument precisely depends on the relation. This is our choice for parthood \refdf{def:partConstant}, classification, temporal quale, and participation-like relations as shown by these \textit{meta-rules} aimed to show the intended interpretations: %\TODOinline{[SB: le f.le qui sotto dovrebbero avere la stessa numerazione delle iniziali ma restare chiaramente differenziate, ad es. usando  \textbf{d13$_{meta}$}][FC:fatto]}
 \bflist
 \item[\mydf{CLnontemp}$_{meta}$] $ \DOLCECLbyBinary{x}{y} \myiff ((\exists t \DOLCEPRE{x}{t}) \land \forall t (\DOLCEPRE{x}{t} \myfi  \DOLCECLby{x}{y}{t}))$ 
 \item \mytext{$x$ is constantly classified by $y$ if and only if $x$ is classified by $y$ whenever $x$ exists}
@@ -1584,12 +1593,12 @@ The link between the temporalized and non-temporalized relations can be interpre
 \item \mytext{$x$ constantly participates-as-doer to $y$ if and only if $x$ participates-as-doer to $y$ for the whole of $y$ duration}
 \eflist
 %and, thus, also for the play-as relation. 
-One could also state that the non-temporalized relation holds if and only if the temporalized relation held true at some time adopting the following \textit{meta-rule}:%. This is our choice for the participation relations, for example, for participation-as-doer: 
+One could also state that the non-temporalized relation holds if and only if the temporalized relation holds true at some time adopting the following \textit{meta-rule}:%. This is our choice for the participation relations, for example, for participation-as-doer: 
 \bflist
-\item[\myex{participationDoerNonTempBIS}$_{meta}$] $ \participateAsDoerBinary{x}{y} \myiff \exists t \participateAsDoer{x}{y}{t}$
+\item[\myex{participationDoerNonTempBIS}$_{meta}$] $ \participateAsDoerBinary{x}{y} \myiff \exists t ~\participateAsDoer{x}{y}{t}$
 \eflist
-There are also other possibilities. The choice of one over the others must be planned carefully depending on the application concerns, since this kind of changes affects the intended models of the \OWL ontology. For example, \refdf{def:participationDoerNonTemp} excludes participation-as-doer in, say, a chemical process only for its first part, while \refex{ex:participationDoerNonTempBIS} allows it, but in \OWL this difference is lost.
-Additionally, the removal of the temporal argument reduces the flexibility of the ensuing ontology. For example, one cannot track (at least not directly) dynamic aspects of roles, e.g. a component that carries out a function at a time and then it changes its function. Nor one can express that, say, there is chemical process which is driven by two different catalysts during its first and second parts.
+There are other possibilities. The choice of one over the others must be planned carefully depending on the application concerns, since this kind of changes affects the intended models of the \OWL ontology. For example, \refdf{def:participationDoerNonTemp} excludes participation-as-doer in, say, a chemical process only for its first part, while \refex{ex:participationDoerNonTempBIS} allows it, but in \OWL this difference is lost.
+Additionally, the removal of the temporal argument reduces the flexibility of the ensuing ontology. For example, one cannot track (at least not directly) dynamic aspects of roles, e.g. a component that carries out a function at a time and then it changes its function. Nor one can express that, say, there is a chemical process which is driven by two different catalysts during its first and second parts.
 
 Finally, as a further simplifying assumption, we define two binary relations that we will use as shortcuts to implement and simplify the definition schema  \refdf{def:method}:
 \bflist
@@ -1602,7 +1611,7 @@ Finally, as a further simplifying assumption, we define two binary relations tha
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.45\textwidth]{query_screenshot.PNG}
-  \caption{\label{fig:screen_query}}
+  \caption{\label{fig:screen_query}\TODO{S: qui manca la caption!!!}}
 \end{figure}
 
 \begin{figure}
@@ -1611,13 +1620,13 @@ Finally, as a further simplifying assumption, we define two binary relations tha
   \caption{A view of the ontology taxonomy in Protegé.\label{fig:screen_entities}}
 \end{figure}
 
-Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, such as \DOLCE-lite or \DOLCE-Ultralite\footnote{Both openly available, e.g., at \url{http://www.loa.istc.cnr.it/dolce/overview.html}.}. 
+Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-adapted versions exist, like \DOLCE-lite or \DOLCE-Ultralite.\footnote{Available at \url{http://www.loa.istc.cnr.it/index.php/dolce/}.}
 Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
-(For the sake of example, the ontology is populated with a few individuals).
+(For the sake of example, the ontology is populated with only a few individuals).
 
 \subsection{Evaluation}
 The ontology developed in this paper is a hand-crafted prototype that discusses middle and high-level concepts. 
-Therefore, some common approaches to evaluation cannot be employed, as, for example, there is no \qquotes{gold standard} \cite{sfarGoldStandardBased2016}, or set of formal ontologies that one could use to compare common ontology metrics (such as those extracted by OntoMetrics\footnote{\url{https://ontometrics.informatik.uni-rostock.de/ontologymetrics/index.jsp}.}) with, neither there is a precise application against which carry out the evaluation. 
+Therefore, some common approaches to evaluation cannot be employed, as, for example, there is no \qquotes{gold standard} \cite{sfarGoldStandardBased2016}, or set of formal ontologies that one could use to compare common ontology metrics (such as those extracted by OntoMetrics\footnote{\url{https://ontometrics.informatik.uni-rostock.de/ontologymetrics/index.jsp}.}), nor there is a precise application against which to carry out the evaluation. 
 Instead, we will evaluate our ontology using the OntoClean methodology  \cite{guarinoOverviewOntoClean2009} and the Ontology Pitfall Scanner \cite{poveda2014oops}. 
 Moreover, we will discuss how our ontology answers the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, as well as some competency questions that will serve to demonstrate the expressive potential of the ontology.
 Finally, we will also discuss some possible application scenarios, though we highlight that the ontology main goals are the research questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2}, while we delegate the development of derived application-level ontologies to further work.
@@ -1651,8 +1660,8 @@ In particular:
   \item \textbf{Answer to \refRQ{RQ:RQ1}.} We modeled functions as \DOLCE-concepts that classify certain classes of perdurants. 
   This modeling choice explains how functions can exist even when they are not executed.
   Moreover, we separated functions into the distinct categories of engineering methods and (proper) functions, and, further, we separated functions into systemic or ontological depending on their abstraction level, thus explaining the ambiguity on the why-how or abstraction-implementation axes.
-  \item \textbf{Answer to \refRQ{RQ:RQ1.1}.} Systemic functions can be decomposed in the way discussed in Subsection \ref{subsec:fun-dec}, where each decomposition is described an engineering \methodsName{singular}. %in such a way that an engineering method describes how a decomposition must happen. 
-  \item \textbf{Answer to \refRQ{RQ:RQ1.2}.} We have attempted full definitions of capabilities and capacities in Section \ref{sec:CapabilAndCapac}. In the first case we leveraged ontological functions, in the second case we committed to consider capacities as parameters of capabilities. Moreover, capabilities and capacities are clearly separated by the use of the founding relation: capabilities are founded on capacities, while the opposite does not hold.     
+  \item \textbf{Answer to \refRQ{RQ:RQ1.1}.} Systemic functions can be decomposed as discussed in Subsection \ref{subsec:fun-dec}, where each decomposition is associated with an engineering \methodsName{singular}. %in such a way that an engineering method describes how a decomposition must happen. 
+  \item \textbf{Answer to \refRQ{RQ:RQ1.2}.} We have attempted full definitions of capabilities and capacities in Section \ref{sec:CapabilAndCapac}. In the first case we leveraged ontological functions, in the second case we suggested to consider capacities as parameters of capabilities. Moreover, capabilities and capacities are clearly separated by the use of the founding relation: capabilities are founded on capacities, while the opposite does not hold.     
 \end{itemize} 
 Additionally, since the formal ontology answers these research questions, it is also able to answer related competency questions, which can be of interest in applications, such as the following:
 
@@ -1661,7 +1670,7 @@ Additionally, since the formal ontology answers these research questions, it is 
 \item[\myCQ{function-implementation}] How can the given ontological function be implemented? %Given an (ontological or systemic) function, which methods can be employed to implement it? %%NIM
 \item[\myCQ{capability-founded}] What are the capacities that a given capability is founded on?%Which parameters explain the performance of a capability or of a function? %%IMMAGINE
 %\item[\myCQ{function-parameter}] Which characteristics of which components are involved in executing the \ontoFunc{fullPlural} present in a given system? %% RODONDANTE CON LA PROSSIMA
-\item[\myCQ{function-parameter2}] Which parameters explain the performance of the functions in a given system?
+\item[\myCQ{function-parameter2}] Which parameters explain the performance of the \myComment{functions} component in a given system?\TODO{S: non sono sicuro di cosa intendi qui}
 \item[\myCQ{function-decomposition}] Which is the functional decomposition of a given system? %%IM
 %\item[\myCQ{function-implementation}] How can the given ontological function be implemented? RIDONDANTE
 %\item[\myCQ{method-specialisation}] What does this engineering method need? RIMOSSA
@@ -1678,8 +1687,8 @@ Additionally, since the formal ontology answers these research questions, it is 
 % 7 or explain what \methodsName{singular}-(sub)types specialize a given \methodsName{singular}, and what systemic-function-types are required by that \methodsName{singular}. RIMOSSO
 % 8 Which is the function of this tag. 
 
-Of course, the RDF schema of our ontology supports many more competency questions, we chose some of the most interesting. 
-Additionally, many possible questions would not need our ontological analysis of functions and related concepts at all to be formulated (e.g., \qquotes{what is the value of a certain property of the given component}).
+%Of course, the RDF schema of our ontology supports many more competency questions, we chose some of the most interesting. 
+%Additionally, many possible questions would not need our ontological analysis of functions and related concepts at all to be formulated (e.g., \qquotes{what is the value of a certain property of the given component}).
 % \bflist
 % \item[\myCQ{cq1}] What is the function of a given component?
 % \item[\myCQ{cq1bis}] What is the value of a given property of a given component?
@@ -1720,11 +1729,11 @@ and of \refCQ{CQ:function-decomposition}, provided that the functional decomposi
       ?functionSystemic :function-of ?component  .
       ?component :constant-part-of :<the given system>}
 \end{verbatim}
-The remaining competency questions can be implemented in a similar way (see also \ref{fig:screen_query} for \refCQ{CQ:capability-founded}).
+The remaining competency questions can be implemented in a similar way (see also Fig.\ref{fig:screen_query} for \refCQ{CQ:capability-founded}).\TODO{S: check}
 
 \medskip
-The fact that our ontology can answer all these questions proves its expressive capability.
-In the following paragraphs we explain how such capability could be used in application scenarios.
+The fact that our ontology can answer all these questions shows its expressivity and coverage.
+In the following paragraphs we explain how these characteristics could be used in application scenarios.
 
 % Motivating scenarios:
 
@@ -1733,11 +1742,11 @@ In the following paragraphs we explain how such capability could be used in appl
 \paragraph{Innovative Design (and other things).}
 A good portion of the literature on functional modelling argues that functional modelling can be used to improve engineering design.
 For instance, the basic argument of the German school is as follows: designers should start from the customer's requirements, translate them into high-level functions, then decompose those functions into less abstract ones, until arriving at a point where finding a solution that realizes the functions is easy \cite{pahl_engineering_2007}.
-This methodology, is argued, facilitates engineers to come up fast with high-quality designs and enhances their creativity by decoupling the goals of the design from the ways they are achieved.
+This methodology, is argued, facilitates engineers to quickly develop high-quality designs and enhances their creativity by decoupling the goals of the design from the ways they are achieved.
 
-This argument is not wrong, but, during actual practice, one rarely starts from a blank slate. 
-Instead, designers are typically constrained by the need to reuse pre-existing solutions, for a company may have developed a legacy that is difficult to depart from, possibly because the company would not be able to (profitably) reroute its know-how and resources towards innovative lines of products, or other reasons.
-Therefore, designers usually have to devise marginal improvements or corrections for pre-existing solutions, and these activities seem at odds with the aforementioned methodology. % or ways to readapt them for marginally more general situations. 
+This argument is not wrong, but, in actual practice, one rarely starts from a blank slate. 
+Designers are typically constrained by the need to reuse pre-existing solutions, for a company may have developed a legacy that is difficult to depart from, possibly because the company would not be able to (profitably) reroute its know-how and resources towards innovative lines of products, or other reasons.
+Therefore, designers usually have to devise marginal improvements or corrections in pre-existing solutions, and these activities seem at odds with the aforementioned methodology. % or ways to readapt them for marginally more general situations. 
 Additionally, such methodology is design-oriented and does not seem relevant to other activities, such as troubleshooting or reverse engineering, despite functional reasoning being clearly relevant for those.
 
 One important reason for carrying out ontological analysis is to bridge all such activities and cases, by producing an explicit representation (the ontology) of the shared conceptualisation of the relevant stakeholders, which can be used by all of them.
@@ -1745,9 +1754,11 @@ We argue that our ontology is useful for the blank-slate innovation scenario (fo
 
 \paragraph{Incremental innovation} In a company, innovation may happen mainly through incremental changes in pre-existing products. 
 Therefore, product types will have a version history, in which each new version improves on the former. 
-Using our ontology, one could describe some\footnote{For example, our ontology by itself is not able to express the case, which is typical, that a new version of a product has been released to repair a known widespread issue.} of such improvements, allowing their digitalisation in a semantically meaningful way. 
+Using our ontology, one could describe %some
+%\footnote{For example, our ontology by itself is not able to express the case, which is typical, that a new version of a product has been released to repair a known widespread issue.} \TODO{S: non ho capito, meglio togliere}
+the relevant improvements, allowing their digitalisation in a semantically meaningful way. 
 For instance, a new version may introduce new capabilities, or it may have the same capabilities as the former version, but it could realize them better due to different capacities. 
-Storing such information could be more helpful to engineers than just storing the bill of material corresponding to the different versions in the enterprise management system.
+Storing such information could be more helpful to engineers than just storing structural information (like the bill of material) of the different versions in the enterprise management system.
 
 \paragraph{Knowledge transfer} An engineer or technician could have been recently employed by a manufacturing company. 
 In that case, they are (hopefully) trained to learn about the company's products and their functioning. 
@@ -1794,12 +1805,12 @@ For example, using our theory we would write requirements \refex{ex:req3} and \r
 \bflist
   \item[\myex{req5}] $ desk\_spot\_lamp(p) \myfi \exists f,c,v( illuminating\_capability(f) \land \DOLCEQualityDirect{f}{p} \land illumination\_area(c) \land \\ \founded{f}{c} \land \DOLCEQualeDirect{c}{v} \land \DOLCEPartBin{v}{[0.5, \infty)}$
   \item[] \mytext{Every desk spot lamp has a capability to illuminate, founded on an illumination-area-capacity greater than 0.5} 
-  \item[\myex{req6}] $ base(p) \myfi \exists fo,fs (provide\_support(fo) \land \DOLCECLbyBinary{fs}{fo} \land \FunctionSysOf{fs}{p})$
+  \item[\myex{req6}] $ base(p) \myfi \exists f_o,f_s (provide\_support(f_o) \land \DOLCECLbyBinary{f_s}{f_o} \land \FunctionSysOf{f_s}{p})$
   \item[] \mytext{Every lamp base has a (systemic) function of (ontological-function-)type provide support} 
 \eflist
-Notice that \refex{ex:req5} and \refex{ex:req6} can be readily rewritten in \OWL, so that they be part of an \OWL knowledge base containing all the requirements that can be expressed in a similar way. 
+Notice that \refex{ex:req5} and \refex{ex:req6} can be readily rewritten in \OWL, so that they can be part of an \OWL knowledge base containing all the requirements that can be expressed in a similar way. 
 Then, if engineers build during design a model of the product, using the same language, they just need to import the model into the knowledge base with the requirements: the product model satisfies the requirements if and only if the ensuing ontology is consistent (similarly one can find if the requirements are inconsistent or if there are duplicates).  
-Of course, in an actual application the user would never write complex formulas such as \refex{ex:req5} and \refex{ex:req6}, but one could mask those with user-friendly templates, similarly to what is done in \cite{chenOntologybasedRequirementVerification2020}  
+In an actual application the user may never write complex formulas such as \refex{ex:req5} and \refex{ex:req6}, unless user-friendly templates are made available as done in \cite{chenOntologybasedRequirementVerification2020}.  
 
 An analogous procedure is the one that the READI project \cite{overliAssetInformationModelling2021,kluwerOntologybasedRequirementsManagement2018} aims to implement. 
 In their case, the requirement are expressed in SCD (Scope Condition Demand) form.
@@ -1902,17 +1913,17 @@ Any of these could be used to align the ontology developed in this paper with \D
 \section{Conclusion}\label{sec:conc}
 %%non riassuntive, bensi' esplicative
 %% abbiamo fatto X, nel farlo abbiamo usato approcci (riichiro, ecc., quelli che abbiamo usato, emilio, qualche standard, - ci siamo appoggiati su questa roba- dolce incluso, e cosa è novelty? E' validazione ontologica, aver chiarito come concetualizzare queste funzioni in modo sistematico in framework ontologico unico. Essere onesti nel dire che la roba nuova che vi formiamo è stata questa qua e basata su quella la.)
-This work contributes towards an ontological understanding of fundamental concepts used in engineering, especially functionality.
+The work presented in this paper contributes to the ontological understanding of fundamental concepts used in engineering, especially functionality.
 In particular, we have shown how one can give ontologically-grounded definitions of capability, capacity, behaviour, and function using first-order logic.
-Moreover, we have shown how one can use functional decomposition to distinguish between ontological, systemic, and engineering functions, and how \ontoFunc{fullPlural} can be used to explain the difference between capabilities and capacities.
+Moreover, we have shown how one can use an ontology and the notion of functional decomposition to distinguish between ontological, systemic, and engineering functions, and how \ontoFunc{fullPlural} can be used to explain the difference between capabilities and capacities.
 Finally, we partially translated our first-order theory in \OWL, showcasing a preliminary serialisation of our theory in a computer-friendly formal language.
 
-Our approach builds on a series of previous works, especially on the study of functionality carried out by engineers and researchers, in particular \cite{pahl_engineering_2007, sasajimaFBRLFunctionBehavior1995, mizoguchiUnifiedDefinitionFunction2012}; the study of resources in manufacturing, in the applied ontology literature as well as some standards  \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021, jochemISOISO15531312004}; and the top-level ontology \DOLCE and its developments \cite{masoloSocialRolesTheir2004, masoloWonderWebDeliverableD182003}.
-The novelty of our work is the in-depth ontological analysis, which,  exploiting a common ontological framework, clarifies the conceptualisation of functions and related concepts in a systematic way.
+Our approach builds on a series of previous works, especially on the study of functionality carried out by engineers and researchers, in particular \cite{pahl_engineering_2007, sasajimaFBRLFunctionBehavior1995, mizoguchiUnifiedDefinitionFunction2012}; the study of resources in manufacturing, in the applied ontology literature as well as some standards  \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021, jochemISOISO15531312004}; and the top-level ontology \DOLCE and its developments \cite{masoloSocialRolesTheir2004, masoloWonderWebDeliverableD182003,borgoDOLCEDescriptiveOntology2022}.
+This work relies on an in-depth ontological analysis of the domain, which,  exploiting the characteristics of the \DOLCE ontology, clarifies the conceptualisation of functions and related concepts in a systematic way.
 
 We evaluated the quality of our implementation by assessing the clarity, expressive capability, and flexibility of our ontology with respect to some research questions, some competency questions, and some application scenarios. 
-The relevance of our work is precisely the ability to answer questions \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2} and \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function}, and similar others, so that the ontology could be able to support applications in most applied scenarios where functional reasoning is required. 
-We highlight, though, that we delegate to further work the specialisation of our ontology to an application-level.\TODO{<--FC:check if ok.}
+The relevance of our work is highlighted by the ability to answer a series of questions, from \refRQ{RQ:RQ1}-\refRQ{RQ:RQ1.2} to \refCQ{CQ:first-function-capability}-\refCQ{CQ:last-tag-function}, showing that the ontology could be able to support applications in most engineering scenarios where functional reasoning is required. 
+Although this paper has set the core elements of our theory, many things require further work and testing to achieve a  level of detail and coverage suitable for real applications.%\TODO{<--FC:check if ok.}
 %\begin{figure}[t]
 %\includegraphics{}
 %\caption{Figure caption.}\label{f1}
