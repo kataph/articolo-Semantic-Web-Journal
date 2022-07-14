@@ -977,7 +977,9 @@ Such behaviours, whose class we characterize with predicate $\BehaviourConcrete{
 We conceptualize the two processual roles through two specialisations of the participation relation: $\participateAsDoer{\cdot}{\cdot}{\cdot}$, to indicate participation in a process with the role of an agent or agent-like doer, and $\participateAsFlow{\cdot}{\cdot}{\cdot}$, for the role of flow: 
 \bflist
   \item[\myax{participateAsDoerRage}]  $ \participateAsDoer{x}{y}{t} \myfi (\TechArt{x} \lor \DOLCEAgent{x} ) \land \BehaviourConcrete{y} \land \DOLCEPC{x}{y}{t}$\TODO{S: non dovremmo escludere persone/operatori, meglio dire "$\TechArt{x} \lor \DOLCEAgent{x}$" [FC:ok]}
-\item \mytext{if $x$ is a doer in $y$ at time $t$ then $x$ is a technical artifact, $y$ is a perdurant, and $x$ participates in $y$ (in the \DOLCE sense) during that time}
+\item \mytext{if $x$ is a doer in $y$ at time $t$ then $x$ is a technical artifact or an agent, $y$ is a behaviour, and $x$ participates in $y$ (in the \DOLCE sense) during that time}
+  \item[\myax{participateAsFlowRage}]  $ \participateAsFlow{x}{y}{t} \myfi \myComment{(\DOLCEPhysObj{x} \lor \DOLCEQuality{x} \lor \texttt{AOM}(x)) \land} \BehaviourConcrete{y} \land \DOLCEPC{x}{y}{t}$
+\item \mytext{if $x$ is a flow in $y$ at time $t$ then $y$ is a behaviour, and $x$ participates in $y$ during that time}\footnote{We do not commit to a classification of flows into some categories, since we want our theory to be flexible enough to consider physical objects, substances, and qualities (cfr \cite{borgoFormalizationFunctionsOperations2011}), but also other entities such as events or information.}
   \item[\myax{processualRoles}] $ \BehaviourConcrete{x} \myfi \exists y,z,t(\participateAsDoer{y}{x}{t} \land \participateAsFlow{z}{x}{t} \land y \neq z) $ 
 \item \mytext{$x$ is a behaviour only if there are at least a doer and a flow that participate in $x$}
 \eflist
