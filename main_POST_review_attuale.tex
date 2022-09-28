@@ -633,9 +633,10 @@ It might be true that the ambiguity of function terminology is both necessary an
 Still, we maintain that formalisation is needed for interoperability and to show differences between the possible approaches. Moreover, it is useful, if not necessary, to develop applications that rely on functional reasoning.
 
 \medskip
-In conclusion of this section, we briefly mention \myComment{very briefly some facts about some} other engineering concepts \myComment{of complex} whose ontological status is quite complex: capabilities, capacities, and affordances. 
-Capacities and, especially, capabilities are used in resource modelling \cite{jarvenpaaDevelopmentOntologyDescribing2019a, sarkarOntologyModelProcess2019, jochemISOISO15531312004, solanoKnowledgeRepresentationProduct2014}. In addition, terminological problems are present also for these two concepts, which are rarely formalized \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021}. When distinguished, capabilities and capacities are separated along a qualitative-quantitative axis, for example ISO 15531-31\cite{jochemISOISO15531312004} states that \quotes{Capacity is strictly a quantitative concept} while \quotes{Capability is essentially a functional and qualitative concept}, and exemplify capacity with product throughput and define capability as \quotes{the quality of being able to perform a given activity}. The same standard advises against reducing capacities as characteristics of capabilities and forbids the opposite (in contradiction to \cite{solanoKnowledgeRepresentationProduct2014}, where a \quotes{Capacity is a Capability
-expressed in terms of amount of production}).
+In conclusion of this section, we briefly mention other engineering concepts whose ontological status is quite complex: capabilities, capacities, and affordances. 
+Capacities and, especially, capabilities are used in resource modelling \cite{jarvenpaaDevelopmentOntologyDescribing2019a, sarkarOntologyModelProcess2019, jochemISOISO15531312004, solanoKnowledgeRepresentationProduct2014, sanfilippoOntologicalModelingManufacturing2021}. In addition, terminological problems are present also for these two concepts, which are rarely formalized \cite{sanfilippoResourcesManufacturing2015, borgoCapabilitiesCapacitiesFunctionalities2021}. When distinguished, capabilities and capacities are separated along a qualitative-quantitative axis, for example ISO 15531-31\cite{jochemISOISO15531312004} states that \quotes{Capacity is strictly a quantitative concept} while \quotes{Capability is essentially a functional and qualitative concept}, and exemplify capacity with product throughput and define capability as \quotes{the quality of being able to perform a given activity}. The same standard advises against reducing capacities as characteristics of capabilities and forbids the opposite (in contradiction to \cite{solanoKnowledgeRepresentationProduct2014}, where a \quotes{Capacity is a Capability
+expressed in terms of amount of production}). 
+In addition, the concept of capability is sometimes, but not always, used interchangeably with functionality: for example, the standard VDI 2860 \cite{VDI2860Assembly1990} lists a vocabulary of actions that machines can execute when manipulating products (e.g. `guide', `rotate', etc.) and calls them `functions'. At the same time, this very standard is quoted in the literature with the aim of establishing standard-based capability taxonomies \cite{kocherFormalCapabilitySkill2020a, kocherReferenceModelCommon2022}.
 In any case, in this paper we will try to formalize, in a preliminary way, some intuitions that transpire from the literature on resource modelling, such as the asymmetry between capacities and capabilities, the close link (but not identity) between capabilities and functionality, qualitative vs quantitative aspects, and the idea of capabilities as qualities of being able to do something.
 
 Affordances too are a source of conceptual confusion:
@@ -1633,6 +1634,21 @@ Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL-ad
 Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted for inclusion in the ISO 21838 standard.\footnote{\url{https://www.iso.org/standard/71954.html}.} The resulting ontology, which can be found on GitHub\footnote{\url{https://github.com/kataph/function-method-ontology.git}.}, was tested using the Hermit reasoner.
 (For the sake of example, the ontology is populated with only a few individuals).
 
+Finally, in Figure \label{fig:model} we attach a schema that shows the main relations and concepts in our ontology.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\textwidth]{model-manual.JPG}
+    \caption{Main concepts and relations in the presented ontology. For simplicity and clarity, the picture refers to the OWL model and many relations and concepts have been suppressed.}
+    \label{fig:model}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\textwidth]{model-protege.JPG}
+    \caption{Main concepts and relations in the presented ontology. For simplicity and clarity, the picture refers to the OWL model and many relations and concepts have been suppressed.}
+    \label{fig:model}
+\end{figure}
+
 \subsection{Evaluation}
 The ontology developed in this paper is a hand-crafted prototype that discusses middle and high-level concepts. 
 Therefore, some common approaches to evaluation cannot be employed, as, for example, there is no \qquotes{gold standard} \cite{sfarGoldStandardBased2016}, or set of formal ontologies that one could use to compare common ontology metrics (such as those extracted by OntoMetrics\footnote{\url{https://ontometrics.informatik.uni-rostock.de/ontologymetrics/index.jsp}.}), nor there is a precise application against which to carry out the evaluation. 
@@ -1966,6 +1982,8 @@ For example, linking the notions of behaviour to the modelling equations that en
 Francesco Compagno is funded
 by the company Adige Spa.
 This work is partially funded by the European project OntoCommons (GA 958371, \url{www.ontocommons.eu}).
+
+The authors wish to thank Riichiro Mizoguchi for the precious time spent discussing his work as well as the topic of engineering functionality in general.
 
 %%%%%%%%%%% The bibliography starts:
 
