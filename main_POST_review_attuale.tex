@@ -325,6 +325,7 @@
 %\newcommand{\TODO}[1]{\nb{#1}}
 %red comment in the margin
 \newcommand{\nb}[1]{\textcolor{red}{$|$}\marginpar{\parbox{22mm}{\scriptsize\raggedright\textcolor{red}{#1}}}}
+\renewcommand{\marginpar}[1]{}
 % to comment away a small text
 \newcommand{\myComment}[1]{{\unskip \ignorespaces}}
 
@@ -689,7 +690,7 @@ capabilities require functions to be defined and existentially depend on capacit
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{DOLCE-taxav2.JPG}
+  \includegraphics[width=\textwidth]{DOLCE-taxav2-nocolor.JPG}
   \caption{\label{fig:DOLCE-taxa} \DOLCE taxonomy, taken from \cite{borgoDOLCEDescriptiveOntology2022}. Most divisions in subcategories are not exhaustive. The dotted classes are added to help some descriptions detailed in the paper, and are not part of \DOLCE taxonomy.}
 \end{figure}
 
@@ -782,7 +783,7 @@ In \DOLCE, roles ($\DOLCERole{\cdot}$) are reified and considered as concepts ($
   \item[\myax{roleSussum2}] $\DOLCEConcept{x} \myfi \DOLCENASO{x}$
   \item[] \mytext{a concept is a non-agentive social object}%\TODOinline{[SB: ho spezzato][FC:ok]}
 \eflist
-In this paper, the fact that roles are founded is particularly important, thus, we give the following formalisation, where $\DOLCECLby{\cdot}{\cdot}{\cdot}$\marginpar{\color{red}{ho sostituito CL con CF}} (`classified-by', also called `play-as', if the first argument is a role) is the classification relation between a concept and its instances at a certain time, cf. \cite{masoloSocialRolesTheir2004}. In the formalisation we use some other relations taken from \DOLCE, namely: constitution, $\DOLCEK{\cdot}{\cdot}{\cdot}$,
+In this paper, the fact that roles are founded is particularly important, thus, we give the following formalisation, where $\DOLCECLby{\cdot}{\cdot}{\cdot}$\marginpar{\color{red}{ho sostituito CL con CF[FC:OK]}} (`classified-by', also called `play-as', if the first argument is a role) is the classification relation between a concept and its instances at a certain time, cf. \cite{masoloSocialRolesTheir2004}. In the formalisation we use some other relations taken from \DOLCE, namely: constitution, $\DOLCEK{\cdot}{\cdot}{\cdot}$,
  which is the  relation holding between some amount of matter and an object when the latter is made of the first (e.g., a statue and the amount of clay it is made of);  $\DOLCEOverTemp{\cdot}{\cdot}{\cdot}$, which is the standard overlap relation (over time) (e.g., two semi-detached houses overlap because of the wall they share); and $\DOLCEPRE{\cdot}{\cdot}$, which is the relation "being present (exist) at time". %, and $\playAs{\cdot}{\cdot}{\cdot}$ is its restriction to roles:
 \bflist
 \item[\mydf{external}] $ \external{x}{y} \myiff \neg (\DOLCEQualityDirect{x}{y} \lor \exists t(\DOLCEK{x}{y}{t}) \lor \exists t(\DOLCEOverTemp{x}{y}{t}))$
@@ -808,7 +809,7 @@ Further, we specialize the founding relationship to concepts and their instances
 \item[] \mytext{if $x$ is a role, then there is a $y$ on which it is instantiation-founded} 
 %cfr. \refax{ax:relationalQtPartialDef}.
 \eflist 
-For example, the role of `husband' is instantiation-founded on the concept of `marriage', since every time a person is a husband there is an individual marriage between that person and another person.\marginpar{\color{red}{Questo esempio va ampliato per esemplificare la formula d5 in modo sistematico.}}
+For example, the role of `husband' is instantiation-founded on the concept of `marriage', since every time a person is a husband there is an individual marriage between that person and another person, which the `husband' role existentially depends on: there cannot be a husband if there is no marriage.\marginpar{\color{red}{Questo esempio va ampliato per esemplificare la formula d5 in modo sistematico.[FC:OK]}}
 
 We also need to capture a different kind of founding relation, that we call \firstTimeKeyWord{definition-founding} ($\foundedDef{\cdot}{\cdot}$). We do not formalize this relation as it requires discussing how to formally define roles, a topic beyond our concerns in this paper. We will use it with the following informal interpretation: \mytext{$x$ is definition-founded on some entity $y$ if and only if $y$ is used to define $x$}.
 %\TODOinline{[assumo che applichiamo la relazione solo a concetti, confermi?][FC: no, perché la ragione di introdurre questa relazione è la definizione \refdf{def:capability}, per provare a collegare le capability alle funzioni.][SB: ok, ho tolto le restrizioni a "concept" nel testo][FC:roger]} 
@@ -977,7 +978,7 @@ Finally, there is the modal axis, since \myComment{for \textcolor{blue}{(since? 
 This axis includes, arguably, talks of causal laws or relations, since those could be conceptualized as changes of a system under some kind of %epistemic 
 modality, that is, changes that necessarily happen when some condition is met.
 We do not argue in favor of conceptualizing causal laws in this way, but, in any case, one must also take this use of behaviour into account, since it is encountered often. %often.
-%Other differences exist in the literature, such as device-centric vs. environment-centric \cite{chandrasekaranFunctionDeviceRepresentation2000}, but we do not discuss them. \marginpar{questo rientra in external-internal}
+%Other differences exist in the literature, such as device-centric vs. environment-centric \cite{chandrasekaranFunctionDeviceRepresentation2000}, but we do not discuss them. \marginpar{questo rientra in external-internal[FC:OK]}
 
 %By virtue of how our approach is structured, to define behaviour as a property would make it very similar to a capability, or to the realisation of one.
 %\TODO{[FC: completamente ristrutturato questo e i prossimi paragrafi. Tengo "behaviour $\subset$ Perdurant" con una caratterizzazione parziale perché è quella più vicina all'uso in ingegneria]}
@@ -1012,7 +1013,7 @@ We conceptualize the two processual roles through two specialisations of the par
   \item[\myax{participateAsDoerRage}]  $ \participateAsDoer{x}{y}{t} \myfi (\TechArt{x} \lor \DOLCEAgent{x} ) \land \BehaviourConcrete{y} \land \DOLCEPC{x}{y}{t}$\TODO{S: non dovremmo escludere persone/operatori, meglio dire "$\TechArt{x} \lor \DOLCEAgent{x}$" [FC:ok]}
 \item \mytext{if $x$ is a doer in $y$ at time $t$ then $x$ is a technical artifact or an agent, $y$ is a behaviour, and $x$ participates in $y$ (in the \DOLCE sense) during that time}
   \item[\myax{participateAsFlowRage}]  $ \participateAsFlow{x}{y}{t} \myfi \myComment{(\DOLCEPhysObj{x} \lor \DOLCEQuality{x} \lor \texttt{AOM}(x)) \land} \BehaviourConcrete{y} \land \DOLCEPC{x}{y}{t}$
-\item \mytext{if $x$ is a flow in $y$ at time $t$ then $y$ is a behaviour, and $x$ participates in $y$ during that time}%\footnote{We do not commit to a classification of flows into some categories, since we want our theory to be flexible enough to consider physical objects, substances, and qualities (cfr \cite{borgoFormalizationFunctionsOperations2011}), but also other entities such as events or information.}\todo{S: qui x non può essere un evento a causa di PC(x,y,t)}
+\item \mytext{if $x$ is a flow in $y$ at time $t$ then $y$ is a behaviour, and $x$ participates in $y$ during that time}%\footnote{We do not commit to a classification of flows into some categories, since we want our theory to be flexible enough to consider physical objects, substances, and qualities (cfr \cite{borgoFormalizationFunctionsOperations2011}), but also other entities such as events or information.}\todo{S: qui x non può essere un evento a causa di PC(x,y,t)[FC:OK]}
   \item[\myax{processualRoles}] $ \BehaviourConcrete{x} \myfi \exists y,z,t(\participateAsDoer{y}{x}{t} \land \participateAsFlow{z}{x}{t} \land y \neq z) $ 
 \item \mytext{$x$ is a behaviour only if there are at least a doer and a flow that participate in $x$}
 \eflist
@@ -1029,7 +1030,7 @@ Here, we take a broader view and set the domain and range to be the category of 
 %In any case, whatever the definition of behaviour one makes use of, one must take into account the fact that behaviours are perdurants seen from the point of view of the device. This is the main reason behind the approaches that define behaviours as relational qualities of devices \cite{borgoFormalOntologicalPerspective2009}. In this paper 
 The role-based approach combined with the causal contribution relation allows us to model behavior from the point of view of the participating device 
 %stating that any behaviour must give raise to corresponding processual roles 
-\refax{ax:processualRoles}. Admittedly, it also introduces some limitations. For instance, the case of an artificial agent changing its own setting exemplifies a function where doer and flow coincide, a case ruled out by \refax{ax:processualRoles} (such a function is called `change over' in \cite{borgoKnowledgebasedAdaptiveAgents2019}).\marginpar{\color{red}{frase aggiunta}}
+\refax{ax:processualRoles}. Admittedly, it also introduces some limitations. For instance, the case of an artificial agent changing its own setting exemplifies a function where doer and flow coincide, a case ruled out by \refax{ax:processualRoles} (such a function is called `change over' in \cite{borgoKnowledgebasedAdaptiveAgents2019}).\marginpar{\color{red}{frase aggiunta[FC:OK]}}
 A full comparison of the two approaches to behavior (relational quality vs. role-based view of perdurants)
 %, including advantages and drawbacks, 
 has not been carried out yet. Nonetheless, we highlight that the two notions are both compatible with \DOLCE and can coexist. One should be careful to separate them, e.g, calling general-behavior the first and engineering-behavior the latter. Since we are only using the second notion in this paper, we will use the term behavior simpliciter.
@@ -1174,12 +1175,12 @@ taking} Continuing the discussion with \DOLCE as the upper ontology, the ontolog
 %%%
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{onto-func-logicv2.JPG}
+  \includegraphics[width=\textwidth]{onto-func-logic-nocolor.JPG}
   \caption{\label{fig:onto-func-logic} A non exhaustive taxonomy of the logical formulas describing changes between states, classified depending on what predicates differ between the initial and final states.}
 \end{figure}
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{onto-func-taxav2.JPG}
+  \includegraphics[width=\textwidth]{onto-func-taxav2-nocolor.JPG}
   \caption{\label{fig:onto-func-taxa} A possible taxonomy of \ontoFunc{fullPlural}. The light blue rectangles contain the \ontoFunc{fullPlural}-categories. The gray circles contain the corresponding type of change at a logical level, and refer to Figure \ref{fig:onto-func-logic}. Finally, the yellow rectangles contain terms used by other authors that could, arguably, used to label the \ontoFunc{fullSingular} category: H, P\&B, and O refers to \cite{hirtz_functional_2002}, \cite{pahl_engineering_2007}, and \cite{sasajimaFBRLFunctionBehavior1995} respectively. Notice that some of these terms are used by their authors with different meaning than in this figure, additionally, we do not have added terms related with information content.}
 \end{figure}
 %%%
@@ -1220,17 +1221,17 @@ This suggests defining specific functions by comparing, for instance, initial an
   \item[\mydf{connect}] $ \Connect{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists a,b,c (\DOLCEPhysObj{a} \land \DOLCEPhysObj{b} \land \DOLCEPhysObj{c} \land \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \DOLCEPC{b}{s_i}{t_i} \land \DOLCEPC{b}{s_f}{t_f} \land %\exists c (
   \DOLCEPC{c}{s_f}{t_f} \land \DOLCEPart{a}{c}{t_f} \land \DOLCEPart{b}{c}{t_f}) \land \neg \exists c' (\DOLCEPhysObj{c'} \land \DOLCEPC{c'}{s_i}{t_i} \land \DOLCEPart{a}{c'}{t_i} \land \DOLCEPart{b}{c'}{t_i})) $ \TODO{S: ho cambiato limitando a ph. obj., controlla [FC: ok, controllato]}
   \myComment{\item[] \mytext{A concept is of \textit{connect} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a final state ($s_f$, with extension $t_f$) and, moreover, there are two entities ($a$ and $b$) that participate in such states and, during the final state but not in the initial one, form a single object ($c$)}}
-    \item[] \mytext{A concept is of \textit{connect} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a final state ($s_f$, with extension $t_f$) and, moreover, there are two physical objects ($a$ and $b$) that participate in such states and, during the final state but not in the initial one, they are both part of a physical object ($c$)}\TODO{S: aggiustato di consequenza [FC:ok]}
+    \item[] \mytext{A concept is of \textit{connect} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there are two physical objects ($a$ and $b$) that participate in such states and, during the final state but not in the initial one, they are both part of a physical object ($c$)}\TODO{S: aggiustato di consequenza [FC:ok]}
 \eflist 
 In the previous formula we used the predicate $\sState{y}{s_i}{t_i}$ to mean that $s_i$ is a state with time extension $t_i$, which is part of the perdurant $y$ and such that there are no parts of the time extension of $y$ which precede $t_i$. Analogous meaning for $\eState{\cdot}{\cdot}{\cdot}$.
-Notice that: $(a)$ this notion captures the act of forming a single object out of two given ones, to formalize an assembly function one should add the condition that the final object is also a single piece (self-connected); $(b)$ if one reverses the initial and final states in Formula \refdf{def:connect}, then one obtains a definition for the \textit{divide} function.\marginpar{\color{red}{ho aggiunto}}
+Notice that: $(a)$ this notion captures the act of forming a single object out of two given ones, to formalize an assembly function one should add the condition that the final object is also a single piece (self-connected); $(b)$ if one reverses the initial and final states in Formula \refdf{def:connect}, then one obtains a definition for the \textit{divide} function.\marginpar{\color{red}{ho aggiunto[FC:OK]}}
 
 %%Moreover, notice that \refdf{def:connect} is not teleological by itself
 
 Another example, to define a \textit{convert} function: 
 \bflist
   \item[\mydf{convert}] $ \Convert{x} \myiff (\DOLCECLbyBinary{y}{x} \myiff \DOLCEEvent{y} \land \sState{y}{s_i}{t_i} \land \eState{y}{s_f}{t_f} \land \Goal{s_f} \land \exists \Phi,\Psi,a (\Phi\in\mathcal{NR} \land \Psi\in\mathcal{NR} \land \Psi\cap\Phi = \emptyset \land  \DOLCEPC{a}{s_i}{t_i} \land \DOLCEPC{a}{s_f}{t_f} \land \Phi(a,t_i) \land \Psi(a,t_f))) $ 
-  \item[] \mytext{A concept is of \textit{convert} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) that at time $t_i$ is instance of a type ($\Phi$), while at time $t_f$ is instance of a different, disjoint, type ($\Psi$). Necessarily, $\Phi$ and $\Psi$ are types belonging to the set of all non-rigid types of the underlying ontology ($\mathcal{NR}$)}
+  \item[] \mytext{A concept is of \textit{convert} type if and only if it classifies precisely those events that are transitions between a starting state ($s_i$, with time extension $t_i$) and a desired final state ($s_f$, with extension $t_f$) and, moreover, there is an entity ($a$) that at time $t_i$ is instance of a type ($\Phi$), while at time $t_f$ is instance of a different, disjoint, type ($\Psi$). Necessarily, $\Phi$ and $\Psi$ are types belonging to the set of all non-rigid types of the underlying ontology ($\mathcal{NR}$)}
 \eflist 
 Notice that in the previous definition we have quantified over the set of all non-rigid classes of an ontology ($\mathcal{NR}$). 
 If such a set is finite, like in \DOLCE, then the quantification corresponds to a finite disjunction of predicates, therefore Formula \refdf{def:convert} is a first-order formula.
@@ -1258,7 +1259,7 @@ At this point we make three observations:
   This makes it so that the temperature value over time oscillates around the target value (because the temperature keeps overshooting or undershooting), and such a process cannot be deduced by only observing the differences between two states.
   Therefore, processes like this cannot be reduced to \ontoFunc{fullSingular}.
   In this particular case, one could also argue that the function of the controller is to maintain the temperature in the oven around the set temperature\footnote{This could be expressed in the style of the previous definitions by comparing an initial state, in which the set value and the actual value are different, to a final state, in which said values are equal.}, while the oscillations of the temperature are merely a side effect of the chosen implementation method, and would be different, or even absent, if the implementation method was different. 
-  In general, though, if one actually wishes to classify a transformation that cannot be described by comparison of two states, then the method employed in the previous formulas is not sufficient and a suitable comparison of what happens {\em during} the event should be added. We do not investigate this situation further but recall that, to maintain the overall view, one should add only conditions that are expressible within the language of the ontology.\marginpar{\color{red}{aggiunto frase}}
+  In general, though, if one actually wishes to classify a transformation that cannot be described by comparison of two states, then the method employed in the previous formulas is not sufficient and a suitable comparison of what happens {\em during} the event should be added. We do not investigate this situation further but recall that, to maintain the overall view, one should add only conditions that are expressible within the language of the ontology.\marginpar{\color{red}{aggiunto frase[FC:OK]}}
   \item Second, actual events can be extremely complex and participated by many relevant entities (think, e.g., the complexity of waking from a biomechanical point of view). 
   This, together with the fact that we admit also \ontoFunc{fullPlural} defined by the absence of some type of change (e.g., \textit{support}), makes so that many events would be classified by a combination of \ontoFunc{fullPlural} (as observed earlier while discussing the cutting example).
   This is not unexpected, and, in fact, reflects the flexibility of teleological thinking.
@@ -1292,7 +1293,7 @@ Another possibility is to look for an intrinsic definition of \ontoFunc{fullPlur
   \item[\mydf{ontoDef2}] \mytext{A concept is a \ontoFunc{fullSingular} if and only if it classifies exactly those events consisting in a transition \myComment{from an initial state to a final state} such that the changes (or the absence thereof) between the initial and final states (or across the whole transition) is characterized in terms of a formula expressed in the language of an upper ontology.}\TODO{S: ho esteso il significato perché l'espressione era limitante [FC:ok]}
 \eflist
 %(Of course, the formulas that engineers actually use to express functions are not so broad as in \refdf{def:ontoDef2}, and typically focus on a small set of cases).
-Since \qquotes{a formula expressed in the language of an upper ontology} is not something that can be written in a natural way using first-order logic, we cannot give an intrinsic first-logical definition of \ontoFunc{fullPlural}. (A similar argument could be applied to extend the notion of ontological functions to functions in the language of reference ontologies.)\marginpar{\color{red}{ho separato i casi upper e reference.}}
+Since \qquotes{a formula expressed in the language of an upper ontology} is not something that can be written in a natural way using first-order logic, we cannot give an intrinsic first-logical definition of \ontoFunc{fullPlural}. (A similar argument could be applied to extend the notion of ontological functions to functions in the language of reference ontologies.)\marginpar{\color{red}{ho separato i casi upper e reference.[FC:OK]}}
 
 
 \paragraph[meta]{Link between systemic functions and \ontoFunc{fullPlural}.}
@@ -1410,7 +1411,7 @@ For instance, in the lathe example discussed above, it could be that the systemi
 \section{Capabilities and capacities}\label{sec:CapabilAndCapac}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section, we discuss capabilities and capacities, two notions that we briefly introduced at the end of Section~\ref{sec:review}. In particular, we will make use of the concept of  \ontoFunc{fullSingular} to distinguish capabilities from capacities. That is, we ground the distinction on an ontological argument moving beyond views like ISO 15531-31\cite{jochemISOISO15531312004}, which proposes the association of capacities with a quantitative viewpoint and capabilities with a qualitative viewpoint only on the basis of practical arguments.\marginpar{\color{red}{ho cambiato un po'}}
+In this section, we discuss capabilities and capacities, two notions that we briefly introduced at the end of Section~\ref{sec:review}. In particular, we will make use of the concept of  \ontoFunc{fullSingular} to distinguish capabilities from capacities. That is, we ground the distinction on an ontological argument moving beyond views like ISO 15531-31\cite{jochemISOISO15531312004}, which proposes the association of capacities with a quantitative viewpoint and capabilities with a qualitative viewpoint only on the basis of practical arguments.\marginpar{\color{red}{ho cambiato un po'[FC:OK]}}
 %\TODOinline{which, following the approach taken in ISO 15531-31\cite{jochemISOISO15531312004}, characterize the qualitative (capabilities) and the quantitative (capacities) viewpoints on what a device can do}.
 
 %\myComment{Given that the difference between capabilities and capacities is expressed using the qualitative vs quantitative duality, a first idea is to model capacities as sublcasses of capabilities: for example, \cite{kochCAPABILITIESBASEDACCOUNTPATIENT2016} (despite not mentioning capacities) speaks of \qquotes{general and specific capabilities}, a general one being, for example, the \qquotes{capability of obtaining food}, and a corresponding specific capability being \qquotes{capability of obtaining through hunting whales on the sea for extended periods of time}. 
@@ -1437,9 +1438,9 @@ Following the quality theory of \DOLCE, both the physical characteristics of the
 %, that we shall call \firstTimeKeyWord{capabilities}, 
 can be conceptualized as individual qualities.\footnote{As seen in Section \ref{sec:DOLCE}, individual qualities in \DOLCE have associated quality spaces, which are essentially types of conceptual spaces as introduced in \cite{Gardenfors2004}. In the case of capabilities, the associated quality spaces should characterize the kinds of entities through which the capability can be realized.} 
 Consequently, we can model the capacity `flow rate' (something that can be quantified) as a relational quality of the artifact relative to a certain kind of fluid, and the capability to pump (something that realizes a type of interaction or ability) of the same artifact as another (yet related) relational quality.
-But what are these capabilities? Our theory provides a natural explanation: an entity has a capability if it can participate as doer in an \ontoFunc{fullSingular}. More precisely, an entity has a capability of a certain type (it has the capability of dividing) if and only if it can participate in the role of doer in an \ontoFunc{fullSingular} of the corresponding type (it can participate as doer in a event classified by the divide function). Thus, we assume that \ontoFunc{fullPlural} define types of capabilities, and that an entity has a capability only if it can perform (participate as doer) the corresponding \ontoFunc{fullSingular}.\TODO{S: ho aggiunto questa parte per collegare capabilities e funz. ontologiche, secondo me va anticipata qui. [FC: ok]} Starting from this level of capabilities (which we could call ontological capabilities), one can specialize capabilities to lower functional levels where functions like cutting, loading etc. are introduced, thus characterizing cutting capability, loading capability and so on.\marginpar{\color{red}{aggiunto}}
+But what are these capabilities? Our theory provides a natural explanation: an entity has a capability if it can participate as doer in an \ontoFunc{fullSingular}. More precisely, an entity has a capability of a certain type (it has the capability of dividing) if and only if it can participate in the role of doer in an \ontoFunc{fullSingular} of the corresponding type (it can participate as doer in a event classified by the divide function). Thus, we assume that \ontoFunc{fullPlural} define types of capabilities, and that an entity has a capability only if it can perform (participate as doer) the corresponding \ontoFunc{fullSingular}.\TODO{S: ho aggiunto questa parte per collegare capabilities e funz. ontologiche, secondo me va anticipata qui. [FC: ok]} Starting from this level of capabilities (which we could call ontological capabilities), one can specialize capabilities to lower functional levels where functions like cutting, loading etc. are introduced, thus characterizing cutting capability, loading capability and so on.\marginpar{\color{red}{aggiunto[FC:OK]}}
 
-\subsection{Capabilities vs. capacities}\marginpar{\color{red}{aggiunta sottosez.}}
+\subsection{Capabilities vs. capacities}\marginpar{\color{red}{aggiunta sottosez.[FC:OK]}}
 Whenever a capability is based on some other quality of a technical artifact, that is, when each realisation of the capability depends on some other quality, we say that it is \firstTimeKeyWord{\foundedTerm{passive}} on that quality (or qualities). As before, we formalize this through the relation $\founded{\cdot}{\cdot}$ defined in \refdf{def:foundingBasic}.
 For example, in the case of the pump we could say that the capability of the pump to move water is founded on its flow rate capacity.
 %a person could say that he or she is able to jump high due to the strength of their leg muscles and their technical proficiency in jumping, that is, they have a jumping capability that is founded on their leg strength and their technical proficiency in jumping. 
@@ -1465,7 +1466,7 @@ In \refax{ax:capacPartialDef}, the $\bearer{\cdot}$ is the (unique) bearer of a 
 \bflist
 \item[\mydf{beareDef}] $ \bearer{x} = \suchthat ~\! 
 y (\DOLCEQualityDirect{x}{y}) $ 
-\item[] \mytext{the bearer of a quality is the entity that has (inheres) the quality}\marginpar{\color{red}{aggiunto}}
+\item[] \mytext{the bearer of a quality is the entity that has (inheres) the quality}\marginpar{\color{red}{aggiunto[FC:OK]}}
 \item[\myax{capacPartialDef2}] $ \Capacity{x} \myfi \exists y( \Capability{y} \land \founded{y}{x}) $  % 
 \item[] \mytext{Each capacity founds a capability.}%\TODO{FC: ha senso questo assioma o è eccessivo (e in caso dire che hanno lo stesso bearer?)?}\TODO{S: per me va bene così}
 \eflist
@@ -1485,7 +1486,7 @@ is to define a capacity as a \quotes{parameter} of the capabilities it founds, t
 Briefly put, the formula above views capacities as the parameters of capabilities allowing to ontologically support practical approaches like, e.g., that of ISO 15531-31\cite{jochemISOISO15531312004}. 
 \myComment{Our approach is to define a parameter as another quality whose values are mereological parts of the values of the original quality. }
 
-\subsection{Capabilities vs. functions}\marginpar{\color{red}{aggiunta sottosez. ed eliminato il rif.to alla modalità}}
+\subsection{Capabilities vs. functions}\marginpar{\color{red}{aggiunta sottosez. ed eliminato il rif.to alla modalità[FC:OK]}}
 %In contrast to \refex{ex:capacFullDef}, a characterisation of capabilities may touch upon the fact that 
 From another perspective, capabilities are inextricably intertwined to functional aspects. 
 %In order to do this, we first try to clarify the nature of capabilities.
@@ -1533,7 +1534,7 @@ From this \myComment{definition} axiom, we have that capabilities are specifical
 The intuition, as anticipated at the beginning of this section, is that capabilities are relational qualities that associate their bearers with \ontoFunc{fullPlural}, so that they must refer to those functions: in our terminology, they are definition-founded on \ontoFunc{fullPlural}.  
 Note that they are not instantiation-founded, see \refdf{def:founding}, since an artifact could have the capability to function without actually functioning. Additionally, the function must be ontological and not systemic because, otherwise, the bearing object would be associated \textit{a priori} with some given system. 
 
-The characterization of capacities and capabilities via \refax{ax:capacPartialDef} and \refdf{def:capability}\marginpar{\color{red}{check}} has the advantage of explaining:
+The characterization of capacities and capabilities via \refax{ax:capacPartialDef}, \refax{ax:capacityNuovo}, and \refdf{def:capability}\marginpar{\color{red}{check[FC: added a20 for explanation of second item]}} has the advantage of explaining:
 \begin{itemize}
     \item the close link between functions and capabilities (capabilities are definition-founded on \ontoFunc{fullPlural});
     \item the asymmetry between capacities and capabilities (capabilities are founded on capacities, but not vice-versa).
@@ -1566,12 +1567,12 @@ We do not attempt to carry out an ontological analysis of affordances, but we do
 \end{itemize}
 From this point of view, our analysis of capabilities would carry at least some insight into affordances.
 
-Finally, in Figure \ref{fig:model} we give a schema that shows the main relations and concepts used in our theory of engineering functions.\marginpar{\color{red}{ho spostato qui la fig.}}
+Finally, in Figure \ref{fig:model} we give a schema that shows the main relations and concepts used in our theory of engineering functions.\marginpar{\color{red}{ho spostato qui la fig.[FC:OK]}}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\textwidth]{schema-manuale.JPG}
-    \caption{Main concepts and relations in the presented ontology. For simplicity and clarity, the picture refers to the OWL model and many relations and concepts have been suppressed. In addition, an instantiation of the schema for the case of a voltage divider is given. The red instance-of arrow is inferrable, since the related systemic function is main-function-of some engineering method (cfr. \refdf{def:engFunc}).}
+    \includegraphics[width=0.95\textwidth]{schema-manual-nocolor.JPG}
+    \caption{Main concepts and relations in the presented ontology. For simplicity and clarity, the picture refers to the OWL model and many relations and concepts have been suppressed. In addition, an instantiation of the schema for the case of a voltage divider is given. The dotted instance-of arrow is inferrable, since the related systemic function is main-function-of some engineering method (cfr. \refdf{def:engFunc}).}
     \label{fig:model}
 \end{figure}
 
@@ -1632,7 +1633,7 @@ The original theory remains essential as it constrains the intended meanings of 
 
 The first-order theory developed in the previous sections can be converted to \OWL language as is, except for the expressions where ternary relations are used, as well as those that necessarily need at least three arguments to be formulated. %as well as \refax{ax:capacPartialDef}, which necessarily needs at least three variables to be formulated.
 For example, the definition of systemic-function-of \refdf{def:functionOf}%-\refdf{def:function}
-\marginpar{\color{red}{ho tolto \refdf{def:function}}}, the instantiation-founding definition \refdf{def:founding}, and the engineering \methodsName{singular} schema \refdf{def:method} cannot be expressed in \OWL. 
+\marginpar{\color{red}{ho tolto \refdf{def:function}[FC:OK]}}, the instantiation-founding definition \refdf{def:founding}, and the engineering \methodsName{singular} schema \refdf{def:method} cannot be expressed in \OWL. 
 In these cases we have to weaken the axioms. For instance, in \OWL we replace the definition of systemic functions with
 \bflist
 \item[\myax{functionOWL}$_{owl}$] 
@@ -1690,9 +1691,9 @@ Note that in \refdf{def:engFunc} the individuals must necessarily be systemic fu
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{entities_screenshot.PNG}
+  \includegraphics[width=0.8\textwidth]{entities_screenshotv2.JPG}
   \caption{A view of the ontology taxonomy in Protegé.\label{fig:screen_entities}}
-\end{figure}\marginpar{\color{red}{IntQ e RelQ sono sottoclassi di PQ}}
+\end{figure}\marginpar{\color{red}{IntQ e RelQ sono sottoclassi di PQ[FC:OK]}}
 
 Even though the \DOLCE ontology is primarily a first-order logic theory, \OWL versions exist as well, e.g. \DOLCE-lite and \DOLCE-Ultralite.\footnote{Available at \url{http://www.loa.istc.cnr.it/index.php/dolce/}.}
 Any of these could be used to align the ontology developed in this paper with \DOLCE. In our case, we used the \OWL version of \DOLCE that has been recently submitted as part the ISO 21838 standard. %\footnote{\url{www.iso.org/standard/71954.html}.} 
