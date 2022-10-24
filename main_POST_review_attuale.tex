@@ -690,8 +690,9 @@ capabilities require functions to be defined and existentially depend on capacit
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{DOLCE-taxav2-nocolor.JPG}
-  \caption{\label{fig:DOLCE-taxa} \DOLCE taxonomy, taken from \cite{borgoDOLCEDescriptiveOntology2022}. Most divisions in subcategories are not exhaustive. The dotted classes are added to help some descriptions detailed in the paper, and are not part of \DOLCE taxonomy.}
+  \includegraphics[width=\textwidth]{DOLCE-taxa-originalv2.JPG}
+  \caption{\label{fig:DOLCE-taxa} \DOLCE taxonomy, taken from \cite{borgoDOLCEDescriptiveOntology2022}. %Most divisions in subcategories are not exhaustive. The gray classes are added to help some descriptions detailed in the paper, and are not part of \DOLCE taxonomy.
+  }
 \end{figure}
 
 \DOLCE qualities \myComment{are similar to} were inspired by the trope theory~\cite{Campbell90} but differ from tropes in important ways. Qualities, for example the weight of a car and the color of a flower, are used for representing properties (e.g., weight) of individual objects (e.g., car) in which they inhere.
@@ -800,16 +801,18 @@ In this paper, the fact that roles are founded is particularly important, thus, 
 \eflist
 Further, we specialize the founding relationship to concepts and their instances as follows:
 \bflist
-\item[\mydf{founding}] $ \foundedROLE{x}{y} \myiff (\DOLCEConcept{x} \land \exists z,t (\DOLCECLby{z}{x}{t}) \land \forall z,t (\DOLCECLby{z}{x}{t} \myfi \exists w (\founded{z}{w} \land \DOLCECLby{w}{y}{t})))$
+\item[\mydf{founding}] $ \foundedROLE{x}{y} \myiff (\DOLCEConcept{x} \land \DOLCEConcept{y} \land \exists z,t (\DOLCECLby{z}{x}{t}) \land \forall z,t (\DOLCECLby{z}{x}{t} \myfi \exists w (\external{z}{w} \land \DOLCECLby{w}{y}{t})))$
 %\textcolor{blue}{(e' necessario assumere che il concetto classifichi qualcosa (quantificatore esistenziale)?(FC: argomentabile, vedi nota 18)( cmq farei un esempio con $founded_{cn}$)(FC: inserito sotto esempio husband-marriage, è OK?)(SB: meglio tenerlo per evitare casi di foundedness irrilevanti)}
-\item[] \mytext{the concept $x$ is instantiation-founded on the concept $y$ if and only if, given any $z$ that plays $x$, then $z$ is founded on some instance of $y$} 
+%\item[] \mytext{the concept $x$ is instantiation-founded on the concept $y$ if and only if, given any $z$ that plays $x$, then $z$ is founded on some instance of $y$} 
+\item[] \mytext{the concept $x$ is instantiation-founded on the concept $y$ if and only if, whenever $z$ is a given entity that plays as $x$, 
+there is also an external entity $w$ that is an instance of $y$} 
 %that is, instantiation-founding is the founding relation `lifted' to concepts. Note that the without the existential quantification any empty concept would be founded on every other concept.
 
 \item[\myax{roleFounding}] $ \DOLCERole{x} \myfi \exists y~ \foundedROLE{x}{y} $ 
 \item[] \mytext{if $x$ is a role, then there is a $y$ on which it is instantiation-founded} 
 %cfr. \refax{ax:relationalQtPartialDef}.
 \eflist 
-For example, the role of `husband' is instantiation-founded on the concept of `marriage', since every time a person is a husband there is an individual marriage between that person and another person, which the `husband' role existentially depends on: there cannot be a husband if there is no marriage.\marginpar{\color{red}{Questo esempio va ampliato per esemplificare la formula d5 in modo sistematico.[FC:OK]}}
+For example, the role of `husband' ($x$) in \refdf{def:founding} is instantiation-founded on the concept of `marriage' ($y$), since every time a person ($z$) is a husband there is an individual marriage ($w$) between that person and another person,  which is external to the `husband' role: this means that there cannot be a husband if there is no marriage.\marginpar{\color{red}{Questo esempio va ampliato per esemplificare la formula d5 in modo sistematico.[FC:OK]}}
 
 We also need to capture a different kind of founding relation, that we call \firstTimeKeyWord{definition-founding} ($\foundedDef{\cdot}{\cdot}$). We do not formalize this relation as it requires discussing how to formally define roles, a topic beyond our concerns in this paper. We will use it with the following informal interpretation: \mytext{$x$ is definition-founded on some entity $y$ if and only if $y$ is used to define $x$}.
 %\TODOinline{[assumo che applichiamo la relazione solo a concetti, confermi?][FC: no, perché la ragione di introdurre questa relazione è la definizione \refdf{def:capability}, per provare a collegare le capability alle funzioni.][SB: ok, ho tolto le restrizioni a "concept" nel testo][FC:roger]} 
@@ -1070,7 +1073,7 @@ Thus, goals may correspond to expressions \quotes{the temperature at the port B 
 In this paragraph we exploit the concepts introduced in the previous sections and propose a preliminary formalisation of \ontoFunc{fullPlural} as roles. 
 Precisely, we start by defining \firstTimeKeyWord{systemic functions}. In doing that, we are mainly inspired by the definition presented in \cite{mizoguchiUnifyingDefinitionArtifact2016} (cfr. also Cummings' definition in \cite{cumminsFunctionalAnalysis1975}), from which we also take the concept name.
 Such a definition is based on the so-called \firstTimeKeyWord{systemic view} of devices, that is, on the idea that devices are complex aggregates of components, called systems, whose behaviours combine in order to generate the  behaviour of the whole system. 
-In this context, a function is seen as the contribution of the behaviour of an individual component to the behaviour of the system as a whole, and teleological aspects are introduced through goals imposed to \myComment{selected for} the system.  
+In this context, a function is seen as the contribution of the behaviour of an individual component to the behaviour of the system as a whole, and teleological aspects are introduced through goals imposed on \myComment{selected for} the system.  
 
 % Note that in this approach objects can be seen as systems of components (systemic
 % view). The idea is that the components of a system interact with each other and these interactions realize
@@ -1180,8 +1183,8 @@ taking} Continuing the discussion with \DOLCE as the upper ontology, the ontolog
 \end{figure}
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{onto-func-taxav2-nocolor.JPG}
-  \caption{\label{fig:onto-func-taxa} A possible taxonomy of \ontoFunc{fullPlural}. The light blue rectangles contain the \ontoFunc{fullPlural}-categories. The gray circles contain the corresponding type of change at a logical level, and refer to Figure \ref{fig:onto-func-logic}. Finally, the yellow rectangles contain terms used by other authors that could, arguably, used to label the \ontoFunc{fullSingular} category: H, P\&B, and O refers to \cite{hirtz_functional_2002}, \cite{pahl_engineering_2007}, and \cite{sasajimaFBRLFunctionBehavior1995} respectively. Notice that some of these terms are used by their authors with different meaning than in this figure, additionally, we do not have added terms related with information content.}
+  \includegraphics[width=\textwidth]{onto-func-taxav2-nocolor-v2.JPG}
+  \caption{\label{fig:onto-func-taxa} A possible taxonomy of \ontoFunc{fullPlural}. The rounded white rectangles contain the \ontoFunc{fullPlural}-categories. The big gray circles contain the corresponding type of change at a logical level, and refer to Figure \ref{fig:onto-func-logic}. The rectangles with sharp corners contain terms used by other authors that could, arguably, used to label the \ontoFunc{fullSingular} category: H, P\&B, and O refers to \cite{hirtz_functional_2002}, \cite{pahl_engineering_2007}, and \cite{sasajimaFBRLFunctionBehavior1995} respectively. Notice that some of these terms are used by their authors with different meaning than in this figure, additionally, we do not have added terms related with information content. Finally, `Amount of Energy' is dotted because it appears only for sake of example and is not part of DOLCE.}
 \end{figure}
 %%%
 
@@ -1326,7 +1329,7 @@ In contrast, a second meaning used by engineers is system-dependent. In general,
 \begin{figure}
   \centering
   \includegraphics[width=0.45\textwidth]{imamoTAXA.PNG}
-  \caption{The scheme of some hydraulic system, taken from \cite{HydroPNG}.  \label{fig:hydroSystem}}
+  \caption{The scheme of a hydraulic system, taken from \cite{HydroPNG}.  \label{fig:hydroSystem}}
 \end{figure}
 In our terminology, we could say that tags identify roles that components play in a system. Necessarily, these roles are of functional nature, for each component in an engineering system has a role in the system function. Thus, tags or, at least, the teleological content they carry, could be formalized by systemic functions. %Indeed, tags should carry also information about, say, the structural links of the underlying component with the remaining components of the systems. 
 %\TODOinline{[SB: manca un risultato conclusivo che giustifichi perché ci fermiamo qui. bisogna dare almeno qualche indicazione di quali concetti di funzione usati in ingegneria cadono sotto questo approccio (nel senso che possono essere considerate specializzazioni di queste definizioni)][ Ho provato a inserire un paragrafo argomentando che le "generally valid functions" di Pahl e Beitz assomigliano alle funz.ont. e che i tag/sigle/functional location assomigliano alle fun.sys.]*[SB: ok, per ora va bene. magari in fase di revisione vediamo se riusciamo ad approfondire questo punto][FC:ok][S: complessivamente la discussione ora va bene :-)}
