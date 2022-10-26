@@ -1364,7 +1364,7 @@ Inspired by the work of Kitamura et al. on `ways of functional achievement' \cit
 Formally, such \methodsDefinition{plural} can be understood as reifications of functional decomposition relations.
 Precisely, we introduce roles $\mainFunctionRole{\cdot}$ and $\subFunctionRole{\cdot}$, contextualized by a decomposition, such that:
 \bflist
-  \item[\myax{main-sub-functions-sussum}] $ (\mainFunctionRole{x} \lor \subFunctionRole{x}) \myfi (\DOLCERole{x} \land \exists \cst{m} ~(\Method{x}  \land \founded{x}{\cst{m}}))$
+  \item[\myax{main-sub-functions-sussum}] $ (\mainFunctionRole{x} \lor \subFunctionRole{x}) \myfi (\DOLCERole{x} \land \exists \cst{m} ~(\Method{\cst{m}}  \land \founded{x}{\cst{m}}))$
   \item[] \mytext{main-functions and sub-functions are roles founded on some engineering \methodsName{singular}}
 \eflist 
 Additionally, we assume that \methodsName{plural} are always contexts for a main-function and for a certain number of  sub-functions (axiom \refax{ax:pre-pre-method}$^*$ is actually a meta-axiom, for this reason we mark it with a $*$-symbol). 
